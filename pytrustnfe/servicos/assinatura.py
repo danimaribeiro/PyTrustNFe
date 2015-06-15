@@ -74,9 +74,7 @@ class Assinatura(object):
                 certificados[i].unlinkNode()
                 certificados[i].freeNode()
 
-            xml = doc_xml.serialize()           
-            open('/home/danimar/Desktop/assinado.xml', 'wb').write(xml)
-
+            xml = doc_xml.serialize()
             return xml
         finally:
             doc_xml.freeDoc()
