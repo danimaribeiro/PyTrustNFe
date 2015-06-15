@@ -5,27 +5,41 @@ Created on Jun 14, 2015
 @author: danimar
 '''
 import unittest
+import os, os.path
 from pytrustnfe.servicos.assinatura import Assinatura
 
 XML_ASSINAR = '<?xml version="1.0" encoding="UTF-8"?>' \
+               '<!DOCTYPE Envelope [ ' \
+               '     <!ATTLIST Data Id ID #IMPLIED>' \
+               ']>' \
                '<Envelope xmlns="urn:envelope">'  \
                '   <Data Id="NFe43150602261542000143550010000000761792265342">' \
                '     Hello, World!' \
                '   </Data>' \
                '</Envelope>'
 
-XML_ASSINADO = ''
 
 class test_assinatura(unittest.TestCase):
+    
+    caminho = os.path.dirname(__file__)
 
-    def test_assinar_xml(self):
-        print 'oola'
-        assinatura = Assinatura('/home/danimar/Desktop/INFOGER.pfx', '123456')
+    def test_assinar_xml_arquivo_invalido(self):
+        print self.caminho
+        assinatura = Assinatura(os.path.join(self.caminho, 'teste_nao_existe.pfx'), '123456')
+        self.assertRaises(Exception, assinatura.assina_xml, XML_ASSINAR)
+
+    def test_assinar_xml_senha_invalida(self):        
+        assinatura = Assinatura(os.path.join(self.caminho,'teste.pfx'), '123')
+        self.assertRaises(Exception, assinatura.assina_xml, XML_ASSINAR)
+
+    def test_assinar_xml_valido(self):        
+        assinatura = Assinatura(os.path.join(self.caminho,'teste.pfx'), '123456')
+        xml = assinatura.assina_xml(XML_ASSINAR)        
+        xml_assinado = open(os.path.join(self.caminho, 'xml_assinado.xml'), 'r').read()    
         
-        self.assertRaises(RuntimeError, assinatura.assina_xml, XML_ASSINAR)
+        self.assertEqual(xml_assinado, xml, 'Xml assinado é inválido')
 
-
-#if __name__ == "__main__":
+if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
-#    unittest.main()
+    unittest.main()
     

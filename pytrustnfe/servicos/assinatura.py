@@ -1,9 +1,11 @@
+#coding=utf-8
 '''
 Created on Jun 14, 2015
 
 @author: danimar
 '''
 import xmlsec, libxml2
+import os.path
 
 NAMESPACE_SIG = 'http://www.w3.org/2000/09/xmldsig#'
 
@@ -12,7 +14,11 @@ class Assinatura(object):
     def __init__(self, arquivo, senha):
         self.arquivo = arquivo
         self.senha = senha
-        
+    
+    def _checar_certificado(self): 
+        if not os.path.isfile(self.arquivo):
+            raise Exception('Caminho do certificado não existe.')
+    
     def _inicializar_cripto(self):
         libxml2.initParser()
         libxml2.substituteEntitiesDefault(1)
@@ -30,6 +36,7 @@ class Assinatura(object):
         
     
     def assina_xml(self, xml):
+        self._checar_certificado()
         self._inicializar_cripto()
         try:
             doc_xml = libxml2.parseMemory(xml.encode('utf-8'), len(xml.encode('utf-8')))
