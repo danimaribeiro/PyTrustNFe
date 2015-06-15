@@ -1,2 +1,0 @@
-import assinatura
-import comunicacao
