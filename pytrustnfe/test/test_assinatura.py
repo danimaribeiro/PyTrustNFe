@@ -18,6 +18,12 @@ XML_ASSINAR = '<?xml version="1.0" encoding="UTF-8"?>' \
                '   </Data>' \
                '</Envelope>'
 
+XML_ERRADO = '<?xml version="1.0" encoding="UTF-8"?>' \
+               '<Envelope xmlns="urn:envelope">'  \
+               ' <Data Id="NFe43150602261542000143550010000000761792265342">' \
+               '     Hello, World!' \
+               '   </Data>' \
+               '</Envelope>'
 
 class test_assinatura(unittest.TestCase):
     
@@ -32,6 +38,10 @@ class test_assinatura(unittest.TestCase):
         assinatura = Assinatura(os.path.join(self.caminho,'teste.pfx'), '123')
         self.assertRaises(Exception, assinatura.assina_xml, XML_ASSINAR)
 
+    def test_assinar_xml_invalido(self):        
+        assinatura = Assinatura(os.path.join(self.caminho,'teste.pfx'), '123456')
+        self.assertRaises(RuntimeError, assinatura.assina_xml, XML_ERRADO)
+
     def test_assinar_xml_valido(self):        
         assinatura = Assinatura(os.path.join(self.caminho,'teste.pfx'), '123456')
         xml = assinatura.assina_xml(XML_ASSINAR)        
@@ -39,7 +49,4 @@ class test_assinatura(unittest.TestCase):
         
         self.assertEqual(xml_assinado, xml, 'Xml assinado é inválido')
 
-if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testName']
-    unittest.main()
     
