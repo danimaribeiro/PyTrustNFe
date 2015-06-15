@@ -9,9 +9,10 @@ script:
   coverage run --source=pytrustnfe setup.py nosetests
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get install -qq build-essential libxml2-dev libxmlsec1-dev libxslt-dev 
+  - sudo apt-get install -qq libxml2-dev libxmlsec1-dev libxslt-dev 
   - sudo apt-get install -qq python-dev python-lxml python-libxml2
   - sudo apt-get install -qq python-libxslt1 libxml2
+  - sudo apt-get install -qq build-essential
 after_success:
   coveralls
 
