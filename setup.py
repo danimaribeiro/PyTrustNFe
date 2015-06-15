@@ -1,12 +1,11 @@
 #coding=utf-8
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name = "PyNfeTrust",
     version = "0.1",
     author = "Danimar Ribeiro",
     author_email = 'danimaribeiro@gmail.com',
-    test_suite='tests',
     keywords = ['nfe', 'mdf-e'],
     classifiers=[
         'Development Status :: 1 - alpha',
@@ -17,10 +16,7 @@ setup(
         'Programming Language :: Python',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
-    packages = [
-        'pynfe',
-        'pynfe.servicos',
-    ],
+    packages = find_packages(exclude=['*tests*']),
     url = 'https://github.com/danimaribeiro/PyNfeTrust',
     license = 'LGPL-v2.1+',
     description = 'PyNfeTrust é uma biblioteca para envio de NF-e',
@@ -28,7 +24,9 @@ setup(
     install_requires=[
         'PyXMLSec >= 0.3.0'
     ],
+    test_suite='nose.collector',
     tests_require=[
-        'pyflakes>=0.6.1',
+        'nose',
+        'mock',
     ],
 )
