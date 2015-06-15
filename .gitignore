@@ -1,0 +1,12 @@
+*.pyc
+*~
+.directory
+.project
+.pydevproject
+.settings/*
+
+# build artifacts from python setup.py build or python setup.py install
+build/
+dist/
+*egg*/
+docs/_build
