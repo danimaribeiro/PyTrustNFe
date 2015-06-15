@@ -16,16 +16,16 @@ XML_ASSINAR = '<?xml version="1.0" encoding="UTF-8"?>' \
 
 XML_ASSINADO = ''
 
-class Test(unittest.TestCase):
+class test_assinatura(unittest.TestCase):
 
-    def testAssinarXml(self):
-        
+    def test_assinar_xml(self):
+        print 'oola'
         assinatura = Assinatura('/home/danimar/Desktop/INFOGER.pfx', '123456')
         
         self.assertRaises(RuntimeError, assinatura.assina_xml, XML_ASSINAR)
 
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
-    unittest.main()
+#    unittest.main()
     
