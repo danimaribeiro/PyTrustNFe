@@ -48,7 +48,8 @@ class Assinatura(object):
             keyInfoNode.addX509Data()  
                    
             dsig_ctx = xmlsec.DSigCtx()   
-            chave = xmlsec.cryptoAppKeyLoad(filename=str(self.arquivo), format=xmlsec.KeyDataFormatPkcs12, pwd=str(self.senha), pwdCallback=None, pwdCallbackCtx=None)
+            chave = xmlsec.cryptoAppKeyLoad(filename=str(self.arquivo), format=xmlsec.KeyDataFormatPkcs12,
+                                        pwd=str(self.senha), pwdCallback=None, pwdCallbackCtx=None)
                 
             dsig_ctx.signKey = chave
             dsig_ctx.sign(signNode)
