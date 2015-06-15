@@ -4,10 +4,12 @@ python:
 install:
   - pip install -r requirements.txt
   - pip install PyXmlSec --allow-external PyXMLSec --allow-insecure PyXMLSec
-script: nosetests
+  - pip install coveralls
+script: 
+  coverage run nosetests --source=pytrustnfe setup.py nosetests
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get install -qq libxml2-dev libxmlsec1-dev 
+  - sudo apt-get install -qq libxml2-dev libxmlsec1-dev libxslt-dev python-dev python-lxml 
 after_success:
   coveralls
 
