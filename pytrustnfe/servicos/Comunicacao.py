@@ -42,10 +42,9 @@ class Comunicacao(object):
     def envio_nfe(self):
         chave, certificado = self._preparar_temp_pem()
         
-        c = HttpClient('cad.svrs.rs.gov.br', chave, certificado)
+        c = HttpClient('cad.sefazrs.rs.gov.br', chave, certificado)
         
-        xml_retorno =  c.post_xml('/ws/cadconsultacadastro/cadconsultacadastro2.asmx', '')
-                
+        xml_retorno =  c.post_xml('/ws/cadconsultacadastro/cadconsultacadastro2.asmx', '')                
         obj = objectify.fromstring(xml_retorno)
 
         return xml_retorno, obj

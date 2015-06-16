@@ -1,2 +1,4 @@
+PyOpenSSL
 nose
 mock
+coveralls

@@ -29,6 +29,7 @@ class HttpClient(object):
             response = conexao.getresponse()
             if response.status == '200':
                 return response.read()
+            return response.read()
         except Exception as e:
             print str(e)            
         finally:

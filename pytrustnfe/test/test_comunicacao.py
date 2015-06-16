@@ -16,10 +16,21 @@ class test_comunicacao(unittest.TestCase):
 
     caminho = os.path.dirname(__file__)
     
+    #Teste temporario
+    def test_envio_without_mock(self):
+        try:
+            dir_pfx = '/home/danimar/Desktop/isotelha.pfx' #Hack
+            
+            com = Comunicacao(dir_pfx, 'iso@#telha')
+            xml, objeto = com.envio_nfe()
+            
+            print xml
+            print objeto
+        except Exception as e:
+            print(str(e))
+        
     def test_envio_nfe(self):        
         dir_pfx = os.path.join(self.caminho, 'teste.pfx')
-        
-        #dir_pfx = '/home/danimar/Desktop/INFOGER.pfx' #Hack
         
         with mock.patch('pytrustnfe.HttpClient.HTTPSConnection') as HttpsConnection:
             conn = HttpsConnection.return_value
