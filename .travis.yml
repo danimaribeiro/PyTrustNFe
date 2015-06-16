@@ -6,6 +6,7 @@ virtual_env:
 install:
   - pip install --upgrade pip
   - pip install -r requirements.txt
+  - pip install http://xmlsoft.org/sources/python/libxml2-python-2.6.21.tar.gz
   - pip install PyXmlSec --allow-external PyXMLSec --allow-insecure PyXMLSec
 script: 
   coverage run --source=pytrustnfe setup.py nosetests
