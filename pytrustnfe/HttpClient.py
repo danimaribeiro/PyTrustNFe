@@ -4,7 +4,7 @@ Created on Jun 16, 2015
 
 @author: danimar
 '''
-from httplib import HTTPSConnection, HTTPResponse
+from httplib import HTTPSConnection
 
 class HttpClient(object):
     

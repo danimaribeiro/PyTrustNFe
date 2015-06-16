@@ -11,7 +11,6 @@ from pytrustnfe.HttpClient import HttpClient
 from pytrustnfe.Certificado import converte_pfx_pem
 
 import logging
-from logilab.common.registry import objectify_predicate
 logging.basicConfig(level=logging.INFO)
 logging.getLogger('suds.client').setLevel(logging.DEBUG)
 logging.getLogger('suds.transport').setLevel(logging.DEBUG)
