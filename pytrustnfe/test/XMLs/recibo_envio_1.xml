@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<retEnviNFe versao="2.00" xmlns="http://www.portalfiscal.inf.br/nfe">
+  <tpAmb>2</tpAmb>
+  <verAplic>SVRS20140728145415</verAplic>
+  <cStat>103</cStat>
+  <xMotivo>Lote recebido com sucesso</xMotivo>
+  <cUF>42</cUF>
+  <dhRecbto>2014-08-18T10:32:32</dhRecbto>
+  <infRec>
+    <nRec>423002149000085</nRec>
+    <tMed>1</tMed>
+  </infRec>
+</retEnviNFe>
