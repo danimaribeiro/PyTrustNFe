@@ -16,6 +16,19 @@ class test_comunicacao(unittest.TestCase):
 
     caminho = os.path.dirname(__file__)
     
+    def test_consulta_cadastro(self):
+        try:
+            dir_pfx = '/home/danimar/Desktop/isotelha.pfx' #Hack
+            
+            com = Comunicacao(dir_pfx, 'iso@#telha')
+            xml, objeto = com.consulta_cadastro(None)
+            
+            print xml
+            print objeto
+        except Exception as e:
+            print(str(e))
+    
+    
     #Teste temporario
     def test_envio_without_mock(self):
         try:

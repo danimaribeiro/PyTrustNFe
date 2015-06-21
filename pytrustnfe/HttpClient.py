@@ -27,7 +27,7 @@ class HttpClient(object):
         try:
             conexao.request(u'POST', post, xml, self._headers())
             response = conexao.getresponse()
-            if response.status == '200':
+            if response.status == 200:
                 return response.read()
             return response.read()
         except Exception as e:

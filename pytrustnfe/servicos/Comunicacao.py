@@ -15,6 +15,7 @@ logging.basicConfig(level=logging.INFO)
 logging.getLogger('suds.client').setLevel(logging.DEBUG)
 logging.getLogger('suds.transport').setLevel(logging.DEBUG)
 
+from pytrustnfe.Strings import CONSULTA_CADASTRO_COMPLETA
 
 class Comunicacao(object):
         
@@ -38,6 +39,15 @@ class Comunicacao(object):
         
         return chave_temp, certificado_temp
         
+    def consulta_cadastro(self, obj_consulta):
+        chave, certificado = self._preparar_temp_pem()
+        
+        client = HttpClient('nfe.fazenda.sp.gov.br', chave, certificado)
+        xml_retorno = client.post_xml('/ws/cadconsultacadastro2.asmx', CONSULTA_CADASTRO_COMPLETA)
+        
+        obj = objectify.fromstring(xml_retorno)
+        return xml_retorno, obj
+    
     def envio_nfe(self):
         chave, certificado = self._preparar_temp_pem()
         
