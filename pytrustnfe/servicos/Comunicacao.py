@@ -10,10 +10,6 @@ from uuid import uuid4
 from pytrustnfe.HttpClient import HttpClient
 from pytrustnfe.Certificado import converte_pfx_pem
 
-import logging
-logging.basicConfig(level=logging.INFO)
-logging.getLogger('suds.client').setLevel(logging.DEBUG)
-logging.getLogger('suds.transport').setLevel(logging.DEBUG)
 
 from pytrustnfe.Strings import CONSULTA_CADASTRO_COMPLETA
 

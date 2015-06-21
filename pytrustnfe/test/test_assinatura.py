@@ -30,7 +30,6 @@ class test_assinatura(unittest.TestCase):
     caminho = os.path.dirname(__file__)
 
     def test_assinar_xml_arquivo_invalido(self):
-        print self.caminho
         assinatura = Assinatura(os.path.join(self.caminho, 'teste_nao_existe.pfx'), '123456')
         self.assertRaises(Exception, assinatura.assina_xml, XML_ASSINAR)
 

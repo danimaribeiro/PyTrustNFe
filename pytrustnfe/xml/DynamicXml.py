@@ -1,3 +1,4 @@
+#coding=utf-8
 '''
 Created on Jun 17, 2015
 
@@ -5,6 +6,7 @@ Created on Jun 17, 2015
 '''
 
 import xml.etree.ElementTree as ET
+from lxml.etree import Element, ElementTree, tostring
 from collections import OrderedDict
 
 class DynamicXml(object):    
@@ -16,15 +18,16 @@ class DynamicXml(object):
             return object.__getattribute__(self,name)
             
     def __setattr__(self, obj, val):
-        if(obj=="value" or obj=="atributos"):
+        if(obj=="value" or obj=="atributos" or obj=="_indice"):
             object.__setattr__(self,obj, val)
         else:
-            object.__setattr__(self,obj, DynamicXml(val))
+            self._indice = self._indice + 1
+            object.__setattr__(self,obj, DynamicXml(val, self._indice))
 
-    def __init__(self, value):
+    def __init__(self, value, indice=0):
         self.value = value
-        self.atributos={}  
-        object.__setattr__(self, '__dict__', OrderedDict())
+        self.atributos={}
+        self._indice = indice
                
     def __str__(self):
         return str(self.value)
@@ -37,31 +40,34 @@ class DynamicXml(object):
             return self.value
 
     def __getitem__(self, i):
-        print(self.value)
-        if(i >= len(self.value)):
+        if not isinstance(self.value, list):
+            self.value = []
+        if(i+1 > len(self.value)):
             self.value.append(DynamicXml(None))
         return self.value[i]
 
-
-def gerar_xml(xml, objeto):
-    for attr, value in objeto.__dict__.items():
-        if(attr!="value" and attr!="atributos"):
-            if(type(value()) == type([])):
-                for item in value():
-                    print(item)
-                    gerar_xml(xml, item)
-            else:
-                sub = ET.SubElement(xml,attr)                
-                if(str(value)!="None"):
-                    sub.text = str(value)
-                gerar_xml(sub, value)
-        elif(attr=="atributos"):
-            for atr, val in value.items():                
-                xml.set(atr.replace("__", ":"), str(val))
-
-
-
-
-
-
+    def render(self, pretty_print=False):
+        root = Element(self.value)
+        self._gerar_xml(root, self)
+        return tostring(root, pretty_print=pretty_print)
+        
+    def _gerar_xml(self, xml, objeto):
+        items = sorted(
+            objeto.__dict__.items(), 
+            key=lambda x: x[1]._indice if isinstance(x[1], DynamicXml) else 0
+        )
+        for attr, value in items:
+            if(attr!="value" and attr!="atributos" and attr!="_indice"):
+                if isinstance(value(), list):                    
+                    for item in value():
+                        sub = ET.SubElement(xml, attr) 
+                        self._gerar_xml(sub, item)
+                else:
+                    sub = ET.SubElement(xml, attr)                
+                    if(str(value)!="None"):
+                        sub.text = str(value)
+                    self._gerar_xml(sub, value)
+            elif(attr=="atributos"):
+                for atr, val in value.items():                
+                    xml.set(atr.replace("__", ":"), str(val))
 
