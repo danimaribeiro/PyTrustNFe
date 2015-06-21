@@ -6,8 +6,7 @@ Created on Jun 17, 2015
 '''
 
 import xml.etree.ElementTree as ET
-from lxml.etree import Element, ElementTree, tostring
-from collections import OrderedDict
+from lxml.etree import Element, tostring
 
 class DynamicXml(object):    
     def __getattr__(self, name):
