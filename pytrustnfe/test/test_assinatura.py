@@ -6,7 +6,7 @@ Created on Jun 14, 2015
 '''
 import unittest
 import os, os.path
-from pytrustnfe.servicos.assinatura import Assinatura
+from pytrustnfe.servicos.Assinatura import Assinatura
 
 XML_ASSINAR = '<?xml version="1.0" encoding="UTF-8"?>' \
                '<!DOCTYPE Envelope [ ' \
