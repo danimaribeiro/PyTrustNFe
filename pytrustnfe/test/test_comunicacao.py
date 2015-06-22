@@ -16,31 +16,6 @@ class test_comunicacao(unittest.TestCase):
 
     caminho = os.path.dirname(__file__)
     
-    def test_consulta_cadastro(self):
-        try:
-            dir_pfx = '/home/danimar/Desktop/isotelha.pfx' #Hack
-            
-            com = Comunicacao(dir_pfx, 'iso@#telha')
-            xml, objeto = com.consulta_cadastro(None)
-            
-            print xml
-            print objeto
-        except Exception as e:
-            print(str(e))
-    
-    
-    #Teste temporario
-    def test_envio_without_mock(self):
-        try:
-            dir_pfx = '/home/danimar/Desktop/isotelha.pfx' #Hack
-            
-            com = Comunicacao(dir_pfx, 'iso@#telha')
-            xml, objeto = com.envio_nfe()
-            
-            print xml
-            print objeto
-        except Exception as e:
-            print(str(e))
         
     def test_envio_nfe(self):        
         dir_pfx = os.path.join(self.caminho, 'teste.pfx')
@@ -54,7 +29,7 @@ class test_comunicacao(unittest.TestCase):
             conn.getresponse.return_value = retorno            
         
             com = Comunicacao(dir_pfx, '123456')
-            xml, objeto = com.envio_nfe()
+            xml, objeto = com._executar_consulta('')
             
             self.assertEqual(xml, XML_RETORNO, 'Envio de NF-e com problemas - xml de retorno inválido')
             self.assertEqual(objeto.cUF, 42, 'Envio de NF-e com problemas - objeto de retorno inválido')

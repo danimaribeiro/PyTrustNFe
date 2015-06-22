@@ -7,20 +7,36 @@ Created on Jun 14, 2015
 
 from lxml import objectify
 from uuid import uuid4
+import xml.etree.ElementTree as ET
+from xml.etree.ElementTree import tostring
 from pytrustnfe.HttpClient import HttpClient
 from pytrustnfe.Certificado import converte_pfx_pem
-
 
 from pytrustnfe.Strings import CONSULTA_CADASTRO_COMPLETA
 
 class Comunicacao(object):
     url = ''
-    web_service = ''    
+    web_service = ''  
+    metodo = ''
+    tag_retorno = ''  
     
     def __init__(self, certificado, senha):
         self.certificado = certificado
         self.senha = senha       
        
+    def _soap_xml(self, body):
+        return '<?xml version="1.0" encoding="utf-8"?>'\
+        '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">'\
+        '<soap:Header>'\
+        '<nfeCabecMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/' + self.tag_retorno + '">'\
+        '<cUF>42</cUF><versaoDados>2.00</versaoDados>'\
+        '</nfeCabecMsg>'\
+        '</soap:Header>'\
+        '<soap:Body>'\
+        '<nfeDadosMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/' + self.tag_retorno + '">'\
+        + body + '</nfeDadosMsg>'\
+        '</soap:Body>'\
+        '</soap:Envelope>'
     
     def _preparar_temp_pem(self):
         chave_temp = '/tmp/' + uuid4().hex
@@ -42,36 +58,21 @@ class Comunicacao(object):
         assert self.web_service != '', "Web service não especificado"
         assert self.certificado != '', "Certificado não configurado"
         assert self.senha != '', "Senha não configurada"
+        assert self.metodo != '', "Método não configurado"
+        assert self.tag_retorno != '', "Tag de retorno não configurado"
     
     def _executar_consulta(self, xmlEnviar):
         self._validar_dados()
         chave, certificado = self._preparar_temp_pem()
         
         client = HttpClient(self.url, chave, certificado)
-        xml_retorno = client.post_xml(self.web_service, xmlEnviar)
-        
-        obj = objectify.fromstring(xml_retorno)
+        soap_xml = self._soap_xml(xmlEnviar)
+        xml_retorno = client.post_xml(self.web_service, soap_xml)
+                
+        tree = ET.fromstring(xml_retorno)
+        node = tree.find(self.tag_retorno)
+        node = tostring(node)
+        obj = objectify.fromstring(node)
         return xml_retorno, obj        
-        
-    
-    def consulta_cadastro(self, obj_consulta):
-        chave, certificado = self._preparar_temp_pem()
-        
-        client = HttpClient('nfe.fazenda.sp.gov.br', chave, certificado)
-        xml_retorno = client.post_xml('/ws/cadconsultacadastro2.asmx', CONSULTA_CADASTRO_COMPLETA)
-        
-        obj = objectify.fromstring(xml_retorno)
-        return xml_retorno, obj
-    
-    def envio_nfe(self):
-        chave, certificado = self._preparar_temp_pem()
-        
-        c = HttpClient('cad.sefazrs.rs.gov.br', chave, certificado)
-        
-        xml_retorno =  c.post_xml('/ws/cadconsultacadastro/cadconsultacadastro2.asmx', '')                
-        obj = objectify.fromstring(xml_retorno)
-
-        return xml_retorno, obj
-        
         
         
