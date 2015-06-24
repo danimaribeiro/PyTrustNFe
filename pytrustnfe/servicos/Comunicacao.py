@@ -12,7 +12,15 @@ from xml.etree.ElementTree import tostring
 from pytrustnfe.HttpClient import HttpClient
 from pytrustnfe.Certificado import converte_pfx_pem
 
+from xml.dom.minidom import parseString
+
 from pytrustnfe.Strings import CONSULTA_CADASTRO_COMPLETA
+
+common_namespaces = { 'soap': 'http://www.w3.org/2003/05/soap-envelope' }
+
+soap_body_path = './soap:Envelope/soap:Body'
+soap_fault_path = './soap:Envelope/soap:Body/soap:Fault'
+
 
 class Comunicacao(object):
     url = ''
@@ -28,12 +36,12 @@ class Comunicacao(object):
         return '<?xml version="1.0" encoding="utf-8"?>'\
         '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">'\
         '<soap:Header>'\
-        '<nfeCabecMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/' + self.tag_retorno + '">'\
+        '<nfeCabecMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/' + self.metodo + '">'\
         '<cUF>42</cUF><versaoDados>2.00</versaoDados>'\
         '</nfeCabecMsg>'\
         '</soap:Header>'\
         '<soap:Body>'\
-        '<nfeDadosMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/' + self.tag_retorno + '">'\
+        '<nfeDadosMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/' + self.metodo + '">'\
         + body + '</nfeDadosMsg>'\
         '</soap:Body>'\
         '</soap:Envelope>'
@@ -68,11 +76,19 @@ class Comunicacao(object):
         client = HttpClient(self.url, chave, certificado)
         soap_xml = self._soap_xml(xmlEnviar)
         xml_retorno = client.post_xml(self.web_service, soap_xml)
-                
-        tree = ET.fromstring(xml_retorno)
-        node = tree.find(self.tag_retorno)
-        node = tostring(node)
-        obj = objectify.fromstring(node)
-        return xml_retorno, obj        
+
+        
+        dom = parseString(xml_retorno)
+        nodes = dom.getElementsByTagNameNS(common_namespaces['soap'],'Fault')
+        if len(nodes) > 0:            
+            return nodes[0].toxml(), None
+        
+        nodes = dom.getElementsByTagName(self.tag_retorno)       
+        if len(nodes) > 0:
+            obj = objectify.fromstring(nodes[0].toxml())
+            return nodes[0].toxml(), obj
+        
+       
+        
         
         

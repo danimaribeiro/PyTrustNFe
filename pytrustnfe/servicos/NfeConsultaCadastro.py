@@ -13,7 +13,7 @@ class NfeConsultaCadastro(Comunicacao):
     def __init__(self, certificado, senha):
         super(NfeConsultaCadastro, self).__init__(certificado, senha)
         self.metodo = 'CadConsultaCadastro2'
-        self.tag_retorno = 'consultaCadastro2Result'
+        self.tag_retorno = 'retConsCad'
         
     
     def consultar_cadastro(self, cadastro, estado):
