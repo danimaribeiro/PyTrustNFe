@@ -11,12 +11,11 @@ from pytrustnfe.xml import DynamicXml
 class RecepcaoEvento(Comunicacao):
     
     def registrar_evento(self, evento):
-        xml = None
-        if isinstance(evento, DynamicXml):
-            xml = evento.render()
-        if isinstance(evento, basestring):
-            xml = evento
-        assert xml is not None, "Objeto recibo deve ser do tipo DynamicXml ou string"
-                
-        
+        xml = self._validar_xml(recibo)
+
+        self.metodo = 'RecepcaoEvento'
+        self.tag_retorno = 'retEnvEvento'
+        self.web_service = 'ws/recepcaoevento/recepcaoevento.asmx'
+        self.url = 'nfe.sefazrs.rs.gov.br'
+
         return self._executar_consulta(xml)

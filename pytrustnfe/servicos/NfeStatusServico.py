@@ -1,4 +1,4 @@
-#coding=utf-8
+# coding=utf-8
 '''
 Created on 21/06/2015
 
@@ -9,14 +9,13 @@ from pytrustnfe.xml import DynamicXml
 
 
 class NfeStatusServico(Comunicacao):
-    
+
     def status(self, consulta):
-        xml = None
-        if isinstance(consulta, DynamicXml):
-            xml = consulta.render()
-        if isinstance(consulta, basestring):
-            xml = consulta
-        assert xml is not None, "Objeto consulta deve ser do tipo DynamicXml ou string"
-                
-        
+        xml = self._validar_xml(recibo)
+
+        self.metodo = 'NfeStatusServico2'
+        self.tag_retorno = 'retConsStatServ'
+        self.web_service = 'ws/NfeStatusServico/NfeStatusServico2.asmx'
+        self.url = 'nfe.sefazrs.rs.gov.br'
+
         return self._executar_consulta(xml)

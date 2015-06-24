@@ -69,6 +69,15 @@ class Comunicacao(object):
         assert self.metodo != '', "Método não configurado"
         assert self.tag_retorno != '', "Tag de retorno não configurado"
     
+    def _validar_xml(self, obj):
+        xml = None
+        if isinstance(obj, DynamicXml):
+            xml = obj.render()
+        if isinstance(obj, basestring):
+            xml = obj
+        assert xml is not None, "Objeto deve ser do tipo DynamicXml ou string"
+        return xml
+    
     def _executar_consulta(self, xmlEnviar):
         self._validar_dados()
         chave, certificado = self._preparar_temp_pem()

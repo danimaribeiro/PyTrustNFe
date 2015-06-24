@@ -11,12 +11,11 @@ from pytrustnfe.xml import DynamicXml
 class NfeInutilizacao(Comunicacao):
     
     def inutilizar(self, inutilizacao):
-        xml = None
-        if isinstance(inutilizacao, DynamicXml):
-            xml = inutilizacao.render()
-        if isinstance(inutilizacao, basestring):
-            xml = inutilizacao
-        assert xml is not None, "Objeto inutilização deve ser do tipo DynamicXml ou string"
-                
+        xml = self._validar_xml(recibo)
+        
+        self.metodo = 'nfeinutilizacao2'
+        self.tag_retorno = 'retInutNFe'
+        self.web_service = 'ws/nfeinutilizacao/nfeinutilizacao2.asmx'
+        self.url = 'nfe.sefazrs.rs.gov.br'
         
         return self._executar_consulta(xml)

@@ -11,12 +11,11 @@ from pytrustnfe.xml import DynamicXml
 class NfeDistribuicaoDFe(Comunicacao):
     
     def distribuicao(self, dfe):
-        xml = None
-        if isinstance(dfe, DynamicXml):
-            xml = dfe.render()
-        if isinstance(dfe, basestring):
-            xml = dfe
-        assert xml is not None, "Objeto recibo deve ser do tipo DynamicXml ou string"
-                
-        
+        xml = self._validar_xml(recibo)
+
+        self.metodo = 'NFeDistribuicaoDFe'
+        self.tag_retorno = 'retDistDFeInt'
+        self.web_service = 'NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx'
+        self.url = 'www1.nfe.fazenda.gov.br'
+
         return self._executar_consulta(xml)

@@ -17,12 +17,7 @@ class NfeConsultaCadastro(Comunicacao):
         
     
     def consultar_cadastro(self, cadastro, estado):
-        xml = None
-        if isinstance(cadastro, DynamicXml):
-            xml = cadastro.render()
-        if isinstance(cadastro, basestring):
-            xml = cadastro
-        assert xml is not None, "Objeto cadastro deve ser do tipo DynamicXml ou string"
+        xml = self._validar_xml(cadastro)
         
         self.web_service = '/ws/cadconsultacadastro/cadconsultacadastro2.asmx'
         self.url = 'cad.svrs.rs.gov.br'
