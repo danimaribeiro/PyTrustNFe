@@ -97,6 +97,7 @@ class Comunicacao(object):
             obj = objectify.fromstring(nodes[0].toxml())
             return nodes[0].toxml(), obj
         
+        return xml_retorno, objectify.fromstring(xml_retorno)
        
         
         

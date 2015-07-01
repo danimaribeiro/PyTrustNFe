@@ -29,6 +29,10 @@ class test_comunicacao(unittest.TestCase):
             conn.getresponse.return_value = retorno            
         
             com = Comunicacao(dir_pfx, '123456')
+            com.url = 'nfe.sefaz.gov.br'
+            com.web_service = '/wsTeste'
+            com.metodo = 'teste'
+            com.tag_retorno = 'testResult'
             xml, objeto = com._executar_consulta('')
             
             self.assertEqual(xml, XML_RETORNO, 'Envio de NF-e com problemas - xml de retorno inválido')
