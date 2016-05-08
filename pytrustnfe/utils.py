@@ -19,7 +19,7 @@ def datetime_tostring(data):
     return data.strftime("%d-%m-%y %H:%M:%S")
 
 
-def gerar_consulta_recibo(recibo):    
+def gerar_consulta_recibo(recibo):
     c = DynamicXml('consReciNFe')
     c(xmlns="http://www.portalfiscal.inf.br/nfe", versao="2.00")
     c.tpAmb = recibo.tpAmb

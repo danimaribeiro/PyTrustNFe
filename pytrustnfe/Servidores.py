@@ -9,33 +9,33 @@ def localizar_url(servico, estado):
 
 
 METODO_WS = {
-    WS_NFE_AUTORIZACAO: {
+    WS_NFE_AUTORIZACAO:{
         'webservice': 'NfeAutorizacao',
-        'metodo'    : 'NfeAutorizacao',
+        'metodo': 'NfeAutorizacao',
     },
     WS_NFE_CONSULTA_AUTORIZACAO: {
         'webservice': 'NfeRetAutorizacao',
-        'metodo'    : 'NfeRetAutorizacao',
+        'metodo': 'NfeRetAutorizacao',
     },
     WS_NFE_INUTILIZACAO: {
         'webservice': 'NfeInutilizacao2',
-        'metodo'    : 'nfeInutilizacaoNF2',
+        'metodo': 'nfeInutilizacaoNF2',
     },
     WS_NFE_CONSULTA: {
         'webservice': 'NfeConsulta2',
-        'metodo'    : 'nfeConsultaNF2',
+        'metodo': 'nfeConsultaNF2',
     },
     WS_NFE_SITUACAO: {
         'webservice': 'NfeStatusServico2',
-        'metodo'    : 'nfeStatusServicoNF2',
+        'metodo': 'nfeStatusServicoNF2',
     },
     WS_NFE_CONSULTA_CADASTRO: {
         'webservice': 'CadConsultaCadastro2',
-        'metodo'    : 'consultaCadastro2',
+        'metodo': 'consultaCadastro2',
     },
     WS_NFE_RECEPCAO_EVENTO: {
         'webservice': 'RecepcaoEvento',
-        'metodo'    : 'nfeRecepcaoEvento',
+        'metodo': 'nfeRecepcaoEvento',
     },
     WS_NFE_DOWNLOAD: {
         'webservice': 'NfeDownloadNF',
