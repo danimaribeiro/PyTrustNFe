@@ -23,7 +23,6 @@ setup(
     description='PyNfeTrust é uma biblioteca para envio de NF-e',
     long_description='PyNfeTrust',
     install_requires=[
-        'PyXMLSec >= 0.3.0',
         'Jinja2 >= 2.8',
         'signxml >= 1.0.0',
     ],
