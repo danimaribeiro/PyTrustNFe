@@ -4,9 +4,7 @@ Created on 21/06/2015
 
 @author: danimar
 '''
-from pytrustnfe.servicos.Comunicacao import Comunicacao
-from pytrustnfe.xml import DynamicXml
-
+from pytrustnfe.servicos.comunicacao import Comunicacao
 
 class NfeStatusServico(Comunicacao):
 

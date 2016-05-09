@@ -5,11 +5,10 @@ Created on 21/06/2015
 @author: danimar
 '''
 from pytrustnfe.servicos.Comunicacao import Comunicacao
-from pytrustnfe.xml import DynamicXml
 
 
 class RecepcaoEvento(Comunicacao):
-    
+
     def registrar_evento(self, evento):
         xml = self._validar_xml(recibo)
 

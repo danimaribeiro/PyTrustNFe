@@ -1,0 +1,174 @@
+<enviNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="3.10">
+    <idLote>{{ idLote }}</idLote>
+    <indSinc>{{ indSinc }}</indSinc>
+    {% for NFe in NFes %}
+    <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+        <infNFe versao="3.10" Id="{{ NFe.infNFe.Id }}">
+            <ide>
+                {% with ide = NFe.infNFe.ide %}
+                <cUF>{{ ide.cUF }}</cUF>
+                <cNF>{{ ide.cNF }}</cNF>
+                <natOp>{{ ide.natOp }}</natOp>
+                <indPag>{{ ide.indPag }}</indPag>
+                <mod>{{ ide.mod }}</mod>
+                <serie>{{ ide.serie }}</serie>
+                <nNF>{{ ide.nNF }}</nNF>
+                <dhEmi>{{ ide.dhEmi }}</dhEmi>
+                <dhSaiEnt>{{ ide.dhSaiEnt }}</dhSaiEnt>
+                <tpNF>{{ ide.tpNF }}</tpNF>
+                <idDest>{{ ide.idDest }}</idDest>
+                <cMunFG>{{ ide.cMunFG }}</cMunFG>
+                <tpImp>{{ ide.tpImp }}</tpImp>
+                <tpEmis>{{ ide.tpEmis }}</tpEmis>
+                <cDV>{{ ide.cDV }}</cDV>
+                <tpAmb>{{ ide.tpAmb }}</tpAmb>
+                <finNFe>{{ ide.finNFe }}</finNFe>
+                <indFinal>{{ ide.indFinal }}</indFinal>
+                <indPres>{{ ide.indPres }}</indPres>
+                <procEmi>{{ ide.procEmi }}</procEmi>
+                <verProc>Odoo Brasil 9.0</verProc>
+                {% endwith %}
+            </ide>
+            <emit>
+                {% with emit = NFe.infNFe.emit %}
+                <CNPJ>{{ emit.CNPJ }}</CNPJ>
+                <xNome>{{ emit.xNome }}</xNome>
+                <xFant>{{ emit.xFant }}</xFant>
+                <enderEmit>
+                    <xLgr>{{ emit.enderEmit.xLgr }}</xLgr>
+                    <nro>{{ emit.enderEmit.nro }}</nro>
+                    <xBairro>{{ emit.enderEmit.xBairro }}</xBairro>
+                    <cMun>{{ emit.enderEmit.cMun }}</cMun>
+                    <xMun>{{ emit.enderEmit.xMun }}</xMun>
+                    <UF>{{ emit.enderEmit.UF }}</UF>
+                    <CEP>{{ emit.enderEmit.CEP }}</CEP>
+                    <cPais>{{ emit.enderEmit.cPais }}</cPais>
+                    <xPais>{{ emit.enderEmit.xPais }}</xPais>
+                    <fone>{{ emit.enderEmit.fone }}</fone>
+                </enderEmit>
+                <IE>{{ emit.IE }}</IE>
+                <CRT>{{ emit.CRT }}</CRT>
+                {% endwith %}
+            </emit>
+            <dest>
+                {% with dest = NFe.infNFe.dest %}
+                <CNPJ>{{ dest.CNPJ }}</CNPJ>
+                <CPF>{{ dest.CPF }}</CPF>
+                <xNome>{{ dest.xNome }}</xNome>
+                <enderDest>
+                    <xLgr>{{ dest.enderDest.xLgr }}</xLgr>
+                    <nro>{{ dest.enderDest.nro }}</nro>
+                    <xBairro>{{ dest.enderDest.xBairro }}</xBairro>
+                    <cMun>{{ dest.enderDest.cMun }}</cMun>
+                    <xMun>{{ dest.enderDest.xMun }}</xMun>
+                    <UF>{{ dest.enderDest.UF }}</UF>
+                    <CEP>{{ dest.enderDest.CEP }}</CEP>
+                    <cPais>{{ dest.enderDest.cPais }}</cPais>
+                    <xPais>{{ dest.enderDest.xPais }}</xPais>
+                    <fone>{{ dest.enderDest.fone }}</fone>
+                </enderDest>
+                <indIEDest>{{ dest.indIEDest }}</indIEDest>
+                <IE>{{ dest.IE }}</IE>
+                {% endwith %}
+            </dest>
+            {% for det in NFe.infNFe.detalhes %}
+            <det nItem="1">
+                <prod>
+                    {% with prod = det.prod %}
+                    <cProd>{{ prod.cProd }}</cProd>
+                    <cEAN>{{ prod.cEAN }}</cEAN>
+                    <xProd>{{ prod.xProd }}</xProd>
+                    <NCM>{{ prod.NCM }}</NCM>
+                    <CFOP>{{ prod.CFOP }}</CFOP>
+                    <uCom>{{ prod.uCom }}</uCom>
+                    <qCom>{{ prod.qCom }}</qCom>
+                    <vUnCom>{{ prod.vUnCom }}</vUnCom>
+                    <vProd>{{ prod.vProd }}</vProd>
+                    <cEANTrib>{{ prod.cEANTrib }}</cEANTrib>
+                    <uTrib>{{ prod.uTrib }}</uTrib>
+                    <qTrib>{{ prod.qTrib }}</qTrib>
+                    <vUnTrib>{{ prod.vUnTrib }}</vUnTrib>
+                    <indTot>{{ prod.indTot }}</indTot>
+                    {% endwith %}
+                </prod>
+                <imposto>
+                    {% with imposto = det.imposto %}
+                    <vTotTrib>{{ imposto.vTotTrib }}</vTotTrib>
+                    <ICMS>
+                        <ICMS00>
+                            <orig>{{ imposto.ICMS.ICMS00.orig }}</orig>
+                            <CST>{{ imposto.ICMS.ICMS00.CST }}</CST>
+                            <modBC>{{ imposto.ICMS.ICMS00.modBC }}</modBC>
+                            <vBC>{{ imposto.ICMS.ICMS00.vBC }}</vBC>
+                            <pICMS>{{ imposto.ICMS.ICMS00.pICMS }}</pICMS>
+                            <vICMS>{{ imposto.ICMS.ICMS00.vICMS }}</vICMS>
+                        </ICMS00>
+                    </ICMS>
+                    <IPI>
+                        <cEnq>{{ imposto.IPI.cEnq }}</cEnq>
+                        <IPITrib>
+                            <CST>{{ imposto.IPI.IPITrib.CST }}</CST>
+                            <vBC>{{ imposto.IPI.IPITrib.vBC }}</vBC>
+                            <pIPI>{{ imposto.IPI.IPITrib.pIPI }}</pIPI>
+                            <vIPI>{{ imposto.IPI.IPITrib.vIPI }}</vIPI>
+                        </IPITrib>
+                    </IPI>
+                    <PIS>
+                        <PISAliq>
+                            <CST>{{ imposto.PIS.PISAliq.CST }}</CST>
+                            <vBC>{{ imposto.PIS.PISAliq.vBC }}</vBC>
+                            <pPIS>{{ imposto.PIS.PISAliq.pPIS }}</pPIS>
+                            <vPIS>{{ imposto.PIS.PISAliq.vPIS }}</vPIS>
+                        </PISAliq>
+                    </PIS>
+                    <COFINS>
+                        <COFINSAliq>
+                            <CST>{{ imposto.COFINS.COFINSAliq.CST }}</CST>
+                            <vBC>{{ imposto.COFINS.COFINSAliq.vBC }}</vBC>
+                            <pCOFINS>{{ imposto.COFINS.COFINSAliq.pCOFINS }}</pCOFINS>
+                            <vCOFINS>{{ imposto.COFINS.COFINSAliq.vCOFINS }}</vCOFINS>
+                        </COFINSAliq>
+                    </COFINS>
+                    {% endwith %}
+                </imposto>
+            </det>
+            {% endfor %}
+            <total>
+                {% with total = NFe.infNFe.total %}
+                <ICMSTot>
+                    <vBC>{{ total.vBC }}</vBC>
+                    <vICMS>{{ total.vICMS }}</vICMS>
+                    <vICMSDeson>{{ total.vICMSDeson }}</vICMSDeson>
+                    <vBCST>{{ total.vBCST }}</vBCST>
+                    <vST>{{ total.vST }}</vST>
+                    <vProd>{{ total.vProd }}</vProd>
+                    <vFrete>{{ total.vFrete }}</vFrete>
+                    <vSeg>{{ total.vSeg }}</vSeg>
+                    <vDesc>{{ total.vDesc }}</vDesc>
+                    <vII>{{ total.vII }}</vII>
+                    <vIPI>{{ total.vIPI }}</vIPI>
+                    <vPIS>{{ total.vPIS }}</vPIS>
+                    <vCOFINS>{{ total.vCOFINS }}</vCOFINS>
+                    <vOutro>{{ total.vOutro }}</vOutro>
+                    <vNF>{{ total.vNF }}</vNF>
+                    <vTotTrib>{{ total.vTotTrib }}</vTotTrib>
+                </ICMSTot>
+                {% endwith %}
+            </total>
+            <transp>
+                <modFrete>{{ NFe.infNFe.transp.modFrete }}</modFrete>
+            </transp>
+            <cobr>
+                <dup>
+                    <nDup>339/1</nDup>
+                    <dVenc>2016-06-02</dVenc>
+                    <vDup>8611.76</vDup>
+                </dup>
+            </cobr>
+            <infAdic>
+                <infCpl>{{ NFe.infNFe.infAdic.infCpl }}</infCpl>
+            </infAdic>
+        </infNFe>
+    </NFe>
+    {% endfor %}
+</enviNFe>

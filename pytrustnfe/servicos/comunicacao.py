@@ -7,7 +7,6 @@ Created on Jun 14, 2015
 
 from lxml import objectify
 from uuid import uuid4
-from pytrustnfe.xml.DynamicXml import DynamicXml
 from pytrustnfe.HttpClient import HttpClient
 from pytrustnfe.Certificado import converte_pfx_pem
 
@@ -25,9 +24,9 @@ class Comunicacao(object):
     metodo = ''
     tag_retorno = ''
 
-    def __init__(self, certificado, senha):
-        self.certificado = certificado
-        self.senha = senha
+    def __init__(self, cert, key):
+        self.certificado = cert
+        self.senha = key
 
     def _soap_xml(self, body):
         xml = '''<?xml version="1.0" encoding="utf-8"?>
@@ -66,20 +65,15 @@ class Comunicacao(object):
         assert self.metodo != '', "Método não configurado"
         assert self.tag_retorno != '', "Tag de retorno não configurado"
 
-    def _validar_xml(self, obj):
-        xml = None
-        if isinstance(obj, DynamicXml):
-            xml = obj.render()
-        if isinstance(obj, basestring):
-            xml = obj
-        assert xml is not None, "Objeto deve ser do tipo DynamicXml ou string"
-        return xml
+    def _validar_nfe(self, obj):
+        if not isinstance(obj, dict):
+            raise u"Objeto deve ser um dicionário de valores"
 
     def _executar_consulta(self, xmlEnviar):
         self._validar_dados()
-        chave, certificado = self._preparar_temp_pem()
+        # chave, certificado = self._preparar_temp_pem()
 
-        client = HttpClient(self.url, chave, certificado)
+        client = HttpClient(self.url, self.certificado, self.senha)
         soap_xml = self._soap_xml(xmlEnviar)
         xml_retorno = client.post_xml(self.web_service, soap_xml)
 
