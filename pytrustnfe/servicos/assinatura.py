@@ -5,14 +5,21 @@ Created on Jun 14, 2015
 @author: danimar
 '''
 
-import xmlsec
-import libxml2
-import os.path
 from signxml import xmldsig
 from signxml import methods
 from lxml import etree
+from OpenSSL import crypto
 
-NAMESPACE_SIG = 'http://www.w3.org/2000/09/xmldsig#'
+
+def extract_cert_and_key_from_pfx(pfx, password):
+    pfx = crypto.load_pkcs12(pfx, password)
+    # PEM formatted private key
+    key = crypto.dump_privatekey(crypto.FILETYPE_PEM,
+                                 pfx.get_privatekey())
+    # PEM formatted certificate
+    cert = crypto.dump_certificate(crypto.FILETYPE_PEM,
+                                   pfx.get_certificate())
+    return cert, key
 
 
 def recursively_empty(e):
@@ -21,7 +28,7 @@ def recursively_empty(e):
     return all((recursively_empty(c) for c in e.iterchildren()))
 
 
-def assinar(xml, cert, key, reference, pfx, senha):
+def assinar(xml, cert, key, reference):
     context = etree.iterwalk(xml)
     for action, elem in context:
         parent = elem.getparent()
@@ -43,87 +50,4 @@ def assinar(xml, cert, key, reference, pfx, senha):
         c14n_algorithm='http://www.w3.org/TR/2001/REC-xml-c14n-20010315')
 
     xmldsig(signed_root, digest_algorithm=u'sha1').verify(x509_cert=cert)
-    # signature = Assinatura(pfx, senha)
-    # xmlsec = signature.assina_xml(not_signed, reference)
-    # xmlsec = xmlsec.replace("""<!DOCTYPE NFe [
-# <!ATTLIST infNFe Id ID #IMPLIED>
-# ]>\n""", "")
     return etree.tostring(signed_root)
-    # , xmlsec
-
-
-class Assinatura(object):
-
-    def __init__(self, arquivo, senha):
-        self.arquivo = arquivo
-        self.senha = senha
-
-    def _checar_certificado(self):
-        if not os.path.isfile(self.arquivo):
-            raise Exception('Caminho do certificado não existe.')
-
-    def _inicializar_cripto(self):
-        libxml2.initParser()
-        libxml2.substituteEntitiesDefault(1)
-
-        xmlsec.init()
-        xmlsec.cryptoAppInit(None)
-        xmlsec.cryptoInit()
-
-    def _finalizar_cripto(self):
-        xmlsec.cryptoShutdown()
-        xmlsec.cryptoAppShutdown()
-        xmlsec.shutdown()
-
-        libxml2.cleanupParser()
-
-    def assina_xml(self, xml, reference):
-        self._checar_certificado()
-        self._inicializar_cripto()
-        try:
-            doc_xml = libxml2.parseMemory(xml.encode('utf-8'),
-                                          len(xml.encode('utf-8')))
-            import ipdb; ipdb.set_trace()
-            signNode = xmlsec.TmplSignature(doc_xml,
-                                            xmlsec.transformInclC14NId(),
-                                            xmlsec.transformRsaSha1Id(), None)
-
-            doc_xml.getRootElement().addChild(signNode)
-            refNode = signNode.addReference(
-                xmlsec.transformSha1Id(),
-                None, reference, None)
-
-            refNode.addTransform(xmlsec.transformEnvelopedId())
-            refNode.addTransform(xmlsec.transformInclC14NId())
-            keyInfoNode = signNode.ensureKeyInfo()
-            keyInfoNode.addX509Data()
-
-            dsig_ctx = xmlsec.DSigCtx()
-            chave = xmlsec.cryptoAppKeyLoad(
-                filename=str(self.arquivo),
-                format=xmlsec.KeyDataFormatPkcs12,
-                pwd=str(self.senha), pwdCallback=None, pwdCallbackCtx=None)
-
-            dsig_ctx.signKey = chave
-            dsig_ctx.sign(signNode)
-
-            status = dsig_ctx.status
-            dsig_ctx.destroy()
-
-            if status != xmlsec.DSigStatusSucceeded:
-                raise RuntimeError(
-                    'Erro ao realizar a assinatura do arquivo; status: "' +
-                    str(status) + '"')
-
-            xpath = doc_xml.xpathNewContext()
-            xpath.xpathRegisterNs('sig', NAMESPACE_SIG)
-            certs = xpath.xpathEval('//sig:X509Data/sig:X509Certificate')
-            for i in range(len(certs)-1):
-                certs[i].unlinkNode()
-                certs[i].freeNode()
-
-            xml = doc_xml.serialize()
-            return xml
-        finally:
-            doc_xml.freeDoc()
-            self._finalizar_cripto()

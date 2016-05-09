@@ -19,11 +19,7 @@ def datetime_tostring(data):
 
 
 def gerar_consulta_recibo(recibo):
-    c = DynamicXml('consReciNFe')
-    c(xmlns="http://www.portalfiscal.inf.br/nfe", versao="2.00")
-    c.tpAmb = recibo.tpAmb
-    c.nRec = recibo.infRec.nRec
-    return c
+    return {'tpAmb': recibo.tpAmb, 'nRec': recibo.infRec.nRec}
 
 
 def gerar_chave(obj_chave, prefix=None):

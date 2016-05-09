@@ -5,6 +5,9 @@ Created on Jun 14, 2015
 @author: danimar
 '''
 
+import suds.client
+import suds_requests
+import requests
 from lxml import objectify
 from uuid import uuid4
 from pytrustnfe.HttpClient import HttpClient
@@ -25,8 +28,29 @@ class Comunicacao(object):
     tag_retorno = ''
 
     def __init__(self, cert, key):
-        self.certificado = cert
-        self.senha = key
+        self.cert = cert
+        self.key = key
+
+    def _get_client(self, base_url):
+        cache_location = '/tmp/suds'
+        cache = suds.cache.DocumentCache(location=cache_location)
+
+        f = open('/tmp/suds/cert_nfe.cer', 'w')
+        f.write(self.cert)
+        f.close()
+        f = open('/tmp/suds/key_nfe.cer', 'w')
+        f.write(self.key)
+        f.close()
+        session = requests.Session()
+        session.verify = False
+        session.cert = ('/tmp/suds/cert_nfe.cer',
+                        '/tmp/suds/key_nfe.cer')
+
+        return suds.client.Client(
+            base_url,
+            cache=cache,
+            transport=suds_requests.RequestsTransport(session)
+        )
 
     def _soap_xml(self, body):
         xml = '''<?xml version="1.0" encoding="utf-8"?>
