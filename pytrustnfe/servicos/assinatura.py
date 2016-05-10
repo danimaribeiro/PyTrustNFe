@@ -35,12 +35,8 @@ def assinar(xml, cert, key, reference):
         if recursively_empty(elem):
             parent.remove(elem)
 
-    element = xml.find('{' + xml.nsmap[None] + '}NFe')
-    not_signed = etree.tostring(element)
-    not_signed = "<!DOCTYPE NFe [<!ATTLIST infNFe Id ID #IMPLIED>]>" + \
-        not_signed
-
-    signer = xmldsig(element, digest_algorithm=u'sha1')
+    # element = xml.find('{' + xml.nsmap[None] + '}NFe')
+    signer = xmldsig(xml, digest_algorithm=u'sha1')
     ns = {}
     ns[None] = signer.namespaces['ds']
     signer.namespaces = ns

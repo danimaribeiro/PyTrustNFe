@@ -6,6 +6,8 @@ Created on 21/06/2015
 '''
 from lxml import etree
 from suds.sax.element import Element
+from suds.sax.text import Raw
+from suds.sax.parser import Parser
 from pytrustnfe.servicos.comunicacao import Comunicacao
 from pytrustnfe import utils
 from pytrustnfe.xml import render_xml
@@ -31,7 +33,11 @@ class NfeAutorizacao(Comunicacao):
         cabecalho.versaoDados = '3.10'
         client.set_options(soapheaders=cabecalho)
 
-        resposta = client.service.nfeAutorizacaoLote(xml_signed)
+        p = Parser()
+        import ipdb; ipdb.set_trace()
+        resposta = client.service.nfeAutorizacaoLote(
+            p.parse(string=xml_signed).root())
+
         print client.last_sent()
         print client.last_received()
 

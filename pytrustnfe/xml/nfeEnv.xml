@@ -169,6 +169,7 @@
                 <infCpl>{{ NFe.infNFe.infAdic.infCpl }}</infCpl>
             </infAdic>
         </infNFe>
+        <Signature Id="placeholder"></Signature>
     </NFe>
     {% endfor %}
 </enviNFe>
