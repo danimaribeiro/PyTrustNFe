@@ -4,8 +4,7 @@ from jinja2 import Environment, FileSystemLoader
 from . import filters
 
 
-def render_xml(template_name, **nfe):
-    path = os.path.dirname(__file__)
+def render_xml(path, template_name, **nfe):
     env = Environment(
         loader=FileSystemLoader(path), extensions=['jinja2.ext.with_'])
 
@@ -19,4 +18,5 @@ def render_xml(template_name, **nfe):
     xml = template.render(**nfe)
     xml = xml.replace('&', '&amp;')
     parser = etree.XMLParser(remove_blank_text=True, remove_comments=True)
-    return etree.fromstring(xml, parser=parser)
+    elem = etree.fromstring(xml, parser=parser)
+    return etree.tostring(elem)

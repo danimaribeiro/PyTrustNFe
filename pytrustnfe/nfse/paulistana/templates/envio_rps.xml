@@ -1,0 +1,51 @@
+<PedidoEnvioRPS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.prefeitura.sp.gov.br/nfe">
+  <Cabecalho Versao="1" xmlns="">
+    <CPFCNPJRemetente>
+      <CNPJ>{{ nfse.cpf_cnpj }}</CNPJ>
+    </CPFCNPJRemetente>
+  </Cabecalho>
+  {% for rps in nfse.lista_rps -%}
+  <RPS xmlns="">
+      <Assinatura>{{ rps.assinatura }}</Assinatura>
+    <ChaveRPS>
+        <InscricaoPrestador>{{ rps.prestador.inscricao_municipal }}</InscricaoPrestador>
+        <SerieRPS>{{ rps.serie }}</SerieRPS>
+        <NumeroRPS>{{ rps.numero }}</NumeroRPS>
+    </ChaveRPS>
+    <TipoRPS>RPS-M</TipoRPS>
+    <DataEmissao>{{ rps.data_emissao }}</DataEmissao>
+    <StatusRPS>N</StatusRPS>
+    <TributacaoRPS>T</TributacaoRPS>
+    <ValorServicos>{{ nfse.total_servicos }}</ValorServicos>
+    <ValorDeducoes>{{ nfse.total_deducoes }}</ValorDeducoes>
+    <ValorPIS>{{ rps.valor_pis }}</ValorPIS>
+    <ValorCOFINS>{{ rps.valor_cofins }}</ValorCOFINS>
+    <ValorINSS>{{ rps.valor_inss }}</ValorINSS>
+    <ValorIR>{{ rps.valor_pis }}</ValorIR>
+    <ValorCSLL>{{ rps.valor_csll }}</ValorCSLL>
+    <CodigoServico>{{ rps.codigo_atividade }}</CodigoServico>
+    <AliquotaServicos>{{ rps.aliquota_atividade }}</AliquotaServicos>
+    <ISSRetido>false</ISSRetido>
+    <CPFCNPJTomador>
+        {% if rps.tomador.tipo_cpfcnpj == 1 -%}
+        <CPF>{{ rps.tomador.cpf_cnpj }}</CPF>
+        {% endif %}
+        {% if rps.tomador.tipo_cpfcnpj == 2 -%}
+        <CNPJ>{{ rps.tomador.cpf_cnpj }}</CNPJ>
+        {% endif %}
+    </CPFCNPJTomador>
+    <RazaoSocialTomador>{{ rps.tomador.razao_social }}</RazaoSocialTomador>
+    <EnderecoTomador>
+        <TipoLogradouro>{{ rps.tomador.tipo_logradouro }}</TipoLogradouro>
+        <Logradouro>{{ rps.tomador.logradouro }}</Logradouro>
+        <NumeroEndereco>{{ rps.tomador.numero }}</NumeroEndereco>
+        <ComplementoEndereco>{{ rps.tomador.complemento }}</ComplementoEndereco>
+        <Bairro>{{ rps.tomador.bairro }}</Bairro>
+        <Cidade>{{ rps.tomador.cidade }}</Cidade>
+        <UF>{{ rps.tomador.uf }}</UF>
+        <CEP>{{ rps.tomador.cep }}</CEP>
+    </EnderecoTomador>
+    <Discriminacao>{{ rps.descricao }}</Discriminacao>
+  {% endfor %}
+  </RPS>
+</PedidoEnvioRPS>
