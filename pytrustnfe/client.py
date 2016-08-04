@@ -4,13 +4,12 @@ import suds.client
 import suds_requests
 
 
-def get_authenticated_client(base_url, key_p, cert):
+def get_authenticated_client(base_url, cert, key):
     cache_location = '/tmp/suds'
     cache = suds.cache.DocumentCache(location=cache_location)
 
     session = requests.Session()
     session.cert = (cert, key)
-
     return suds.client.Client(
         base_url,
         cache=cache,
