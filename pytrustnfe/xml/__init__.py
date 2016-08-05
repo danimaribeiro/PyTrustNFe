@@ -1,5 +1,10 @@
 import os.path
+import unicodedata
 from lxml import etree
+
+from StringIO import StringIO
+from lxml import objectify
+import xml.etree.ElementTree as ET
 from jinja2 import Environment, FileSystemLoader
 from . import filters
 
@@ -20,6 +25,23 @@ def render_xml(path, template_name, **nfe):
     parser = etree.XMLParser(remove_blank_text=True, remove_comments=True)
     elem = etree.fromstring(xml, parser=parser)
     return etree.tostring(elem)
+
+
+def sanitize_response(response):
+    response = unicode(response)
+    response = unicodedata.normalize('NFKD', response).encode('ascii',
+                                                              'ignore')
+
+    tree = etree.fromstring(response)
+    # Remove namespaces inuteis na resposta
+    for elem in tree.getiterator():
+        if not hasattr(elem.tag, 'find'):
+            continue
+        i = elem.tag.find('}')
+        if i >= 0:
+            elem.tag = elem.tag[i+1:]
+    objectify.deannotate(tree, cleanup_namespaces=True)
+    return response, objectify.fromstring(etree.tostring(tree))
 
 
 def valida_schema(xml, arquivo_xsd):
