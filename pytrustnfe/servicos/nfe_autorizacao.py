@@ -4,6 +4,7 @@ Created on 21/06/2015
 
 @author: danimar
 '''
+import os
 from lxml import etree
 from suds.sax.element import Element
 from suds.sax.text import Raw
@@ -19,31 +20,22 @@ class NfeAutorizacao(Comunicacao):
     def __init__(self, cert, key):
         Comunicacao.__init__(self, cert, key)
 
-    def autorizar_nfe(self, nfe, id):
+    def autorizar_nfe(self, nfe, id):        
+        self.url = 'nfe-homologacao.sefazrs.rs.gov.br'
+        self.web_service = '/ws/NfeAutorizacao/NFeAutorizacao.asmx'
+        self.metodo = 'nfeAutorizacaoLote'
+        
         self._validar_nfe(nfe)
-        xml = render_xml('nfeEnv.xml', **nfe)
+        path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'xml')        
+        xml = render_xml(path, 'nfeEnv.xml', **nfe)
 
-        xml_signed = assinar(xml, self.cert, self.key, '#%s' % id)
-
-        client = self._get_client(
-            'https://nfe-homologacao.sefazrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao.asmx?wsdl')
-
-        cabecalho = client.factory.create('nfeCabecMsg')
-        cabecalho.cUF = '43'
-        cabecalho.versaoDados = '3.10'
-        client.set_options(soapheaders=cabecalho)
-
-        p = Parser()
-        import ipdb; ipdb.set_trace()
-        resposta = client.service.nfeAutorizacaoLote(
-            p.parse(string=xml_signed).root())
-
-        print client.last_sent()
-        print client.last_received()
-
-        consulta_recibo = utils.gerar_consulta_recibo(resposta)
-
-        client = self._get_client(
-            'https://nfe-homologacao.sefazrs.rs.gov.br/ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx'
-        )
-        return client.service.nfeRetAutorizacao(consulta_recibo)
+        #xmlElem = etree.fromstring(xml) TODO Assinar
+        #xml_signed = assinar(xmlElem, self.cert, self.key, '#%s' % id)
+        print xml
+        xml_response, obj = self._executar_consulta(xml)
+        
+        return {
+            'sent_xml': xml,
+            'received_xml': xml_response,
+            'object': obj.Body.nfeAutorizacaoLoteResult
+        }

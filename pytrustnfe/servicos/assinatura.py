@@ -5,7 +5,7 @@ Created on Jun 14, 2015
 @author: danimar
 '''
 
-from signxml import xmldsig
+from signxml import XMLSigner
 from signxml import methods
 from lxml import etree
 from OpenSSL import crypto
@@ -36,14 +36,13 @@ def assinar(xml, cert, key, reference):
             parent.remove(elem)
 
     # element = xml.find('{' + xml.nsmap[None] + '}NFe')
-    signer = xmldsig(xml, digest_algorithm=u'sha1')
+    signer = XMLSigner(digest_algorithm=u'sha1',signature_algorithm="rsa-sha1", 
+                       method=methods.enveloped,
+                       c14n_algorithm='http://www.w3.org/TR/2001/REC-xml-c14n-20010315')
     ns = {}
     ns[None] = signer.namespaces['ds']
     signer.namespaces = ns
-    signed_root = signer.sign(
-        key=str(key), cert=cert, reference_uri=reference,
-        algorithm="rsa-sha1", method=methods.enveloped,
-        c14n_algorithm='http://www.w3.org/TR/2001/REC-xml-c14n-20010315')
+    signed_root = signer.sign(xml, key=str(key), cert=cert, reference_uri=reference)
 
-    xmldsig(signed_root, digest_algorithm=u'sha1').verify(x509_cert=cert)
+    # XMLSigner(signed_root, digest_algorithm=u'sha1').verify(x509_cert=cert)
     return etree.tostring(signed_root)
