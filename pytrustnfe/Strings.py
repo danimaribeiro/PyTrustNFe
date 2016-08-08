@@ -1,9 +1,7 @@
-#coding=utf-8
-'''
-Created on Jun 17, 2015
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro, Trustcode
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-@author: danimar
-'''
 
 CONSULTA_CADASTRO_COMPLETA = '<?xml version="1.0" encoding="utf-8"?>'\
         '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">'\
@@ -19,7 +17,7 @@ CONSULTA_CADASTRO_COMPLETA = '<?xml version="1.0" encoding="utf-8"?>'\
         '</ConsCad></nfeDadosMsg>'\
         '</soap:Body>'\
         '</soap:Envelope>'
-        
+
 RETORNO_CONSULTA = '<?xml version="1.0" encoding="utf-8"?>'\
         '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'\
         '<soap:Header><nfeCabecMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro2">'\
@@ -38,4 +36,3 @@ RETORNO_CONSULTA = '<?xml version="1.0" encoding="utf-8"?>'\
         '<xBairro>CONJUNTO HABITACIONAL FRANCISCO DE CILLO (INOCOOP)</xBairro><cMun>3545803</cMun>'\
         '<xMun>SANTA BARBARA D''OESTE</xMun><CEP>13457162</CEP></ender></infCad></infCons>'\
         '</retConsCad></consultaCadastro2Result></soap:Body></soap:Envelope>'
-        

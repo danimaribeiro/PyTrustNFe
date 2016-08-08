@@ -1,9 +1,6 @@
-# coding=utf-8
-'''
-Created on 23/06/2015
-
-@author: danimar
-'''
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro, Trustcode
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
 class ChaveNFe(object):

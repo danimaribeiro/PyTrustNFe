@@ -1,9 +1,7 @@
-# coding=utf-8
-'''
-Created on 01/07/2015
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro, Trustcode
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-@author: danimar
-'''
 from pytrustnfe.xml.DynamicXml import DynamicXml
 from reportlab.platypus.tables import Table
 from reportlab.pdfgen.canvas import Canvas
@@ -45,27 +43,27 @@ class Danfe(object):
         linhas = [20,30]
         table = Table(data, style=estilo, colWidths=colunas, rowHeights=linhas)
         return table
-    
+
     def _field(self, label, value):
         estilo = ParagraphStyle('default')
         return Paragraph('<font size="8">' + label + '</font>' + '<br />' + value, estilo)
-    
+
     def _segundo_cabecalho(self):
         data = [
                 [self._field('Natureza da operação', 'Venda de produção do estabelecimento'), '',
                  self._field('Protocolo de autorização de uso', '12345678956665487')],
-                [self._field('Inscrição estadual', '156466487897'), 
-                 self._field('Inscrição estadual substituto tributário', '1456465456'), 
+                [self._field('Inscrição estadual', '156466487897'),
+                 self._field('Inscrição estadual substituto tributário', '1456465456'),
                  self._field('CNPJ', '87.224.633/0001-61'), ]
                 ]
-        
-        estilo = [('SPAN', (0, 0), (1, 0)),                  
+
+        estilo = [('SPAN', (0, 0), (1, 0)),
                   ('FONTSIZE', (0, 0), (1, 1), 7.0),
                   ('GRID', (0, 0), (2, 1), 0.5, colors.black)]
-        colunas = [6 * inch, 7 * inch, 7 * inch]        
+        colunas = [6 * inch, 7 * inch, 7 * inch]
         table = Table(data, style=estilo, colWidths=colunas)
         return table
-    
+
     def gerar(self):
         doc = SimpleDocTemplate(
             '/home/danimar/projetos/pdfs/danfe.pdf',
@@ -73,7 +71,7 @@ class Danfe(object):
             topMargin=0.5 * inch, bottomMargin=0.5 * inch)
 
         elementos = []
-        
+
         elementos.append(self._header())
         elementos.append(self._segundo_cabecalho())
 
