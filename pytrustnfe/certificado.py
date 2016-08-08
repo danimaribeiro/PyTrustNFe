@@ -1,9 +1,8 @@
-# coding=utf-8
-'''
-Created on Jun 16, 2015
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro, Trustcode
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-@author: danimar
-'''
+
 from uuid import uuid4
 import os.path
 from OpenSSL import crypto
@@ -15,20 +14,16 @@ class Certificado(object):
         self.password = password
 
 
-def converte_pfx_pem(pfx_stream, senha):
-    try:
-        certificado = crypto.load_pkcs12(pfx_stream, senha)
-
-        cert = crypto.dump_certificate(crypto.FILETYPE_PEM,
-                                       certificado.get_certificate())
-        key = crypto.dump_privatekey(crypto.FILETYPE_PEM,
-                                     certificado.get_privatekey())
-    except Exception as e:
-        if len(e.message) == 1 and len(e.message[0]) == 3 and \
-                e.message[0][2] == 'mac verify failure':
-            raise Exception('Senha inválida')
-        raise
+def extract_cert_and_key_from_pfx(pfx, password):
+    pfx = crypto.load_pkcs12(pfx, password)
+    # PEM formatted private key
+    key = crypto.dump_privatekey(crypto.FILETYPE_PEM,
+                                 pfx.get_privatekey())
+    # PEM formatted certificate
+    cert = crypto.dump_certificate(crypto.FILETYPE_PEM,
+                                   pfx.get_certificate())
     return cert, key
+
 
 
 def save_cert_key(cert, key):

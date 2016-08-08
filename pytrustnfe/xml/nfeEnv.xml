@@ -31,7 +31,12 @@
             </ide>
             <emit>
                 {% with emit = NFe.infNFe.emit %}
-                <CNPJ>{{ emit.CNPJ }}</CNPJ>
+                {% if emit.tipo == 'person' -%}
+		           <CPF>{{ emit.cnpj_cpf }}</CPF>
+		        {% endif %}
+		        {% if emit.tipo == 'company' -%}
+		           <CNPJ>{{ emit.cnpj_cpf }}</CNPJ>
+		        {% endif %}
                 <xNome>{{ emit.xNome }}</xNome>
                 <xFant>{{ emit.xFant }}</xFant>
                 <enderEmit>
@@ -52,8 +57,12 @@
             </emit>
             <dest>
                 {% with dest = NFe.infNFe.dest %}
-                <CNPJ>{{ dest.CNPJ }}</CNPJ>
-                <CPF>{{ dest.CPF }}</CPF>
+                {% if dest.tipo == 'person' -%}
+		           <CPF>{{ dest.cnpj_cpf }}</CPF>
+		        {% endif %}
+		        {% if dest.tipo == 'company' -%}
+		           <CNPJ>{{  dest.cnpj_cpf }}</CNPJ>
+		        {% endif %}                
                 <xNome>{{ dest.xNome }}</xNome>
                 <enderDest>
                     <xLgr>{{ dest.enderDest.xLgr }}</xLgr>
@@ -68,7 +77,7 @@
                     <fone>{{ dest.enderDest.fone }}</fone>
                 </enderDest>
                 <indIEDest>{{ dest.indIEDest }}</indIEDest>
-                <IE>{{ dest.IE }}</IE>
+                {% if dest.IE != '' -%}<IE>{{ dest.IE }}</IE>{% endif %}
                 {% endwith %}
             </dest>
             {% for det in NFe.infNFe.detalhes %}
@@ -169,7 +178,6 @@
                 <infCpl>{{ NFe.infNFe.infAdic.infCpl }}</infCpl>
             </infAdic>
         </infNFe>
-        <Signature Id="placeholder"></Signature>
     </NFe>
     {% endfor %}
 </enviNFe>

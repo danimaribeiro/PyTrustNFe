@@ -1,8 +1,26 @@
-'''
-Created on 26/06/2015
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-@author: danimar
-'''
+WS_NFE_AUTORIZACAO = 0
+WS_NFE_CONSULTA_AUTORIZACAO = 1
+WS_NFE_CANCELAMENTO = 2
+WS_NFE_INUTILIZACAO = 3
+WS_NFE_CONSULTA = 4
+WS_NFE_SITUACAO = 5
+WS_NFE_CONSULTA_CADASTRO = 6
+
+WS_DPEC_RECEPCAO = 7
+WS_DPEC_CONSULTA = 8
+
+WS_NFE_RECEPCAO_EVENTO = 9
+WS_NFE_DOWNLOAD = 10
+WS_NFE_CONSULTA_DESTINADAS = 11
+WS_DFE_DISTRIBUICAO = 12
+
+NFE_AMBIENTE_PRODUCAO = 1
+NFE_AMBIENTE_HOMOLOGACAO = 2
+
 
 def localizar_url(servico, estado):
     return ESTADO_WS[estado]['servidor'], ESTADO_WS[estado][servico]
@@ -279,17 +297,8 @@ UFGO = {
     }
 }
 
-#UFMA = {
-    #NFE_AMBIENTE_PRODUCAO: {
-        #'servidor': 'sistemas.sefaz.ma.gov.br',
-        #WS_NFE_CONSULTA_CADASTRO: 'wscadastro/CadConsultaCadastro2',
-    #}
-#}
 
 UFMT = {
-#NFeAutorizacao  3.10    https://nfe.sefaz.mt.gov.br/nfews/v2/services/NfeAutorizacao?wsdl
-#NFeRetAutorizacao   3.10    https://nfe.sefaz.mt.gov.br/nfews/v2/services/NfeRetAutorizacao?wsdl
-
     NFE_AMBIENTE_PRODUCAO: {
         'servidor'              : 'nfe.sefaz.mt.gov.br',
         WS_NFE_AUTORIZACAO       : 'nfews/v2/services/NfeAutorizacao',

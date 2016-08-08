@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro, Trustcode
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import requests
 import suds.client
@@ -28,3 +31,23 @@ def get_client(base_url):
         cache=cache,
         transport=suds_requests.RequestsTransport(session)
     )
+
+
+class HttpClient(object):
+
+    def __init__(self, url, cert_path, key_path):
+        self.url = url
+        self.cert_path = cert_path
+        self.key_path = key_path
+
+    def _headers(self, action):
+        return {
+            u'Content-type': u'application/soap+xml; charset=utf-8; action="http://www.portalfiscal.inf.br/nfe/wsdl/%s' % action,
+            u'Accept': u'application/soap+xml; charset=utf-8'        
+        }
+
+    def post_soap(self, xml_soap, action):
+        res = requests.post(self.url, data=xml_soap, 
+                            cert=(self.cert_path, self.key_path),
+                            verify=False, headers=self._headers(action))
+        return res.text            

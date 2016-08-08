@@ -1,13 +1,8 @@
-# coding=utf-8
-'''
-Created on Jun 14, 2015
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro, Trustcode
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-@author: danimar
-'''
 
-import suds.client
-import suds_requests
-import requests
 from lxml import objectify
 from uuid import uuid4
 from pytrustnfe.HttpClient import HttpClient
@@ -57,13 +52,8 @@ class Comunicacao(object):
 
     def _validar_dados(self):
         assert self.url != '', "Url servidor não configurada"
-        assert self.web_service != '', "Web service não especificado"
         assert self.metodo != '', "Método não configurado"
        
-
-    def _validar_nfe(self, obj):
-        if not isinstance(obj, dict):
-            raise u"Objeto deve ser um dicionário de valores"
 
     def _executar_consulta(self, xmlEnviar):
         self._validar_dados()
