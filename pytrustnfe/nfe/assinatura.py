@@ -39,13 +39,15 @@ def assinar(xml, cert, key, reference):
             parent.remove(elem)
 
     element = xml.find('{' + xml.nsmap[None] + '}NFe')
-    signer = XMLSigner(digest_algorithm=u'sha1',signature_algorithm="rsa-sha1", 
-                       method=methods.enveloped,
-                       c14n_algorithm='http://www.w3.org/TR/2001/REC-xml-c14n-20010315')
+    signer = XMLSigner(
+        digest_algorithm=u'sha1', signature_algorithm="rsa-sha1",
+        method=methods.enveloped,
+        c14n_algorithm='http://www.w3.org/TR/2001/REC-xml-c14n-20010315')
     ns = {}
     ns[None] = signer.namespaces['ds']
     signer.namespaces = ns
-    signed_root = signer.sign(element, key=str(key), cert=cert, reference_uri=reference)
+    signed_root = signer.sign(element, key=str(key), cert=cert,
+                              reference_uri=reference)
 
     xml.remove(element)
     xml.append(signed_root)
@@ -96,7 +98,7 @@ class Assinatura(object):
             keyInfoNode = signNode.ensureKeyInfo()
             keyInfoNode.addX509Data()
 
-            dsig_ctx = xmlsec.DSigCtx()            
+            dsig_ctx = xmlsec.DSigCtx()
             chave = xmlsec.cryptoAppKeyLoad(filename=str(self.arquivo),
                                             format=xmlsec.KeyDataFormatPkcs12,
                                             pwd=str(self.senha),

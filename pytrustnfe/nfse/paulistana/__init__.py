@@ -5,10 +5,10 @@ from uuid import uuid4
 from lxml import etree
 from pytrustnfe.xml import render_xml, valida_schema, sanitize_response
 from pytrustnfe.client import get_authenticated_client
-from pytrustnfe.certificado import converte_pfx_pem, save_cert_key
+from pytrustnfe.certificado import extract_cert_and_key_from_pfx, save_cert_key
 
 
-from signxml import xmldsig
+from signxml import XMLSigner
 from signxml import methods
 
 
@@ -19,17 +19,18 @@ def sign_xml(xml, cert, key):
     root = etree.Element('root')
     rps = elem.find('RPS')
 
-    signer = xmldsig(rps, digest_algorithm=u'sha1')
+    signer = XMLSigner(
+        digest_algorithm=u'sha1', signature_algorithm="rsa-sha1",
+        method=methods.enveloped,
+        c14n_algorithm='http://www.w3.org/TR/2001/REC-xml-c14n-20010315')
     ns = {}
     ns[None] = signer.namespaces['ds']
     signer.namespaces = ns
-    signed_root = signer.sign(
-        key=str(key), cert=cert,
-        algorithm="rsa-sha1", method=methods.enveloped,
-        c14n_algorithm='http://www.w3.org/TR/2001/REC-xml-c14n-20010315')
+    signed_root = signer.sign(rps, key=str(key), cert=cert)
 
     root.append(
         signed_root.find('{http://www.w3.org/2000/09/xmldsig#}Signature'))
+    elem.remove(rps)
     elem.append(signed_root)
     elem.append(root.find('{http://www.w3.org/2000/09/xmldsig#}Signature'))
     return etree.tostring(elem)
@@ -44,7 +45,8 @@ def _send(certificado, method, **kwargs):
         xml = render_xml(path, '%s.xml' % method, **kwargs)
     base_url = 'https://nfe.prefeitura.sp.gov.br/ws/lotenfe.asmx?wsdl'
 
-    cert, key = converte_pfx_pem(certificado.pfx, certificado.password)
+    cert, key = extract_cert_and_key_from_pfx(
+        certificado.pfx, certificado.password)
     cert_path, key_path = save_cert_key(cert, key)
     client = get_authenticated_client(base_url, cert_path, key_path)
 

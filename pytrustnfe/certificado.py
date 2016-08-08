@@ -25,7 +25,6 @@ def extract_cert_and_key_from_pfx(pfx, password):
     return cert, key
 
 
-
 def save_cert_key(cert, key):
     cert_temp = '/tmp/' + uuid4().hex
     key_temp = '/tmp/' + uuid4().hex
