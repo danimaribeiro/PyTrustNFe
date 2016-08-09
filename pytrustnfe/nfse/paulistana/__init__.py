@@ -14,7 +14,6 @@ from pytrustnfe.certificado import extract_cert_and_key_from_pfx, save_cert_key
 from pytrustnfe.nfe.assinatura import Assinatura
 
 
-
 def sign_tag(certificado, **kwargs):
     pkcs12 = crypto.load_pkcs12(certificado.pfx, certificado.password)
     key = pkcs12.get_privatekey()
@@ -65,10 +64,12 @@ def envio_rps(certificado, **kwargs):
     return _send(certificado, 'EnvioRPS', **kwargs)
 
 
+# Testado pois usa o mesmo xml que o teste_envio_lote_rps
 def envio_lote_rps(certificado, **kwargs):
     return _send(certificado, 'EnvioLoteRPS', **kwargs)
 
 
+# Testado
 def teste_envio_lote_rps(certificado, **kwargs):
     return _send(certificado, 'TesteEnvioLoteRPS', **kwargs)
 
@@ -77,25 +78,31 @@ def cancelamento_nfe(certificado, **kwargs):
     return _send(certificado, 'CancelamentoNFe', **kwargs)
 
 
+# Testado
 def consulta_nfe(certificado, **kwargs):
-    return _send('ConsultaNFe', **kwargs)
+    return _send(certificado, 'ConsultaNFe', **kwargs)
 
 
+# Testado
 def consulta_nfe_recebidas(certificado, **kwargs):
-    return _send('ConsultaNFeRecebidas', **kwargs)
+    return _send(certificado, 'ConsultaNFeRecebidas', **kwargs)
 
 
-def consulta_nfe_emitidas(data=None):
-    return _send('ConsultaNFeEmitidas', data)
+# Testado
+def consulta_nfe_emitidas(certificado, **kwargs):
+    return _send(certificado, 'ConsultaNFeEmitidas', **kwargs)
 
 
-def consulta_lote(data=None):
-    return _send('ConsultaLote', data)
+# Testado
+def consulta_lote(certificado, **kwargs):
+    return _send(certificado, 'ConsultaLote', **kwargs)
 
 
-def consulta_informacoes_lote(data=None):
-    return _send('ConsultaInformacoesLote', data)
+# Testado
+def consulta_informacoes_lote(certificado, **kwargs):
+    return _send(certificado, 'ConsultaInformacoesLote', **kwargs)
 
 
-def consulta_cnpj(data=None):
-    return _send('ConsultaCNPJ', data)
+# Testado
+def consulta_cnpj(certificado, **kwargs):
+    return _send(certificado, 'ConsultaCNPJ', **kwargs)

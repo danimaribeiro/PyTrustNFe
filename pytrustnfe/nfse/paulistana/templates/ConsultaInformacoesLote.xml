@@ -1,0 +1,8 @@
+<PedidoInformacoesLote
+    xmlns="http://www.prefeitura.sp.gov.br/nfe">
+    <Cabecalho Versao="1" xmlns="">
+        <CPFCNPJRemetente><CNPJ>{{ consulta.cnpj_remetente }}</CNPJ></CPFCNPJRemetente>
+        <NumeroLote>{{ consulta.lote }}</NumeroLote>
+        <InscricaoPrestador>{{ consulta.inscricao_municipal }}</InscricaoPrestador>
+    </Cabecalho>
+</PedidoInformacoesLote>

@@ -1,19 +1,21 @@
-<ns1:ReqConsultaNFSeRPS xmlns:ns1="http://localhost:8080/WsNFe2/lote"
-	xmlns:tipos="http://localhost:8080/WsNFe2/tp" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://localhost:8080/WsNFe2/lote http://localhost:8080/WsNFe2/xsd/ReqConsultaNFSeRPS.xsd">
-	<Cabecalho>
-		<CodCidade>{{ consulta.cidade }}</CodCidade>
-		<CPFCNPJRemetente>{{ consulta.cpf_cnpj }}</CPFCNPJRemetente>
-		<transacao>{{ consulta.transacao }}</transacao>
-		<Versao>1</Versao>
+<PedidoConsultaNFe xmlns="http://www.prefeitura.sp.gov.br/nfe">
+    <Cabecalho Versao="1" xmlns="">
+        <CPFCNPJRemetente><CNPJ>{{ consulta.cnpj_remetente }}</CNPJ></CPFCNPJRemetente>
 	</Cabecalho>
-	<Lote Id="lote:{{ consulta.lote }}">
-		<RPSConsulta>
-			<RPS Id="rps:{{ consulta.rps_id }}">
-				<InscricaoMunicipalPrestador>{{ consulta.inscricao_municipal }}</InscricaoMunicipalPrestador>
-				<NumeroRPS>{{ consulta.rps_id }}</NumeroRPS>
-				<SeriePrestacao>{{ consulta.serie_prestacao }}</SeriePrestacao>
-			</RPS>
-		</RPSConsulta>
-	</Lote>
-</ns1:ReqConsultaNFSeRPS>
+    <Detalhe xmlns="">
+        {% if consulta.numero_rps -%}
+           <ChaveRPS>
+               <InscricaoPrestador>{{ consulta.inscricao_municipal }}</InscricaoPrestador>
+               <SerieRPS>{{ consulta.serie_rps }}</SerieRPS>
+               <NumeroRPS>{{ consulta.numero_rps }}</NumeroRPS>
+           </ChaveRPS>
+        {% endif %}
+        {% if consulta.numero_nfse -%}
+           <ChaveNFe>
+               <InscricaoPrestador>{{ consulta.inscricao_municipal }}</InscricaoPrestador>
+               <NumeroNFe>{{ consulta.numero_nfse }}</NumeroNFe>
+               <CodigoVerificacao>{{ consulta.codigo_verificacao }}</CodigoVerificacao>
+           </ChaveNFe>
+        {% endif %}
+    </Detalhe>
+</PedidoConsultaNFe>
