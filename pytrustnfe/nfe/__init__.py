@@ -6,7 +6,7 @@
 import os
 from lxml import etree
 from .comunicacao import Comunicacao
-from .assinatura import assinar, Assinatura
+from .assinatura import sign_xml, Assinatura
 from pytrustnfe import utils
 from pytrustnfe.xml import render_xml
 
@@ -40,7 +40,7 @@ class NFe(Comunicacao):
         xml = render_xml(path, 'nfeEnv.xml', **nfe)
         
         xmlElem = etree.fromstring(xml)        
-        xml_signed = assinar(xmlElem, self.cert, self.key, '#%s' % nfe_id)
+        xml_signed = sign_xml(xmlElem, self.cert, self.key, '#%s' % nfe_id)
 
         xml_response, obj = self._executar_consulta(xml_signed)
         

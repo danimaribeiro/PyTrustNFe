@@ -4,7 +4,6 @@
 
 
 from uuid import uuid4
-import os.path
 from OpenSSL import crypto
 
 
@@ -12,6 +11,13 @@ class Certificado(object):
     def __init__(self, pfx, password):
         self.pfx = pfx
         self.password = password
+
+    def save_pfx(self):
+        pfx_temp = '/tmp/' + uuid4().hex
+        arq_temp = open(pfx_temp, 'w')
+        arq_temp.write(self.pfx)
+        arq_temp.close()
+        return pfx_temp
 
 
 def extract_cert_and_key_from_pfx(pfx, password):
@@ -23,6 +29,7 @@ def extract_cert_and_key_from_pfx(pfx, password):
     cert = crypto.dump_certificate(crypto.FILETYPE_PEM,
                                    pfx.get_certificate())
     return cert, key
+
 
 
 def save_cert_key(cert, key):

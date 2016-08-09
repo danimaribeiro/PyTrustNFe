@@ -31,27 +31,21 @@ def recursively_empty(e):
     return all((recursively_empty(c) for c in e.iterchildren()))
 
 
-def assinar(xml, cert, key, reference):
-    context = etree.iterwalk(xml)
-    for dummy, elem in context:
-        parent = elem.getparent()
-        if recursively_empty(elem):
-            parent.remove(elem)
+def sign_xml(xml, cert, key):
+    parser = etree.XMLParser(remove_blank_text=True, remove_comments=True)
+    elem = etree.fromstring(xml, parser=parser)
 
-    element = xml.find('{' + xml.nsmap[None] + '}NFe')
     signer = XMLSigner(
         digest_algorithm=u'sha1', signature_algorithm="rsa-sha1",
-        method=methods.enveloped,
+        method=methods.enveloping,
         c14n_algorithm='http://www.w3.org/TR/2001/REC-xml-c14n-20010315')
     ns = {}
     ns[None] = signer.namespaces['ds']
     signer.namespaces = ns
-    signed_root = signer.sign(element, key=str(key), cert=cert,
-                              reference_uri=reference)
+    signed_root = signer.sign(elem, key=str(key), cert=cert)
 
-    xml.remove(element)
-    xml.append(signed_root)
-    return etree.tostring(xml)
+    return etree.tostring(signed_root)
+
 
 
 class Assinatura(object):
@@ -84,12 +78,12 @@ class Assinatura(object):
         self._inicializar_cripto()
         try:
             doc_xml = libxml2.parseMemory(
-                xml.encode('utf-8'), len(xml.encode('utf-8')))
+                xml, len(xml))
 
             signNode = xmlsec.TmplSignature(doc_xml, xmlsec.transformInclC14NId(),
                                             xmlsec.transformRsaSha1Id(), None)
 
-            doc_xml.getLastChild().addChild(signNode)
+            doc_xml.getRootElement().addChild(signNode)
             refNode = signNode.addReference(xmlsec.transformSha1Id(),
                                             None, reference, None)
 
@@ -129,4 +123,4 @@ class Assinatura(object):
             return xml
         finally:
             doc_xml.freeDoc()
-            self._finalizar_cripto()
+            # self._finalizar_cripto()
