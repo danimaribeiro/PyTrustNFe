@@ -15,6 +15,15 @@ common_namespaces = {'soap': 'http://www.w3.org/2003/05/soap-envelope'}
 soap_body_path = './soap:Envelope/soap:Body'
 soap_fault_path = './soap:Envelope/soap:Body/soap:Fault'
 
+def executar_consulta(cerficado, cabecalho, xmlEnviar):        
+    cert_path, key_path = self._preparar_temp_pem()
+
+    client = HttpClient(self.url, cert_path, key_path)
+    soap_xml = self._soap_xml(xmlEnviar)
+    xml_retorno = client.post_xml(self.web_service, soap_xml)
+    
+    return sanitize_response(xml_retorno)
+
 
 class Comunicacao(object):
     url = ''

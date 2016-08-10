@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<consStatServ xmlns="http://www.portalfiscal.inf.br/nfe" versao="3.10">
+   <tpAmb>{{ obj.ambiente }}</tpAmb>
+   <cUF>{{ obj.estado }}</cUF>
+   <xServ>STATUS</xServ>
+</consStatServ>

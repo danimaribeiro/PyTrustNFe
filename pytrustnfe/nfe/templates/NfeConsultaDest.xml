@@ -1,0 +1,8 @@
+<consNFeDest xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.01">
+  <tpAmb>{{ obj.ambiente }}</tpAmb>
+  <xServ>CONSULTAR NFE DEST</xServ>
+  <CNPJ>{{ obj.cnpj }}</CNPJ>
+  <indNFe>{{ obj.indicador_nfe }}</indNFe>
+  <indEmi>{{ obj.indicador_emissor }}</indEmi>
+  <ultNSU>{{ obj.ultimo_nsu }}</ultNSU>
+</consNFeDest>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inutNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="2.00">
+  <infInut Id="{{ obj.id }}">
+    <tpAmb>{{ obj.ambiente }}</tpAmb>
+    <xServ>INUTILIZAR</xServ>
+    <cUF>{{ obj.estado }}</cUF>
+    <ano>{{ obj.ano }}</ano>
+    <CNPJ>{{ obj.cnpj }}</CNPJ>
+    <mod>{{ obj.modelo }}</mod>
+    <serie>{{ obj.serie }}</serie>
+    <nNFIni>{{ obj.numero_inicio}}</nNFIni>
+    <nNFFin>{{ obj.numero_fim }}</nNFFin>
+    <xJust>{{ obj.justificativa }}</xJust>
+  </infInut>
+ <inutNFe>

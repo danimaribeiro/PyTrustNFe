@@ -1,0 +1,18 @@
+<envEvento xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.00">
+  <idLote>{{ obj.lote }}</idLote>
+  <evento xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.00">
+    <infEvento Id="{{ obj.id }}">
+      <cOrgao>{{ obj.orgao }}</cOrgao>
+      <tpAmb>{{ obj.ambiente }}</tpAmb>
+      <CNPJ>{{ obj.cnpj }}</CNPJ>
+      <chNFe>{{ obj.chave_nfe }}</chNFe>
+      <dhEvento>{{ obj.data_hora_evento }}</dhEvento>
+      <tpEvento>210200</tpEvento>
+      <nSeqEvento>{{ obj.sequencia }}</nSeqEvento>
+      <verEvento>1.00</verEvento>
+      <detEvento versao="1.00">
+        <descEvento>Confirmacao da Operacao</descEvento>
+      </detEvento>
+    </infEvento>
+  </evento>
+</envEvento>

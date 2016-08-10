@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<envEvento xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.00">
+  <idLote>00000001319901</idLote>
+  <evento xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.00">
+    <infEvento Id="ID1101103511051014278500019055111000000013199881790001">
+      <cOrgao>{{ obj.orgao }}</cOrgao>
+      <tpAmb>{{ obj.ambiente }}</tpAmb>
+      <CNPJ>{{ obj.cnpj }}</CNPJ>
+      <chNFe>{{ obj.chave_nfe }}</chNFe>
+      <dhEvento>{{} obj.data_hora_evento }</dhEvento>
+      <tpEvento>110110</tpEvento>
+      <nSeqEvento>{{ obj.sequencia }}</nSeqEvento>
+      <verEvento>1.00</verEvento>
+      <detEvento versao="1.00">
+        <descEvento>Carta de Correção</descEvento>
+        <xCorrecao>{{ obj.correcao }}</xCorrecao>
+        <xCondUso>A Carta de Correção é disciplinada pelo § 1º-A do art. 7º do Convênio S/N, de 15 de dezembro de 1970 e pode ser utilizada para regularização de erro ocorrido na emissão de documento fiscal, desde que o erro não esteja relacionado com: I - as variáveis que determinam o valor do imposto tais como: base de cálculo, alíquota, diferença de preço, quantidade, valor da operação ou da prestação; II - a correção de dados cadastrais que implique mudança do remetente ou do destinatário; III - a data de emissão ou de saída.</xCondUso>
+      </detEvento>
+    </infEvento>
+   </evento>
+ </envEvento>

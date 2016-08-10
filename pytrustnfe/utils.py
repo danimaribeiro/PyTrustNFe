@@ -5,6 +5,12 @@
 
 from datetime import date, datetime
 
+class CabecalhoSoap(object):
+    
+    def __init__(self, **kwargs):
+        self.estado = kwargs.pop('estado', '')
+        self.soap_action = kwargs.pop('soap_action', '')
+
 
 class ChaveNFe(object):
 
