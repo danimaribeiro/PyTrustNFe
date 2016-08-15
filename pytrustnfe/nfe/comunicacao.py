@@ -5,7 +5,7 @@
 
 from lxml import objectify
 from uuid import uuid4
-from pytrustnfe.HttpClient import HttpClient
+from pytrustnfe.client import HttpClient
 from pytrustnfe.Certificado import converte_pfx_pem
 
 from ..xml import sanitize_response
@@ -39,7 +39,7 @@ class Comunicacao(object):
     def _preparar_temp_pem(self):
         cert_path = '/tmp/' + uuid4().hex
         key_path = '/tmp/' + uuid4().hex
-        
+
         arq_temp = open(cert_path, 'w')
         arq_temp.write(self.cert)
         arq_temp.close()
@@ -53,7 +53,7 @@ class Comunicacao(object):
     def _validar_dados(self):
         assert self.url != '', "Url servidor não configurada"
         assert self.metodo != '', "Método não configurado"
-       
+
 
     def _executar_consulta(self, xmlEnviar):
         self._validar_dados()
@@ -62,5 +62,5 @@ class Comunicacao(object):
         client = HttpClient(self.url, cert_path, key_path)
         soap_xml = self._soap_xml(xmlEnviar)
         xml_retorno = client.post_xml(self.web_service, soap_xml)
-        
+
         return sanitize_response(xml_retorno)
