@@ -1,0 +1,6 @@
+<downloadNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.00">
+  <tpAmb>{{ obj.ambiente }}</tpAmb>
+  <xServ>DOWNLOAD NFE</xServ>
+  <CNPJ>{{ obj.cnpj }}</CNPJ>
+  <chNFe>{{ obj.chave_nfe }}</chNFe>
+</downloadNFe>
