@@ -6,46 +6,7 @@ import xmlsec
 import libxml2
 import os.path
 
-from signxml import XMLSigner
-from signxml import methods
-from lxml import etree
-from OpenSSL import crypto
-
 NAMESPACE_SIG = 'http://www.w3.org/2000/09/xmldsig#'
-
-
-def extract_cert_and_key_from_pfx(pfx, password):
-    pfx = crypto.load_pkcs12(pfx, password)
-    # PEM formatted private key
-    key = crypto.dump_privatekey(crypto.FILETYPE_PEM,
-                                 pfx.get_privatekey())
-    # PEM formatted certificate
-    cert = crypto.dump_certificate(crypto.FILETYPE_PEM,
-                                   pfx.get_certificate())
-    return cert, key
-
-
-def recursively_empty(e):
-    if e.text:
-        return False
-    return all((recursively_empty(c) for c in e.iterchildren()))
-
-
-def sign_xml(xml, cert, key):
-    parser = etree.XMLParser(remove_blank_text=True, remove_comments=True)
-    elem = etree.fromstring(xml, parser=parser)
-
-    signer = XMLSigner(
-        digest_algorithm=u'sha1', signature_algorithm="rsa-sha1",
-        method=methods.enveloping,
-        c14n_algorithm='http://www.w3.org/TR/2001/REC-xml-c14n-20010315')
-    ns = {}
-    ns[None] = signer.namespaces['ds']
-    signer.namespaces = ns
-    signed_root = signer.sign(elem, key=str(key), cert=cert)
-
-    return etree.tostring(signed_root)
-
 
 
 class Assinatura(object):
@@ -80,7 +41,8 @@ class Assinatura(object):
             doc_xml = libxml2.parseMemory(
                 xml, len(xml))
 
-            signNode = xmlsec.TmplSignature(doc_xml, xmlsec.transformInclC14NId(),
+            signNode = xmlsec.TmplSignature(doc_xml,
+                                            xmlsec.transformInclC14NId(),
                                             xmlsec.transformRsaSha1Id(), None)
 
             doc_xml.getRootElement().addChild(signNode)

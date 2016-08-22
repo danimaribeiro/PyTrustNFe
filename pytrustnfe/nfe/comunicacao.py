@@ -3,10 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-from lxml import objectify
 from uuid import uuid4
 from pytrustnfe.client import HttpClient
-from pytrustnfe.Certificado import converte_pfx_pem
+from pytrustnfe.certificado import save_cert_key
 
 from ..xml import sanitize_response
 
@@ -15,13 +14,14 @@ common_namespaces = {'soap': 'http://www.w3.org/2003/05/soap-envelope'}
 soap_body_path = './soap:Envelope/soap:Body'
 soap_fault_path = './soap:Envelope/soap:Body/soap:Fault'
 
-def executar_consulta(cerficado, cabecalho, xmlEnviar):        
-    cert_path, key_path = self._preparar_temp_pem()
 
-    client = HttpClient(self.url, cert_path, key_path)
-    soap_xml = self._soap_xml(xmlEnviar)
-    xml_retorno = client.post_xml(self.web_service, soap_xml)
-    
+def executar_consulta(cerficado, cabecalho, xmlEnviar):
+    cert_path, key_path = save_cert_key()
+    url = ''
+    web_service = ''
+    client = HttpClient(url, cert_path, key_path)
+    xml_retorno = client.post_xml(web_service, xmlEnviar)
+
     return sanitize_response(xml_retorno)
 
 
@@ -63,9 +63,7 @@ class Comunicacao(object):
         assert self.url != '', "Url servidor não configurada"
         assert self.metodo != '', "Método não configurado"
 
-
     def _executar_consulta(self, xmlEnviar):
-        self._validar_dados()
         cert_path, key_path = self._preparar_temp_pem()
 
         client = HttpClient(self.url, cert_path, key_path)
