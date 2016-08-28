@@ -18,7 +18,7 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     packages=find_packages(exclude=['*test*']),
-    package_data={'pytrustnfe': ['xml/*xml',
+    package_data={'pytrustnfe': ['nfe/templates/*xml',
                                  'nfse/paulistana/templates/*xml']},
     url='https://github.com/danimaribeiro/PyNfeTrust',
     license='LGPL-v2.1+',

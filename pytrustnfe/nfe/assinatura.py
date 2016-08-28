@@ -38,6 +38,7 @@ class Assinatura(object):
         self._checar_certificado()
         self._inicializar_cripto()
         try:
+            xml = '<!DOCTYPE NFe [<!ATTLIST infNFe Id ID #IMPLIED>]>' + xml
             doc_xml = libxml2.parseMemory(
                 xml, len(xml))
 
@@ -47,7 +48,7 @@ class Assinatura(object):
 
             doc_xml.getRootElement().addChild(signNode)
             refNode = signNode.addReference(xmlsec.transformSha1Id(),
-                                            None, reference, None)
+                                            None, '#' + str(reference), None)
 
             refNode.addTransform(xmlsec.transformEnvelopedId())
             refNode.addTransform(xmlsec.transformInclC14NId())

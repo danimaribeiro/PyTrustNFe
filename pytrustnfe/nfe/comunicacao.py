@@ -5,7 +5,7 @@
 
 from uuid import uuid4
 from pytrustnfe.client import HttpClient
-from pytrustnfe.certificado import save_cert_key
+from pytrustnfe.certificado import save_cert_key, extract_cert_and_key_from_pfx
 
 from ..xml import sanitize_response
 
@@ -15,12 +15,13 @@ soap_body_path = './soap:Envelope/soap:Body'
 soap_fault_path = './soap:Envelope/soap:Body/soap:Fault'
 
 
-def executar_consulta(cerficado, cabecalho, xmlEnviar):
-    cert_path, key_path = save_cert_key()
-    url = ''
-    web_service = ''
+def executar_consulta(certificado, url, cabecalho, xmlEnviar):
+    cert, key = extract_cert_and_key_from_pfx(certificado.pfx, certificado.password)
+    cert_path, key_path = save_cert_key(cert, key)
+    url = 'https://nfe-homologacao.sefazrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao.asmx'
+    web_service = 'NfeAutorizacao/nfeAutorizacaoLote'
     client = HttpClient(url, cert_path, key_path)
-    xml_retorno = client.post_xml(web_service, xmlEnviar)
+    xml_retorno = client.post_soap(xmlEnviar, web_service)
 
     return sanitize_response(xml_retorno)
 

@@ -8,12 +8,31 @@ from .comunicacao import executar_consulta
 from .assinatura import Assinatura
 from pytrustnfe.xml import render_xml
 from pytrustnfe.utils import CabecalhoSoap
+from pytrustnfe.utils import gerar_chave, ChaveNFe
+from pytrustnfe.Servidores import localizar_url
 
 
 def _build_header(**kwargs):
-    estado = kwargs['estado']
-    return CabecalhoSoap({'estado': estado, 'soap_action': ''})
+    vals = {'estado': kwargs['estado'], 'soap_action': ''}
+    return CabecalhoSoap(**vals)
 
+def _generate_nfe_id(**kwargs):
+    for item in kwargs['NFes']:
+        vals = {
+            'cnpj': item['infNFe']['emit']['cnpj_cpf'],
+            'estado': item['infNFe']['ide']['cUF'],
+            'emissao': '%s%s' % (item['infNFe']['ide']['dhEmi'][2:4],
+                                 item['infNFe']['ide']['dhEmi'][5:7]),
+            'modelo': item['infNFe']['ide']['mod'],
+            'serie': item['infNFe']['ide']['serie'],
+            'numero': item['infNFe']['ide']['nNF'],
+            'tipo': item['infNFe']['ide']['tpEmis'],
+            'codigo': item['infNFe']['ide']['cNF'],
+        }        
+        chave = ChaveNFe(**vals)
+        item['infNFe']['Id'] = gerar_chave(chave, 'NFe') 
+    
+    
 
 def _send(certificado, method, **kwargs):
     path = os.path.join(os.path.dirname(__file__), 'templates')
@@ -22,14 +41,16 @@ def _send(certificado, method, **kwargs):
 
     pfx_path = certificado.save_pfx()
     signer = Assinatura(pfx_path, certificado.password)
-    xml_signed = signer.assina_xml(xml, '')
+    xml_signed = signer.assina_xml(xml, kwargs['NFes'][0]['infNFe']['Id'])
 
+    url = localizar_url(0,  'RS')
     cabecalho = _build_header(**kwargs)
 
-    return executar_consulta(certificado, cabecalho, xml_signed)
+    return executar_consulta(certificado, url, cabecalho, xml_signed)
 
 
 def autorizar_nfe(certificado, **kwargs):  # Assinar
+    _generate_nfe_id(**kwargs)
     _send(certificado, 'NfeAutorizacao', **kwargs)
 
 
