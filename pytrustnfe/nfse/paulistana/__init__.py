@@ -3,12 +3,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import os
-import logging
 import suds
 from OpenSSL import crypto
-from base64 import b64encode, b64decode
-from uuid import uuid4
-from pytrustnfe.xml import render_xml, valida_schema, sanitize_response
+from base64 import b64encode
+from pytrustnfe.xml import render_xml, sanitize_response
 from pytrustnfe.client import get_authenticated_client
 from pytrustnfe.certificado import extract_cert_and_key_from_pfx, save_cert_key
 from pytrustnfe.nfe.assinatura import Assinatura
@@ -17,15 +15,20 @@ from pytrustnfe.nfe.assinatura import Assinatura
 def sign_tag(certificado, **kwargs):
     pkcs12 = crypto.load_pkcs12(certificado.pfx, certificado.password)
     key = pkcs12.get_privatekey()
-    for item in kwargs['nfse']['lista_rps']:
-        signed = crypto.sign(key, item['assinatura'], 'SHA1')
-        item['assinatura'] = b64encode(signed)
+    if 'nfse' in kwargs:
+        for item in kwargs['nfse']['lista_rps']:
+            signed = crypto.sign(key, item['assinatura'], 'SHA1')
+            item['assinatura'] = b64encode(signed)
+    if 'cancelamento' in kwargs:
+        signed = crypto.sign(key, kwargs['cancelamento']['assinatura'], 'SHA1')
+        kwargs['cancelamento']['assinatura'] = b64encode(signed)
 
 
 def _send(certificado, method, **kwargs):
     # A little hack to test
     path = os.path.join(os.path.dirname(__file__), 'templates')
-    if method == 'TesteEnvioLoteRPS' or method == 'EnvioLoteRPS':
+    if method == 'TesteEnvioLoteRPS' or method == 'EnvioLoteRPS' \
+       or method == 'CancelamentoNFe':
         sign_tag(certificado, **kwargs)
 
     if method == 'TesteEnvioLoteRPS':

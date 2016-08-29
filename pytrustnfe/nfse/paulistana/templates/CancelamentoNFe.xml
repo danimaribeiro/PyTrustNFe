@@ -1,7 +1,7 @@
 <PedidoCancelamentoNFe
     xmlns="http://www.prefeitura.sp.gov.br/nfe">
     <Cabecalho Versao="1" xmlns="">
-        <CPFCNPJRemetente><CNPJ>{{ cancelamento.cpf_cnpj }}</CNPJ></CPFCNPJRemetente>
+        <CPFCNPJRemetente><CNPJ>{{ cancelamento.cnpj_remetente }}</CNPJ></CPFCNPJRemetente>
         <transacao>1</transacao>
     </Cabecalho>
     <Detalhe xmlns="">
