@@ -62,7 +62,7 @@
 		        {% endif %}
 		        {% if dest.tipo == 'company' -%}
 		           <CNPJ>{{  dest.cnpj_cpf }}</CNPJ>
-		        {% endif %}                
+		        {% endif %}
                 <xNome>{{ dest.xNome }}</xNome>
                 <enderDest>
                     <xLgr>{{ dest.enderDest.xLgr }}</xLgr>

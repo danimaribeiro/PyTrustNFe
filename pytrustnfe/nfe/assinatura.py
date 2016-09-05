@@ -38,7 +38,6 @@ class Assinatura(object):
         self._checar_certificado()
         self._inicializar_cripto()
         try:
-            xml = '<!DOCTYPE NFe [<!ATTLIST infNFe Id ID #IMPLIED>]>' + xml
             doc_xml = libxml2.parseMemory(
                 xml, len(xml))
 

@@ -23,11 +23,11 @@ NFE_AMBIENTE_HOMOLOGACAO = 2
 
 
 def localizar_url(servico, estado):
-    return ESTADO_WS[estado]['servidor'], ESTADO_WS[estado][servico]
+    return ESTADO_WS[estado][2]['servidor'], ESTADO_WS[estado][2][servico]
 
 
 METODO_WS = {
-    WS_NFE_AUTORIZACAO:{
+    WS_NFE_AUTORIZACAO: {
         'webservice': 'NfeAutorizacao',
         'metodo': 'NfeAutorizacao',
     },

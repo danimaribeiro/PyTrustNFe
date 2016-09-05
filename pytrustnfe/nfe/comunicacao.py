@@ -15,14 +15,26 @@ soap_body_path = './soap:Envelope/soap:Body'
 soap_fault_path = './soap:Envelope/soap:Body/soap:Fault'
 
 
+def _soap_xml(body):
+    xml = '<?xml version="1.0" encoding="utf-8"?>'
+    xml += '<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope"><soap12:Header>'
+    xml += '<nfeCabecMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/NfeAutorizacao">'
+    xml += '<cUF>43</cUF><versaoDados>3.10</versaoDados></nfeCabecMsg></soap12:Header><soap12:Body>'
+    xml += '<nfeDadosMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/NfeAutorizacao">'
+    xml += body
+    xml += '</nfeDadosMsg></soap12:Body></soap12:Envelope>'
+    return xml.rstrip('\n')
+
+
 def executar_consulta(certificado, url, cabecalho, xmlEnviar):
     cert, key = extract_cert_and_key_from_pfx(certificado.pfx, certificado.password)
     cert_path, key_path = save_cert_key(cert, key)
     url = 'https://nfe-homologacao.sefazrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao.asmx'
     web_service = 'NfeAutorizacao/nfeAutorizacaoLote'
     client = HttpClient(url, cert_path, key_path)
-    xml_retorno = client.post_soap(xmlEnviar, web_service)
-
+    xmlEnviar = xmlEnviar.replace('<?xml version="1.0"?>', '')
+    xml_enviar = _soap_xml(xmlEnviar)
+    xml_retorno = client.post_soap(xml_enviar, web_service)
     return sanitize_response(xml_retorno)
 
 
@@ -35,16 +47,6 @@ class Comunicacao(object):
     def __init__(self, cert, key):
         self.cert = cert
         self.key = key
-
-    def _soap_xml(self, body):
-        xml = '<?xml version="1.0" encoding="utf-8"?>'
-        xml += '<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope"><soap12:Header>'
-        xml += '<nfeCabecMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/NfeAutorizacao">'
-        xml += '<cUF>43</cUF><versaoDados>3.10</versaoDados></nfeCabecMsg></soap12:Header><soap12:Body>'
-        xml += '<nfeDadosMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/NfeAutorizacao">'
-        xml += body
-        xml += '</nfeDadosMsg></soap12:Body></soap12:Envelope>'
-        return xml.rstrip('\n')
 
     def _preparar_temp_pem(self):
         cert_path = '/tmp/' + uuid4().hex
