@@ -104,14 +104,24 @@
                     {% with imposto = det.imposto %}
                     <vTotTrib>{{ imposto.vTotTrib }}</vTotTrib>
                     <ICMS>
+                        {% if imposto.ICMS.CST == '00' -%}
                         <ICMS00>
-                            <orig>{{ imposto.ICMS.ICMS00.orig }}</orig>
-                            <CST>{{ imposto.ICMS.ICMS00.CST }}</CST>
-                            <modBC>{{ imposto.ICMS.ICMS00.modBC }}</modBC>
-                            <vBC>{{ imposto.ICMS.ICMS00.vBC }}</vBC>
-                            <pICMS>{{ imposto.ICMS.ICMS00.pICMS }}</pICMS>
-                            <vICMS>{{ imposto.ICMS.ICMS00.vICMS }}</vICMS>
+                            <orig>{{ imposto.ICMS.orig }}</orig>
+                            <CST>{{ imposto.ICMS.CST }}</CST>
+                            <modBC>{{ imposto.ICMS.modBC }}</modBC>
+                            <vBC>{{ imposto.ICMS.vBC }}</vBC>
+                            <pICMS>{{ imposto.ICMS.pICMS }}</pICMS>
+                            <vICMS>{{ imposto.ICMS.vICMS }}</vICMS>
                         </ICMS00>
+                        {% endif %}
+                        {% if imposto.ICMS.CST == '101' -%}
+                        <ICMSSN101>
+                            <orig>{{ imposto.ICMS.orig }}</orig>
+                            <CSOSN>{{ imposto.ICMS.CST }}</CSOSN>
+                            <pCredSN>{{ imposto.ICMS.pCredSN }}</pCredSN>
+                            <vCredICMSSN>{{ imposto.ICMS.vCredICMSSN }}</vCredICMSSN>
+                        </ICMSSN101>
+                        {% endif %}
                     </ICMS>
                     <IPI>
                         <cEnq>{{ imposto.IPI.cEnq }}</cEnq>
