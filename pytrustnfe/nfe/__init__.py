@@ -10,6 +10,7 @@ from pytrustnfe.xml import render_xml
 from pytrustnfe.utils import CabecalhoSoap
 from pytrustnfe.utils import gerar_chave, ChaveNFe
 from pytrustnfe.Servidores import localizar_url
+import re
 
 
 def _build_header(**kwargs):
@@ -30,8 +31,10 @@ def _generate_nfe_id(**kwargs):
             'tipo': item['infNFe']['ide']['tpEmis'],
             'codigo': item['infNFe']['ide']['cNF'],
         }
-        chave = ChaveNFe(**vals)
-        item['infNFe']['Id'] = gerar_chave(chave, 'NFe')
+        chave_nfe = ChaveNFe(**vals)
+        chave_nfe = gerar_chave(chave_nfe, 'NFe')
+        item['infNFe']['Id'] = chave_nfe
+        item['infNFe']['ide']['cDV'] = chave_nfe[len(chave_nfe) - 1:]
 
 
 def _send(certificado, method, sign, **kwargs):
@@ -40,15 +43,27 @@ def _send(certificado, method, sign, **kwargs):
     xml_send = render_xml(path, '%s.xml' % method, **kwargs)
 
     if sign:
+        xml_send = '<!DOCTYPE NFe [<!ATTLIST infNFe Id ID #IMPLIED>]>' + \
+            xml_send
+        xml_send = xml_send.replace('\n', '')
         pfx_path = certificado.save_pfx()
         signer = Assinatura(pfx_path, certificado.password)
-        xml_send = signer.assina_xml(
+        xml_send = signer.assina_xml_nota(
             xml_send, kwargs['NFes'][0]['infNFe']['Id'])
+        xml_send = xml_send.replace(
+            '\n<!DOCTYPE NFe [\n<!ATTLIST infNFe Id ID #IMPLIED>\n]>\n', '')
+        print xml_send
+        xml_send = xml_send.replace('\n', '')
 
     url = localizar_url(method,  kwargs['estado'])
     cabecalho = _build_header(**kwargs)
 
-    return executar_consulta(certificado, url, cabecalho, xml_send)
+    response, obj = executar_consulta(certificado, url, cabecalho, xml_send)
+    return {
+        'sent_xml': xml_send,
+        'received_xml': response,
+        'object': obj
+    }
 
 
 def autorizar_nfe(certificado, **kwargs):  # Assinar

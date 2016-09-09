@@ -52,9 +52,10 @@ SIGLA_ESTADO = {
 }
 
 
-def localizar_url(servico, estado):
+def localizar_url(servico, estado, ambiente=2):
     sigla = SIGLA_ESTADO[estado]
-    return ESTADO_WS[sigla]['servidor'], ESTADO_WS[sigla][servico]
+    return ESTADO_WS[sigla][ambiente]['servidor'],
+    ESTADO_WS[sigla][ambiente][servico]
 
 
 METODO_WS = {

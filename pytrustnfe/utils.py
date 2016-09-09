@@ -6,7 +6,7 @@
 from datetime import date, datetime
 
 class CabecalhoSoap(object):
-    
+
     def __init__(self, **kwargs):
         self.estado = kwargs.pop('estado', '')
         self.soap_action = kwargs.pop('soap_action', '')
@@ -53,7 +53,7 @@ def gerar_chave(obj_chave, prefix=None):
     assert isinstance(obj_chave, ChaveNFe), "Objeto deve ser do tipo ChaveNFe"
     obj_chave.validar()
 
-    chave_parcial = "%s%s%s%s%s%09d%d%08d" % (obj_chave.estado, obj_chave.emissao,
+    chave_parcial = "%s%s%s%s%s%09d%d%s" % (obj_chave.estado, obj_chave.emissao,
                                           obj_chave.cnpj, obj_chave.modelo,
                                           obj_chave.serie.zfill(3), obj_chave.numero,
                                           obj_chave.tipo, obj_chave.codigo)

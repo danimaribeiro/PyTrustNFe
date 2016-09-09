@@ -38,7 +38,6 @@ class Assinatura(object):
         self._checar_certificado()
         self._inicializar_cripto()
         try:
-            xml = '<!DOCTYPE NFe [<!ATTLIST infNFe Id ID #IMPLIED>]>' + xml
             doc_xml = libxml2.parseMemory(
                 xml, len(xml))
 
@@ -47,6 +46,57 @@ class Assinatura(object):
                                             xmlsec.transformRsaSha1Id(), None)
 
             doc_xml.getRootElement().addChild(signNode)
+            refNode = signNode.addReference(xmlsec.transformSha1Id(),
+                                            None, '#' + str(reference), None)
+
+            refNode.addTransform(xmlsec.transformEnvelopedId())
+            refNode.addTransform(xmlsec.transformInclC14NId())
+            keyInfoNode = signNode.ensureKeyInfo()
+            keyInfoNode.addX509Data()
+
+            dsig_ctx = xmlsec.DSigCtx()
+            chave = xmlsec.cryptoAppKeyLoad(filename=str(self.arquivo),
+                                            format=xmlsec.KeyDataFormatPkcs12,
+                                            pwd=str(self.senha),
+                                            pwdCallback=None,
+                                            pwdCallbackCtx=None)
+
+            dsig_ctx.signKey = chave
+            dsig_ctx.sign(signNode)
+
+            status = dsig_ctx.status
+            dsig_ctx.destroy()
+
+            if status != xmlsec.DSigStatusSucceeded:
+                raise RuntimeError(
+                    'Erro ao realizar a assinatura do arquivo; status: "' +
+                    str(status) +
+                    '"')
+
+            xpath = doc_xml.xpathNewContext()
+            xpath.xpathRegisterNs('sig', NAMESPACE_SIG)
+            certificados = xpath.xpathEval(
+                '//sig:X509Data/sig:X509Certificate')
+            for i in range(len(certificados) - 1):
+                certificados[i].unlinkNode()
+                certificados[i].freeNode()
+
+            xml = doc_xml.serialize()
+            return xml
+        finally:
+            doc_xml.freeDoc()
+            # self._finalizar_cripto()
+
+    def assina_xml_nota(self, xml, reference):
+        self._checar_certificado()
+        self._inicializar_cripto()
+        try:
+            doc_xml = libxml2.parseMemory(
+                xml, len(xml))
+            signNode = xmlsec.TmplSignature(doc_xml,
+                                            xmlsec.transformInclC14NId(),
+                                            xmlsec.transformRsaSha1Id(), None)
+            doc_xml.getRootElement().get_last().addChild(signNode)
             refNode = signNode.addReference(xmlsec.transformSha1Id(),
                                             None, '#' + str(reference), None)
 
