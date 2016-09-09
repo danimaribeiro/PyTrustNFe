@@ -2,32 +2,63 @@
 # © 2016 Danimar Ribeiro
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-WS_NFE_AUTORIZACAO = 0
-WS_NFE_CONSULTA_AUTORIZACAO = 1
-WS_NFE_CANCELAMENTO = 2
-WS_NFE_INUTILIZACAO = 3
-WS_NFE_CONSULTA = 4
-WS_NFE_SITUACAO = 5
-WS_NFE_CONSULTA_CADASTRO = 6
+WS_NFE_AUTORIZACAO = 'NfeAutorizacao'
+WS_NFE_CONSULTA_AUTORIZACAO = 'NfeRetAutorizacao'
+WS_NFE_CANCELAMENTO = 'RecepcaoEventoCancelamento'
+WS_NFE_INUTILIZACAO = 'NfeInutilizacao'
+WS_NFE_CONSULTA = 'NfeConsultaProtocolo'
+WS_NFE_SITUACAO = 'NfeStatusServico'
+WS_NFE_CONSULTA_CADASTRO = 'NfeConsultaCadastro'
 
-WS_DPEC_RECEPCAO = 7
+WS_DPEC_RECEPCAO = 'RecepcaoEventoEPEC'
 WS_DPEC_CONSULTA = 8
 
-WS_NFE_RECEPCAO_EVENTO = 9
-WS_NFE_DOWNLOAD = 10
-WS_NFE_CONSULTA_DESTINADAS = 11
+WS_NFE_RECEPCAO_EVENTO = 'RecepcaoEventoCarta'
+WS_NFE_DOWNLOAD = 'NfeDownloadNF'
+WS_NFE_CONSULTA_DESTINADAS = 'NfeConsultaDest'
 WS_DFE_DISTRIBUICAO = 12
 
 NFE_AMBIENTE_PRODUCAO = 1
 NFE_AMBIENTE_HOMOLOGACAO = 2
 
+SIGLA_ESTADO = {
+    '12': 'AC',
+    '27': 'AL',
+    '13': 'AM',
+    '16': 'AP',
+    '29': 'BA',
+    '23': 'CE',
+    '53': 'DF',
+    '32': 'ES',
+    '52': 'GO',
+    '21': 'MA',
+    '31': 'MG',
+    '50': 'MS',
+    '51': 'MT',
+    '15': 'PA',
+    '25': 'PB',
+    '26': 'PE',
+    '22': 'PI',
+    '41': 'PR',
+    '33': 'RJ',
+    '24': 'RN',
+    '11': 'RO',
+    '14': 'RR',
+    '43': 'RS',
+    '42': 'SC',
+    '28': 'SE',
+    '35': 'SP',
+    '17': 'TO',
+}
+
 
 def localizar_url(servico, estado):
-    return ESTADO_WS[estado]['servidor'], ESTADO_WS[estado][servico]
+    sigla = SIGLA_ESTADO[estado]
+    return ESTADO_WS[sigla]['servidor'], ESTADO_WS[sigla][servico]
 
 
 METODO_WS = {
-    WS_NFE_AUTORIZACAO:{
+    WS_NFE_AUTORIZACAO: {
         'webservice': 'NfeAutorizacao',
         'metodo': 'NfeAutorizacao',
     },
