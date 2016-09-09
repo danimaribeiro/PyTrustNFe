@@ -54,8 +54,16 @@ SIGLA_ESTADO = {
 
 def localizar_url(servico, estado, ambiente=2):
     sigla = SIGLA_ESTADO[estado]
-    return ESTADO_WS[sigla][ambiente]['servidor'],
-    ESTADO_WS[sigla][ambiente][servico]
+    dominio = ESTADO_WS[sigla][ambiente]['servidor']
+    complemento = ESTADO_WS[sigla][ambiente][servico]
+
+    if sigla == 'RS' and servico == WS_NFE_CONSULTA_CADASTRO:
+        dominio = 'cad.sefazrs.rs.gov.br'
+    if sigla in ('AC', 'RN', 'PB', 'SC') and \
+       servico == WS_NFE_CONSULTA_CADASTRO:
+        dominio = 'cad.svrs.rs.gov.br'
+
+    return "https://%s/%s" % (dominio, complemento)
 
 
 METODO_WS = {

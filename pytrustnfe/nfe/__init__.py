@@ -10,11 +10,17 @@ from pytrustnfe.xml import render_xml
 from pytrustnfe.utils import CabecalhoSoap
 from pytrustnfe.utils import gerar_chave, ChaveNFe
 from pytrustnfe.Servidores import localizar_url
-import re
 
 
-def _build_header(**kwargs):
-    vals = {'estado': kwargs['estado'], 'soap_action': ''}
+def _build_header(method, **kwargs):
+    action = {
+        'NfeAutorizacao': ('NfeAutorizacao', '3.10'),
+        'NfeRetAutorizacao': ('NfeRetAutorizacao', '3.10'),
+        'NfeConsultaCadastro': ('CadConsultaCadastro2', '2.00'),
+    }
+    vals = {'estado': kwargs['estado'],
+            'soap_action': action[method][0],
+            'versao': action[method][1]}
     return CabecalhoSoap(**vals)
 
 
@@ -41,7 +47,6 @@ def _send(certificado, method, sign, **kwargs):
     path = os.path.join(os.path.dirname(__file__), 'templates')
 
     xml_send = render_xml(path, '%s.xml' % method, **kwargs)
-
     if sign:
         xml_send = '<!DOCTYPE NFe [<!ATTLIST infNFe Id ID #IMPLIED>]>' + \
             xml_send
@@ -55,8 +60,8 @@ def _send(certificado, method, sign, **kwargs):
         print xml_send
         xml_send = xml_send.replace('\n', '')
 
-    url = localizar_url(method,  kwargs['estado'])
-    cabecalho = _build_header(**kwargs)
+    url = localizar_url(method,  kwargs['estado'], kwargs['ambiente'])
+    cabecalho = _build_header(method, **kwargs)
 
     response, obj = executar_consulta(certificado, url, cabecalho, xml_send)
     return {
@@ -68,48 +73,48 @@ def _send(certificado, method, sign, **kwargs):
 
 def autorizar_nfe(certificado, **kwargs):  # Assinar
     _generate_nfe_id(**kwargs)
-    _send(certificado, 'NfeAutorizacao', True, **kwargs)
+    return _send(certificado, 'NfeAutorizacao', True, **kwargs)
 
 
 def retorno_autorizar_nfe(certificado, **kwargs):
-    _send(certificado, 'NfeRetAutorizacao', False, **kwargs)
+    return _send(certificado, 'NfeRetAutorizacao', False, **kwargs)
 
 
 def recepcao_evento_cancelamento(certificado, **kwargs):  # Assinar
-    _send(certificado, 'RecepcaoEventoCancelamento', True, **kwargs)
+    return _send(certificado, 'RecepcaoEventoCancelamento', True, **kwargs)
 
 
 def inutilizar_nfe(certificado, **kwargs):  # Assinar
-    _send(certificado, 'NfeInutilizacao', True, **kwargs)
+    return _send(certificado, 'NfeInutilizacao', True, **kwargs)
 
 
 def consultar_protocolo_nfe(certificado, **kwargs):
-    _send(certificado, 'NfeConsultaProtocolo', True, **kwargs)
+    return _send(certificado, 'NfeConsultaProtocolo', True, **kwargs)
 
 
 def nfe_status_servico(certificado, **kwargs):
-    _send(certificado, 'NfeStatusServico', False, **kwargs)
+    return _send(certificado, 'NfeStatusServico', False, **kwargs)
 
 
 def consulta_cadastro(certificado, **kwargs):
-    _send(certificado, 'NfeConsultaCadastro', False, **kwargs)
+    return _send(certificado, 'NfeConsultaCadastro', False, **kwargs)
 
 
 def recepcao_evento_carta_correcao(certificado, **kwargs):  # Assinar
-    _send(certificado, 'RecepcaoEventoCarta', True, **kwargs)
+    return _send(certificado, 'RecepcaoEventoCarta', True, **kwargs)
 
 
 def recepcao_evento_manifesto(certificado, **kwargs):  # Assinar
-    _send(certificado, 'RecepcaoEventoManifesto', True, **kwargs)
+    return _send(certificado, 'RecepcaoEventoManifesto', True, **kwargs)
 
 
 def recepcao_evento_epec(certificado, **kwargs):  # Assinar
-    _send(certificado, 'RecepcaoEventoEPEC', True, **kwargs)
+    return _send(certificado, 'RecepcaoEventoEPEC', True, **kwargs)
 
 
 def consulta_nfe_destinada(certificado, **kwargs):
-    _send(certificado, 'NfeConsultaDest', False, **kwargs)
+    return _send(certificado, 'NfeConsultaDest', False, **kwargs)
 
 
 def download_nfe(certificado, **kwargs):
-    _send(certificado, 'NfeDownloadNF', False, **kwargs)
+    return _send(certificado, 'NfeDownloadNF', False, **kwargs)

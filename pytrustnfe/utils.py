@@ -5,9 +5,11 @@
 
 from datetime import date, datetime
 
+
 class CabecalhoSoap(object):
 
     def __init__(self, **kwargs):
+        self.versao = kwargs.pop('versao', '')
         self.estado = kwargs.pop('estado', '')
         self.soap_action = kwargs.pop('soap_action', '')
 

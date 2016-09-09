@@ -15,62 +15,23 @@ soap_body_path = './soap:Envelope/soap:Body'
 soap_fault_path = './soap:Envelope/soap:Body/soap:Fault'
 
 
-def _soap_xml(body):
+def _soap_xml(body, cabecalho):
     xml = '<?xml version="1.0" encoding="utf-8"?>'
-    xml += '<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope"><soap12:Header>'
-    xml += '<nfeCabecMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/NfeAutorizacao">'
-    xml += '<cUF>43</cUF><versaoDados>3.10</versaoDados></nfeCabecMsg></soap12:Header><soap12:Body>'
-    xml += '<nfeDadosMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/NfeAutorizacao">'
+    xml += '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header>'
+    xml += '<nfeCabecMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/'+ cabecalho.soap_action +  '">'
+    xml += '<cUF>' + cabecalho.estado + '</cUF><versaoDados>' + cabecalho.versao + '</versaoDados></nfeCabecMsg></soap:Header><soap:Body>'
+    xml += '<nfeDadosMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/' + cabecalho.soap_action + '">'
     xml += body
-    xml += '</nfeDadosMsg></soap12:Body></soap12:Envelope>'
+    xml += '</nfeDadosMsg></soap:Body></soap:Envelope>'
     return xml.rstrip('\n')
 
 
 def executar_consulta(certificado, url, cabecalho, xmlEnviar):
-    cert, key = extract_cert_and_key_from_pfx(certificado.pfx, certificado.password)
+    cert, key = extract_cert_and_key_from_pfx(
+        certificado.pfx, certificado.password)
     cert_path, key_path = save_cert_key(cert, key)
-    url = 'https://nfe-homologacao.sefazrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao.asmx'
-    web_service = 'NfeAutorizacao/nfeAutorizacaoLote'
     client = HttpClient(url, cert_path, key_path)
-    xmlEnviar = xmlEnviar.replace('<?xml version="1.0"?>', '')
-    xml_enviar = _soap_xml(xmlEnviar)
-    xml_retorno = client.post_soap(xml_enviar, web_service)
+
+    xml_enviar = _soap_xml(xmlEnviar, cabecalho)
+    xml_retorno = client.post_soap(xml_enviar, cabecalho)
     return sanitize_response(xml_retorno)
-
-
-class Comunicacao(object):
-    url = ''
-    web_service = ''
-    metodo = ''
-    tag_retorno = ''
-
-    def __init__(self, cert, key):
-        self.cert = cert
-        self.key = key
-
-    def _preparar_temp_pem(self):
-        cert_path = '/tmp/' + uuid4().hex
-        key_path = '/tmp/' + uuid4().hex
-
-        arq_temp = open(cert_path, 'w')
-        arq_temp.write(self.cert)
-        arq_temp.close()
-
-        arq_temp = open(key_path, 'w')
-        arq_temp.write(self.key)
-        arq_temp.close()
-
-        return cert_path, key_path
-
-    def _validar_dados(self):
-        assert self.url != '', "Url servidor não configurada"
-        assert self.metodo != '', "Método não configurado"
-
-    def _executar_consulta(self, xmlEnviar):
-        cert_path, key_path = self._preparar_temp_pem()
-
-        client = HttpClient(self.url, cert_path, key_path)
-        soap_xml = self._soap_xml(xmlEnviar)
-        xml_retorno = client.post_xml(self.web_service, soap_xml)
-
-        return sanitize_response(xml_retorno)
