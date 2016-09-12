@@ -57,8 +57,8 @@ def _send(certificado, method, sign, **kwargs):
             xml_send, kwargs['NFes'][0]['infNFe']['Id'])
         xml_send = xml_send.replace(
             '\n<!DOCTYPE NFe [\n<!ATTLIST infNFe Id ID #IMPLIED>\n]>\n', '')
-        print xml_send
-        xml_send = xml_send.replace('\n', '')
+        xml_send = xml_send.replace('\n', u'')
+        xml_send = xml_send.replace('<?xml version="1.0"?>', '')
 
     url = localizar_url(method,  kwargs['estado'], kwargs['ambiente'])
     cabecalho = _build_header(method, **kwargs)

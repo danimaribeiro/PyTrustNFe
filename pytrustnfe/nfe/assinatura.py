@@ -39,7 +39,7 @@ class Assinatura(object):
         self._inicializar_cripto()
         try:
             doc_xml = libxml2.parseMemory(
-                xml, len(xml))
+                xml.encode('utf-8'), len(xml.encode('utf-8')))
 
             signNode = xmlsec.TmplSignature(doc_xml,
                                             xmlsec.transformInclC14NId(),
@@ -92,7 +92,7 @@ class Assinatura(object):
         self._inicializar_cripto()
         try:
             doc_xml = libxml2.parseMemory(
-                xml, len(xml))
+                xml.encode('utf-8'), len(xml.encode('utf-8')))
             signNode = xmlsec.TmplSignature(doc_xml,
                                             xmlsec.transformInclC14NId(),
                                             xmlsec.transformRsaSha1Id(), None)

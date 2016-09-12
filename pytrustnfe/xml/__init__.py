@@ -25,7 +25,6 @@ def render_xml(path, template_name, **nfe):
     template = env.get_template(template_name)
 
     xml = template.render(**nfe)
-    xml = xml.replace('&', '&amp;')
     parser = etree.XMLParser(remove_blank_text=True, remove_comments=True)
     elem = etree.fromstring(xml, parser=parser)
     return etree.tostring(elem)
