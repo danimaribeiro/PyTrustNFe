@@ -9,7 +9,7 @@ from base64 import b64encode
 from pytrustnfe.xml import render_xml, sanitize_response
 from pytrustnfe.client import get_authenticated_client
 from pytrustnfe.certificado import extract_cert_and_key_from_pfx, save_cert_key
-from pytrustnfe.nfe.assinatura import Assinatura
+from pytrustnfe.nfse.assinatura import Assinatura
 
 
 def sign_tag(certificado, **kwargs):

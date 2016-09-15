@@ -48,17 +48,9 @@ def _send(certificado, method, sign, **kwargs):
 
     xml_send = render_xml(path, '%s.xml' % method, **kwargs)
     if sign:
-        xml_send = '<!DOCTYPE NFe [<!ATTLIST infNFe Id ID #IMPLIED>]>' + \
-            xml_send
-        xml_send = xml_send.replace('\n', '')
-        pfx_path = certificado.save_pfx()
-        signer = Assinatura(pfx_path, certificado.password)
-        xml_send = signer.assina_xml_nota(
+        signer = Assinatura(certificado.pfx, certificado.password)
+        xml_send = signer.assina_xml(
             xml_send, kwargs['NFes'][0]['infNFe']['Id'])
-        xml_send = xml_send.replace(
-            '\n<!DOCTYPE NFe [\n<!ATTLIST infNFe Id ID #IMPLIED>\n]>\n', '')
-        xml_send = xml_send.replace('\n', u'')
-        xml_send = xml_send.replace('<?xml version="1.0"?>', '')
 
     url = localizar_url(method,  kwargs['estado'], kwargs['ambiente'])
     cabecalho = _build_header(method, **kwargs)

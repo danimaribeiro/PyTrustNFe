@@ -32,11 +32,11 @@
             <emit>
                 {% with emit = NFe.infNFe.emit %}
                 {% if emit.tipo == 'person' -%}
-		           <CPF>{{ emit.cnpj_cpf }}</CPF>
-		        {% endif %}
-		        {% if emit.tipo == 'company' -%}
-		           <CNPJ>{{ emit.cnpj_cpf }}</CNPJ>
-		        {% endif %}
+                    <CPF>{{ emit.cnpj_cpf }}</CPF>
+                {% endif %}
+                {% if emit.tipo == 'company' -%}
+                    <CNPJ>{{ emit.cnpj_cpf }}</CNPJ>
+                {% endif %}
                 <xNome>{{ emit.xNome }}</xNome>
                 <xFant>{{ emit.xFant }}</xFant>
                 <enderEmit>
@@ -58,11 +58,11 @@
             <dest>
                 {% with dest = NFe.infNFe.dest %}
                 {% if dest.tipo == 'person' -%}
-		           <CPF>{{ dest.cnpj_cpf }}</CPF>
-		        {% endif %}
-		        {% if dest.tipo == 'company' -%}
-		           <CNPJ>{{  dest.cnpj_cpf }}</CNPJ>
-		        {% endif %}
+                    <CPF>{{ dest.cnpj_cpf }}</CPF>
+                {% endif %}
+                {% if dest.tipo == 'company' -%}
+                    <CNPJ>{{  dest.cnpj_cpf }}</CNPJ>
+                {% endif %}
                 <xNome>{{ dest.xNome }}</xNome>
                 <enderDest>
                     <xLgr>{{ dest.enderDest.xLgr }}</xLgr>
@@ -154,6 +154,16 @@
                             <vCOFINS>{{ imposto.COFINS.COFINSAliq.vCOFINS }}</vCOFINS>
                         </COFINSAliq>
                     </COFINS>
+                    <ICMSUFDest>
+                        <vBCUFDest>0.00</vBCUFDest>
+                        <pFCPUFDest>0.00</pFCPUFDest>
+                        <pICMSUFDest>0.00</pICMSUFDest>
+                        <pICMSInter>12.00</pICMSInter>
+                        <pICMSInterPart>40</pICMSInterPart>
+                        <vFCPUFDest>0.00</vFCPUFDest>
+                        <vICMSUFDest>0.00</vICMSUFDest>
+                        <vICMSUFRemet>0.00</vICMSUFRemet>
+                    </ICMSUFDest>
                     {% endwith %}
                 </imposto>
             </det>
