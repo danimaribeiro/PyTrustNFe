@@ -769,9 +769,9 @@
             {% endif %}
             {% if NFe.infNFe.compra is defined %}
             <compra>
-                <xNEmp>{{ obs.xNEmp }}</xNEmp>
-                <xPed>{{ obs.xPed }}</xPed>
-                <xCont>{{ obs.xCont }}</xCont>
+                <xNEmp>{{ NFe.infNFe.compra.xNEmp }}</xNEmp>
+                <xPed>{{ NFe.infNFe.compra.xPed }}</xPed>
+                <xCont>{{ NFe.infNFe.compra.xCont }}</xCont>
             </compra>
             {% endif %}
         </infNFe>
