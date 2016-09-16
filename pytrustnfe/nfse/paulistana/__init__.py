@@ -32,9 +32,9 @@ def _send(certificado, method, **kwargs):
         sign_tag(certificado, **kwargs)
 
     if method == 'TesteEnvioLoteRPS':
-        xml = render_xml(path, 'EnvioLoteRPS.xml', **kwargs)
+        xml = render_xml(path, 'EnvioLoteRPS.xml', False, **kwargs)
     else:
-        xml = render_xml(path, '%s.xml' % method, **kwargs)
+        xml = render_xml(path, '%s.xml' % method, False, **kwargs)
     base_url = 'https://nfe.prefeitura.sp.gov.br/ws/lotenfe.asmx?wsdl'
 
     cert, key = extract_cert_and_key_from_pfx(

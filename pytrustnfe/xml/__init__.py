@@ -2,18 +2,21 @@
 # © 2016 Danimar Ribeiro, Trustcode
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import os.path
 import unicodedata
 from lxml import etree
 
-from StringIO import StringIO
 from lxml import objectify
-import xml.etree.ElementTree as ET
 from jinja2 import Environment, FileSystemLoader
 from . import filters
 
 
-def render_xml(path, template_name, **nfe):
+def recursively_empty(e):
+    if e.text:
+        return False
+    return all((recursively_empty(c) for c in e.iterchildren()))
+
+
+def render_xml(path, template_name, remove_empty, **nfe):
     env = Environment(
         loader=FileSystemLoader(path), extensions=['jinja2.ext.with_'])
 
@@ -26,8 +29,15 @@ def render_xml(path, template_name, **nfe):
 
     xml = template.render(**nfe)
     parser = etree.XMLParser(remove_blank_text=True, remove_comments=True)
-    elem = etree.fromstring(xml, parser=parser)
-    return etree.tostring(elem)
+    root = etree.fromstring(xml, parser=parser)
+    if remove_empty:
+        context = etree.iterwalk(root)
+        for action, elem in context:
+            parent = elem.getparent()
+            if recursively_empty(elem):
+                parent.remove(elem)
+        return root
+    return etree.tostring(root)
 
 
 def sanitize_response(response):

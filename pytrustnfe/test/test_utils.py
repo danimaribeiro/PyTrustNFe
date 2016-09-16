@@ -4,20 +4,18 @@ Created on Jun 16, 2015
 
 @author: danimar
 '''
-import mock
 import unittest
 import datetime
 from pytrustnfe.utils import date_tostring, datetime_tostring, \
-    gerar_chave, gerar_consulta_recibo
-from pytrustnfe.ChaveNFe import ChaveNFe
-from pytrustnfe.xml.DynamicXml import DynamicXml
+    gerar_chave
+from pytrustnfe.utils import ChaveNFe
 
 
 class test_utils(unittest.TestCase):
     kwargs = {
         'cnpj': '33009911002506', 'estado': '52', 'emissao': '0604',
-        'modelo': '55', 'serie': '012', 'numero': '000000780',
-        'tipo': '0', 'codigo': '26730161'
+        'modelo': '55', 'serie': '012', 'numero': 780,
+        'tipo': 0, 'codigo': '26730161'
     }
 
     def test_date_tostring(self):
@@ -48,17 +46,6 @@ class test_utils(unittest.TestCase):
 
         self.assertRaises(Exception, gerar_chave, "Not a ChaveNFe object")
         self.assertRaises(Exception, gerar_chave, "Not a ChaveNFe object")
-
-    def test_geracao_recibo(self):
-        recibo = DynamicXml('EnviNFe')
-        recibo.tpAmb = '1'
-        recibo.infRec.nRec = '0001'
-        consulta = gerar_consulta_recibo(recibo)        
-        self.assertEqual(str(consulta.nRec), '0001', 'Número do recibo inválido')
-        self.assertEqual(str(consulta.tpAmb), '1', 'Tipo de ambiente inválido')
-
-        self.assertIsInstance(consulta, DynamicXml,
-                              'Consulta recibo deve ser do tipo DynamicXml')
 
     def test_chave_nfe(self):
         chave = ChaveNFe(**self.kwargs)

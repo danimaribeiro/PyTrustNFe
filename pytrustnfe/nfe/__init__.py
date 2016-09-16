@@ -4,6 +4,7 @@
 
 
 import os
+from lxml import etree
 from .comunicacao import executar_consulta
 from .assinatura import Assinatura
 from pytrustnfe.xml import render_xml
@@ -43,14 +44,34 @@ def _generate_nfe_id(**kwargs):
         item['infNFe']['ide']['cDV'] = chave_nfe[len(chave_nfe) - 1:]
 
 
+def _add_required_node(elemTree):
+    ns = elemTree.nsmap
+    if None in ns:
+        ns['ns'] = ns[None]
+        ns.pop(None)
+
+    prods = elemTree.findall('ns:NFe/ns:infNFe/ns:det/ns:prod', namespaces=ns)
+    for prod in prods:
+        cEan = etree.Element('cEAN')
+        cEANTrib = etree.Element('cEANTrib')
+        prod.insert(1, cEan)
+        prod.insert(9, cEANTrib)
+    return elemTree
+
+
 def _send(certificado, method, sign, **kwargs):
     path = os.path.join(os.path.dirname(__file__), 'templates')
 
-    xml_send = render_xml(path, '%s.xml' % method, **kwargs)
+    xmlElem_send = render_xml(path, '%s.xml' % method, True, **kwargs)
     if sign:
+        # Caso for autorização temos que adicionar algumas tags tipo
+        # cEan, cEANTrib porque o governo sempre complica e não segue padrão
+        if method == 'NfeAutorizacao':
+            xmlElem_send = _add_required_node(xmlElem_send)
+
         signer = Assinatura(certificado.pfx, certificado.password)
         xml_send = signer.assina_xml(
-            xml_send, kwargs['NFes'][0]['infNFe']['Id'])
+            xmlElem_send, kwargs['NFes'][0]['infNFe']['Id'])
 
     url = localizar_url(method,  kwargs['estado'], kwargs['ambiente'])
     cabecalho = _build_header(method, **kwargs)

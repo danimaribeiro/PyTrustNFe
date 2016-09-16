@@ -1,12 +1,13 @@
-#coding=utf-8
+# coding=utf-8
 '''
 Created on Jun 14, 2015
 
 @author: danimar
 '''
 import unittest
-import os, os.path
-from pytrustnfe.Certificado import converte_pfx_pem
+import os
+import os.path
+from pytrustnfe.certificado import extract_cert_and_key_from_pfx
 
 CHAVE = '-----BEGIN PRIVATE KEY-----\n' \
     'MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAJONRp6l1y2ojgv8\n' \
@@ -26,40 +27,36 @@ CHAVE = '-----BEGIN PRIVATE KEY-----\n' \
     '-----END PRIVATE KEY-----\n'
 
 CERTIFICADO = '-----BEGIN CERTIFICATE-----\n'\
-            'MIICMTCCAZqgAwIBAgIQfYOsIEVuAJ1FwwcTrY0t1DANBgkqhkiG9w0BAQUFADBX\n'\
-            'MVUwUwYDVQQDHkwAewA1ADkARgAxAEUANAA2ADEALQBEAEQARQA1AC0ANABEADIA\n'\
-            'RgAtAEEAMAAxAEEALQA4ADMAMwAyADIAQQA5AEUAQgA4ADMAOAB9MB4XDTE1MDYx\n'\
-            'NTA1NDc1N1oXDTE2MDYxNDExNDc1N1owVzFVMFMGA1UEAx5MAHsANQA5AEYAMQBF\n'\
-            'ADQANgAxAC0ARABEAEUANQAtADQARAAyAEYALQBBADAAMQBBAC0AOAAzADMAMgAy\n'\
-            'AEEAOQBFAEIAOAAzADgAfTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAk41G\n'\
-            'nqXXLaiOC/y0/cA4tbS+NZCqI+x4EsztgDFvPPlHstiVYcLRkni4i93gK9zoC6g0\n'\
-            'mh66HMVzAfE8vRNwW5b7m6nWS1SiHBon7/Mqsw4MIq3SC+J/fTbKpqwyfAuH2YZl\n'\
-            'AiQuQc85fyllAMLh2WrA7JgOLR/5tF3kLtpbHdECAwEAATANBgkqhkiG9w0BAQUF\n'\
-            'AAOBgQArdh+RyT6VxKGsXk1zhHsgwXfToe6GpTF4W8PHI1+T0WIsNForDhvst6nm\n'\
-            'QtgAhuZM9rxpOJuNKc+pM29EixpAiZZiRMCSWEItNyEVdUIi+YnKBcAHd88TwO86\n'\
-            'd126MWQ2O8cu5W1VoDp7hYBYKOnLbYi11/StO+0rzK+oPYAvIw==\n'\
-            '-----END CERTIFICATE-----\n'
+    'MIICMTCCAZqgAwIBAgIQfYOsIEVuAJ1FwwcTrY0t1DANBgkqhkiG9w0BAQUFADBX\n'\
+    'MVUwUwYDVQQDHkwAewA1ADkARgAxAEUANAA2ADEALQBEAEQARQA1AC0ANABEADIA\n'\
+    'RgAtAEEAMAAxAEEALQA4ADMAMwAyADIAQQA5AEUAQgA4ADMAOAB9MB4XDTE1MDYx\n'\
+    'NTA1NDc1N1oXDTE2MDYxNDExNDc1N1owVzFVMFMGA1UEAx5MAHsANQA5AEYAMQBF\n'\
+    'ADQANgAxAC0ARABEAEUANQAtADQARAAyAEYALQBBADAAMQBBAC0AOAAzADMAMgAy\n'\
+    'AEEAOQBFAEIAOAAzADgAfTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAk41G\n'\
+    'nqXXLaiOC/y0/cA4tbS+NZCqI+x4EsztgDFvPPlHstiVYcLRkni4i93gK9zoC6g0\n'\
+    'mh66HMVzAfE8vRNwW5b7m6nWS1SiHBon7/Mqsw4MIq3SC+J/fTbKpqwyfAuH2YZl\n'\
+    'AiQuQc85fyllAMLh2WrA7JgOLR/5tF3kLtpbHdECAwEAATANBgkqhkiG9w0BAQUF\n'\
+    'AAOBgQArdh+RyT6VxKGsXk1zhHsgwXfToe6GpTF4W8PHI1+T0WIsNForDhvst6nm\n'\
+    'QtgAhuZM9rxpOJuNKc+pM29EixpAiZZiRMCSWEItNyEVdUIi+YnKBcAHd88TwO86\n'\
+    'd126MWQ2O8cu5W1VoDp7hYBYKOnLbYi11/StO+0rzK+oPYAvIw==\n'\
+    '-----END CERTIFICATE-----\n'
+
 
 class test_assinatura(unittest.TestCase):
-    
+
     caminho = os.path.dirname(__file__)
 
     def test_preparar_pfx(self):
-        dir_pfx = os.path.join(self.caminho, 'teste.pfx')
-        chave, certificado = converte_pfx_pem(dir_pfx, '123456')        
-        self.assertEqual(chave, CHAVE, 'Chave gerada inválida')
-        self.assertEqual(certificado, CERTIFICADO, 'Certificado gerado inválido')
-    
-    def test_pfx_nao_existe(self):        
-        self.assertRaises(Exception, converte_pfx_pem, 'file.pfx', '123456')        
-        
+        dir_pfx = open(os.path.join(self.caminho, 'teste.pfx'), 'r').read()
+        cert, key = extract_cert_and_key_from_pfx(dir_pfx, '123456')
+        self.assertEqual(key, CHAVE, 'Chave gerada inválida')
+        self.assertEqual(cert, CERTIFICADO, 'Certificado inválido')
+
+    def test_pfx_nao_existe(self):
+        self.assertRaises(Exception, extract_cert_and_key_from_pfx,
+                          'file.pfx', '123456')
+
     def test_pfx_senha_invalida(self):
         dir_pfx = os.path.join(self.caminho, 'teste.pfx')
-        self.assertRaises(Exception, converte_pfx_pem, dir_pfx, '123')
-        
-    def test_pfx_invalido(self):
-        dir_pfx = os.path.join(self.caminho, 'xml_assinado.xml')
-        self.assertRaises(Exception, converte_pfx_pem, dir_pfx, '123456')
-        
-        
-        
+        self.assertRaises(Exception, extract_cert_and_key_from_pfx,
+                          dir_pfx, '123')
