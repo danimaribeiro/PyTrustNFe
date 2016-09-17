@@ -5,6 +5,7 @@ import os.path
 import unittest
 from pytrustnfe.certificado import Certificado
 from pytrustnfe.nfse.paulistana import envio_lote_rps
+from pytrustnfe.nfse.paulistana import cancelamento_nfe
 
 
 class test_nfse_paulistana(unittest.TestCase):
@@ -68,3 +69,52 @@ class test_nfse_paulistana(unittest.TestCase):
                 retorno['object'].ChaveNFeRPS.ChaveNFe.NumeroNFe, 446)
             self.assertEqual(
                 retorno['object'].ChaveNFeRPS.ChaveRPS.NumeroRPS, 6)
+
+    def _get_cancelamento(self):
+        return {
+            'cnpj_remetente': '123',
+            'assinatura': 'assinatura',
+            'numero_nfse': '456',
+            'inscricao_municipal': '654',
+            'codigo_verificacao': '789',
+        }
+
+    def test_cancelamento_nfse_ok(self):
+        pfx_source = open(os.path.join(self.caminho, 'teste.pfx'), 'r').read()
+        pfx = Certificado(pfx_source, '123456')
+        cancelamento = self._get_cancelamento()
+
+        path = os.path.join(os.path.dirname(__file__), 'XMLs')
+        xml_return = open(os.path.join(
+            path, 'paulistana_canc_ok.xml'), 'r').read()
+
+        with mock.patch('pytrustnfe.nfse.paulistana.get_authenticated_client') as client:
+            retorno = mock.MagicMock()
+            client.return_value = retorno
+            retorno.service.CancelamentoNFe.return_value = xml_return
+
+            retorno = cancelamento_nfe(pfx, cancelamento=cancelamento)
+
+            self.assertEqual(retorno['received_xml'], xml_return)
+            self.assertEqual(retorno['object'].Cabecalho.Sucesso, True)
+
+    def test_cancelamento_nfse_com_erro(self):
+        pfx_source = open(os.path.join(self.caminho, 'teste.pfx'), 'r').read()
+        pfx = Certificado(pfx_source, '123456')
+        cancelamento = self._get_cancelamento()
+
+        path = os.path.join(os.path.dirname(__file__), 'XMLs')
+        xml_return = open(os.path.join(
+            path, 'paulistana_canc_errado.xml'), 'r').read()
+
+        with mock.patch('pytrustnfe.nfse.paulistana.get_authenticated_client') as client:
+            retorno = mock.MagicMock()
+            client.return_value = retorno
+            retorno.service.CancelamentoNFe.return_value = xml_return
+
+            retorno = cancelamento_nfe(pfx, cancelamento=cancelamento)
+
+            self.assertEqual(retorno['received_xml'], xml_return)
+            self.assertEqual(retorno['object'].Cabecalho.Sucesso, False)
+            self.assertEqual(
+                retorno['object'].Erro.ChaveNFe.NumeroNFe, 446)
