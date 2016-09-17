@@ -10,3 +10,4 @@ signxml
 pypandoc
 suds
 suds_requests
+reportlab
