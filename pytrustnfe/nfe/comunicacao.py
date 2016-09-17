@@ -8,11 +8,6 @@ from pytrustnfe.certificado import save_cert_key, extract_cert_and_key_from_pfx
 
 from ..xml import sanitize_response
 
-common_namespaces = {'soap': 'http://www.w3.org/2003/05/soap-envelope'}
-
-soap_body_path = './soap:Envelope/soap:Body'
-soap_fault_path = './soap:Envelope/soap:Body/soap:Fault'
-
 
 def _soap_xml(body, cabecalho):
     xml = '<?xml version="1.0" encoding="utf-8"?>'

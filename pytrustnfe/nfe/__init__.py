@@ -72,6 +72,8 @@ def _send(certificado, method, sign, **kwargs):
         signer = Assinatura(certificado.pfx, certificado.password)
         xml_send = signer.assina_xml(
             xmlElem_send, kwargs['NFes'][0]['infNFe']['Id'])
+    else:
+        xml_send = etree.tostring(xmlElem_send)
 
     url = localizar_url(method,  kwargs['estado'], kwargs['ambiente'])
     cabecalho = _build_header(method, **kwargs)
