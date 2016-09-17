@@ -4,8 +4,6 @@
 
 from decimal import Decimal
 from datetime import datetime
-import dateutil.parser as parser_dateutil
-
 from unicodedata import normalize
 
 
@@ -35,12 +33,6 @@ def format_datetime(value):
     dt_format = '%Y-%m-%dT%H:%M:%I'
     if isinstance(value, datetime):
         return value.strftime(dt_format)
-
-    try:
-        value = parser_dateutil.parse(value).strftime(dt_format)
-    except AttributeError:
-        pass
-
     return value
 
 
@@ -51,10 +43,4 @@ def format_date(value):
     dt_format = '%Y-%m-%d'
     if isinstance(value, datetime):
         return value.strftime(dt_format)
-
-    try:
-        value = parser_dateutil.parse(value).strftime(dt_format)
-    except AttributeError:
-        pass
-
     return value
