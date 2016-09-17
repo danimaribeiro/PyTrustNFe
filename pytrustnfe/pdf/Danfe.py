@@ -4,7 +4,6 @@
 
 from pytrustnfe.xml.DynamicXml import DynamicXml
 from reportlab.platypus.tables import Table
-from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.platypus.doctemplate import SimpleDocTemplate
 from reportlab.lib import colors

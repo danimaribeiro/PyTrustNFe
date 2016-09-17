@@ -32,32 +32,32 @@ def _send(certificado, method, **kwargs):
         sign_tag(certificado, **kwargs)
 
     if method == 'TesteEnvioLoteRPS':
-        xml = render_xml(path, 'EnvioLoteRPS.xml', False, **kwargs)
+        xml_send = render_xml(path, 'EnvioLoteRPS.xml', False, **kwargs)
     else:
-        xml = render_xml(path, '%s.xml' % method, False, **kwargs)
+        xml_send = render_xml(path, '%s.xml' % method, False, **kwargs)
     base_url = 'https://nfe.prefeitura.sp.gov.br/ws/lotenfe.asmx?wsdl'
 
     cert, key = extract_cert_and_key_from_pfx(
         certificado.pfx, certificado.password)
-    cert_path, key_path = save_cert_key(cert, key)
-    client = get_authenticated_client(base_url, cert_path, key_path)
+    cert, key = save_cert_key(cert, key)
+    client = get_authenticated_client(base_url, cert, key)
 
     pfx_path = certificado.save_pfx()
     signer = Assinatura(pfx_path, certificado.password)
-    xml_signed = signer.assina_xml(xml, '')
+    xml_send = signer.assina_xml(xml_send, '')
 
     try:
-        response = getattr(client.service, method)(1, xml_signed)
+        response = getattr(client.service, method)(1, xml_send)
     except suds.WebFault, e:
         return {
-            'sent_xml': xml_signed,
+            'sent_xml': xml_send,
             'received_xml': e.fault.faultstring,
             'object': None
         }
 
     response, obj = sanitize_response(response)
     return {
-        'sent_xml': xml_signed,
+        'sent_xml': xml_send,
         'received_xml': response,
         'object': obj
     }

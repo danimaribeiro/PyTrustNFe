@@ -32,7 +32,7 @@ def render_xml(path, template_name, remove_empty, **nfe):
     root = etree.fromstring(xml, parser=parser)
     if remove_empty:
         context = etree.iterwalk(root)
-        for action, elem in context:
+        for dummy, elem in context:
             parent = elem.getparent()
             if recursively_empty(elem):
                 parent.remove(elem)
@@ -58,27 +58,27 @@ def sanitize_response(response):
 
 
 def valida_schema(xml, arquivo_xsd):
-        '''Função que valida um XML usando lxml do Python via arquivo XSD'''
-        # Carrega o esquema XML do arquivo XSD
-        xsd = etree.XMLSchema(file=arquivo_xsd)
-        # Converte o XML passado em XML do lxml
-        xml = etree.fromstring(str(xml))
-        # Verifica a validade do xml
-        erros = []
-        if not xsd(xml):
-            # Caso tenha erros, cria uma lista de erros
-            for erro in xsd.error_log:
-                erros.append({
-                    'message': erro.message,
-                    'domain': erro.domain,
-                    'type': erro.type,
-                    'level': erro.level,
-                    'line': erro.line,
-                    'column': erro.column,
-                    'filename': erro.filename,
-                    'domain_name': erro.domain_name,
-                    'type_name': erro.type_name,
-                    'level_name': erro.level_name
-                })
-        # Retorna os erros, sendo uma lista vazia caso não haja erros
-        return erros
+    '''Função que valida um XML usando lxml do Python via arquivo XSD'''
+    # Carrega o esquema XML do arquivo XSD
+    xsd = etree.XMLSchema(file=arquivo_xsd)
+    # Converte o XML passado em XML do lxml
+    xml = etree.fromstring(str(xml))
+    # Verifica a validade do xml
+    erros = []
+    if not xsd(xml):
+        # Caso tenha erros, cria uma lista de erros
+        for erro in xsd.error_log:
+            erros.append({
+                'message': erro.message,
+                'domain': erro.domain,
+                'type': erro.type,
+                'level': erro.level,
+                'line': erro.line,
+                'column': erro.column,
+                'filename': erro.filename,
+                'domain_name': erro.domain_name,
+                'type_name': erro.type_name,
+                'level_name': erro.level_name
+            })
+    # Retorna os erros, sendo uma lista vazia caso não haja erros
+    return erros

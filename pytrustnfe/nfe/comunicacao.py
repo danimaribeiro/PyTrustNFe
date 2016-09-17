@@ -3,7 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-from uuid import uuid4
 from pytrustnfe.client import HttpClient
 from pytrustnfe.certificado import save_cert_key, extract_cert_and_key_from_pfx
 
