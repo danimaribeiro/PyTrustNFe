@@ -111,7 +111,7 @@ METODO_WS = {
 
 SVRS = {
     NFE_AMBIENTE_PRODUCAO: {
-        'servidor': 'nfe.sefazvirtual.rs.gov.br',
+        'servidor': 'nfe.svrs.rs.gov.br',
         WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
         WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NfeAutorizacao.asmx',
         WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NfeRetAutorizacao.asmx',

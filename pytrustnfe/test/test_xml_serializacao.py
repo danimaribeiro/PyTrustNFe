@@ -1,65 +1,37 @@
 # coding=utf-8
 
+import os.path
 import unittest
-from unittest import skip
-
-
-XML_TESTE = '<enviNFe versao="3.10">'\
-    '<idLote>1</idLote>'\
-    '<indSinc>1</indSinc>'\
-    '<NFe>'\
-    '<infNFe versao="3.10" Id="NFe456465465465465654652123564878">'\
-    '<ide>'\
-    '<cUF>32</cUF>'\
-    '<cNF>0001</cNF>'\
-    '<natOp>Venda de mercadorias</natOp>'\
-    '</ide>'\
-    '</infNFe>'\
-    '</NFe>'\
-    '</enviNFe>'
-
-XML_LIST = '<cobr>'\
-    '<dup item="1">'\
-    '<nDup>1</nDup>'\
-    '<dVenc>21-06-2015</dVenc>'\
-    '<vDup>123.00</vDup>'\
-    '</dup>'\
-    '<dup item="2">'\
-    '<nDup>2</nDup>'\
-    '<dVenc>21-07-2015</dVenc>'\
-    '<vDup>123.00</vDup>'\
-    '</dup>'\
-    '</cobr>'
+from lxml import etree
+from pytrustnfe.xml import render_xml
+from pytrustnfe.xml import sanitize_response
 
 
 class test_xml_serializacao(unittest.TestCase):
 
-    @skip('Pulando')
-    def test_serializacao(self):
-        t = DynamicXml("enviNFe")
-        t(versao="3.10")
-        t.idLote = "1"
-        t.indSinc = "1"
-        t.NFe.infNFe(versao="3.10", Id="NFe456465465465465654652123564878")
-        t.NFe.infNFe.ide.cUF = "32"
-        t.NFe.infNFe.ide.cNF = "0001"
-        t.NFe.infNFe.ide.natOp = "Venda de mercadorias"
+    def test_serializacao_default(self):
+        path = os.path.join(os.path.dirname(__file__), 'XMLs')
+        xml = render_xml(path, 'jinja_template.xml', False, tag1='oi',
+                         tag2='ola', tag3='comovai')
 
-        xml = t.render()
-        self.assertEqual(xml, XML_TESTE, "Geração de xml com problemas")
+        result = open(os.path.join(path, 'jinja_result.xml'), 'r').read()
+        self.assertEqual(xml + '\n', result)
 
-    @skip('Pulando')
-    def test_list_serializacao(self):
-        t = DynamicXml("cobr")
-        t.dup[0](item="1")
-        t.dup[0].nDup = '1'
-        t.dup[0].dVenc = '21-06-2015'
-        t.dup[0].vDup = '123.00'
-        t.dup[1](item="2")
-        t.dup[1].nDup = '2'
-        t.dup[1].dVenc = '21-07-2015'
-        t.dup[1].vDup = '123.00'
+    def test_serializacao_remove_empty(self):
+        path = os.path.join(os.path.dirname(__file__), 'XMLs')
+        xmlElem = render_xml(path, 'jinja_template.xml', True, tag1='oi',
+                             tag2='ola', tag3='comovai')
+        xml = etree.tostring(xmlElem)
+        result = open(os.path.join(path, 'jinja_remove_empty.xml'), 'r').read()
+        self.assertEqual(xml + '\n', result)
 
-        xml = t.render()
-        self.assertEqual(xml, XML_LIST,
-                         "Xml com lista de valores sendo gerado incorretamnte")
+    def test_sanitize_response(self):
+        path = os.path.join(os.path.dirname(__file__), 'XMLs')
+        xml_to_clear = open(os.path.join(path, 'jinja_result.xml'), 'r').read()
+        xml, obj = sanitize_response(xml_to_clear)
+
+        self.assertEqual(xml, xml_to_clear)
+        self.assertEqual(obj.tpAmb, 'oi')
+        self.assertEqual(obj.CNPJ, 'ola')
+        self.assertEqual(obj.indNFe, '')
+        self.assertEqual(obj.indEmi, 'comovai')

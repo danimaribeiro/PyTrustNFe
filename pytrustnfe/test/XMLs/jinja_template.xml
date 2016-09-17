@@ -1,0 +1,6 @@
+<consNFeDest xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.01">
+  <tpAmb>{{ tag1 }}</tpAmb>
+  <CNPJ>{{ tag2 }}</CNPJ>
+  <indNFe></indNFe>
+  <indEmi>{{ tag3 }}</indEmi>
+</consNFeDest>

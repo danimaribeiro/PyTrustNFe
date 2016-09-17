@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from decimal import Decimal
+from datetime import date
 from datetime import datetime
 from unicodedata import normalize
 
@@ -41,6 +42,6 @@ def format_date(value):
     Format date
     """
     dt_format = '%Y-%m-%d'
-    if isinstance(value, datetime):
+    if isinstance(value, date):
         return value.strftime(dt_format)
     return value
