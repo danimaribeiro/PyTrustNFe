@@ -27,7 +27,7 @@ class Assinatura(object):
             c14n_algorithm='http://www.w3.org/TR/2001/REC-xml-c14n-20010315')
 
         signed_root = signer.sign(
-            xml_element, key=key, cert=cert, reference_only=True,
+            xml_element, key=key, cert=cert,
             reference_uri=('#%s' % reference))
         if len(signed_root) > 3:
             signed_root[2].append(signed_root[3])
