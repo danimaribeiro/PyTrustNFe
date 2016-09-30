@@ -13,7 +13,7 @@ class Danfe(object):
     objeto = None
 
     def __init__(self, objetoNFe):
-        self.objeto = sanitize_response(objetoNFe)[1]
+        self.objeto = xml.sanitize_response(objetoNFe)[1]
         self.NFe = self.objeto.getchildren()[2]
         self.infNFe = self.NFe.getchildren()[0]
         self.ide = self.infNFe.getchildren()[0]
