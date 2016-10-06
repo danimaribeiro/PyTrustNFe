@@ -4,6 +4,7 @@
 
 
 from datetime import date, datetime
+import re
 
 
 class CabecalhoSoap(object):
@@ -51,11 +52,12 @@ def gerar_chave(obj_chave, prefix=None):
     assert isinstance(obj_chave, ChaveNFe), "Objeto deve ser do tipo ChaveNFe"
     obj_chave.validar()
 
-    chave_parcial = "%s%s%s%s%s%09d%d%s" % (
+    chave_parcial = "%s%s%s%s%s%02d%08d%s" % (
         obj_chave.estado, obj_chave.emissao,
         obj_chave.cnpj, obj_chave.modelo,
         obj_chave.serie.zfill(3), obj_chave.numero,
         obj_chave.tipo, obj_chave.codigo)
+    chave_parcial = re.sub('[^0-9]', '', chave_parcial)
     soma = 0
     contador = 2
     for c in reversed(chave_parcial):
