@@ -51,11 +51,10 @@ def datetime_tostring(data):
 def gerar_chave(obj_chave, prefix=None):
     assert isinstance(obj_chave, ChaveNFe), "Objeto deve ser do tipo ChaveNFe"
     obj_chave.validar()
-
-    chave_parcial = "%s%s%s%s%s%02d%08d%s" % (
+    chave_parcial = "%s%s%s%s%s%s%d%s" % (
         obj_chave.estado, obj_chave.emissao,
         obj_chave.cnpj, obj_chave.modelo,
-        obj_chave.serie.zfill(3), obj_chave.numero,
+        obj_chave.serie.zfill(3), str(obj_chave.numero).zfill(9),
         obj_chave.tipo, obj_chave.codigo)
     chave_parcial = re.sub('[^0-9]', '', chave_parcial)
     soma = 0
