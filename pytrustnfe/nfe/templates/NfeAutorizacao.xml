@@ -587,16 +587,18 @@
                         <indIncentivo>{{ imposto.ISSQN.vDeducao }}</indIncentivo>
                     </ISSQN>
                     {% endif %}
+                    {% if imposto.ICMSUFDest is defined %}
                     <ICMSUFDest>
-                        <vBCUFDest>0.00</vBCUFDest>
-                        <pFCPUFDest>0.00</pFCPUFDest>
-                        <pICMSUFDest>0.00</pICMSUFDest>
-                        <pICMSInter>12.00</pICMSInter>
-                        <pICMSInterPart>40</pICMSInterPart>
-                        <vFCPUFDest>0.00</vFCPUFDest>
-                        <vICMSUFDest>0.00</vICMSUFDest>
-                        <vICMSUFRemet>0.00</vICMSUFRemet>
+                        <vBCUFDest>{{ imposto.ICMSUFDest.vBCUFDest }}</vBCUFDest>
+                        <pFCPUFDest>{{ imposto.ICMSUFDest.pFCPUFDest }}</pFCPUFDest>
+                        <pICMSUFDest>{{ imposto.ICMSUFDest.pICMSInter }}</pICMSUFDest>
+                        <pICMSInter>{{ imposto.ICMSUFDest.pICMSInter }}</pICMSInter>
+                        <pICMSInterPart>{{ imposto.ICMSUFDest.pICMSInterPart }}</pICMSInterPart>
+                        <vFCPUFDest>{{ imposto.ICMSUFDest.vFCPUFDest }}</vFCPUFDest>
+                        <vICMSUFDest>{{ imposto.ICMSUFDest.vICMSUFDest }}</vICMSUFDest>
+                        <vICMSUFRemet>{{ imposto.ICMSUFDest.vICMSUFRemet }}</vICMSUFRemet>
                     </ICMSUFDest>
+                    {% endif %}
                     {% endwith %}
                 </imposto>
                 {% if det.impostoDevol is defined %}
