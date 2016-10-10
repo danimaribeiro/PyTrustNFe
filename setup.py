@@ -6,7 +6,7 @@ long_description = pypandoc.convert('README.md', 'rst')
 
 setup(
     name="PyTrustNFe",
-    version="0.1.3",
+    version="0.1.4",
     author="Danimar Ribeiro",
     author_email='danimaribeiro@gmail.com',
     keywords=['nfe', 'mdf-e'],
