@@ -51,6 +51,7 @@ class test_assinatura(unittest.TestCase):
         xml = signer.assina_xml(
             etree.fromstring(XML_ASSINAR),
             'NFe43150602261542000143550010000000761792265342')
-        xml_assinado = open(os.path.join(self.caminho, 'xml_assinado.xml'),
+        xml_assinado = open(os.path.join(self.caminho,
+                                         'xml_valido_assinado.xml'),
                             'r').read()
         self.assertEqual(xml_assinado, xml, 'Xml assinado é inválido')
