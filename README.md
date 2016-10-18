@@ -20,7 +20,7 @@ Exemplos de uso da NFe
 
 Consulta Cadastro por CNPJ:
 
-```
+```python
     from pytrustnfe.nfe import consulta_cadastro
     from pytrustnfe.certificado import Certificado
 
@@ -36,7 +36,7 @@ Exemplo de uso da NFSe Paulistana
 
 Envio de RPS por lote
 
-```
+```python
     certificado = open('/path/certificado.pfx', 'r').read()
     certificado = Certificado(certificado, '123456')
     # Necessário criar um dicionário com os dados, validação dos dados deve
@@ -92,7 +92,7 @@ Envio de RPS por lote
 
 Cancelamento de NFSe:
 
-```
+```python
     from pytrustnfe.certificado import Certificado
     from pytrustnfe.nfse.paulistana import cancelamento_nfe
 
