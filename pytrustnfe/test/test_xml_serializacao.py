@@ -1,5 +1,6 @@
 # coding=utf-8
 
+import codecs
 import os.path
 import unittest
 from lxml import etree
@@ -15,19 +16,21 @@ class test_xml_serializacao(unittest.TestCase):
                          tag2='ola', tag3='comovai')
 
         result = open(os.path.join(path, 'jinja_result.xml'), 'r').read()
-        self.assertEqual(xml + '\n', result)
+        self.assertEqual(xml + u'\n', result)
 
     def test_serializacao_remove_empty(self):
         path = os.path.join(os.path.dirname(__file__), 'XMLs')
         xmlElem = render_xml(path, 'jinja_template.xml', True, tag1='oi',
                              tag2='ola', tag3='comovai')
-        xml = etree.tostring(xmlElem)
+        xml = etree.tostring(xmlElem, encoding="unicode")
         result = open(os.path.join(path, 'jinja_remove_empty.xml'), 'r').read()
-        self.assertEqual(xml + '\n', result)
+        self.assertEqual(xml + u'\n', result)
 
     def test_sanitize_response(self):
         path = os.path.join(os.path.dirname(__file__), 'XMLs')
-        xml_to_clear = open(os.path.join(path, 'jinja_result.xml'), 'r').read()
+        f = codecs.open(os.path.join(path, 'jinja_result.xml'), encoding='utf-8')
+
+        xml_to_clear = f.read()
         xml, obj = sanitize_response(xml_to_clear)
 
         self.assertEqual(xml, xml_to_clear)
