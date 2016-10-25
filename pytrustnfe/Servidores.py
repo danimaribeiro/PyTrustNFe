@@ -52,16 +52,56 @@ SIGLA_ESTADO = {
 }
 
 
-def localizar_url(servico, estado, ambiente=2):
+def localizar_url(servico, estado, mod=55, ambiente=2):
     sigla = SIGLA_ESTADO[estado]
     dominio = ESTADO_WS[sigla][ambiente]['servidor']
     complemento = ESTADO_WS[sigla][ambiente][servico]
+    if mod == 65:
+        if sigla == 'SP':
+            if servico == WS_NFE_AUTORIZACAO:
+                dominio = 'https://homologacao.nfce.fazenda.sp.gov.br/ws/\
+nfeautorizacao.asmx'
+            if servico == WS_NFE_RET_AUTORIZACAO:
+                dominio = 'https://homologacao.nfce.fazenda.sp.gov.br/ws/\
+nferetautorizacao.asmx'
+            if servico == WS_NFE_INUTILIZACAO:
+                dominio = 'https://homologacao.nfce.fazenda.sp.gov.br/ws/\
+nfeinutilizacao2.asmx'
+            if servico == WS_NFE_CONSULTA:
+                dominio = 'https://homologacao.nfce.fazenda.sp.gov.br/ws/\
+nfeconsulta2.asmx'
+            if servico == WS_NFE_SITUACAO:
+                dominio = 'https://homologacao.nfce.fazenda.sp.gov.br/ws/\
+nfestatusservico2.asmx'
+            if servico == WS_NFE_RECEPCAO_EVENTO:
+                dominio = 'https://homologacao.nfce.fazenda.sp.gov.br/ws/\
+recepcaoevento.asmx'
+        if sigla == 'RS':
+            if servico == WS_NFE_AUTORIZACAO:
+                dominio = 'https://nfce-homologacao.sefazrs.rs.gov.br/ws/\
+NfeAutorizacao/NFeAutorizacao.asmx'
+            if servico == WS_NFE_RET_AUTORIZACAO:
+                dominio = 'https://nfce-homologacao.sefazrs.rs.gov.br/ws/\
+NfeRetAutorizacao/NFeRetAutorizacao.asmx'
+            if servico == WS_NFE_INUTILIZACAO:
+                dominio = 'https://nfce-homologacao.sefazrs.rs.gov.br/ws/\
+nfeinutilizacao/nfeinutilizacao2.asmx'
+            if servico == WS_NFE_CONSULTA:
+                dominio = 'https://nfce-homologacao.sefazrs.rs.gov.br/ws/\
+NfeConsulta/NfeConsulta2.asmx'
+            if servico == WS_NFE_SITUACAO:
+                dominio = 'https://nfce-homologacao.sefazrs.rs.gov.br/ws/\
+NfeStatusServico/NfeStatusServico2.asmx'
+            if servico == WS_NFE_RECEPCAO_EVENTO:
+                dominio = 'https://nfce-homologacao.sefazrs.rs.gov.br/ws/\
+recepcaoevento/recepcaoevento.asmx'
 
-    if sigla == 'RS' and servico == WS_NFE_CADASTRO:
-        dominio = 'cad.sefazrs.rs.gov.br'
-    if sigla in ('AC', 'RN', 'PB', 'SC') and \
-       servico == WS_NFE_CADASTRO:
-        dominio = 'cad.svrs.rs.gov.br'
+    else:
+        if sigla == 'RS' and servico == WS_NFE_CADASTRO:
+            dominio = 'cad.sefazrs.rs.gov.br'
+        if sigla in ('AC', 'RN', 'PB', 'SC') and \
+           servico == WS_NFE_CADASTRO:
+            dominio = 'cad.svrs.rs.gov.br'
 
     return "https://%s/%s" % (dominio, complemento)
 
