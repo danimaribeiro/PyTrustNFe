@@ -55,7 +55,8 @@ def _add_required_node(elemTree):
         cEan = etree.Element('cEAN')
         cEANTrib = etree.Element('cEANTrib')
         prod.insert(1, cEan)
-        prod.insert(9, cEANTrib)
+        vProd = prod.find('ns:vProd', namespaces = ns)
+        prod.insert(prod.index(vProd) + 1, cEANTrib)
     return elemTree
 
 

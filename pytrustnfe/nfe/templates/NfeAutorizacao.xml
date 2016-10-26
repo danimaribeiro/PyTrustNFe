@@ -16,7 +16,7 @@
                 <dhEmi>{{ ide.dhEmi }}</dhEmi>
                 <dhSaiEnt>{{ ide.dhSaiEnt }}</dhSaiEnt>
                 <tpNF>{{ ide.tpNF }}</tpNF>
-                <idDest>{{ ide.idDest }}</idDest>
+				<idDest>{{ ide.idDest }}</idDest>
                 <cMunFG>{{ ide.cMunFG }}</cMunFG>
                 <tpImp>{{ ide.tpImp }}</tpImp>
                 <tpEmis>{{ ide.tpEmis }}</tpEmis>
@@ -97,6 +97,7 @@
                 <CRT>{{ emit.CRT }}</CRT>
                 {% endwith %}
             </emit>
+			{% if dest is defined %}
             <dest>
                 {% with dest = NFe.infNFe.dest %}
                 {% if dest.tipo == 'person' -%}
@@ -124,7 +125,8 @@
                 <IM>{{ dest.IM }}</IM>
                 <email>{{ dest.email }}</email>
                 {% endwith %}
-            </dest>
+			</dest>
+			{% endif %}
             {% if NFe.infNFe.retirada is defined %}
             <retirada>
                 <CNPJ>{{ NFe.infNFe.retirada.CNPJ }}</CNPJ>
