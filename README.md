@@ -48,8 +48,8 @@ Envio de RPS por lote
             'numero': '1',
             'data_emissao': '2016-08-29',
             'codigo_atividade': '07498',
-            'total_servicos': '2.00',
-            'total_deducoes': '3.00',
+            'valor_servico': '2.00',
+            'valor_deducao': '3.00',
             'prestador': {
                 'inscricao_municipal': '123456'
             },
@@ -62,7 +62,7 @@ Envio de RPS por lote
                 'logradouro': 'Vinicius de Moraes, 42',
                 'numero': '42',
                 'bairro': 'Corrego',
-                'cidade': 'Floripa',
+                'cidade': '4205407',  # Código da cidade, de acordo com o IBGE
                 'uf': 'SC',
                 'cep': '88037240',
             },
@@ -75,6 +75,8 @@ Envio de RPS por lote
         'cpf_cnpj': '12345678901234',
         'data_inicio': '2016-08-29',
         'data_fim': '2016-08-29',
+        'total_servicos': '2.00',
+        'total_deducoes': '3.00',
         'lista_rps': rps
     }
 
