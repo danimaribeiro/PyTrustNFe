@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PedidoEnvioLoteRPS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.prefeitura.sp.gov.br/nfe"><Cabecalho xmlns="" Versao="1"><CPFCNPJRemetente><CNPJ>12345678901234</CNPJ></CPFCNPJRemetente><transacao>false</transacao><dtInicio>2016-08-29</dtInicio><dtFim>2016-08-29</dtFim><QtdRPS>1</QtdRPS><ValorTotalServicos/><ValorTotalDeducoes/></Cabecalho><RPS xmlns=""><Assinatura>E4fpHYkQa7Naxn6IKGb7NwwZu5tPk/KXJ9hCwtZgq0xvKS450aQqqBL+7Iv46lTgqrSMu7+gLrl+LC1qs/8aT2mbHE8uaVFSbzwZ+sF/BkcT6nsFHLMswEiTAEs95Jb7hN1cC91xqQGRH4buw0TzxHKmhuLJ22WwtG/scxyKtjM=</Assinatura><ChaveRPS><InscricaoPrestador>123456</InscricaoPrestador><SerieRPS>1</SerieRPS><NumeroRPS>1</NumeroRPS></ChaveRPS><TipoRPS>RPS</TipoRPS><DataEmissao>2016-08-29</DataEmissao><StatusRPS>N</StatusRPS><TributacaoRPS>T</TributacaoRPS><ValorServicos/><ValorDeducoes/><ValorPIS>0.00</ValorPIS><ValorCOFINS>0.00</ValorCOFINS><ValorINSS>0.00</ValorINSS><ValorIR>0.00</ValorIR><ValorCSLL>0.00</ValorCSLL><CodigoServico>07498</CodigoServico><AliquotaServicos>5.00</AliquotaServicos><ISSRetido>false</ISSRetido><CPFCNPJTomador>
+        
+        
+    </CPFCNPJTomador><InscricaoMunicipalTomador>123456</InscricaoMunicipalTomador><RazaoSocialTomador>Trustcode</RazaoSocialTomador><EnderecoTomador><TipoLogradouro>1</TipoLogradouro><Logradouro>Vinicius de Moraes, 42</Logradouro><NumeroEndereco>42</NumeroEndereco><ComplementoEndereco/><Bairro>Corrego</Bairro><Cidade>Floripa</Cidade><UF>SC</UF><CEP>88037240</CEP></EnderecoTomador><Discriminacao>Venda de servico</Discriminacao></RPS><Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+<Reference URI="">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+<DigestValue>ivaOwkcrt0pfuMYsAdfyLaUAcIk=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue>FjIHdfPavSEyaWYhAT0z0shPLuTsqBKyy78PUEZ8PUhTZ+iSV0MOvAIRq9MPPVK9
+jjXOw1TE903uSK8aJon52RNKPd68ORVJ3bKFSjTqQLxFRR9tiiAQFrWDETf7FF89
+EhG6dy6TGcgVbOyn0Jqm8MkqrE1XrJ44orN1X+Jt+7U=</SignatureValue>
+<KeyInfo>
+<X509Data>
+<X509Certificate>MIICMTCCAZqgAwIBAgIQfYOsIEVuAJ1FwwcTrY0t1DANBgkqhkiG9w0BAQUFADBX
+MVUwUwYDVQQDHkwAewA1ADkARgAxAEUANAA2ADEALQBEAEQARQA1AC0ANABEADIA
+RgAtAEEAMAAxAEEALQA4ADMAMwAyADIAQQA5AEUAQgA4ADMAOAB9MB4XDTE1MDYx
+NTA1NDc1N1oXDTE2MDYxNDExNDc1N1owVzFVMFMGA1UEAx5MAHsANQA5AEYAMQBF
+ADQANgAxAC0ARABEAEUANQAtADQARAAyAEYALQBBADAAMQBBAC0AOAAzADMAMgAy
+AEEAOQBFAEIAOAAzADgAfTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAk41G
+nqXXLaiOC/y0/cA4tbS+NZCqI+x4EsztgDFvPPlHstiVYcLRkni4i93gK9zoC6g0
+mh66HMVzAfE8vRNwW5b7m6nWS1SiHBon7/Mqsw4MIq3SC+J/fTbKpqwyfAuH2YZl
+AiQuQc85fyllAMLh2WrA7JgOLR/5tF3kLtpbHdECAwEAATANBgkqhkiG9w0BAQUF
+AAOBgQArdh+RyT6VxKGsXk1zhHsgwXfToe6GpTF4W8PHI1+T0WIsNForDhvst6nm
+QtgAhuZM9rxpOJuNKc+pM29EixpAiZZiRMCSWEItNyEVdUIi+YnKBcAHd88TwO86
+d126MWQ2O8cu5W1VoDp7hYBYKOnLbYi11/StO+0rzK+oPYAvIw==</X509Certificate>
+</X509Data>
+</KeyInfo>
+</Signature></PedidoEnvioLoteRPS>

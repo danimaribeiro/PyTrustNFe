@@ -1,0 +1,27 @@
+<ConsultarNfseServicoTomadoEnvio xmlns="http://www.betha.com.br/e-nota-contribuinte-ws">
+    <Consulente>
+        <CpfCnpj>
+            <Cnpj>45111111111100</Cnpj>
+        </CpfCnpj>
+    </Consulente>
+    <PeriodoEmissao>
+        <DataInicial>2014-01-01</DataInicial>
+        <DataFinal>2014-12-31</DataFinal>
+    </PeriodoEmissao>
+    <Prestador>
+        <CpfCnpj>
+            <Cnpj>45111111111100</Cnpj>
+        </CpfCnpj>
+    </Prestador>
+    <Tomador>
+        <CpfCnpj>
+            <Cnpj>83787494000123</Cnpj>
+        </CpfCnpj>
+    </Tomador>
+    <Intermediario>
+        <CpfCnpj>
+            <Cnpj>45111111111100</Cnpj>
+        </CpfCnpj>
+    </Intermediario>
+    <Pagina>1</Pagina>
+</ConsultarNfseServicoTomadoEnvio>

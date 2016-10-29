@@ -23,12 +23,12 @@ Emissão de NFCe
 Compatibilidade [python 2 e 3](https://github.com/danimaribeiro/PyTrustNFe/pull/6)
 
 Implementar novos provedores de NFSe
-* [Betha](nfse/cidades/beta.md) - 81 cidades atendidas  WIP
-* [GINFES](nfse/cidades/ginfes.md) - 79 cidades atendidas
-* [WebISS](nfse/cidades/webiss.md) - 51 cidades atendidas
-* [ISSIntel](nfse/cidades/issintel.md) - 32 cidades atendidas
-* [ISSNET](nfse/cidades/issnet.md) - 32 cidades atendidas
-* [Saatri](nfse/cidades/saatri.md) - 31 cidades atendidas
+* [Betha](cidades/betha.md) - 81 cidades atendidas  WIP
+* [GINFES](cidades/ginfes.md) - 79 cidades atendidas
+* [WebISS](cidades/webiss.md) - 51 cidades atendidas
+* [ISSIntel](cidades/issintel.md) - 32 cidades atendidas
+* [ISSNET](cidades/issnet.md) - 32 cidades atendidas
+* [Saatri](cidades/saatri.md) - 31 cidades atendidas
 
 
 Exemplos de uso da NFe

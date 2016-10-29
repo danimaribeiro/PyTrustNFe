@@ -1,0 +1,13 @@
+<ConsultarNfseServicoPrestadoEnvio xmlns="http://www.betha.com.br/e-nota-contribuinte-ws">
+    <Prestador>
+        <CpfCnpj>
+            <Cnpj>45111111111100</Cnpj>
+        </CpfCnpj>
+    </Prestador>
+    <NumeroNfse>61</NumeroNfse>
+    <PeriodoEmissao>
+        <DataInicial>2014-12-01</DataInicial>
+        <DataFinal>2014-12-31</DataFinal>
+    </PeriodoEmissao>
+    <Pagina>1</Pagina>
+</ConsultarNfseServicoPrestadoEnvio>

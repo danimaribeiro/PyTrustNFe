@@ -1,0 +1,13 @@
+<EnviarLoteRpsEnvio xmlns = "http://www.betha.com.br/e-nota-contribuinte-ws">
+    <LoteRps  Id="lote1" versao="2.02">
+        <NumeroLote>2012024</NumeroLote>
+        <CpfCnpj>
+            <Cnpj>45111111111100</Cnpj>
+        </CpfCnpj>
+        <InscricaoMunicipal>123498</InscricaoMunicipal>
+        <QuantidadeRps>1</QuantidadeRps>
+        <ListaRps>
+            {% include 'rps.xml' %}
+        </ListaRps>
+    </LoteRps>
+</EnviarLoteRpsEnvio>

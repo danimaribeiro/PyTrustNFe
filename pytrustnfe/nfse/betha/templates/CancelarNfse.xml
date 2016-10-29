@@ -1,0 +1,15 @@
+<CancelarNfseEnvio xmlns = "http://www.betha.com.br/e-nota-contribuinte-ws">
+    <Pedido>
+        <InfPedidoCancelamento Id="1">
+            <IdentificacaoNfse>
+                <Numero>58</Numero>
+                <CpfCnpj>
+                    <Cnpj>45111111111100</Cnpj>
+                </CpfCnpj>
+                <InscricaoMunicipal>123498</InscricaoMunicipal>
+                <CodigoMunicipio>4204608</CodigoMunicipio>
+            </IdentificacaoNfse>
+            <CodigoCancelamento>1</CodigoCancelamento>
+        </InfPedidoCancelamento>
+    </Pedido>
+</CancelarNfseEnvio>
