@@ -71,8 +71,12 @@ def _send(certificado, method, sign, **kwargs):
             xmlElem_send = _add_required_node(xmlElem_send)
 
         signer = Assinatura(certificado.pfx, certificado.password)
-        xml_send = signer.assina_xml(
-            xmlElem_send, kwargs['NFes'][0]['infNFe']['Id'])
+        if method == 'NfeAutorizacao':
+            xml_send = signer.assina_xml(
+                xmlElem_send, kwargs['NFes'][0]['infNFe']['Id'])
+        elif method == 'RecepcaoEventoCancelamento':
+            xml_send = signer.assina_xml(
+                xmlElem_send, kwargs['eventos'][0]['Id'])
     else:
         xml_send = etree.tostring(xmlElem_send)
 
