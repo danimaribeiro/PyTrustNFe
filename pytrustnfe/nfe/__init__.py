@@ -18,6 +18,7 @@ def _build_header(method, **kwargs):
         'NfeAutorizacao': ('NfeAutorizacao', '3.10'),
         'NfeRetAutorizacao': ('NfeRetAutorizacao', '3.10'),
         'NfeConsultaCadastro': ('CadConsultaCadastro2', '2.00'),
+        'RecepcaoEventoCancelamento': ('RecepcaoEvento', '1.00')
     }
     vals = {'estado': kwargs['estado'],
             'soap_action': action[method][0],
@@ -55,7 +56,7 @@ def _add_required_node(elemTree):
         cEan = etree.Element('cEAN')
         cEANTrib = etree.Element('cEANTrib')
         prod.insert(1, cEan)
-        vProd = prod.find('ns:vProd', namespaces = ns)
+        vProd = prod.find('ns:vProd', namespaces=ns)
         prod.insert(prod.index(vProd) + 1, cEANTrib)
     return elemTree
 

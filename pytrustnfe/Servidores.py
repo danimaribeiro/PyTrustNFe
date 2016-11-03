@@ -153,6 +153,7 @@ SVRS = {
     NFE_AMBIENTE_PRODUCAO: {
         'servidor': 'nfe.svrs.rs.gov.br',
         WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
+        WS_NFE_CANCELAMENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
         WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NfeAutorizacao.asmx',
         WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NfeRetAutorizacao.asmx',
         WS_NFE_CADASTRO: 'ws/CadConsultaCadastro/CadConsultaCadastro2.asmx',
@@ -163,6 +164,7 @@ SVRS = {
     NFE_AMBIENTE_HOMOLOGACAO: {
         'servidor': 'nfe-homologacao.svrs.rs.gov.br',
         WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
+        WS_NFE_CANCELAMENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
         WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NfeAutorizacao.asmx',
         WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NfeRetAutorizacao.asmx',
         WS_NFE_CADASTRO: 'ws/CadConsultaCadastro/CadConsultaCadastro2.asmx',
@@ -508,6 +510,7 @@ UFRS = {
         WS_NFE_INUTILIZACAO: 'ws/NfeInutilizacao/NfeInutilizacao2.asmx',
         WS_NFE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
         WS_NFE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
+        WS_NFE_CANCELAMENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
     },
     NFE_AMBIENTE_HOMOLOGACAO: {
         'servidor': 'nfe-homologacao.sefazrs.rs.gov.br',
@@ -520,6 +523,7 @@ UFRS = {
         WS_NFE_INUTILIZACAO: 'ws/NfeInutilizacao/NfeInutilizacao2.asmx',
         WS_NFE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
         WS_NFE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
+        WS_NFE_CANCELAMENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
     }
 }
 
@@ -534,6 +538,7 @@ UFSP = {
         WS_NFE_SITUACAO: 'ws/nfestatusservico2.asmx',
         WS_NFE_CADASTRO: 'ws/cadconsultacadastro2.asmx',
         WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento.asmx',
+        WS_NFE_CANCELAMENTO: 'ws/recepcaoevento.asmx',
     },
     NFE_AMBIENTE_HOMOLOGACAO: {
         'servidor': 'homologacao.nfe.fazenda.sp.gov.br',
@@ -544,6 +549,7 @@ UFSP = {
         WS_NFE_SITUACAO: 'ws/nfestatusservico2.asmx',
         WS_NFE_CADASTRO: 'ws/cadconsultacadastro2.asmx',
         WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento.asmx',
+        WS_NFE_CANCELAMENTO: 'ws/recepcaoevento.asmx',
     }
 }
 

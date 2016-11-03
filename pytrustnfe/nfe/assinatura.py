@@ -33,6 +33,10 @@ class Assinatura(object):
         signed_root = signer.sign(
             xml_element, key=key, cert=cert,
             reference_uri=('#%s' % reference))
-        if len(signed_root) > 3:
-            signed_root[2].append(signed_root[3])
+        element_signed = signed_root.find(".//*[@Id='%s']" % reference)
+        signature = signed_root.find(
+            ".//{http://www.w3.org/2000/09/xmldsig#}Signature")
+        if element_signed and signature:
+            parent = element_signed.getparent()
+            parent.append(signature)
         return etree.tostring(signed_root)
