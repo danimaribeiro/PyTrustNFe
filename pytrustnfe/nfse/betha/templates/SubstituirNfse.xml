@@ -1,0 +1,18 @@
+<SubstituirNfseEnvio xmlns = "http://www.betha.com.br/e-nota-contribuinte-ws">
+    <SubstituicaoNfse Id="subst">
+        <Pedido>
+            <InfPedidoCancelamento Id="cancel">
+                <IdentificacaoNfse>
+                    <Numero>57</Numero>
+                    <CpfCnpj>
+                        <Cnpj>45111111111100</Cnpj>
+                    </CpfCnpj>
+                    <InscricaoMunicipal>123498</InscricaoMunicipal>
+                    <CodigoMunicipio>4204608</CodigoMunicipio>
+                </IdentificacaoNfse>
+                <CodigoCancelamento>2</CodigoCancelamento>
+            </InfPedidoCancelamento>
+        </Pedido>
+        {% include 'rps.xml' %}
+    </SubstituicaoNfse>
+</SubstituirNfseEnvio>

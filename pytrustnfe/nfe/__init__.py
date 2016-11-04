@@ -10,7 +10,7 @@ from .assinatura import Assinatura
 from pytrustnfe.xml import render_xml
 from pytrustnfe.utils import CabecalhoSoap
 from pytrustnfe.utils import gerar_chave, ChaveNFe
-from pytrustnfe.Servidores import localizar_url
+from pytrustnfe.Servidores import localizar_url, localizar_qrcode
 
 
 def _build_header(method, **kwargs):
@@ -18,6 +18,7 @@ def _build_header(method, **kwargs):
         'NfeAutorizacao': ('NfeAutorizacao', '3.10'),
         'NfeRetAutorizacao': ('NfeRetAutorizacao', '3.10'),
         'NfeConsultaCadastro': ('CadConsultaCadastro2', '2.00'),
+        'RecepcaoEventoCancelamento': ('RecepcaoEvento', '1.00')
     }
     vals = {'estado': kwargs['estado'],
             'soap_action': action[method][0],
@@ -55,14 +56,36 @@ def _add_required_node(elemTree):
         cEan = etree.Element('cEAN')
         cEANTrib = etree.Element('cEANTrib')
         prod.insert(1, cEan)
-        vProd = prod.find('ns:vProd', namespaces = ns)
+        vProd = prod.find('ns:vProd', namespaces=ns)
         prod.insert(prod.index(vProd) + 1, cEANTrib)
     return elemTree
 
 
+def _add_qrCode(xml, **kwargs):
+    xml = etree.fromstring(xml)
+    inf_nfe = kwargs['NFes'][0]['infNFe']
+    nfe = xml.find(".//{http://www.portalfiscal.inf.br/nfe}NFe")
+    infnfesupl = etree.Element('infNFeSupl')
+    qrcode = etree.Element('qrCode')
+    qrcode_url = localizar_qrcode(kwargs['estado'], kwargs['ambiente'])
+    chave_nfe = inf_nfe['Id'][3:]
+    dh_emissao = inf_nfe['ide']['dhEmi'].encode('hex')
+    versao = 100
+    ambiente = kwargs['ambiente']
+    valor_total = inf_nfe['total']['vNF']
+    if inf_nfe.get('dest', False):
+        dest_cpf = inf_nfe['dest'].get('CPF', False)
+    icms_total = inf_nfe['total']['vICMS']
+    dig_val_tag = xml.find(
+        ".//{http://www.portalfiscal.inf.br/nfe}Signature/SignedInfo/Reference/DigestValue")
+    dig_val = dig_val_tag.text.encode('hex')
+
+    qrcode_text = qrcode_url
+
+
 def _send(certificado, method, sign, **kwargs):
     path = os.path.join(os.path.dirname(__file__), 'templates')
-
+    modelo = kwargs['NFes'][0]['infNFe']['ide']['mod']
     xmlElem_send = render_xml(path, '%s.xml' % method, True, **kwargs)
     if sign:
         # Caso for autorização temos que adicionar algumas tags tipo
@@ -71,12 +94,21 @@ def _send(certificado, method, sign, **kwargs):
             xmlElem_send = _add_required_node(xmlElem_send)
 
         signer = Assinatura(certificado.pfx, certificado.password)
-        xml_send = signer.assina_xml(
-            xmlElem_send, kwargs['NFes'][0]['infNFe']['Id'])
+        if method == 'NfeAutorizacao':
+            xml_send = signer.assina_xml(
+                xmlElem_send, kwargs['NFes'][0]['infNFe']['Id'])
+        elif method == 'RecepcaoEventoCancelamento':
+            xml_send = signer.assina_xml(
+                xmlElem_send, kwargs['eventos'][0]['Id'])
+
+        if modelo == '65':
+            _add_qrCode(xml_send, **kwargs)
+
     else:
         xml_send = etree.tostring(xmlElem_send)
 
-    url = localizar_url(method,  kwargs['estado'], kwargs['ambiente'])
+    url = localizar_url(method,  kwargs['estado'], modelo,
+                        kwargs['ambiente'])
     cabecalho = _build_header(method, **kwargs)
 
     response, obj = executar_consulta(certificado, url, cabecalho, xml_send)

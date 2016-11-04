@@ -6,15 +6,15 @@ import unittest
 from pytrustnfe.certificado import Certificado
 from pytrustnfe.nfse.paulistana import envio_lote_rps
 from pytrustnfe.nfse.paulistana import cancelamento_nfe
+from pytrustnfe.nfse.assinatura import Assinatura
+from pytrustnfe.nfse.paulistana import sign_tag
 
 
 class test_nfse_paulistana(unittest.TestCase):
 
     caminho = os.path.dirname(__file__)
 
-    def test_envio_nfse(self):
-        pfx_source = open(os.path.join(self.caminho, 'teste.pfx'), 'r').read()
-        pfx = Certificado(pfx_source, '123456')
+    def _get_nfse(self):
         rps = [
             {
                 'assinatura': '123',
@@ -51,7 +51,13 @@ class test_nfse_paulistana(unittest.TestCase):
             'data_fim': '2016-08-29',
             'lista_rps': rps
         }
+        return nfse
 
+    def test_envio_nfse(self):
+        pfx_source = open(os.path.join(self.caminho, 'teste.pfx'), 'r').read()
+        pfx = Certificado(pfx_source, '123456')
+
+        nfse = self._get_nfse()
         path = os.path.join(os.path.dirname(__file__), 'XMLs')
         xml_return = open(os.path.join(
             path, 'paulistana_resultado.xml'), 'r').read()
@@ -69,6 +75,23 @@ class test_nfse_paulistana(unittest.TestCase):
                 retorno['object'].ChaveNFeRPS.ChaveNFe.NumeroNFe, 446)
             self.assertEqual(
                 retorno['object'].ChaveNFeRPS.ChaveRPS.NumeroRPS, 6)
+
+    def test_nfse_signature(self):
+        pfx_source = open(os.path.join(self.caminho, 'teste.pfx'), 'r').read()
+        pfx = Certificado(pfx_source, '123456')
+
+        nfse = self._get_nfse()
+        path = os.path.join(os.path.dirname(__file__), 'XMLs')
+        xml_sent = open(os.path.join(
+            path, 'paulistana_signature.xml'), 'r').read()
+
+        with mock.patch('pytrustnfe.nfse.paulistana.get_authenticated_client') as client:
+            retorno = mock.MagicMock()
+            client.return_value = retorno
+            retorno.service.EnvioLoteRPS.return_value = '<xml></xml>'
+
+            retorno = envio_lote_rps(pfx, nfse=nfse)
+            self.assertEqual(retorno['sent_xml'], xml_sent)
 
     def _get_cancelamento(self):
         return {

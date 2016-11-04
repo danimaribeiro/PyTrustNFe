@@ -10,15 +10,15 @@ WS_NFE_CONSULTA = 'NfeConsultaProtocolo'
 WS_NFE_SITUACAO = 'NfeStatusServico'
 WS_NFE_CADASTRO = 'NfeConsultaCadastro'
 
-WS_NFCE_AUTORIZACAO = 'NfceAutorizacao'
-WS_NFCE_RET_AUTORIZACAO = 'NfceRetAutorizacao'
+WS_NFCE_AUTORIZACAO = 'NfeAutorizacao'
+WS_NFCE_RET_AUTORIZACAO = 'NfeRetAutorizacao'
 WS_NFCE_CANCELAMENTO = 'RecepcaoEventoCancelamento'
-WS_NFCE_INUTILIZACAO = 'NfceInutilizacao'
-WS_NFCE_CONSULTA = 'NfceConsultaProtocolo'
-WS_NFCE_SITUACAO = 'NfceStatusServico'
-WS_NFCE_CADASTRO = 'NfceConsultaCadastro'
+WS_NFCE_INUTILIZACAO = 'NfeInutilizacao'
+WS_NFCE_CONSULTA = 'NfeConsultaProtocolo'
+WS_NFCE_SITUACAO = 'NfeStatusServico'
+WS_NFCE_CADASTRO = 'NfeConsultaCadastro'
 WS_NFCE_RECEPCAO_EVENTO = 'RecepcaoEventoCarta'
-WS_NFCE_QR_CODE = 'NcfeQRCode'
+WS_NFCE_QR_CODE = 'NfeQRCode'
 
 WS_NFE_CADASTRO = 'NfeConsultaCadastro'
 WS_DPEC_RECEPCAO = 'RecepcaoEventoEPEC'
@@ -34,8 +34,8 @@ NFE_AMBIENTE_HOMOLOGACAO = 2
 NFCE_AMBIENTE_PRODUCAO = 1
 NFCE_AMBIENTE_HOMOLOGACAO = 2
 
-NFE_MODELO = 55
-NFCE_MODELO = 65
+NFE_MODELO = u'55'
+NFCE_MODELO = u'65'
 
 SIGLA_ESTADO = {
     '12': 'AC',
@@ -69,17 +69,23 @@ SIGLA_ESTADO = {
 
 
 def localizar_url(servico, estado, mod=55, ambiente=2):
-    import pdb
-    pdb.set_trace()
     sigla = SIGLA_ESTADO[estado]
-    dominio = ESTADO_WS[sigla][ambiente]['servidor']
-    complemento = ESTADO_WS[sigla][ambiente][servico]
+    dominio = ESTADO_WS[sigla][mod][ambiente]['servidor']
+    complemento = ESTADO_WS[sigla][mod][ambiente][servico]
 
     if sigla == 'RS' and servico == WS_NFE_CADASTRO:
         dominio = 'cad.sefazrs.rs.gov.br'
     if sigla in ('AC', 'RN', 'PB', 'SC') and \
        servico == WS_NFE_CADASTRO:
         dominio = 'cad.svrs.rs.gov.br'
+
+    return "https://%s/%s" % (dominio, complemento)
+
+
+def localizar_qrcode(estado, ambiente=2):
+    sigla = SIGLA_ESTADO[estado]
+    dominio = ESTADO_WS[sigla]['65'][ambiente]['servidor']
+    complemento = ESTADO_WS[sigla]['65'][ambiente][WS_NFCE_QR_CODE]
 
     return "https://%s/%s" % (dominio, complemento)
 
@@ -131,6 +137,7 @@ SVRS = {
     NFE_AMBIENTE_PRODUCAO: {
         'servidor': 'nfe.svrs.rs.gov.br',
         WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
+        WS_NFE_CANCELAMENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
         WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NfeAutorizacao.asmx',
         WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NfeRetAutorizacao.asmx',
         WS_NFE_CADASTRO: 'ws/CadConsultaCadastro/CadConsultaCadastro2.asmx',
@@ -141,6 +148,7 @@ SVRS = {
     NFE_AMBIENTE_HOMOLOGACAO: {
         'servidor': 'nfe-homologacao.svrs.rs.gov.br',
         WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
+        WS_NFE_CANCELAMENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
         WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NfeAutorizacao.asmx',
         WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NfeRetAutorizacao.asmx',
         WS_NFE_CADASTRO: 'ws/CadConsultaCadastro/CadConsultaCadastro2.asmx',
@@ -486,6 +494,7 @@ UFRS = {
         WS_NFE_INUTILIZACAO: 'ws/NfeInutilizacao/NfeInutilizacao2.asmx',
         WS_NFE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
         WS_NFE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
+        WS_NFE_CANCELAMENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
     },
     NFE_AMBIENTE_HOMOLOGACAO: {
         'servidor': 'nfe-homologacao.sefazrs.rs.gov.br',
@@ -498,6 +507,7 @@ UFRS = {
         WS_NFE_INUTILIZACAO: 'ws/NfeInutilizacao/NfeInutilizacao2.asmx',
         WS_NFE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
         WS_NFE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
+        WS_NFE_CANCELAMENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
     }
 }
 
@@ -546,7 +556,7 @@ UFSP = {
             WS_NFCE_SITUACAO: 'ws/nfestatusservico2.asmx',
             WS_NFCE_CADASTRO: 'ws/cadconsultacadastro2.asmx',
             WS_NFCE_RECEPCAO_EVENTO: 'ws/recepcaoevento.asmx',
-            WS_NFCE_QR_CODE: '/NFCEConsultaPublica/Paginas/ConstultaQRCode.aspx',
+            WS_NFCE_QR_CODE: 'NFCEConsultaPublica/Paginas/ConstultaQRCode.aspx',
         }
     }
 }
