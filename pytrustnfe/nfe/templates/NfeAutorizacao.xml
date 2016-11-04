@@ -14,7 +14,9 @@
                 <serie>{{ ide.serie }}</serie>
                 <nNF>{{ ide.nNF }}</nNF>
                 <dhEmi>{{ ide.dhEmi }}</dhEmi>
-                <dhSaiEnt>{{ ide.dhSaiEnt }}</dhSaiEnt>
+				{% if ide.mod != '65' %}
+				<dhSaiEnt>{{ ide.dhSaiEnt }}</dhSaiEnt>
+				{% endif %}
                 <tpNF>{{ ide.tpNF }}</tpNF>
 				<idDest>{{ ide.idDest }}</idDest>
                 <cMunFG>{{ ide.cMunFG }}</cMunFG>
@@ -457,6 +459,7 @@
                         </ICMSSN900>
                         {% endif %}
                     </ICMS>
+					{% if NFe.infNFe.ide.mod != '65' %}
                     <IPI>
                         <clEnq>{{ imposto.IPI.clEnq }}</clEnq>
                         <CNPJProd>{{ imposto.IPI.CNPJProd }}</CNPJProd>
@@ -479,6 +482,7 @@
                         </IPINT>
                         {% endif %}
                     </IPI>
+					{% endif %}
                     {% if imposto.II is defined %}
                     <II>
                         <vBC>{{ imposto.II.vBC }}</vBC>
@@ -712,6 +716,7 @@
                 {% endif %}
             </transp>
             {% if NFe.infNFe.cobr is defined %}
+			{% if NFe.infNFe.ide.mod != '65' %}
             <cobr>
                 {% if NFe.infNFe.cobr.fat is defined %}
                 <fat>
@@ -731,6 +736,7 @@
                 {% endfor %}
                 {% endif %}
             </cobr>
+			{% endif %}
             {% endif %}
             {% if NFe.infNFe.pag is defined %}
             {% for pag in NFe.infNFe.pag %}
