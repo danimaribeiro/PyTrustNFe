@@ -10,6 +10,17 @@ WS_NFE_CONSULTA = 'NfeConsultaProtocolo'
 WS_NFE_SITUACAO = 'NfeStatusServico'
 WS_NFE_CADASTRO = 'NfeConsultaCadastro'
 
+WS_NFCE_AUTORIZACAO = 'NfeAutorizacao'
+WS_NFCE_RET_AUTORIZACAO = 'NfeRetAutorizacao'
+WS_NFCE_CANCELAMENTO = 'RecepcaoEventoCancelamento'
+WS_NFCE_INUTILIZACAO = 'NfeInutilizacao'
+WS_NFCE_CONSULTA = 'NfeConsultaProtocolo'
+WS_NFCE_SITUACAO = 'NfeStatusServico'
+WS_NFCE_CADASTRO = 'NfeConsultaCadastro'
+WS_NFCE_RECEPCAO_EVENTO = 'RecepcaoEventoCarta'
+WS_NFCE_QR_CODE = 'NfeQRCode'
+
+WS_NFE_CADASTRO = 'NfeConsultaCadastro'
 WS_DPEC_RECEPCAO = 'RecepcaoEventoEPEC'
 WS_DPEC_CONSULTA = 8
 
@@ -20,6 +31,11 @@ WS_DFE_DISTRIBUICAO = 12
 
 NFE_AMBIENTE_PRODUCAO = 1
 NFE_AMBIENTE_HOMOLOGACAO = 2
+NFCE_AMBIENTE_PRODUCAO = 1
+NFCE_AMBIENTE_HOMOLOGACAO = 2
+
+NFE_MODELO = u'55'
+NFCE_MODELO = u'65'
 
 SIGLA_ESTADO = {
     '12': 'AC',
@@ -54,54 +70,22 @@ SIGLA_ESTADO = {
 
 def localizar_url(servico, estado, mod=55, ambiente=2):
     sigla = SIGLA_ESTADO[estado]
-    dominio = ESTADO_WS[sigla][ambiente]['servidor']
-    complemento = ESTADO_WS[sigla][ambiente][servico]
-    if mod == 65:
-        if sigla == 'SP':
-            if servico == WS_NFE_AUTORIZACAO:
-                dominio = 'https://homologacao.nfce.fazenda.sp.gov.br/ws/\
-nfeautorizacao.asmx'
-            if servico == WS_NFE_RET_AUTORIZACAO:
-                dominio = 'https://homologacao.nfce.fazenda.sp.gov.br/ws/\
-nferetautorizacao.asmx'
-            if servico == WS_NFE_INUTILIZACAO:
-                dominio = 'https://homologacao.nfce.fazenda.sp.gov.br/ws/\
-nfeinutilizacao2.asmx'
-            if servico == WS_NFE_CONSULTA:
-                dominio = 'https://homologacao.nfce.fazenda.sp.gov.br/ws/\
-nfeconsulta2.asmx'
-            if servico == WS_NFE_SITUACAO:
-                dominio = 'https://homologacao.nfce.fazenda.sp.gov.br/ws/\
-nfestatusservico2.asmx'
-            if servico == WS_NFE_RECEPCAO_EVENTO:
-                dominio = 'https://homologacao.nfce.fazenda.sp.gov.br/ws/\
-recepcaoevento.asmx'
-        if sigla == 'RS':
-            if servico == WS_NFE_AUTORIZACAO:
-                dominio = 'https://nfce-homologacao.sefazrs.rs.gov.br/ws/\
-NfeAutorizacao/NFeAutorizacao.asmx'
-            if servico == WS_NFE_RET_AUTORIZACAO:
-                dominio = 'https://nfce-homologacao.sefazrs.rs.gov.br/ws/\
-NfeRetAutorizacao/NFeRetAutorizacao.asmx'
-            if servico == WS_NFE_INUTILIZACAO:
-                dominio = 'https://nfce-homologacao.sefazrs.rs.gov.br/ws/\
-nfeinutilizacao/nfeinutilizacao2.asmx'
-            if servico == WS_NFE_CONSULTA:
-                dominio = 'https://nfce-homologacao.sefazrs.rs.gov.br/ws/\
-NfeConsulta/NfeConsulta2.asmx'
-            if servico == WS_NFE_SITUACAO:
-                dominio = 'https://nfce-homologacao.sefazrs.rs.gov.br/ws/\
-NfeStatusServico/NfeStatusServico2.asmx'
-            if servico == WS_NFE_RECEPCAO_EVENTO:
-                dominio = 'https://nfce-homologacao.sefazrs.rs.gov.br/ws/\
-recepcaoevento/recepcaoevento.asmx'
+    dominio = ESTADO_WS[sigla][mod][ambiente]['servidor']
+    complemento = ESTADO_WS[sigla][mod][ambiente][servico]
 
-    else:
-        if sigla == 'RS' and servico == WS_NFE_CADASTRO:
-            dominio = 'cad.sefazrs.rs.gov.br'
-        if sigla in ('AC', 'RN', 'PB', 'SC') and \
-           servico == WS_NFE_CADASTRO:
-            dominio = 'cad.svrs.rs.gov.br'
+    if sigla == 'RS' and servico == WS_NFE_CADASTRO:
+        dominio = 'cad.sefazrs.rs.gov.br'
+    if sigla in ('AC', 'RN', 'PB', 'SC') and \
+       servico == WS_NFE_CADASTRO:
+        dominio = 'cad.svrs.rs.gov.br'
+
+    return "https://%s/%s" % (dominio, complemento)
+
+
+def localizar_qrcode(estado, ambiente=2):
+    sigla = SIGLA_ESTADO[estado]
+    dominio = ESTADO_WS[sigla]['65'][ambiente]['servidor']
+    complemento = ESTADO_WS[sigla]['65'][ambiente][WS_NFCE_QR_CODE]
 
     return "https://%s/%s" % (dominio, complemento)
 
@@ -529,27 +513,51 @@ UFRS = {
 
 
 UFSP = {
-    NFE_AMBIENTE_PRODUCAO: {
-        'servidor': 'nfe.fazenda.sp.gov.br',
-        WS_NFE_AUTORIZACAO: 'ws/nfeautorizacao.asmx',
-        WS_NFE_RET_AUTORIZACAO: 'ws/nferetautorizacao.asmx',
-        WS_NFE_INUTILIZACAO: 'ws/nfeinutilizacao2.asmx',
-        WS_NFE_CONSULTA: 'ws/nfeconsulta2.asmx',
-        WS_NFE_SITUACAO: 'ws/nfestatusservico2.asmx',
-        WS_NFE_CADASTRO: 'ws/cadconsultacadastro2.asmx',
-        WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento.asmx',
-        WS_NFE_CANCELAMENTO: 'ws/recepcaoevento.asmx',
+    NFE_MODELO: {
+        NFE_AMBIENTE_PRODUCAO: {
+            'servidor': 'nfe.fazenda.sp.gov.br',
+            WS_NFE_AUTORIZACAO: 'ws/nfeautorizacao.asmx',
+            WS_NFE_RET_AUTORIZACAO: 'ws/nferetautorizacao.asmx',
+            WS_NFE_INUTILIZACAO: 'ws/nfeinutilizacao2.asmx',
+            WS_NFE_CONSULTA: 'ws/nfeconsulta2.asmx',
+            WS_NFE_SITUACAO: 'ws/nfestatusservico2.asmx',
+            WS_NFE_CADASTRO: 'ws/cadconsultacadastro2.asmx',
+            WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento.asmx',
+        },
+        NFE_AMBIENTE_HOMOLOGACAO: {
+            'servidor': 'homologacao.nfe.fazenda.sp.gov.br',
+            WS_NFE_AUTORIZACAO: 'ws/nfeautorizacao.asmx',
+            WS_NFE_RET_AUTORIZACAO: 'ws/nferetautorizacao.asmx',
+            WS_NFE_INUTILIZACAO: 'ws/nfeinutilizacao2.asmx',
+            WS_NFE_CONSULTA: 'ws/nfeconsulta2.asmx',
+            WS_NFE_SITUACAO: 'ws/nfestatusservico2.asmx',
+            WS_NFE_CADASTRO: 'ws/cadconsultacadastro2.asmx',
+            WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento.asmx',
+        }
     },
-    NFE_AMBIENTE_HOMOLOGACAO: {
-        'servidor': 'homologacao.nfe.fazenda.sp.gov.br',
-        WS_NFE_AUTORIZACAO: 'ws/nfeautorizacao.asmx',
-        WS_NFE_RET_AUTORIZACAO: 'ws/nferetautorizacao.asmx',
-        WS_NFE_INUTILIZACAO: 'ws/nfeinutilizacao2.asmx',
-        WS_NFE_CONSULTA: 'ws/nfeconsulta2.asmx',
-        WS_NFE_SITUACAO: 'ws/nfestatusservico2.asmx',
-        WS_NFE_CADASTRO: 'ws/cadconsultacadastro2.asmx',
-        WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento.asmx',
-        WS_NFE_CANCELAMENTO: 'ws/recepcaoevento.asmx',
+    NFCE_MODELO: {
+        NFCE_AMBIENTE_PRODUCAO: {
+            'servidor': 'nfce.fazenda.sp.gov.br',
+            WS_NFCE_AUTORIZACAO: 'ws/nfeautorizacao.asmx',
+            WS_NFCE_RET_AUTORIZACAO: 'ws/nferetautorizacao.asmx',
+            WS_NFCE_INUTILIZACAO: 'ws/nfeinutilizacao2.asmx',
+            WS_NFCE_CONSULTA: 'ws/nfeconsulta2.asmx',
+            WS_NFCE_SITUACAO: 'ws/nfestatusservico2.asmx',
+            WS_NFCE_CADASTRO: 'ws/cadconsultacadastro2.asmx',
+            WS_NFCE_RECEPCAO_EVENTO: 'ws/recepcaoevento.asmx',
+            WS_NFCE_QR_CODE: '',
+        },
+        NFCE_AMBIENTE_HOMOLOGACAO: {
+            'servidor': 'homologacao.nfce.fazenda.sp.gov.br',
+            WS_NFCE_AUTORIZACAO: 'ws/nfeautorizacao.asmx',
+            WS_NFCE_RET_AUTORIZACAO: 'ws/nferetautorizacao.asmx',
+            WS_NFCE_INUTILIZACAO: 'ws/nfeinutilizacao2.asmx',
+            WS_NFCE_CONSULTA: 'ws/nfeconsulta2.asmx',
+            WS_NFCE_SITUACAO: 'ws/nfestatusservico2.asmx',
+            WS_NFCE_CADASTRO: 'ws/cadconsultacadastro2.asmx',
+            WS_NFCE_RECEPCAO_EVENTO: 'ws/recepcaoevento.asmx',
+            WS_NFCE_QR_CODE: 'NFCEConsultaPublica/Paginas/ConstultaQRCode.aspx',
+        }
     }
 }
 
