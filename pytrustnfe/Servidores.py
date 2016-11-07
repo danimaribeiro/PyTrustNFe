@@ -68,10 +68,15 @@ SIGLA_ESTADO = {
 }
 
 
-def localizar_url(servico, estado, mod=55, ambiente=2):
+def localizar_url(servico, estado, mod='55', ambiente=2):
     sigla = SIGLA_ESTADO[estado]
-    dominio = ESTADO_WS[sigla][mod][ambiente]['servidor']
-    complemento = ESTADO_WS[sigla][mod][ambiente][servico]
+    ws = ESTADO_WS[sigla]
+    if mod in ws:
+        dominio = ws[mod][ambiente]['servidor']
+        complemento = ws[mod][ambiente][servico]
+    else:
+        dominio = ws[ambiente]['servidor']
+        complemento = ws[ambiente][servico]
 
     if sigla == 'RS' and servico == WS_NFE_CADASTRO:
         dominio = 'cad.sefazrs.rs.gov.br'

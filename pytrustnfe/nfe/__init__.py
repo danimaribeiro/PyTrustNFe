@@ -85,7 +85,7 @@ def _add_qrCode(xml, **kwargs):
 
 def _send(certificado, method, sign, **kwargs):
     path = os.path.join(os.path.dirname(__file__), 'templates')
-    modelo = kwargs['NFes'][0]['infNFe']['ide']['mod']
+    modelo = '55'
     xmlElem_send = render_xml(path, '%s.xml' % method, True, **kwargs)
     if sign:
         # Caso for autorização temos que adicionar algumas tags tipo
