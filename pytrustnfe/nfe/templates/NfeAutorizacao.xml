@@ -100,11 +100,16 @@
             {% if NFe.infNFe.dest is defined %}
             <dest>
                 {% with dest = NFe.infNFe.dest %}
-                {% if dest.tipo == 'person' -%}
-                    <CPF>{{ dest.cnpj_cpf }}</CPF>
+                {% if NFe.infNFe.ide.idDest == '3' %}
+                    <idEstrangeiro>{{ dest.idEstrangeiro }}</idEstrangeiro>
                 {% endif %}
-                {% if dest.tipo == 'company' -%}
-                    <CNPJ>{{  dest.cnpj_cpf }}</CNPJ>
+                {% if NFe.infNFe.ide.idDest != '3' %}
+                    {% if dest.tipo == 'person' -%}
+                        <CPF>{{ dest.cnpj_cpf }}</CPF>
+                    {% endif %}
+                    {% if dest.tipo == 'company' -%}
+                        <CNPJ>{{  dest.cnpj_cpf }}</CNPJ>
+                    {% endif %}
                 {% endif %}
                 <xNome>{{ dest.xNome }}</xNome>
                 <enderDest>
