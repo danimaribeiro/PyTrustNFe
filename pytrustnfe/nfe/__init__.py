@@ -75,8 +75,9 @@ def _add_qrCode(xml, **kwargs):
     valor_total = inf_nfe['total']['vNF']
     dest_cpf = 'Inexistente'
     dest = nfe.find(".//{http://www.portalfiscal.inf.br/nfe}dest")
-    dest_parent = dest.getparent()
-    dest_parent.remove(dest)
+    if dest:
+        dest_parent = dest.getparent()
+        dest_parent.remove(dest)
     if inf_nfe.get('dest', False):
         if inf_nfe['dest'].get('CPF', False):
             dest_cpf = inf_nfe['dest']['CPF']
@@ -87,22 +88,26 @@ def _add_qrCode(xml, **kwargs):
             dest_parent.append(dest)
     icms_total = inf_nfe['total']['vICMS']
     dig_val = xml.find(
-        ".//{http://www.w3.org/2000/09/xmldsig#}DigestValue").text.encode('hex')
+        ".//{http://www.w3.org/2000/09/xmldsig#}DigestValue")\
+        .text.encode('hex')
     cid_token = kwargs['NFes'][0]['infNFe']['codigo_seguranca']['cid_token']
     csc = kwargs['NFes'][0]['infNFe']['codigo_seguranca']['csc']
 
-    c_hash_QR_code = "chNFe={0}&nVersao={1}&tpAmb={2}&cDest={3}&dhEmi={4}&vNF={5}&vICMS={6}&digVal={7}&cIdToken={8}{9}".\
+    c_hash_QR_code = "chNFe={0}&nVersao={1}&tpAmb={2}&cDest={3}&dhEmi={4}&vNF\
+={5}&vICMS={6}&digVal={7}&cIdToken={8}{9}".\
         format(chave_nfe, versao, ambiente, dest_cpf, dh_emissao,
-                valor_total, icms_total, dig_val, cid_token, csc)
+               valor_total, icms_total, dig_val, cid_token, csc)
     c_hash_QR_code = hashlib.sha1(c_hash_QR_code).hexdigest()
 
-    QR_code_url = "?chNFe={0}&nVersao={1}&tpAmb={2}&{3}dhEmi={4}&vNF={5}&vICMS={6}&digVal={7}&cIdToken={8}&cHashQRCode={9}".\
+    QR_code_url = "?chNFe={0}&nVersao={1}&tpAmb={2}&{3}dhEmi={4}&vNF={5}&vICMS\
+={6}&digVal={7}&cIdToken={8}&cHashQRCode={9}".\
         format(chave_nfe, versao, ambiente,
-               'cDest={}&'.format(dest_cpf) if dest_cpf != 'Inexistente' else '',
-               dh_emissao, valor_total, icms_total, dig_val, cid_token, c_hash_QR_code)
+               'cDest={}&'.format(dest_cpf) if dest_cpf != 'Inexistente'
+               else '', dh_emissao, valor_total, icms_total, dig_val,
+               cid_token, c_hash_QR_code)
     qr_code_server = localizar_qrcode(kwargs['estado'], ambiente)
     qrcode_text = qr_code_server + QR_code_url
-    qrcode.text = qrcode_text
+    qrcode.text = etree.CDATA(qrcode_text)
     infnfesupl.append(qrcode)
     nfe.insert(1, infnfesupl)
     return etree.tostring(xml)
@@ -113,6 +118,19 @@ def _send(certificado, method, sign, **kwargs):
     xmlElem_send = render_xml(path, '%s.xml' % method, True, **kwargs)
     modelo = xmlElem_send.find(".//{http://www.portalfiscal.inf.br/nfe}mod")
     modelo = modelo.text if modelo is not None else '55'
+    if modelo == '65':
+        pagamento = etree.Element('pag')
+        tipo_pagamento = etree.Element('tPag')
+        valor = etree.Element('vPag')
+        valor_pago = kwargs['NFes'][0]['infNFe']['total']['vNF']
+        metodo_pagamento = kwargs['NFes'][0]['infNFe']['pagamento']
+        tipo_pagamento.text, valor.text = metodo_pagamento, valor_pago
+        pagamento.append(tipo_pagamento)
+        pagamento.append(valor)
+        transp = xmlElem_send.find(
+                ".//{http://www.portalfiscal.inf.br/nfe}transp")
+        transp.addnext(pagamento)
+
     if sign:
         # Caso for autorização temos que adicionar algumas tags tipo
         # cEan, cEANTrib porque o governo sempre complica e não segue padrão

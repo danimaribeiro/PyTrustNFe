@@ -5,12 +5,14 @@ Created on Jun 14, 2015
 @author: danimar
 '''
 import unittest
-from pytrustnfe.Servidores import localizar_url
+from pytrustnfe.Servidores import localizar_url, localizar_qrcode
 
 url_ba = 'https://nfe.sefaz.ba.gov.br/webservices/NfeAutorizacao/NfeAutoriza\
 cao.asmx'
 
 url_sp = 'https://nfe.fazenda.sp.gov.br/ws/nfeautorizacao.asmx'
+
+url_qrcode_homologacao_sp = 'https://homologacao.nfce.fazenda.sp.gov.br/NFCEConsultaPublica/Paginas/ConstultaQRCode.aspx'
 
 url_sc = 'https://nfe.svrs.rs.gov.br/ws/NfeAutorizacao/NfeAutorizacao.asmx'
 
@@ -40,3 +42,7 @@ class test_servidores(unittest.TestCase):
 
         url = localizar_url('NfeConsultaCadastro', '42', ambiente=2)
         self.assertEqual(url, url_cad_sc)
+
+    def test_localizar_qrcode(self):
+        url = localizar_qrcode('35')
+        self.assertEqual(url, url_qrcode_homologacao_sp)
