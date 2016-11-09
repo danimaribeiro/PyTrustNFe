@@ -235,7 +235,7 @@
                         </exportInd>
                         {% endfor %}
                         {% endif %}
-                    <detExport>
+		    </detExport>
                     {% endfor %}
                     {% endif %}
                     <xPed>{{ prod.xPed }}</xPed>
@@ -342,8 +342,9 @@
                             <modBCST>{{ imposto.ICMS.modBCST }}</modBCST>
                             <pMVAST>{{ imposto.ICMS.pMVAST }}</pMVAST>
                             <pRedBCST>{{ imposto.ICMS.pRedBCST }}</pRedBCST>
-                            <vBCST>{{ imposto.ICMS.pICMSST }}</pICvBCSTMSST>
+                            <vBCST>{{ imposto.ICMS.vBCST }}</vBCST>
                             <vICMSST>{{ imposto.ICMS.vICMSST }}</vICMSST>
+                            <pICMSST>{{ imposto.ICMS.pICMSST }}</pICMSST>
                             <vICMSDeson>{{ imposto.ICMS.vICMSDeson }}</vICMSDeson>
                             <motDesICMS>{{ imposto.ICMS.motDesICMS }}</motDesICMS>
                         </ICMS70>
