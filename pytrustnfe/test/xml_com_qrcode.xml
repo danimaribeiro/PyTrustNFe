@@ -1,0 +1,189 @@
+<enviNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="3.10">
+  <idLote>103</idLote>
+  <indSinc>1</indSinc>
+  <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+    <infNFe versao="3.10" Id="NFe35161121332917000163650010000000011448875034">
+      <ide>
+        <cUF>35</cUF>
+        <cNF>44887503</cNF>
+        <natOp>Venda POS</natOp>
+        <indPag>0</indPag>
+        <mod>65</mod>
+        <serie>1</serie>
+        <nNF>1</nNF>
+        <dhEmi>2016-11-09T16:03:58-00:00</dhEmi>
+        <tpNF>1</tpNF>
+        <idDest>1</idDest>
+        <cMunFG>3550308</cMunFG>
+        <tpImp>4</tpImp>
+        <tpEmis>1</tpEmis>
+        <cDV>4</cDV>
+        <tpAmb>2</tpAmb>
+        <finNFe>1</finNFe>
+        <indFinal>1</indFinal>
+        <indPres>1</indPres>
+        <procEmi>0</procEmi>
+        <verProc>Odoo Brasil 10</verProc>
+      </ide>
+      <emit>
+        <CNPJ>21332917000163</CNPJ>
+        <xNome>LEL AMBIENTAL LTDA - EPP</xNome>
+        <xFant>Zell Ambiental</xFant>
+        <enderEmit>
+          <xLgr>Rua Padre Jo&#227;o</xLgr>
+          <nro>444</nro>
+          <xBairro>Penha de Fran&#231;a</xBairro>
+          <cMun>3550308</cMun>
+          <xMun>S&#227;o Paulo</xMun>
+          <UF>SP</UF>
+          <CEP>03637000</CEP>
+          <cPais>1058</cPais>
+          <xPais>Brasil</xPais>
+          <fone>3425323750</fone>
+        </enderEmit>
+        <IE>244694180116</IE>
+        <CRT>3</CRT>
+      </emit>
+      <det nItem="1">
+        <prod>
+          <cProd>MISC</cProd>
+          <cEAN/>
+          <xProd>NOTA FISCAL EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL</xProd>
+          <NCM>28431000</NCM>
+          <CEST>2806300</CEST>
+          <CFOP>5101</CFOP>
+          <uCom>Unit(s</uCom>
+          <qCom>18.0</qCom>
+          <vUnCom>18.00</vUnCom>
+          <vProd>324.00</vProd>
+          <cEANTrib/>
+          <uTrib>Unit(s</uTrib>
+          <qTrib>18.0</qTrib>
+          <vUnTrib>18.00</vUnTrib>
+          <indTot>1</indTot>
+        </prod>
+        <imposto>
+          <vTotTrib>0.00</vTotTrib>
+          <ICMS>
+            <ICMS00>
+              <orig>0</orig>
+              <CST>00</CST>
+              <modBC>3</modBC>
+              <vBC>324.00</vBC>
+              <pICMS>19.00</pICMS>
+              <vICMS>61.56</vICMS>
+            </ICMS00>
+          </ICMS>
+          <PIS>
+            <PISAliq>
+              <CST>01</CST>
+              <vBC>324.00</vBC>
+              <pPIS>0.00</pPIS>
+              <vPIS>2.11</vPIS>
+            </PISAliq>
+          </PIS>
+          <COFINS>
+            <COFINSAliq>
+              <CST>01</CST>
+              <vBC>324.00</vBC>
+              <pCOFINS>0.00</pCOFINS>
+              <vCOFINS>9.72</vCOFINS>
+            </COFINSAliq>
+          </COFINS>
+        </imposto>
+      </det>
+      <total>
+        <ICMSTot>
+          <vBC>324.00</vBC>
+          <vICMS>61.56</vICMS>
+          <vICMSDeson>0.00</vICMSDeson>
+          <vBCST>0.00</vBCST>
+          <vST>0.00</vST>
+          <vProd>324.00</vProd>
+          <vFrete>0.00</vFrete>
+          <vSeg>0.00</vSeg>
+          <vDesc>0.00</vDesc>
+          <vII>0.00</vII>
+          <vIPI>0.00</vIPI>
+          <vPIS>2.11</vPIS>
+          <vCOFINS>9.72</vCOFINS>
+          <vOutro>0.00</vOutro>
+          <vNF>324.00</vNF>
+          <vTotTrib>0.00</vTotTrib>
+        </ICMSTot>
+      </total>
+      <transp>
+        <modFrete>9</modFrete>
+      </transp>
+      <pag>
+        <tPag>01</tPag>
+        <vPag>324.00</vPag>
+      </pag>
+    </infNFe>
+    <infNFeSupl><qrCode><![CDATA[https://homologacao.nfce.fazenda.sp.gov.br/NFCEConsultaPublica/Paginas/ConstultaQRCode.aspx?chNFe=35161121332917000163650010000000011448875034&nVersao=100&tpAmb=2&dhEmi=323031362d31312d30395431363a30333a32352d30303a3030&vNF=324.00&vICMS=61.56&digVal=66664a5a2b30346a6d484e33754c7830386875796b7942733272343d&cIdToken=000001&cHashQRCode=6d674f77ece8067d1255c5ca33fc2acaab3a0e8e]]></qrCode></infNFeSupl><Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+        <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+        <Reference URI="#NFe35161121332917000163650010000000011448875034">
+          <Transforms>
+            <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+            <Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+          </Transforms>
+          <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+          <DigestValue>ffJZ+04jmHN3uLx08huykyBs2r4=</DigestValue>
+        </Reference>
+      </SignedInfo>
+      <SignatureValue>u42y8bBqNM336yc7r0+5YWiePmCerKu3cFcp2J+lmQzIK6snba7txyeBtwVos8jQxrYLsnfWtKb5P6FxmhDeqAB41o2aoSIcnxc0yxdFn2ZDTquwU+AurH6E4hGclz8D/5qapv2+g3y+VpXMZFNNCqZSm2vJpvXBmPEY/7oO2cPB13N7WDhDRmI9H4kRDsPuxeeJetr2Bf1ThGJ0EUA4DXC7My0kl/Bw0rYwoPDhoqhxinr9Wocw1UyQ1vprLF0JVHXOtSq39Uqfqmj5QUDwUvvh4YL9bFZ8lvZZ0CZDmILaFGvr1XH3CwJ2Ws3RLlb12Arj5OT4vS8ZKhJtr/dpfA==</SignatureValue>
+      <KeyInfo>
+        <X509Data>
+          <X509Certificate>MIIIPzCCBiegAwIBAgIQYdesnYUNG8VPne0qhTeKOzANBgkqhkiG9w0BAQsFADB4
+MQswCQYDVQQGEwJCUjETMBEGA1UEChMKSUNQLUJyYXNpbDE2MDQGA1UECxMtU2Vj
+cmV0YXJpYSBkYSBSZWNlaXRhIEZlZGVyYWwgZG8gQnJhc2lsIC0gUkZCMRwwGgYD
+VQQDExNBQyBDZXJ0aXNpZ24gUkZCIEc0MB4XDTE2MDUxMDAwMDAwMFoXDTE3MDUw
+OTIzNTk1OVowgekxCzAJBgNVBAYTAkJSMRMwEQYDVQQKFApJQ1AtQnJhc2lsMQsw
+CQYDVQQIEwJTUDESMBAGA1UEBxQJU2FvIFBhdWxvMTYwNAYDVQQLFC1TZWNyZXRh
+cmlhIGRhIFJlY2VpdGEgRmVkZXJhbCBkbyBCcmFzaWwgLSBSRkIxFjAUBgNVBAsU
+DVJGQiBlLUNOUEogQTExJDAiBgNVBAsUG0F1dGVudGljYWRvIHBvciBBUiBTdW5z
+aGluZTEuMCwGA1UEAxMlTEVaIEFNQklFTlRBTCBMVERBIEVQUDoyMTMzMjkxNzAw
+MDE2MzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANEG6j0uXIvvHlMz
+0IGzuY/vuFQncIoSE+cBUk0uq6J3dtmGAg4oaVWCHUfHbX9s2Ag1jIG+PFAo2dlt
+sbLSEji74XhD+IpM/9aHm3ke8kb05ay+bYRuUjTNSwUbslT1+amAmIu7m1yPBi6u
+v3+/Lj2I0g7VeBBAjv/TiBG0VRCURXvKrwWrv2Lpybo/yDnENGtRqQHihqeYFKin
+nDzBsMbv4ripbi3XiAgcy/bF6NFgVMqxrNnGvSiSUhDRkmceVFIysRXUMke02Qo1
+Q5Ik1j1goUIHP44QOruXCMiT0yOK8u0qNAXR0yzSaWcBR2aJCeWgFg7sNbB50Qcx
+c+2GKUECAwEAAaOCA1EwggNNMIG2BgNVHREEga4wgaugPQYFYEwBAwSgNAQyMTYw
+NjE5ODYzNDEzNzgyODg2NTAwMDAwMDAwMDAwMDAwMDAwMDQwMDAwMzczU1NQU1Cg
+IgYFYEwBAwKgGQQXTEVPTkFSRE8gREUgTElNQSBTQU5UT1OgGQYFYEwBAwOgEAQO
+MjEzMzI5MTcwMDAxNjOgFwYFYEwBAwegDgQMMDAwMDAwMDAwMDAwgRJ3YWduZXJA
+emVsbC5jb20uYnIwCQYDVR0TBAIwADAfBgNVHSMEGDAWgBQukerWbeWyWYLcOIUp
+djQWVjzQPjAOBgNVHQ8BAf8EBAMCBeAwfwYDVR0gBHgwdjB0BgZgTAECAQwwajBo
+BggrBgEFBQcCARZcaHR0cDovL2ljcC1icmFzaWwuY2VydGlzaWduLmNvbS5ici9y
+ZXBvc2l0b3Jpby9kcGMvQUNfQ2VydGlzaWduX1JGQi9EUENfQUNfQ2VydGlzaWdu
+X1JGQi5wZGYwggEWBgNVHR8EggENMIIBCTBXoFWgU4ZRaHR0cDovL2ljcC1icmFz
+aWwuY2VydGlzaWduLmNvbS5ici9yZXBvc2l0b3Jpby9sY3IvQUNDZXJ0aXNpZ25S
+RkJHNC9MYXRlc3RDUkwuY3JsMFagVKBShlBodHRwOi8vaWNwLWJyYXNpbC5vdXRy
+YWxjci5jb20uYnIvcmVwb3NpdG9yaW8vbGNyL0FDQ2VydGlzaWduUkZCRzQvTGF0
+ZXN0Q1JMLmNybDBWoFSgUoZQaHR0cDovL3JlcG9zaXRvcmlvLmljcGJyYXNpbC5n
+b3YuYnIvbGNyL0NlcnRpc2lnbi9BQ0NlcnRpc2lnblJGQkc0L0xhdGVzdENSTC5j
+cmwwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMEMIGbBggrBgEFBQcBAQSB
+jjCBizBfBggrBgEFBQcwAoZTaHR0cDovL2ljcC1icmFzaWwuY2VydGlzaWduLmNv
+bS5ici9yZXBvc2l0b3Jpby9jZXJ0aWZpY2Fkb3MvQUNfQ2VydGlzaWduX1JGQl9H
+NC5wN2MwKAYIKwYBBQUHMAGGHGh0dHA6Ly9vY3NwLmNlcnRpc2lnbi5jb20uYnIw
+DQYJKoZIhvcNAQELBQADggIBAFIUBrNIyC4kBap/7hCW63tQhA/WNnWDNYpKM5wN
+zwApVV2bqFMJURzO/7AUrHu7uZS1p/Ubo+w2dFjmnmj5DniQkY85Sd6HNa1fukJY
+PK13wcUMVHMjeevIAcxnYraNdN4BIz1Svl6A8leGFgIEuDUll7Td+R7+aA8N5JYQ
+dFFIe2VxvJNbWP/WA49oI8U2wkoPTfOZtfrgKf2msHm3FnTfnmyOPhIf8L31iFt6
+MbKuFjOGIaWu+Z/gRDqj/EbFcEMUrDbeIYqz2724ZGBOJrkjHO7DBqXXoN9pzCTO
+RB5+gILMEnMS7zFsCuLOtLVohxgYUzg8p4Fy3nsHEzb/7IDVOnKLfjh/c5GSTvOa
+JT6qznYV2yav7NyuUSNUv+5bCIBNk45+qrQ8DwpsLBsFa+RLfCwvYVK95ad/xVgJ
+QosPJuzW3t0fU/FWbc00sZWV6lgBPyWhdF8EodaRIWC+EOC2wJbODyw+vdX8pUxT
+TUJKV2iAP8206gR2h07o2CZgXckJGJQ5MnBUbS78AaITXZ5JlPaS7ZdU9zWY3kD+
+j5YERs0+UweijKi5eHZioGRZRDZ2uksh1wrgeLFLWuiSNaPFYVVrQ/ZGo+E5uVNl
+8FuoR6P9TZjx1/A4XjqLQ9yPoPWgIWe14Vh/76dVcgz3ElWMbmPCDoc/wX+FoHX1
+Fbux
+</X509Certificate>
+        </X509Data>
+      </KeyInfo>
+    </Signature>
+  </NFe>
+</enviNFe>
