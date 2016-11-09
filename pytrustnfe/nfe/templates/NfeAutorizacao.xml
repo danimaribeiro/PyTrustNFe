@@ -343,8 +343,8 @@
                             <pMVAST>{{ imposto.ICMS.pMVAST }}</pMVAST>
                             <pRedBCST>{{ imposto.ICMS.pRedBCST }}</pRedBCST>
                             <vBCST>{{ imposto.ICMS.vBCST }}</vBCST>
-                            <vICMSST>{{ imposto.ICMS.vICMSST }}</vICMSST>
                             <pICMSST>{{ imposto.ICMS.pICMSST }}</pICMSST>
+                            <vICMSST>{{ imposto.ICMS.vICMSST }}</vICMSST>
                             <vICMSDeson>{{ imposto.ICMS.vICMSDeson }}</vICMSDeson>
                             <motDesICMS>{{ imposto.ICMS.motDesICMS }}</motDesICMS>
                         </ICMS70>
