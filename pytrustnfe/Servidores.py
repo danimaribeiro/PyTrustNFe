@@ -19,6 +19,10 @@ WS_NFCE_SITUACAO = 'NfeStatusServico'
 WS_NFCE_CADASTRO = 'NfeConsultaCadastro'
 WS_NFCE_RECEPCAO_EVENTO = 'RecepcaoEventoCarta'
 WS_NFCE_QR_CODE = 'NfeQRCode'
+WS_NFCE_RET_AUTORIZACAO = 'NFeRetAutorizacao',
+WS_NFCE_CONSULTA_DESTINADAS = 'NfeConsultaDest',
+WS_NFCE_DOWNLOAD = 'NfeDownloadNF',
+
 
 WS_NFE_CADASTRO = 'NfeConsultaCadastro'
 WS_DPEC_RECEPCAO = 'RecepcaoEventoEPEC'
@@ -91,7 +95,8 @@ def localizar_qrcode(estado, ambiente=2):
     sigla = SIGLA_ESTADO[estado]
     dominio = ESTADO_WS[sigla]['65'][ambiente]['servidor']
     complemento = ESTADO_WS[sigla]['65'][ambiente][WS_NFCE_QR_CODE]
-
+    if 'https://' in complemento:
+        return complemento
     return "https://%s/%s" % (dominio, complemento)
 
 
@@ -488,34 +493,65 @@ UFPE = {
 
 
 UFRS = {
-    NFE_AMBIENTE_PRODUCAO: {
-        'servidor': 'nfe.sefaz.rs.gov.br',
-        WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
-        WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao.asmx',
-        WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx',
-        WS_NFE_CADASTRO: 'ws/cadconsultacadastro/cadconsultacadastro2.asmx',
-        WS_NFE_CONSULTA_DESTINADAS: 'ws/nfeConsultaDest/nfeConsultaDest.asmx',
-        WS_NFE_DOWNLOAD: 'ws/nfeDownloadNF/nfeDownloadNF.asmx',
-        WS_NFE_INUTILIZACAO: 'ws/NfeInutilizacao/NfeInutilizacao2.asmx',
-        WS_NFE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
-        WS_NFE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
-        WS_NFE_CANCELAMENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
+    NFE_MODELO : {
+        NFE_AMBIENTE_PRODUCAO: {
+            'servidor': 'nfe.sefaz.rs.gov.br',
+            WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
+            WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao.asmx',
+            WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx',
+            WS_NFE_CADASTRO: 'ws/cadconsultacadastro/cadconsultacadastro2.asmx',
+            WS_NFE_CONSULTA_DESTINADAS: 'ws/nfeConsultaDest/nfeConsultaDest.asmx',
+            WS_NFE_DOWNLOAD: 'ws/nfeDownloadNF/nfeDownloadNF.asmx',
+            WS_NFE_INUTILIZACAO: 'ws/NfeInutilizacao/NfeInutilizacao2.asmx',
+            WS_NFE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
+            WS_NFE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
+            WS_NFE_CANCELAMENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
+        },
+        NFE_AMBIENTE_HOMOLOGACAO: {
+            'servidor': 'nfe-homologacao.sefazrs.rs.gov.br',
+            WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
+            WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao.asmx',
+            WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx',
+            WS_NFE_CADASTRO: 'ws/cadconsultacadastro/cadconsultacadastro2.asmx',
+            WS_NFE_CONSULTA_DESTINADAS: 'ws/nfeConsultaDest/nfeConsultaDest.asmx',
+            WS_NFE_DOWNLOAD: 'ws/nfeDownloadNF/nfeDownloadNF.asmx',
+            WS_NFE_INUTILIZACAO: 'ws/NfeInutilizacao/NfeInutilizacao2.asmx',
+            WS_NFE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
+            WS_NFE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
+            WS_NFE_CANCELAMENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
+        }
     },
-    NFE_AMBIENTE_HOMOLOGACAO: {
-        'servidor': 'nfe-homologacao.sefazrs.rs.gov.br',
-        WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
-        WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao.asmx',
-        WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx',
-        WS_NFE_CADASTRO: 'ws/cadconsultacadastro/cadconsultacadastro2.asmx',
-        WS_NFE_CONSULTA_DESTINADAS: 'ws/nfeConsultaDest/nfeConsultaDest.asmx',
-        WS_NFE_DOWNLOAD: 'ws/nfeDownloadNF/nfeDownloadNF.asmx',
-        WS_NFE_INUTILIZACAO: 'ws/NfeInutilizacao/NfeInutilizacao2.asmx',
-        WS_NFE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
-        WS_NFE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
-        WS_NFE_CANCELAMENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
+    NFCE_MODELO: {
+        NFE_AMBIENTE_PRODUCAO: {
+            'servidor': 'ncfe.sefaz.rs.gov.br',
+            WS_NFCE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
+            WS_NFCE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao.asmx',
+            WS_NFCE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx',
+            WS_NFCE_CADASTRO: 'ws/cadconsultacadastro/cadconsultacadastro2.asmx',
+            WS_NFCE_CONSULTA_DESTINADAS: 'ws/nfeConsultaDest/nfeConsultaDest.asmx',
+            WS_NFCE_DOWNLOAD: 'ws/nfeDownloadNF/nfeDownloadNF.asmx',
+            WS_NFCE_INUTILIZACAO: 'ws/NfeInutilizacao/NfeInutilizacao2.asmx',
+            WS_NFCE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
+            WS_NFCE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
+            WS_NFCE_CANCELAMENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
+            WS_NFCE_QR_CODE: 'https://www.sefaz.rs.gov.br/NFCE/NFCE-COM.aspx',
+        },
+        NFE_AMBIENTE_HOMOLOGACAO: {
+            'servidor': 'nfce-homologacao.sefazrs.rs.gov.br',
+            WS_NFCE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
+            WS_NFCE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao.asmx',
+            WS_NFCE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx',
+            WS_NFCE_CADASTRO: 'ws/cadconsultacadastro/cadconsultacadastro2.asmx',
+            WS_NFCE_CONSULTA_DESTINADAS: 'ws/nfeConsultaDest/nfeConsultaDest.asmx',
+            WS_NFCE_DOWNLOAD: 'ws/nfeDownloadNF/nfeDownloadNF.asmx',
+            WS_NFCE_INUTILIZACAO: 'ws/NfeInutilizacao/NfeInutilizacao2.asmx',
+            WS_NFCE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
+            WS_NFCE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
+            WS_NFCE_CANCELAMENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
+            WS_NFCE_QR_CODE: 'https://www.sefaz.rs.gov.br/NFCE/NFCE-COM.aspx'
+        }
     }
 }
-
 
 UFSP = {
     NFE_MODELO: {
