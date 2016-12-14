@@ -4,7 +4,7 @@
 
 import requests
 import suds.client
-import suds_requests
+from . import suds_requests
 
 
 def get_authenticated_client(base_url, cert, key):

@@ -3,11 +3,9 @@ lxml
 nose
 mock
 coveralls
-http://xmlsoft.org/sources/python/libxml2-python-2.6.21.tar.gz
-https://github.com/odoo-brazil/pyxmlsec/archive/master.zip
 Jinja2
 signxml
 pypandoc
-suds
-suds_requests
+suds-jurko
 reportlab
+six

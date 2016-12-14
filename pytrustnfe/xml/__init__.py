@@ -37,13 +37,11 @@ def render_xml(path, template_name, remove_empty, **nfe):
             if recursively_empty(elem):
                 parent.remove(elem)
         return root
-    return etree.tostring(root)
+    return etree.tostring(root, encoding="unicode")
 
 
 def sanitize_response(response):
-    response = unicode(response)
-    response = unicodedata.normalize('NFKD', response).encode('ascii',
-                                                              'ignore')
+    response = unicodedata.normalize('NFKD', response)
 
     tree = etree.fromstring(response)
     # Remove namespaces inuteis na resposta

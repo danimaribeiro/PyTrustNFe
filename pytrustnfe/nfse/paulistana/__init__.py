@@ -48,7 +48,7 @@ def _send(certificado, method, **kwargs):
 
     try:
         response = getattr(client.service, method)(1, xml_send)
-    except suds.WebFault, e:
+    except suds.WebFault as e:
         return {
             'sent_xml': xml_send,
             'received_xml': e.fault.faultstring,
