@@ -19,7 +19,8 @@ def _build_header(method, **kwargs):
         'NfeAutorizacao': ('NfeAutorizacao', '3.10'),
         'NfeRetAutorizacao': ('NfeRetAutorizacao', '3.10'),
         'NfeConsultaCadastro': ('CadConsultaCadastro2', '2.00'),
-        'RecepcaoEventoCancelamento': ('RecepcaoEvento', '1.00')
+        'RecepcaoEventoCancelamento': ('RecepcaoEvento', '1.00'),
+        'RecepcaoEventoCarta': ('RecepcaoEvento', '1.00'),
     }
     vals = {'estado': kwargs['estado'],
             'soap_action': action[method][0],
@@ -144,6 +145,10 @@ def _send(certificado, method, sign, **kwargs):
         elif method == 'RecepcaoEventoCancelamento':
             xml_send = signer.assina_xml(
                 xmlElem_send, kwargs['eventos'][0]['Id'])
+
+        if method == 'RecepcaoEventoCarta':
+            xml_send = signer.assina_xml(
+                xmlElem_send, kwargs['Id'])
 
         if modelo == '65':
             xml_send = _add_qrCode(xml_send, **kwargs)
