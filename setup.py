@@ -4,9 +4,10 @@ from setuptools import setup, find_packages
 
 long_description = pypandoc.convert('README.md', 'rst')
 
+VERSION = "0.1.9",
 setup(
     name="PyTrustNFe",
-    version="0.1.9",
+    version=VERSION,
     author="Danimar Ribeiro",
     author_email='danimaribeiro@gmail.com',
     keywords=['nfe', 'mdf-e'],
