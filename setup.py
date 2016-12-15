@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 long_description = pypandoc.convert('README.md', 'rst')
 
-VERSION = "0.1.9",
+VERSION = "0.1.9"
 setup(
     name="PyTrustNFe",
     version=VERSION,
