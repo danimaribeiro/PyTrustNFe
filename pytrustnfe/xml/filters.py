@@ -10,7 +10,7 @@ from unicodedata import normalize
 
 def normalize_str(string):
     """
-    Remove special characters and return the ascii string
+    Remove special characters and strip spaces
     """
     if string:
         if not isinstance(string, unicode):
@@ -20,6 +20,18 @@ def normalize_str(string):
         return normalize(
             'NFKD', string.decode('utf-8')).encode('ASCII', 'ignore')
     return ''
+
+
+def strip_line_feed(string):
+    if string:
+        remap = {
+            ord(u'\t'): u' ',
+            ord(u'\n'): u' ',
+            ord(u'\f'): u' ',
+            ord(u'\r'): None,      # Delete
+        }
+        return string.translate(remap).strip()
+    return string
 
 
 def format_percent(value):

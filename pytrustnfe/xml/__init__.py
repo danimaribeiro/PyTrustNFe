@@ -20,7 +20,8 @@ def render_xml(path, template_name, remove_empty, **nfe):
     env = Environment(
         loader=FileSystemLoader(path), extensions=['jinja2.ext.with_'])
 
-    env.filters["normalize"] = filters.normalize_str
+    env.filters["normalize"] = filters.strip_line_feed
+    env.filters["normalize_str"] = filters.normalize_str
     env.filters["format_percent"] = filters.format_percent
     env.filters["format_datetime"] = filters.format_datetime
     env.filters["format_date"] = filters.format_date
