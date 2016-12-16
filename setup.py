@@ -1,9 +1,7 @@
 # coding=utf-8
 from setuptools import setup, find_packages
 
-long_description = open('README.md').read()
-
-VERSION = "0.1.10"
+VERSION = "0.1.11"
 
 setup(
     name="PyTrustNFe",
@@ -27,7 +25,7 @@ later (LGPLv2+)',
     url='https://github.com/danimaribeiro/PyTrustNFe',
     license='LGPL-v2.1+',
     description='PyTrustNFe é uma biblioteca para envio de NF-e',
-    long_description=long_description,
+    long_description=open('README.md', 'r').read(),
     install_requires=[
         'Jinja2 >= 2.8',
         'signxml >= 2.0.0',
