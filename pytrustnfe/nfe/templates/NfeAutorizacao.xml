@@ -14,9 +14,9 @@
                 <serie>{{ ide.serie }}</serie>
                 <nNF>{{ ide.nNF }}</nNF>
                 <dhEmi>{{ ide.dhEmi }}</dhEmi>
-				{% if ide.mod != '65' %}
-				<dhSaiEnt>{{ ide.dhSaiEnt }}</dhSaiEnt>
-				{% endif %}
+                {% if ide.mod != '65' %}
+                <dhSaiEnt>{{ ide.dhSaiEnt }}</dhSaiEnt>
+                {% endif %}
                 <tpNF>{{ ide.tpNF }}</tpNF>
                 <idDest>{{ ide.idDest }}</idDest>
                 <cMunFG>{{ ide.cMunFG }}</cMunFG>
@@ -78,14 +78,14 @@
                 {% if emit.tipo == 'company' -%}
                     <CNPJ>{{ emit.cnpj_cpf }}</CNPJ>
                 {% endif %}
-                <xNome>{{ emit.xNome }}</xNome>
-                <xFant>{{ emit.xFant }}</xFant>
+                <xNome>{{ emit.xNome|normalize }}</xNome>
+                <xFant>{{ emit.xFant|normalize }}</xFant>
                 <enderEmit>
-                    <xLgr>{{ emit.enderEmit.xLgr }}</xLgr>
+                    <xLgr>{{ emit.enderEmit.xLgr|normalize }}</xLgr>
                     <nro>{{ emit.enderEmit.nro }}</nro>
-                    <xBairro>{{ emit.enderEmit.xBairro }}</xBairro>
+                    <xBairro>{{ emit.enderEmit.xBairro|normalize }}</xBairro>
                     <cMun>{{ emit.enderEmit.cMun }}</cMun>
-                    <xMun>{{ emit.enderEmit.xMun }}</xMun>
+                    <xMun>{{ emit.enderEmit.xMun|normalize }}</xMun>
                     <UF>{{ emit.enderEmit.UF }}</UF>
                     <CEP>{{ emit.enderEmit.CEP }}</CEP>
                     <cPais>{{ emit.enderEmit.cPais }}</cPais>
@@ -113,13 +113,13 @@
                         <CNPJ>{{  dest.cnpj_cpf }}</CNPJ>
                     {% endif %}
                 {% endif %}
-                <xNome>{{ dest.xNome }}</xNome>
+                <xNome>{{ dest.xNome|normalize }}</xNome>
                 <enderDest>
-                    <xLgr>{{ dest.enderDest.xLgr }}</xLgr>
+                    <xLgr>{{ dest.enderDest.xLgr|normalize }}</xLgr>
                     <nro>{{ dest.enderDest.nro }}</nro>
-                    <xBairro>{{ dest.enderDest.xBairro }}</xBairro>
+                    <xBairro>{{ dest.enderDest.xBairro|normalize }}</xBairro>
                     <cMun>{{ dest.enderDest.cMun }}</cMun>
-                    <xMun>{{ dest.enderDest.xMun }}</xMun>
+                    <xMun>{{ dest.enderDest.xMun|normalize }}</xMun>
                     <UF>{{ dest.enderDest.UF }}</UF>
                     <CEP>{{ dest.enderDest.CEP }}</CEP>
                     <cPais>{{ dest.enderDest.cPais }}</cPais>
@@ -175,7 +175,7 @@
                     {% with prod = det.prod %}
                     <cProd>{{ prod.cProd }}</cProd>
                     <cEAN>{{ prod.cEAN }}</cEAN>
-                    <xProd>{{ prod.xProd }}</xProd>
+                    <xProd>{{ prod.xProd|normalize }}</xProd>
                     <NCM>{{ prod.NCM }}</NCM>
                     <NVE>{{ prod.NVE }}</NVE>
                     <CEST>{{ prod.CEST }}</CEST>
@@ -235,7 +235,7 @@
                         </exportInd>
                         {% endfor %}
                         {% endif %}
-		    </detExport>
+                    </detExport>
                     {% endfor %}
                     {% endif %}
                     <xPed>{{ prod.xPed }}</xPed>
@@ -465,7 +465,7 @@
                         </ICMSSN900>
                         {% endif %}
                     </ICMS>
-					{% if NFe.infNFe.ide.mod != '65' %}
+                    {% if NFe.infNFe.ide.mod != '65' %}
                     <IPI>
                         <clEnq>{{ imposto.IPI.clEnq }}</clEnq>
                         <CNPJProd>{{ imposto.IPI.CNPJProd }}</CNPJProd>
@@ -488,7 +488,7 @@
                         </IPINT>
                         {% endif %}
                     </IPI>
-					{% endif %}
+                    {% endif %}
                     {% if imposto.II is defined %}
                     <II>
                         <vBC>{{ imposto.II.vBC }}</vBC>
@@ -623,7 +623,7 @@
                 </impostoDevol>
                 {% endif %}
                 {% if det.infAdProd %}
-                <infAdProd>{{ det.infAdProd }}<infAdProd>
+                <infAdProd>{{ det.infAdProd|normalize }}<infAdProd>
                 {% endif %}
                 {% set count = count + 1 %}
             </det>
@@ -722,7 +722,7 @@
                 {% endif %}
             </transp>
             {% if NFe.infNFe.cobr is defined %}
-			{% if NFe.infNFe.ide.mod != '65' %}
+            {% if NFe.infNFe.ide.mod != '65' %}
             <cobr>
                 {% if NFe.infNFe.cobr.fat is defined %}
                 <fat>
@@ -742,7 +742,7 @@
                 {% endfor %}
                 {% endif %}
             </cobr>
-			{% endif %}
+            {% endif %}
             {% endif %}
             {% if NFe.infNFe.pag is defined %}
             {% for pag in NFe.infNFe.pag %}
@@ -760,21 +760,21 @@
             {% endfor %}
             {% endif %}
             <infAdic>
-                <infAdFisco>{{ NFe.infNFe.infAdic.infAdFisco }}</infAdFisco>
-                <infCpl>{{ NFe.infNFe.infAdic.infCpl }}</infCpl>
+                <infAdFisco>{{ NFe.infNFe.infAdic.infAdFisco|normalize }}</infAdFisco>
+                <infCpl>{{ NFe.infNFe.infAdic.infCpl|normalize }}</infCpl>
                 {% if NFe.infNFe.infAdic.obsCont is defined %}
                 {% for obs in NFe.infNFe.infAdic.obsCont %}
                 <obsCont>
-                    <xCampo>{{ obs.xCampo }}</xCampo>
-                    <xTexto>{{ obs.xTexto }}</xTexto>
+                    <xCampo>{{ obs.xCampo|normalize }}</xCampo>
+                    <xTexto>{{ obs.xTexto|normalize }}</xTexto>
                 </obsCont>
                 {% endfor %}
                 {% endif %}
                 {% if NFe.infNFe.infAdic.obsFisco is defined %}
                 {% for obs in NFe.infNFe.infAdic.obsFisco %}
                 <obsFisco>
-                    <xCampo>{{ obs.xCampo }}</xCampo>
-                    <xTexto>{{ obs.xTexto }}</xTexto>
+                    <xCampo>{{ obs.xCampo|normalize }}</xCampo>
+                    <xTexto>{{ obs.xTexto|normalize }}</xTexto>
                 </obsFisco>
                 {% endfor %}
                 {% endif %}
