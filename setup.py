@@ -1,8 +1,7 @@
 # coding=utf-8
-import pypandoc
 from setuptools import setup, find_packages
 
-long_description = pypandoc.convert('README.md', 'rst')
+long_description = open('README.md').read()
 
 VERSION = "0.1.9"
 setup(

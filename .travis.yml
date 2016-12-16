@@ -10,7 +10,7 @@ script: coverage run --source=pytrustnfe setup.py nosetests
 before_install:
 - sudo apt-get update -qq
 - sudo apt-get install -qq python-dev libffi-dev libxml2-dev libxslt1-dev libssl-dev
-  libxmlsec1-dev python-lxml pandoc
+  libxmlsec1-dev python-lxml
 after_success: coveralls
 deploy:
   provider: pypi
