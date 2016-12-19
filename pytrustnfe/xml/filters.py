@@ -24,6 +24,8 @@ def normalize_str(string):
 
 def strip_line_feed(string):
     if string:
+        if not isinstance(string, unicode):
+            string = unicode(string, 'utf-8', 'replace')
         remap = {
             ord(u'\t'): u' ',
             ord(u'\n'): u' ',
