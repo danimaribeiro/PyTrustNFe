@@ -1,7 +1,7 @@
 # coding=utf-8
 from setuptools import setup, find_packages
 
-VERSION = "0.1.13"
+VERSION = "0.1.14"
 
 setup(
     name="PyTrustNFe",
@@ -29,6 +29,9 @@ later (LGPLv2+)',
     install_requires=[
         'Jinja2 >= 2.8',
         'signxml >= 2.0.0',
+        'lxml >= 3.6.0, < 3.7',
+        'suds >= 0.4',
+        'suds_requests >= 0.3',
     ],
     test_suite='nose.collector',
     tests_require=[
