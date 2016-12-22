@@ -6,9 +6,8 @@ http://xmlsoft.org/sources/python/libxml2-python-2.6.21.tar.gz
 https://github.com/odoo-brazil/pyxmlsec/archive/master.zip
 Jinja2
 signxml
-suds
-suds_requests
-reportlab
+suds >= 0.4
+suds_requests >= 0.3
 defusedxml >= 0.4.1, < 0.5
 eight >= 0.3.0, < 0.4
 cryptography >= 1.4, < 1.8
