@@ -78,8 +78,8 @@
                 {% if emit.tipo == 'company' -%}
                     <CNPJ>{{ emit.cnpj_cpf }}</CNPJ>
                 {% endif %}
-                <xNome>{{ emit.xNome|normalize }}</xNome>
-                <xFant>{{ emit.xFant|normalize }}</xFant>
+                <xNome>{{ emit.xNome|normalize|escape }}</xNome>
+                <xFant>{{ emit.xFant|normalize|escape }}</xFant>
                 <enderEmit>
                     <xLgr>{{ emit.enderEmit.xLgr|normalize }}</xLgr>
                     <nro>{{ emit.enderEmit.nro }}</nro>
@@ -113,7 +113,7 @@
                         <CNPJ>{{  dest.cnpj_cpf }}</CNPJ>
                     {% endif %}
                 {% endif %}
-                <xNome>{{ dest.xNome|normalize }}</xNome>
+                <xNome>{{ dest.xNome|normalize|escape }}</xNome>
                 <enderDest>
                     <xLgr>{{ dest.enderDest.xLgr|normalize }}</xLgr>
                     <nro>{{ dest.enderDest.nro }}</nro>
@@ -175,7 +175,7 @@
                     {% with prod = det.prod %}
                     <cProd>{{ prod.cProd }}</cProd>
                     <cEAN>{{ prod.cEAN }}</cEAN>
-                    <xProd>{{ prod.xProd|normalize }}</xProd>
+                    <xProd>{{ prod.xProd|normalize|escape }}</xProd>
                     <NCM>{{ prod.NCM }}</NCM>
                     <NVE>{{ prod.NVE }}</NVE>
                     <CEST>{{ prod.CEST }}</CEST>
@@ -623,7 +623,7 @@
                 </impostoDevol>
                 {% endif %}
                 {% if det.infAdProd %}
-                <infAdProd>{{ det.infAdProd|normalize }}<infAdProd>
+                <infAdProd>{{ det.infAdProd|normalize|escape }}<infAdProd>
                 {% endif %}
                 {% set count = count + 1 %}
             </det>
@@ -760,21 +760,21 @@
             {% endfor %}
             {% endif %}
             <infAdic>
-                <infAdFisco>{{ NFe.infNFe.infAdic.infAdFisco|normalize }}</infAdFisco>
-                <infCpl>{{ NFe.infNFe.infAdic.infCpl|normalize }}</infCpl>
+                <infAdFisco>{{ NFe.infNFe.infAdic.infAdFisco|normalize|escape }}</infAdFisco>
+                <infCpl>{{ NFe.infNFe.infAdic.infCpl|normalize|escape }}</infCpl>
                 {% if NFe.infNFe.infAdic.obsCont is defined %}
                 {% for obs in NFe.infNFe.infAdic.obsCont %}
                 <obsCont>
-                    <xCampo>{{ obs.xCampo|normalize }}</xCampo>
-                    <xTexto>{{ obs.xTexto|normalize }}</xTexto>
+                    <xCampo>{{ obs.xCampo|normalize|escape }}</xCampo>
+                    <xTexto>{{ obs.xTexto|normalize|escape }}</xTexto>
                 </obsCont>
                 {% endfor %}
                 {% endif %}
                 {% if NFe.infNFe.infAdic.obsFisco is defined %}
                 {% for obs in NFe.infNFe.infAdic.obsFisco %}
                 <obsFisco>
-                    <xCampo>{{ obs.xCampo|normalize }}</xCampo>
-                    <xTexto>{{ obs.xTexto|normalize }}</xTexto>
+                    <xCampo>{{ obs.xCampo|normalize|escape }}</xCampo>
+                    <xTexto>{{ obs.xTexto|normalize|escape }}</xTexto>
                 </obsFisco>
                 {% endfor %}
                 {% endif %}
