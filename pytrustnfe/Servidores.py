@@ -472,6 +472,7 @@ UFPE = {
     NFE_AMBIENTE_PRODUCAO: {
         'servidor': 'nfe.sefaz.pe.gov.br',
         WS_NFE_RECEPCAO_EVENTO: 'nfe-service/services/RecepcaoEvento',
+        WS_NFE_CANCELAMENTO: 'nfe-service/services/RecepcaoEvento',
         WS_NFE_AUTORIZACAO: 'nfe-service/services/NfeAutorizacao',
         WS_NFE_RET_AUTORIZACAO: 'nfe-service/services/NfeRetAutorizacao',
         WS_NFE_INUTILIZACAO: 'nfe-service/services/NfeInutilizacao2',
@@ -482,6 +483,7 @@ UFPE = {
     NFE_AMBIENTE_HOMOLOGACAO: {
         'servidor': 'nfehomolog.sefaz.pe.gov.br',
         WS_NFE_RECEPCAO_EVENTO: 'nfe-service/services/RecepcaoEvento',
+        WS_NFE_CANCELAMENTO: 'nfe-service/services/RecepcaoEvento',
         WS_NFE_AUTORIZACAO: 'nfe-service/services/NfeAutorizacao',
         WS_NFE_RET_AUTORIZACAO: 'nfe-service/services/NfeRetAutorizacao',
         WS_NFE_INUTILIZACAO: 'nfe-service/services/NfeInutilizacao2',
@@ -523,7 +525,7 @@ UFRS = {
     },
     NFCE_MODELO: {
         NFE_AMBIENTE_PRODUCAO: {
-            'servidor': 'ncfe.sefaz.rs.gov.br',
+            'servidor': 'nfce.sefaz.rs.gov.br',
             WS_NFCE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
             WS_NFCE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao.asmx',
             WS_NFCE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx',
@@ -564,6 +566,7 @@ UFSP = {
             WS_NFE_SITUACAO: 'ws/nfestatusservico2.asmx',
             WS_NFE_CADASTRO: 'ws/cadconsultacadastro2.asmx',
             WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento.asmx',
+            WS_NFE_CANCELAMENTO: 'ws/recepcaoevento.asmx',
         },
         NFE_AMBIENTE_HOMOLOGACAO: {
             'servidor': 'homologacao.nfe.fazenda.sp.gov.br',
@@ -574,6 +577,7 @@ UFSP = {
             WS_NFE_SITUACAO: 'ws/nfestatusservico2.asmx',
             WS_NFE_CADASTRO: 'ws/cadconsultacadastro2.asmx',
             WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento.asmx',
+            WS_NFE_CANCELAMENTO: 'ws/recepcaoevento.asmx',
         }
     },
     NFCE_MODELO: {
