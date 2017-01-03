@@ -623,7 +623,7 @@
                 </impostoDevol>
                 {% endif %}
                 {% if det.infAdProd %}
-                <infAdProd>{{ det.infAdProd|normalize|escape }}<infAdProd>
+                <infAdProd>{{ det.infAdProd|normalize|escape }}</infAdProd>
                 {% endif %}
                 {% set count = count + 1 %}
             </det>
