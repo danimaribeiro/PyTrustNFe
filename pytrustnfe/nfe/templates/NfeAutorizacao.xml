@@ -35,6 +35,9 @@
                     {% if ref.refNFe is defined -%}
                     <refNFe>{{ ref.refNFe }}</refNFe>
                     {% endif %}
+                    {% if ref.refCTe is defined -%}
+                    <refCTe>{{ ref.refCTe }}</refCTe>
+                    {% endif %}
                     {% if ref.refNF is defined -%}
                     <refNF>
                         <cUF>{{ ref.refNF.cUF }}</cUF>
@@ -55,7 +58,6 @@
                         <mod>{{ ref.refNFP.mod }}</mod>
                         <serie>{{ ref.refNFP.serie }}</serie>
                         <nNF>{{ ref.refNFP.nNF }}</nNF>
-                        <refCTe>{{ ref.refNFP.nNF }}</refCTe>
                     </refNFP>
                     {% endif %}
                     {% if ref.refECF is defined -%}
