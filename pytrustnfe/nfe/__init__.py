@@ -55,11 +55,15 @@ def _add_required_node(elemTree):
 
     prods = elemTree.findall('ns:NFe/ns:infNFe/ns:det/ns:prod', namespaces=ns)
     for prod in prods:
-        cEan = etree.Element('cEAN')
-        cEANTrib = etree.Element('cEANTrib')
-        prod.insert(1, cEan)
-        vProd = prod.find('ns:vProd', namespaces=ns)
-        prod.insert(prod.index(vProd) + 1, cEANTrib)
+        element = prod.find('ns:cEAN', namespaces=ns)
+        if element is None:
+            cEan = etree.Element('cEAN')
+            prod.insert(1, cEan)
+        element = prod.find('ns:cEANTrib', namespaces=ns)
+        if element is None:
+            cEANTrib = etree.Element('cEANTrib')
+            vProd = prod.find('ns:vProd', namespaces=ns)
+            prod.insert(prod.index(vProd) + 1, cEANTrib)
     return elemTree
 
 
