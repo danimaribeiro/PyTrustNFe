@@ -170,9 +170,8 @@
             </autXML>
             {% endfor %}
             {% endif %}
-            {% set count = 1 %}
             {% for det in NFe.infNFe.detalhes %}
-            <det nItem="{{ count }}">
+            <det nItem="{{ loop.index }}">
                 <prod>
                     {% with prod = det.prod %}
                     <cProd>{{ prod.cProd }}</cProd>
@@ -627,7 +626,6 @@
                 {% if det.infAdProd %}
                 <infAdProd>{{ det.infAdProd|normalize|escape }}</infAdProd>
                 {% endif %}
-                {% set count = count + 1 %}
             </det>
             {% endfor %}
             <total>
