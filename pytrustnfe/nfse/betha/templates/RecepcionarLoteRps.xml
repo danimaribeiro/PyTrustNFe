@@ -7,7 +7,7 @@
         <InscricaoMunicipal>123498</InscricaoMunicipal>
         <QuantidadeRps>1</QuantidadeRps>
         <ListaRps>
-            {% include 'rps.xml' %}
+            {% include 'Rps.xml' %}
         </ListaRps>
     </LoteRps>
 </EnviarLoteRpsEnvio>

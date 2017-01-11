@@ -32,10 +32,10 @@ def _send(certificado, method, **kwargs):
         sign_tag(certificado, **kwargs)
 
     if kwargs['ambiente'] == 'producao':
+        url = 'http://e-gov.betha.com.br/e-nota-contribuinte-ws/nfseWS?wsdl'
+    else:
         url = \
             'http://e-gov.betha.com.br/e-nota-contribuinte-test-ws/nfseWS?wsdl'
-    else:
-        url = 'http://e-gov.betha.com.br/e-nota-contribuinte-ws/nfseWS?wsdl'
 
     xml_send = render_xml(path, '%s.xml' % method, False, **kwargs)
 
@@ -105,7 +105,7 @@ def consultar_nfse_servico_tomado(certificado, **kwargs):
     return _send(certificado, 'ConsultarNfseServicoTomado', **kwargs)
 
 
-def consulta_nfse_faixe(certificado, **kwargs):
+def consulta_nfse_faixa(certificado, **kwargs):
     return _send(certificado, 'ConsultarNfseFaixa', **kwargs)
 
 

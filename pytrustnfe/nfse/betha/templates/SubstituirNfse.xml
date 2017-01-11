@@ -13,6 +13,6 @@
                 <CodigoCancelamento>2</CodigoCancelamento>
             </InfPedidoCancelamento>
         </Pedido>
-        {% include 'rps.xml' %}
+        {% include 'Rps.xml' %}
     </SubstituicaoNfse>
 </SubstituirNfseEnvio>
