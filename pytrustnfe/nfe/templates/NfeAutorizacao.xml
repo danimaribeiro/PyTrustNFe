@@ -687,9 +687,9 @@
                 <transporta>
                     <CNPJ>{{ NFe.infNFe.transp.transporta.CNPJ }}</CNPJ>
                     <CPF>{{ NFe.infNFe.transp.transporta.CPF }}</CPF>
-                    <xNome>{{ NFe.infNFe.transp.transporta.xNome }}</xNome>
+                    <xNome>{{ NFe.infNFe.transp.transporta.xNome|normalize|escape }}</xNome>
                     <IE>{{ NFe.infNFe.transp.transporta.IE }}</IE>
-                    <xEnder>{{ NFe.infNFe.transp.transporta.xEnder }}</xEnder>
+                    <xEnder>{{ NFe.infNFe.transp.transporta.xEnder|normalize|escape }}</xEnder>
                     <xMun>{{ NFe.infNFe.transp.transporta.xMun }}</xMun>
                     <UF>{{ NFe.infNFe.transp.transporta.UF }}</UF>
                 </transporta>
@@ -782,8 +782,8 @@
             {% if NFe.infNFe.exporta is defined %}
             <exporta>
                 <UFSaidaPais>{{ NFe.infNFe.exporta.UFSaidaPais }}</UFSaidaPais>
-                <xLocExporta>{{ NFe.infNFe.exporta.xLocExporta }}</xLocExporta>
-                <xLocDespacho>{{ NFe.infNFe.exporta.xLocDespacho }}</xLocDespacho>
+                <xLocExporta>{{ NFe.infNFe.exporta.xLocExporta|normalize|escape }}</xLocExporta>
+                <xLocDespacho>{{ NFe.infNFe.exporta.xLocDespacho|normalize|escape }}</xLocDespacho>
             </exporta>
             {% endif %}
             {% if NFe.infNFe.compra is defined %}
