@@ -35,6 +35,9 @@
                     {% if ref.refNFe is defined -%}
                     <refNFe>{{ ref.refNFe }}</refNFe>
                     {% endif %}
+                    {% if ref.refCTe is defined -%}
+                    <refCTe>{{ ref.refCTe }}</refCTe>
+                    {% endif %}
                     {% if ref.refNF is defined -%}
                     <refNF>
                         <cUF>{{ ref.refNF.cUF }}</cUF>
@@ -55,7 +58,6 @@
                         <mod>{{ ref.refNFP.mod }}</mod>
                         <serie>{{ ref.refNFP.serie }}</serie>
                         <nNF>{{ ref.refNFP.nNF }}</nNF>
-                        <refCTe>{{ ref.refNFP.nNF }}</refCTe>
                     </refNFP>
                     {% endif %}
                     {% if ref.refECF is defined -%}
@@ -81,9 +83,10 @@
                 <xNome>{{ emit.xNome|normalize|escape }}</xNome>
                 <xFant>{{ emit.xFant|normalize|escape }}</xFant>
                 <enderEmit>
-                    <xLgr>{{ emit.enderEmit.xLgr|normalize }}</xLgr>
+                    <xLgr>{{ emit.enderEmit.xLgr|normalize|escape }}</xLgr>
                     <nro>{{ emit.enderEmit.nro }}</nro>
-                    <xBairro>{{ emit.enderEmit.xBairro|normalize }}</xBairro>
+                    <xCpl>{{ emit.enderEmit.xCpl|normalize|escape }}</xCpl>
+                    <xBairro>{{ emit.enderEmit.xBairro|normalize|escape }}</xBairro>
                     <cMun>{{ emit.enderEmit.cMun }}</cMun>
                     <xMun>{{ emit.enderEmit.xMun|normalize }}</xMun>
                     <UF>{{ emit.enderEmit.UF }}</UF>
@@ -115,9 +118,10 @@
                 {% endif %}
                 <xNome>{{ dest.xNome|normalize|escape }}</xNome>
                 <enderDest>
-                    <xLgr>{{ dest.enderDest.xLgr|normalize }}</xLgr>
+                    <xLgr>{{ dest.enderDest.xLgr|normalize|escape }}</xLgr>
                     <nro>{{ dest.enderDest.nro }}</nro>
-                    <xBairro>{{ dest.enderDest.xBairro|normalize }}</xBairro>
+                    <xCpl>{{ dest.enderDest.xCpl|normalize|escape }}</xCpl>
+                    <xBairro>{{ dest.enderDest.xBairro|normalize|escape }}</xBairro>
                     <cMun>{{ dest.enderDest.cMun }}</cMun>
                     <xMun>{{ dest.enderDest.xMun|normalize }}</xMun>
                     <UF>{{ dest.enderDest.UF }}</UF>
@@ -138,12 +142,12 @@
             <retirada>
                 <CNPJ>{{ NFe.infNFe.retirada.CNPJ }}</CNPJ>
                 <CPF>{{ NFe.infNFe.retirada.CPF }}</CPF>
-                <xLgr>{{ NFe.infNFe.retirada.xLgr }}</xLgr>
+                <xLgr>{{ NFe.infNFe.retirada.xLgr|normalize|escape }}</xLgr>
                 <nro>{{ NFe.infNFe.retirada.nro }}</nro>
-                <xCpl>{{ NFe.infNFe.retirada.xCpl }}</xCpl>
-                <xBairro>{{ NFe.infNFe.retirada.xBairro }}</xBairro>
+                <xCpl>{{ NFe.infNFe.retirada.xCpl|normalize|escape }}</xCpl>
+                <xBairro>{{ NFe.infNFe.retirada.xBairro|normalize|escape }}</xBairro>
                 <cMun>{{ NFe.infNFe.retirada.cMun }}</cMun>
-                <xMun>{{ NFe.infNFe.retirada.xMun }}</xMun>
+                <xMun>{{ NFe.infNFe.retirada.xMun|normalize }}</xMun>
                 <UF>{{ NFe.infNFe.retirada.UF }}</UF>
             </retirada>
             {% endif %}
@@ -151,10 +155,10 @@
             <entrega>
                 <CNPJ>{{ NFe.infNFe.entrega.CNPJ }}</CNPJ>
                 <CPF>{{ NFe.infNFe.entrega.CPF }}</CPF>
-                <xLgr>{{ NFe.infNFe.entrega.xLgr }}</xLgr>
+                <xLgr>{{ NFe.infNFe.entrega.xLgr|normalize|escape }}</xLgr>
                 <nro>{{ NFe.infNFe.entrega.nro }}</nro>
-                <xCpl>{{ NFe.infNFe.entrega.xCpl }}</xCpl>
-                <xBairro>{{ NFe.infNFe.entrega.xBairro }}</xBairro>
+                <xCpl>{{ NFe.infNFe.entrega.xCpl|normalize|escape }}</xCpl>
+                <xBairro>{{ NFe.infNFe.entrega.xBairro|normalize|escape }}</xBairro>
                 <cMun>{{ NFe.infNFe.entrega.cMun }}</cMun>
                 <xMun>{{ NFe.infNFe.entrega.xMun }}</xMun>
                 <UF>{{ NFe.infNFe.entrega.UF }}</UF>
@@ -168,9 +172,8 @@
             </autXML>
             {% endfor %}
             {% endif %}
-            {% set count = 1 %}
             {% for det in NFe.infNFe.detalhes %}
-            <det nItem="{{ count }}">
+            <det nItem="{{ loop.index }}">
                 <prod>
                     {% with prod = det.prod %}
                     <cProd>{{ prod.cProd }}</cProd>
@@ -199,7 +202,7 @@
                     <DI>
                         <nDI>{{ di.nDI }}</nDI>
                         <dDI>{{ di.dDI }}</dDI>
-                        <xLocDesemb>{{ di.xLocDesemb }}</xLocDesemb>
+                        <xLocDesemb>{{ di.xLocDesemb|normalize|escape }}</xLocDesemb>
                         <UFDesemb>{{ di.UFDesemb }}</UFDesemb>
                         <dDesemb>{{ di.dDesemb }}</dDesemb>
                         <tpViaTransp>{{ di.tpViaTransp }}</tpViaTransp>
@@ -625,7 +628,6 @@
                 {% if det.infAdProd %}
                 <infAdProd>{{ det.infAdProd|normalize|escape }}</infAdProd>
                 {% endif %}
-                {% set count = count + 1 %}
             </det>
             {% endfor %}
             <total>
@@ -687,9 +689,9 @@
                 <transporta>
                     <CNPJ>{{ NFe.infNFe.transp.transporta.CNPJ }}</CNPJ>
                     <CPF>{{ NFe.infNFe.transp.transporta.CPF }}</CPF>
-                    <xNome>{{ NFe.infNFe.transp.transporta.xNome }}</xNome>
+                    <xNome>{{ NFe.infNFe.transp.transporta.xNome|normalize|escape }}</xNome>
                     <IE>{{ NFe.infNFe.transp.transporta.IE }}</IE>
-                    <xEnder>{{ NFe.infNFe.transp.transporta.xEnder }}</xEnder>
+                    <xEnder>{{ NFe.infNFe.transp.transporta.xEnder|normalize|escape }}</xEnder>
                     <xMun>{{ NFe.infNFe.transp.transporta.xMun }}</xMun>
                     <UF>{{ NFe.infNFe.transp.transporta.UF }}</UF>
                 </transporta>
@@ -782,8 +784,8 @@
             {% if NFe.infNFe.exporta is defined %}
             <exporta>
                 <UFSaidaPais>{{ NFe.infNFe.exporta.UFSaidaPais }}</UFSaidaPais>
-                <xLocExporta>{{ NFe.infNFe.exporta.xLocExporta }}</xLocExporta>
-                <xLocDespacho>{{ NFe.infNFe.exporta.xLocDespacho }}</xLocDespacho>
+                <xLocExporta>{{ NFe.infNFe.exporta.xLocExporta|normalize|escape }}</xLocExporta>
+                <xLocDespacho>{{ NFe.infNFe.exporta.xLocDespacho|normalize|escape }}</xLocDespacho>
             </exporta>
             {% endif %}
             {% if NFe.infNFe.compra is defined %}
