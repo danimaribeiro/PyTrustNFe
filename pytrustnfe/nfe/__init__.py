@@ -19,6 +19,7 @@ def _build_header(method, **kwargs):
         'NfeAutorizacao': ('NfeAutorizacao', '3.10'),
         'NfeRetAutorizacao': ('NfeRetAutorizacao', '3.10'),
         'NfeConsultaCadastro': ('CadConsultaCadastro2', '2.00'),
+        'NfeInutilizacao': ('NfeInutilizacao', '3.10'),
         'RecepcaoEventoCancelamento': ('RecepcaoEvento', '1.00'),
         'RecepcaoEventoCarta': ('RecepcaoEvento', '1.00'),
     }
@@ -139,6 +140,8 @@ def _send(certificado, method, sign, **kwargs):
             xmlElem_send = _add_required_node(xmlElem_send)
 
         signer = Assinatura(certificado.pfx, certificado.password)
+        if method == 'NfeInutilizacao':
+            xml_send = signer.assina_xml(xmlElem_send, kwargs['obj']['id'])
         if method == 'NfeAutorizacao':
             xml_send = signer.assina_xml(
                 xmlElem_send, kwargs['NFes'][0]['infNFe']['Id'])

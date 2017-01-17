@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <inutNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="2.00">
   <infInut Id="{{ obj.id }}">
     <tpAmb>{{ obj.ambiente }}</tpAmb>
@@ -12,4 +11,4 @@
     <nNFFin>{{ obj.numero_fim }}</nNFFin>
     <xJust>{{ obj.justificativa|normalize }}</xJust>
   </infInut>
- <inutNFe>
+ </inutNFe>
