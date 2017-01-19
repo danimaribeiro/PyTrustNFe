@@ -408,7 +408,7 @@
                             <vCredICMSSN>{{ imposto.ICMS.vCredICMSSN }}</vCredICMSSN>
                         </ICMSSN101>
                         {% endif %}
-                        {% if imposto.ICMS.CST == '102' -%}
+                        {% if imposto.ICMS.CST in ('102', '103', '300', '400') -%}
                         <ICMSSN102>
                             <orig>{{ imposto.ICMS.orig }}</orig>
                             <CSOSN>{{ imposto.ICMS.CST }}</CSOSN>
