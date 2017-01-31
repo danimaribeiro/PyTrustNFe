@@ -12,6 +12,8 @@ from pytrustnfe.xml import render_xml
 from pytrustnfe.utils import CabecalhoSoap
 from pytrustnfe.utils import gerar_chave, ChaveNFe
 from pytrustnfe.Servidores import localizar_url, localizar_qrcode
+from pytrustnfe.xml.validate import valida_nfe
+from pytrustnfe.exceptions import NFeValidationException
 
 
 def _build_header(method, **kwargs):
@@ -149,6 +151,12 @@ def _send(certificado, method, sign, **kwargs):
         if method == 'NfeAutorizacao':
             xml_send = signer.assina_xml(
                 xmlElem_send, kwargs['NFes'][0]['infNFe']['Id'])
+            if 'validate' in kwargs:
+                erros = valida_nfe(xml_send)
+                if erros:
+                    raise NFeValidationException('Erro ao validar NFe',
+                                                 erros=erros,
+                                                 sent_xml=xml_send)
         elif method == 'RecepcaoEventoCancelamento':
             xml_send = signer.assina_xml(
                 xmlElem_send, kwargs['eventos'][0]['Id'])
