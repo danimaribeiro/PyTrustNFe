@@ -3,8 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-from datetime import date, datetime
 import re
+from datetime import date, datetime
+import lxml.etree as ET
 
 
 class CabecalhoSoap(object):
@@ -68,3 +69,29 @@ def gerar_chave(obj_chave, prefix=None):
     if prefix:
         return prefix + chave_parcial + str(dv)
     return chave_parcial + str(dv)
+
+
+def _find_node(xml, node):
+    for item in xml.iterchildren("*"):
+        if node in item.tag:
+            return item
+        else:
+            item = _find_node(item, node)
+            if item is not None:
+                return item
+    return None
+
+
+def gerar_nfeproc(envio, recibo):
+    NSMAP = {None: 'http://www.portalfiscal.inf.br/nfe'}
+    root = ET.Element("nfeProc", versao="3.10", nsmap=NSMAP)
+    docEnvio = ET.fromstring(envio)
+    docRecibo = ET.fromstring(recibo)
+
+    nfe = _find_node(docEnvio, "NFe")
+    protocolo = _find_node(docRecibo, "protNFe")
+    if nfe is None or protocolo is None:
+        return ''
+    root.append(nfe)
+    root.append(protocolo)
+    return ET.tostring(root)
