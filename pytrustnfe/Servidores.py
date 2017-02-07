@@ -91,13 +91,17 @@ def localizar_url(servico, estado, mod='55', ambiente=2):
     return "https://%s/%s" % (dominio, complemento)
 
 
-def localizar_qrcode(estado, ambiente=2):
-    sigla = SIGLA_ESTADO[estado]
-    dominio = ESTADO_WS[sigla]['65'][ambiente]['servidor']
-    complemento = ESTADO_WS[sigla]['65'][ambiente][WS_NFCE_QR_CODE]
-    if 'https://' in complemento:
-        return complemento
-    return "https://%s/%s" % (dominio, complemento)
+def localizar_qrcode(estado, ambiente=2, mod='65'):
+    sigla = SIGLA_ESTADO[estado]#15
+    if sigla != 'PA':
+        dominio = ESTADO_WS[sigla]['65'][ambiente]['servidor']
+        complemento = ESTADO_WS[sigla]['65'][ambiente][WS_NFCE_QR_CODE]
+        if 'https://' in complemento:
+            return complemento
+        return "https://%s/%s" % (dominio, complemento)
+    else:
+        return "https://appnfc.sefa.pa.gov.br/portal-homologacao/view/consultas/nfce/nfceForm.seam"
+
 
 
 METODO_WS = {
