@@ -19,7 +19,6 @@ WS_NFCE_SITUACAO = 'NfeStatusServico'
 WS_NFCE_CADASTRO = 'NfeConsultaCadastro'
 WS_NFCE_RECEPCAO_EVENTO = 'RecepcaoEventoCarta'
 WS_NFCE_QR_CODE = 'NfeQRCode'
-WS_NFCE_RET_AUTORIZACAO = 'NFeRetAutorizacao',
 WS_NFCE_CONSULTA_DESTINADAS = 'NfeConsultaDest',
 WS_NFCE_DOWNLOAD = 'NfeDownloadNF',
 
@@ -74,10 +73,10 @@ SIGLA_ESTADO = {
 
 def localizar_url(servico, estado, mod='55', ambiente=2):
     sigla = SIGLA_ESTADO[estado]
-    if sigla != 'PA': #Pará não utiliza o mesmo WS que NFe para NFCe
-        ws = ESTADO_WS[sigla]
-    else:
+    if sigla == 'PA' and mod == '65':
         ws = SVRS
+    else:
+        ws = ESTADO_WS[sigla]
     if mod in ws:
         dominio = ws[mod][ambiente]['servidor']
         complemento = ws[mod][ambiente][servico]
@@ -187,7 +186,7 @@ SVRS = {
         WS_NFCE_INUTILIZACAO: 'ws/nfeinutilizacao/nfeinutilizacao2.asmx',
         WS_NFCE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
         WS_NFCE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
-        #WS_NFCE_CANCELAMENTO: ,
+        WS_NFCE_CANCELAMENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
         #WS_NFCE_QR_CODE: ,
         },
         NFE_AMBIENTE_HOMOLOGACAO: {
@@ -201,7 +200,7 @@ SVRS = {
         WS_NFCE_INUTILIZACAO: 'ws/nfeinutilizacao/nfeinutilizacao2.asmx',
         WS_NFCE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
         WS_NFCE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
-        #WS_NFCE_CANCELAMENTO: ,
+        WS_NFCE_CANCELAMENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
         #WS_NFCE_QR_CODE: ,
         }
     }
