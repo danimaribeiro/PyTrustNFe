@@ -120,13 +120,10 @@ def _add_qrCode(xml, **kwargs):
     nfe.insert(1, infnfesupl)
     return etree.tostring(xml)
 
-
-def _send(certificado, method, sign, **kwargs):
+def _send(certificado, method, sign, mod='55', **kwargs):
     path = os.path.join(os.path.dirname(__file__), 'templates')
     xmlElem_send = render_xml(path, '%s.xml' % method, True, **kwargs)
-    modelo = xmlElem_send.find(".//{http://www.portalfiscal.inf.br/nfe}mod")
-    modelo = modelo.text if modelo is not None else '55'
-    if modelo == '65':
+    if mod == '65'and method == 'NfeAutorizacao':
         pagamento = etree.Element('pag')
         tipo_pagamento = etree.Element('tPag')
         valor = etree.Element('vPag')
@@ -165,13 +162,13 @@ def _send(certificado, method, sign, **kwargs):
             xml_send = signer.assina_xml(
                 xmlElem_send, kwargs['Id'])
 
-        if modelo == '65':
+        if mod == '65':
             xml_send = _add_qrCode(xml_send, **kwargs)
 
     else:
         xml_send = etree.tostring(xmlElem_send)
 
-    url = localizar_url(method,  kwargs['estado'], modelo,
+    url = localizar_url(method,  kwargs['estado'], mod,
                         kwargs['ambiente'])
     cabecalho = _build_header(method, **kwargs)
 
@@ -183,50 +180,40 @@ def _send(certificado, method, sign, **kwargs):
     }
 
 
-def autorizar_nfe(certificado, **kwargs):  # Assinar
+def autorizar_nfe(certificado, mod='55', **kwargs):  # Assinar
     _generate_nfe_id(**kwargs)
-    return _send(certificado, 'NfeAutorizacao', True, **kwargs)
+    return _send(certificado, 'NfeAutorizacao', True, mod, **kwargs)
+
+def retorno_autorizar_nfe(certificado, mod='55', **kwargs):
+    return _send(certificado, 'NfeRetAutorizacao', False, mod, **kwargs)
 
 
-def retorno_autorizar_nfe(certificado, **kwargs):
-    return _send(certificado, 'NfeRetAutorizacao', False, **kwargs)
+def recepcao_evento_cancelamento(certificado, mod='55', **kwargs):  # Assinar
+    return _send(certificado, 'RecepcaoEventoCancelamento', True, mod, **kwargs)
 
+def inutilizar_nfe(certificado, mod='55', **kwargs):  # Assinar
+    return _send(certificado, 'NfeInutilizacao', mod, True, **kwargs)
 
-def recepcao_evento_cancelamento(certificado, **kwargs):  # Assinar
-    return _send(certificado, 'RecepcaoEventoCancelamento', True, **kwargs)
+def consultar_protocolo_nfe(certificado, mod='55', **kwargs):
+    return _send(certificado, 'NfeConsultaProtocolo', True, mod, **kwargs)
 
+def nfe_status_servico(certificado, mod='55', **kwargs):
+    return _send(certificado, 'NfeStatusServico', False, mod, **kwargs)
 
-def inutilizar_nfe(certificado, **kwargs):  # Assinar
-    return _send(certificado, 'NfeInutilizacao', True, **kwargs)
+def consulta_cadastro(certificado, mod='55', **kwargs):
+    return _send(certificado, 'NfeConsultaCadastro', False, mod, **kwargs)
 
+def recepcao_evento_carta_correcao(certificado, mod='55', **kwargs):  # Assinar
+    return _send(certificado, 'RecepcaoEventoCarta', True, mod, **kwargs)
 
-def consultar_protocolo_nfe(certificado, **kwargs):
-    return _send(certificado, 'NfeConsultaProtocolo', True, **kwargs)
+def recepcao_evento_manifesto(certificado, mod='55', **kwargs):  # Assinar
+    return _send(certificado, 'RecepcaoEventoManifesto', True, mod, **kwargs)
 
+def recepcao_evento_epec(certificado, mod='55', **kwargs):  # Assinar
+    return _send(certificado, 'RecepcaoEventoEPEC', True, mod, **kwargs)
 
-def nfe_status_servico(certificado, **kwargs):
-    return _send(certificado, 'NfeStatusServico', False, **kwargs)
+def consulta_nfe_destinada(certificado, mod='55', **kwargs):
+    return _send(certificado, 'NfeConsultaDest', False, mod, **kwargs)
 
-
-def consulta_cadastro(certificado, **kwargs):
-    return _send(certificado, 'NfeConsultaCadastro', False, **kwargs)
-
-
-def recepcao_evento_carta_correcao(certificado, **kwargs):  # Assinar
-    return _send(certificado, 'RecepcaoEventoCarta', True, **kwargs)
-
-
-def recepcao_evento_manifesto(certificado, **kwargs):  # Assinar
-    return _send(certificado, 'RecepcaoEventoManifesto', True, **kwargs)
-
-
-def recepcao_evento_epec(certificado, **kwargs):  # Assinar
-    return _send(certificado, 'RecepcaoEventoEPEC', True, **kwargs)
-
-
-def consulta_nfe_destinada(certificado, **kwargs):
-    return _send(certificado, 'NfeConsultaDest', False, **kwargs)
-
-
-def download_nfe(certificado, **kwargs):
-    return _send(certificado, 'NfeDownloadNF', False, **kwargs)
+def download_nfe(certificado, mod='55', **kwargs):
+    return _send(certificado, 'NfeDownloadNF', False, mod, **kwargs)
