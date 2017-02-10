@@ -1,0 +1,7 @@
+<ConsultarSituacaoLoteRpsEnvio xmlns="http://www.ginfes.com.br/servico_consultar_situacao_lote_rps_envio_v03.xsd" xmlns:tipos="http://www.ginfes.com.br/tipos_v03.xsd">
+    <Prestador>
+        <tipos:Cnpj>45111111111100</tipos:Cnpj>
+        <tipos:InscricaoMunicipal>123456</tipos:InscricaoMunicipal>
+    </Prestador>
+    <Protocolo>141542179222170</Protocolo>
+</ConsultarSituacaoLoteRpsEnvio>
