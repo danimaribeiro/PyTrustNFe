@@ -1,0 +1,13 @@
+<ConsultarNfseRpsEnvio xmlns="http://www.betha.com.br/e-nota-contribuinte-ws">
+    <IdentificacaoRps>
+        <Numero>24</Numero>
+        <Serie>A1</Serie>
+        <Tipo>1</Tipo>
+    </IdentificacaoRps>
+    <Prestador>
+        <CpfCnpj>
+            <Cnpj>45111111111100</Cnpj>
+        </CpfCnpj>
+        <InscricaoMunicipal>123498</InscricaoMunicipal>
+    </Prestador>
+</ConsultarNfseRpsEnvio>

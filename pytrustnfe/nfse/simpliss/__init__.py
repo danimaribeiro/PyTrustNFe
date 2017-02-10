@@ -11,19 +11,16 @@ from pytrustnfe.nfse.assinatura import Assinatura
 
 
 def _send(certificado, method, **kwargs):
+    # A little hack to test
     path = os.path.join(os.path.dirname(__file__), 'templates')
+
     xml_send = render_xml(path, '%s.xml' % method, False, **kwargs)
 
-    base_url = ''
-    if kwargs['ambiente'] == 'producao':
-        base_url = 'https://producao.ginfes.com.br/ServiceGinfesImpl?wsdl'
-    else:
-        base_url = 'https://homologacao.ginfes.com.br/ServiceGinfesImpl?wsdl'
+    base_url = 'Achar URL'
 
     cert, key = extract_cert_and_key_from_pfx(
         certificado.pfx, certificado.password)
     cert, key = save_cert_key(cert, key)
-
     client = get_authenticated_client(base_url, cert, key)
 
     pfx_path = certificado.save_pfx()
@@ -31,8 +28,7 @@ def _send(certificado, method, **kwargs):
     xml_send = signer.assina_xml(xml_send, '')
 
     try:
-        header = '<ns2:cabecalho xmlns:ns2="http://www.ginfes.com.br/cabecalho_v03.xsd" versao="3"><versaoDados>3</versaoDados></ns2:cabecalho>' #noqa
-        response = getattr(client.service, method)(header, xml_send)
+        response = getattr(client.service, method)(1, xml_send)
     except suds.WebFault, e:
         return {
             'sent_xml': xml_send,
@@ -49,24 +45,24 @@ def _send(certificado, method, **kwargs):
 
 
 def envio_lote_rps(certificado, **kwargs):
-    return _send(certificado, 'RecepcionarLoteRpsV3', **kwargs)
+    return _send(certificado, 'EnvioLoteRps', **kwargs)
 
 
 def consultar_situacao_lote(certificado, **kwargs):
-    return _send(certificado, 'ConsultarSituacaoLoteRpsV3', **kwargs)
+    return _send(certificado, 'ConsultarSituacaoLote', **kwargs)
 
 
 def consultar_nfse_por_rps(certificado, **kwargs):
-    return _send(certificado, 'ConsultarNfsePorRpsV3', **kwargs)
+    return _send(certificado, 'ConsultarNFSePorRps', **kwargs)
 
 
 def consultar_lote(certificado, **kwargs):
-    return _send(certificado, 'ConsultarLoteRpsV3', **kwargs)
+    return _send(certificado, 'ConsultarLote', **kwargs)
 
 
 def consultar_nfse(certificado, **kwargs):
-    return _send(certificado, 'ConsultarNfseV3', **kwargs)
+    return _send(certificado, 'ConsultarNFSe', **kwargs)
 
 
 def cancelar_nfse(certificado, **kwargs):
-    return _send(certificado, 'CancelarNfseV3', **kwargs)
+    return _send(certificado, 'CancelarNFSe', **kwargs)
