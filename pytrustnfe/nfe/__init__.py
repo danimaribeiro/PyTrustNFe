@@ -84,7 +84,7 @@ def _add_qrCode(xml, **kwargs):
     #tipo de ambiente
     ambiente = kwargs['ambiente']
     #doc identificação do cliente
-    dest_cpf = 'Inexistente'
+    dest_cpf = None
     dest = nfe.find(".//{http://www.portalfiscal.inf.br/nfe}dest")
     if dest:
         dest_parent = dest.getparent()
