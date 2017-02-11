@@ -85,6 +85,7 @@ def _add_qrCode(xml, **kwargs):
     ambiente = kwargs['ambiente']
     #doc identificação do cliente
     dest_cpf = 'Inexistente'
+    dest = nfe.find(".//{http://www.portalfiscal.inf.br/nfe}dest")
     if dest:
         dest_parent = dest.getparent()
         dest_parent.remove(dest)
@@ -110,7 +111,6 @@ def _add_qrCode(xml, **kwargs):
     cid_token = kwargs['NFes'][0]['infNFe']['codigo_seguranca']['cid_token']
     #codigo de seguranca do contribuinte
     csc = kwargs['NFes'][0]['infNFe']['codigo_seguranca']['csc']
-    dest = nfe.find(".//{http://www.portalfiscal.inf.br/nfe}dest")
     
     #hash qrCode
     if dest_cpf == None:
