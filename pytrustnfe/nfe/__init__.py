@@ -75,14 +75,16 @@ def _add_qrCode(xml, **kwargs):
     inf_nfe = kwargs['NFes'][0]['infNFe']
     nfe = xml.find(".//{http://www.portalfiscal.inf.br/nfe}NFe")
     infnfesupl = etree.Element('infNFeSupl')
+    #cria o nó qrCode no xml
     qrcode = etree.Element('qrCode')
+    #busca a chave da nfe
     chave_nfe = inf_nfe['Id'][3:]
-    dh_emissao = inf_nfe['ide']['dhEmi'].encode('hex')
+    #versao do qrCode
     versao = '100'
+    #tipo de ambiente
     ambiente = kwargs['ambiente']
-    valor_total = inf_nfe['total']['vNF']
+    #doc identificação do cliente
     dest_cpf = 'Inexistente'
-    dest = nfe.find(".//{http://www.portalfiscal.inf.br/nfe}dest")
     if dest:
         dest_parent = dest.getparent()
         dest_parent.remove(dest)
@@ -94,25 +96,45 @@ def _add_qrCode(xml, **kwargs):
             cpf.text = dest_cpf
             dest.append(cpf)
             dest_parent.append(dest)
+    #data e hora de emissao da nfce
+    dh_emissao = inf_nfe['ide']['dhEmi'].encode('hex')
+    #valor total da nfce
+    valor_total = inf_nfe['total']['vNF']
+    #valor total do icms
     icms_total = inf_nfe['total']['vICMS']
+    #digest value
     dig_val = xml.find(
         ".//{http://www.w3.org/2000/09/xmldsig#}DigestValue")\
         .text.encode('hex')
+    #identificação do csc
     cid_token = kwargs['NFes'][0]['infNFe']['codigo_seguranca']['cid_token']
+    #codigo de seguranca do contribuinte
     csc = kwargs['NFes'][0]['infNFe']['codigo_seguranca']['csc']
+    dest = nfe.find(".//{http://www.portalfiscal.inf.br/nfe}dest")
+    
+    #hash qrCode
+    if dest_cpf == None:
+    
+        c_hash_QR_code = 'chNFe={}&nVersao={}&tpAmb={}&dhEmi={}&vNF={}&vICMS={}&digVal={}&cIdToken={}{}'\
+            .format(chave_nfe, versao, ambiente, dh_emissao,\
+                 valor_total,icms_total, dig_val, cid_token, csc)
 
-    c_hash_QR_code = "chNFe={0}&nVersao={1}&tpAmb={2}&cDest={3}&dhEmi={4}&vNF\
-={5}&vICMS={6}&digVal={7}&cIdToken={8}{9}".\
-        format(chave_nfe, versao, ambiente, dest_cpf, dh_emissao,
-               valor_total, icms_total, dig_val, cid_token, csc)
+    else:
+        c_hash_QR_code = 'chNFe={}&nVersao={}&tpAmb={}&cDest={}&dhEmi={}&vNF={}&vICMS={}&digVal={}&cIdToken={}{}'\
+            .format(chave_nfe, versao, ambiente, dest_cpf, dh_emissao,\
+                 valor_total,icms_total, dig_val, cid_token, csc)
+
     c_hash_QR_code = hashlib.sha1(c_hash_QR_code).hexdigest()
-
-    QR_code_url = "?chNFe={0}&nVersao={1}&tpAmb={2}&{3}dhEmi={4}&vNF={5}&vICMS\
-={6}&digVal={7}&cIdToken={8}&cHashQRCode={9}".\
-        format(chave_nfe, versao, ambiente,
-               'cDest={}&'.format(dest_cpf) if dest_cpf != 'Inexistente'
-               else '', dh_emissao, valor_total, icms_total, dig_val,
-               cid_token, c_hash_QR_code)
+    #url qrCode
+    if dest_cpf == None:
+        QR_code_url = "?chNFe={}&nVersao={}&tpAmb={}&dhEmi={}&vNF={}&vICMS={}&digVal={}&cIdToken={}&cHashQRCode={}"\
+            .format(chave_nfe, versao, ambiente, dh_emissao, valor_total,\
+               icms_total, dig_val, cid_token, c_hash_QR_code)
+    else:
+        QR_code_url = "?chNFe={}&nVersao={}&tpAmb={}&cDest={}&dhEmi={}&vNF={}&vICMS={}&digVal={}&cIdToken={}&cHashQRCode={}".\
+            format(chave_nfe, versao, ambiente, dest_cpf, dh_emissao,\
+               valor_total, icms_total, dig_val, cid_token, c_hash_QR_code)
+               
     qr_code_server = localizar_qrcode(kwargs['estado'], ambiente)
     qrcode_text = qr_code_server + QR_code_url
     qrcode.text = etree.CDATA(qrcode_text)
