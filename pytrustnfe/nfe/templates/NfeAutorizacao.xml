@@ -749,8 +749,10 @@
             {% if NFe.infNFe.pag is defined %}
             {% for pag in NFe.infNFe.pag %}
             <pag>
-                <tPag>{{ pag.tPag }}</tPag>
-                <vPag>{{ pag.vPag }}</vPag>
+        		{% if ide.mod == '65' %}
+                <tPag>{{ pagamento }}</tPag>
+		        {% if ide.mod == '65' %}
+                <vPag>{{ total.vNF }}</vPag>
                 {% if pag.card is defined %}
                 <card>
                     <CNPJ>{{ pag.card.CNPJ }}</CNPJ>
