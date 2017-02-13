@@ -145,19 +145,7 @@ def _add_qrCode(xml, **kwargs):
 def _send(certificado, method, sign, mod='55', **kwargs):
     path = os.path.join(os.path.dirname(__file__), 'templates')
     xmlElem_send = render_xml(path, '%s.xml' % method, True, **kwargs)
-    if mod == '65'and method == 'NfeAutorizacao':
-        pagamento = etree.Element('pag')
-        tipo_pagamento = etree.Element('tPag')
-        valor = etree.Element('vPag')
-        valor_pago = kwargs['NFes'][0]['infNFe']['total']['vNF']
-        metodo_pagamento = kwargs['NFes'][0]['infNFe']['pagamento']
-        tipo_pagamento.text, valor.text = metodo_pagamento, valor_pago
-        pagamento.append(tipo_pagamento)
-        pagamento.append(valor)
-        transp = xmlElem_send.find(
-                ".//{http://www.portalfiscal.inf.br/nfe}transp")
-        transp.addnext(pagamento)
-
+    
     if sign:
         # Caso for autorização temos que adicionar algumas tags tipo
         # cEan, cEANTrib porque o governo sempre complica e não segue padrão
