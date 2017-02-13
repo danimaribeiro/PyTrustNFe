@@ -754,7 +754,7 @@
 		{% if NFe.infNFe.ide.mod == '65' %}
                 <vPag>{{ NFe.infNFe.total.vNF }}</vPag>
 		{% endif %}
-                {% if pag.card is defined %}
+                {% if NFe.infNFe.pag.card is defined %}
                 <card>
                     <CNPJ>{{ pag.card.CNPJ }}</CNPJ>
                     <tBand>{{ pag.card.tBand }}</tBand>
