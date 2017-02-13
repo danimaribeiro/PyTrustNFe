@@ -747,10 +747,9 @@
             {% endif %}
             {% endif %}
             {% if NFe.infNFe.pag is defined %}
-            {% for pag in NFe.infNFe.pag %}
             <pag>
         	{% if NFe.infNFe.ide.mod == '65' %}
-                <tPag>{{ pag }}</tPag>
+                <tPag>{{ NFe.infNFe.pag }}</tPag>
 		{% endif %}
 		{% if NFe.infNFe.ide.mod == '65' %}
                 <vPag>{{ NFe.infNFe.total.vNF }}</vPag>
@@ -763,7 +762,6 @@
                 </card>
                 {% endif %}
             </pag>
-            {% endfor %}
             {% endif %}
             <infAdic>
                 <infAdFisco>{{ NFe.infNFe.infAdic.infAdFisco|normalize|escape }}</infAdFisco>
