@@ -23,8 +23,8 @@ def _send(certificado, method, **kwargs):
     esquema.validate(nfe)
     erros = [x.message for x in esquema.error_log]
 
-    if erros:
-        raise Exception('\n'.join(erros))
+#    if erros:
+#        raise Exception('\n'.join(erros))
     base_url = 'http://sistemas.pmp.sp.gov.br/semfi/simpliss/ws_nfse/nfseservice.svc?wsdl'
 
     cert, key = extract_cert_and_key_from_pfx(
@@ -32,19 +32,19 @@ def _send(certificado, method, **kwargs):
     cert, key = save_cert_key(cert, key)
     client = get_authenticated_client(base_url, cert, key)
 
-    pfx_path = certificado.save_pfx()
-    signer = Assinatura(pfx_path, certificado.password)
-    xml_send = signer.assina_xml(xml_send, '')
+    #pfx_path = certificado.save_pfx()
+    #signer = Assinatura(pfx_path, certificado.password)
+    #xml_send = signer.assina_xml(xml_send, '')
 
     try:
-        response = getattr(client.service, method)(1, xml_send)
+        response = getattr(client.service, method)(xml_send)
     except suds.WebFault, e:
         return {
             'sent_xml': xml_send,
             'received_xml': e.fault.faultstring,
             'object': None
         }
-
+    print response
     response, obj = sanitize_response(response)
     return {
         'sent_xml': xml_send,
@@ -53,25 +53,25 @@ def _send(certificado, method, **kwargs):
     }
 
 
-def enviar_lote_rps(certificado, **kwargs):
-    return _send(certificado, 'EnviarLoteRps', **kwargs)
+def recepcionar_lote_rps(certificado, **kwargs):
+    return _send(certificado, 'RecepcionarLoteRps', **kwargs)
 
 
 def consultar_situacao_lote(certificado, **kwargs):
-    return _send(certificado, 'ConsultarSituacaoLote', **kwargs)
+    return _send(certificado, 'ConsultarSituacaoLoteRps', **kwargs)
 
 
 def consultar_nfse_por_rps(certificado, **kwargs):
-    return _send(certificado, 'ConsultarNFSePorRps', **kwargs)
+    return _send(certificado, 'ConsultarNfsePorRps', **kwargs)
 
 
-def consultar_lote(certificado, **kwargs):
-    return _send(certificado, 'ConsultarLote', **kwargs)
+def consultar_lote_rps(certificado, **kwargs):
+    return _send(certificado, 'ConsultarLoteRps', **kwargs)
 
 
 def consultar_nfse(certificado, **kwargs):
-    return _send(certificado, 'ConsultarNFSe', **kwargs)
+    return _send(certificado, 'ConsultarNfse', **kwargs)
 
 
 def cancelar_nfse(certificado, **kwargs):
-    return _send(certificado, 'CancelarNFSe', **kwargs)
+    return _send(certificado, 'CancelarNfse', **kwargs)

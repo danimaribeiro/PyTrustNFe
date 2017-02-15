@@ -3,10 +3,11 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import os.path
 import unittest
+from unittest import skip
 from pytrustnfe.certificado import Certificado
 from pytrustnfe.nfse.simpliss import consultar_situacao_lote
 from pytrustnfe.nfse.simpliss import consultar_nfse_por_rps
-from pytrustnfe.nfse.simpliss import consultar_lote
+from pytrustnfe.nfse.simpliss import consultar_lote_rps
 from pytrustnfe.nfse.simpliss import consultar_nfse
 from pytrustnfe.nfse.simpliss import cancelar_nfse
 
@@ -24,6 +25,7 @@ class test_nfse_simpliss(unittest.TestCase):
             pfx, consulta=dados, ambiente='homologacao')
         print response
 
+    @skip
     def test_consultar_nfse_rps(self):
         pfx_source = open('/home/danimar/Downloads/2016.pfx', 'r').read()
         pfx = Certificado(pfx_source, '1234')
@@ -33,15 +35,16 @@ class test_nfse_simpliss(unittest.TestCase):
         consultar_nfse_por_rps(
             pfx, consulta=dados, ambiente='homologacao')
 
+    @skip
     def test_consultar_lote(self):
         pfx_source = open('/home/danimar/Downloads/2016.pfx', 'r').read()
         pfx = Certificado(pfx_source, '1234')
 
         dados = {'cnpj_prestador': '01234567896589', 'protocolo': '545455451'}
-        consultar_lote(
+        consultar_lote_rps(
             pfx, consulta=dados, ambiente='homologacao')
 
-
+    @skip
     def test_consultar_nfse(self):
         pfx_source = open('/home/danimar/Downloads/2016.pfx', 'r').read()
         pfx = Certificado(pfx_source, '1234')
@@ -50,6 +53,7 @@ class test_nfse_simpliss(unittest.TestCase):
         consultar_nfse(
             pfx, consulta=dados, ambiente='homologacao')
 
+    @skip
     def test_cancelar_nfse(self):
         pfx_source = open('/home/danimar/Downloads/2016.pfx', 'r').read()
         pfx = Certificado(pfx_source, '1234')
