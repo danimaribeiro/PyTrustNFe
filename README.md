@@ -15,6 +15,12 @@ Dependências:
 * reportlab
 * Jinja2
 
+NFSe - Cidades atendidas
+--------------
+* [Ariss](cidades/ariss.md) - 4 cidades atendidas
+* [Simpliss](cidades/simpliss.md) - 18 cidade atendidas
+
+
 Roadmap
 --------------
 Teste unitários
