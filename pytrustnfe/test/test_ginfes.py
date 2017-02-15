@@ -13,8 +13,8 @@ class test_nfse_ginfes(unittest.TestCase):
     caminho = os.path.dirname(__file__)
 
     def test_consulta_situacao_lote(self):
-        pfx_source = open('/home/danimar/Downloads/machado.pfx', 'r').read()
-        pfx = Certificado(pfx_source, '123456789')
+        pfx_source = open('/home/danimar/Downloads/2016.pfx', 'r').read()
+        pfx = Certificado(pfx_source, '1234')
 
         dados = {'ambiente': 'homologacao'}
         retorno = consultar_situacao_lote(

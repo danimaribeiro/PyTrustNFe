@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.abrasf.org.br/nfse" targetNamespace="http://www.abrasf.org.br/nfse" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:element name="EnviarLoteRpsEnvio">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="LoteRps" type="tcLoteRps" />
+                <xsd:element ref="dsig:Signature" minOccurs="0" maxOccurs="1" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
