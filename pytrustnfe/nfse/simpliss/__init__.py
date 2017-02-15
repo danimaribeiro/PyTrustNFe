@@ -15,8 +15,17 @@ def _send(certificado, method, **kwargs):
     path = os.path.join(os.path.dirname(__file__), 'templates')
 
     xml_send = render_xml(path, '%s.xml' % method, False, **kwargs)
+    schema = os.path.join(path, '%s.xsd' % method)
 
-    base_url = 'Achar URL'
+    from lxml import etree
+    nfe = etree.fromstring(xml_send)
+    esquema = etree.XMLSchema(etree.parse(schema))
+    esquema.validate(nfe)
+    erros = [x.message for x in esquema.error_log]
+
+    if erros:
+        raise Exception('\n'.join(erros))
+    base_url = 'http://sistemas.pmp.sp.gov.br/semfi/simpliss/ws_nfse/nfseservice.svc?wsdl'
 
     cert, key = extract_cert_and_key_from_pfx(
         certificado.pfx, certificado.password)
@@ -44,8 +53,8 @@ def _send(certificado, method, **kwargs):
     }
 
 
-def envio_lote_rps(certificado, **kwargs):
-    return _send(certificado, 'EnvioLoteRps', **kwargs)
+def enviar_lote_rps(certificado, **kwargs):
+    return _send(certificado, 'EnviarLoteRps', **kwargs)
 
 
 def consultar_situacao_lote(certificado, **kwargs):

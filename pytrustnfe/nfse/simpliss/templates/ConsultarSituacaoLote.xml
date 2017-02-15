@@ -1,8 +1,7 @@
-<ConsultarLoteRpsEnvio xmlns="http://www.betha.com.br/e-nota-contribuinte-ws">
+<ConsultarSituacaoLoteRpsEnvio xmlns="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd">
     <Prestador>
-        <CpfCnpj>
-            <Cnpj>45111111111100</Cnpj>
-        </CpfCnpj>
+        <Cnpj>{{ consulta.cnpj_prestador }}</Cnpj>
+        <InscricaoMunicipal>{{ consulta.inscricao_prestador }}</InscricaoMunicipal>
     </Prestador>
-    <Protocolo>141542179222170</Protocolo>
-</ConsultarLoteRpsEnvio>
+    <Protocolo>{{ consulta.protocolo }}</Protocolo>
+</ConsultarSituacaoLoteRpsEnvio>
