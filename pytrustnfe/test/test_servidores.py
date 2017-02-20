@@ -16,7 +16,7 @@ url_qrcode_homologacao_sp = 'https://homologacao.nfce.fazenda.sp.gov.br/NFCECons
 
 url_sc = 'https://nfe.svrs.rs.gov.br/ws/NfeAutorizacao/NfeAutorizacao.asmx'
 
-url_rs = 'https://nfe.sefaz.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao.asmx'
+url_rs = 'https://nfe.sefazrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao.asmx'
 
 url_cad_rs = 'https://cad.sefazrs.rs.gov.br/ws/cadconsultacadastro/cadcon\
 sultacadastro2.asmx'
