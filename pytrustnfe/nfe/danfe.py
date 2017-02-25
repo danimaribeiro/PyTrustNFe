@@ -3,12 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 # Classe para geração de PDF da DANFE a partir de xml etree.fromstring
 
-# TO DO
-# Layout Paisagem
-# Logo imagem da empresa
 
 from cStringIO import StringIO as IO
-from lxml import etree
 from textwrap import wrap
 
 from reportlab.lib import utils
@@ -18,6 +14,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.colors import black, gray
 from reportlab.graphics.barcode import code128
 from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.enums import TA_CENTER
 from reportlab.platypus import Paragraph, Image
 
 
@@ -58,6 +55,12 @@ def tagtext(oNode=None, cTag=None):
         cText = ''
     return cText
 
+REGIME_TRIBUTACAO = {
+    '1': 'Simples Nacional',
+    '2': 'Simples Nacional, excesso sublimite de receita bruta',
+    '3': 'Regime Normal'
+}
+
 
 def get_image(path, width=1*cm):
     img = utils.ImageReader(path)
@@ -68,7 +71,7 @@ def get_image(path, width=1*cm):
 
 class danfe(object):
     def __init__(self, sizepage=A4, list_xml=None, recibo=True,
-                 orientation='portrait'):
+                 orientation='portrait', logo=None):
         self.width = 210    # 21 x 29,7cm
         self.height = 297
         self.nLeft = 10
@@ -76,6 +79,7 @@ class danfe(object):
         self.nTop = 7
         self.nBottom = 15
         self.nlin = self.nTop
+        self.logo = logo
         self.oFrete = {'0': '0 - Emitente',
                        '1': '1 - Dest/Remet',
                        '2': '2 - Terceiros',
@@ -248,31 +252,39 @@ class danfe(object):
 
         styles = getSampleStyleSheet()
         styleN = styles['Normal']
-        styleN.fontSize = 11
-        styleN.fontName = 'NimbusSanL-Regu'
+        styleN.fontSize = 10
+        styleN.fontName = 'NimbusSanL-Bold'
+        styleN.alignment = TA_CENTER
 
         # Razão Social emitente
         P = Paragraph(tagtext(oNode=elem_emit, cTag='xNome'), styleN)
         w, h = P.wrap(55*mm, 50*mm)
         P.drawOn(self.canvas, (self.nLeft+30)*mm,
-                 (self.height-self.nlin-10)*mm)
+                 (self.height-self.nlin-12)*mm)
 
-        logo = '/home/danimar/Downloads/innova.png'
-        img = get_image(logo, width=2*cm)
-        img.drawOn(self.canvas, (self.nLeft+5)*mm, (self.height-self.nlin-22)*mm)
+        if self.logo:
+            img = get_image(self.logo, width=2*cm)
+            img.drawOn(self.canvas, (self.nLeft+5)*mm,
+                       (self.height-self.nlin-22)*mm)
 
         cEnd = tagtext(oNode=elem_emit, cTag='xLgr') + ', ' + tagtext(
             oNode=elem_emit, cTag='nro') + ' - '
-        cEnd += tagtext(oNode=elem_emit, cTag='xBairro') + ' - ' + tagtext(
+        cEnd += tagtext(oNode=elem_emit, cTag='xBairro') + '<br />' + tagtext(
             oNode=elem_emit, cTag='xMun') + ' - '
+        cEnd += 'Fone: ' + tagtext(oNode=elem_emit, cTag='fone') + '<br />'
         cEnd += tagtext(oNode=elem_emit, cTag='UF') + ' - ' + tagtext(
             oNode=elem_emit, cTag='CEP')
-        cEnd += ' - Fone: ' + tagtext(oNode=elem_emit, cTag='fone')
-        styleN.fontSize = 8
+
+        regime = tagtext(oNode=elem_emit, cTag='CRT')
+        cEnd += u'<br />Regime Tributário: %s' % (REGIME_TRIBUTACAO[regime])
+
+        styleN.fontName = 'NimbusSanL-Regu'
+        styleN.fontSize = 7
         styleN.leading = 10
         P = Paragraph(cEnd, styleN)
-        w, h = P.wrap(80*mm, 30*mm)
-        P.drawOn(self.canvas, (self.nLeft+5)*mm, (self.height-self.nlin-30)*mm)
+        w, h = P.wrap(55*mm, 30*mm)
+        P.drawOn(self.canvas, (self.nLeft+30)*mm,
+                 (self.height-self.nlin-31)*mm)
 
         # Homologação
         if tagtext(oNode=elem_ide, cTag='tpAmb') == '2':
@@ -695,7 +707,7 @@ obsCont[@xCampo='NomeVendedor']")
         P = Paragraph(tagtext(oNode=el_infAdic,
                               cTag='infCpl'), styles['Normal'])
         w, h = P.wrap(92*mm, 32*mm)
-        P.drawOn(self.canvas, (self.nLeft+1)*mm, (self.height-self.nlin-12)*mm)
+        P.drawOn(self.canvas, (self.nLeft+1)*mm, (self.height-self.nlin-17)*mm)
 
         self.nlin += 36
 
@@ -792,20 +804,7 @@ obsCont[@xCampo='NomeVendedor']")
         y = self.height - y
         self.canvas.drawCentredString(x*mm, y*mm, value)
 
-    def get_buffer(self):
+    def writeto_pdf(self, fileObj):
         pdf_out = self.oPDF_IO.getvalue()
         self.oPDF_IO.close()
-        return pdf_out
-
-
-# Exemplo de uso
-
-if __name__ == "__main__":
-    xml_string = open(
-        "/home/danimar/Downloads/nfe-envio-2017-02-13-10-10.xml", "r").read()
-    xml_element = etree.fromstring(xml_string)
-
-    oDanfe = danfe(list_xml=[xml_element])
-    oFile = open('/home/danimar/DANFE.pdf', 'w')
-    oFile.write(oDanfe.get_buffer())
-    oFile.close()
+        fileObj.write(pdf_out)
