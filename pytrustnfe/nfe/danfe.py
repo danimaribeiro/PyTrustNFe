@@ -110,6 +110,7 @@ class danfe(object):
             el_det = oXML.findall(".//{http://www.portalfiscal.inf.br/nfe}det")
             if el_det is not None:
                 list_desc = []
+                list_cod_prod = []
                 nPg = 0
                 for nId, item in enumerate(el_det):
                     el_prod = item.find(
@@ -117,10 +118,13 @@ class danfe(object):
                     infAdProd = item.find(
                         ".//{http://www.portalfiscal.inf.br/nfe}infAdProd")
 
-                    list_ = wrap(tagtext(oNode=el_prod, cTag='xProd'), 51)
+                    list_ = wrap(tagtext(oNode=el_prod, cTag='xProd'), 56)
                     if infAdProd is not None:
-                        list_.extend(wrap(infAdProd.text, 51))
+                        list_.extend(wrap(infAdProd.text, 56))
                     list_desc.append(list_)
+
+                    list_cProd = wrap(tagtext(oNode=el_prod, cTag='cProd'), 14)
+                    list_cod_prod.append(list_cProd)
 
                     # Nr linhas necessárias p/ descrição item
                     nLin_Itens = len(list_)
@@ -150,7 +154,7 @@ class danfe(object):
             self.impostos(oXML=oXML)
             self.transportes(oXML=oXML)
             self.produtos(oXML=oXML, el_det=el_det, oPaginator=oPaginator[0],
-                          list_desc=list_desc)
+                          list_desc=list_desc, list_cod_prod=list_cod_prod)
 
             self.adicionais(oXML=oXML)
 
@@ -576,7 +580,7 @@ obsCont[@xCampo='NomeVendedor']")
         self.nlin += 23
 
     def produtos(self, oXML=None, el_det=None, oPaginator=None,
-                 list_desc=None, nHeight=29):
+                 list_desc=None, list_cod_prod=None, nHeight=29):
 
         nMr = self.width-self.nRight
         nStep = 2.5  # Passo entre linhas
@@ -591,8 +595,8 @@ obsCont[@xCampo='NomeVendedor']")
 
         self.canvas.setFont('NimbusSanL-Regu', 5.5)
         # Colunas
-        self.vline(self.nLeft+11, self.nlin+2, nH)
-        self.stringcenter(self.nLeft+5.5, self.nlin+5.5, 'CÓDIGO')
+        self.vline(self.nLeft+15, self.nlin+2, nH)
+        self.stringcenter(self.nLeft+7.5, self.nlin+5.5, 'CÓDIGO')
         self.vline(nMr-7, self.nlin+2, nH)
         self.stringcenter(nMr-3.5, self.nlin+4.5, 'ALÍQ')
         self.stringcenter(nMr-3.5, self.nlin+6.5, 'IPI')
@@ -611,17 +615,17 @@ obsCont[@xCampo='NomeVendedor']")
         self.stringcenter(nMr-70.5, self.nlin+5.5, 'VLR UNIT')
         self.vline(nMr-90, self.nlin+2, nH)
         self.stringcenter(nMr-83.5, self.nlin+5.5, 'QTD')
-        self.vline(nMr-98, self.nlin+2, nH)
-        self.stringcenter(nMr-94, self.nlin+5.5, 'UNID')
-        self.vline(nMr-104, self.nlin+2, nH)
-        self.stringcenter(nMr-101, self.nlin+5.5, 'CFOP')
-        self.vline(nMr-110, self.nlin+2, nH)
-        self.stringcenter(nMr-107, self.nlin+5.5, 'CST')
-        self.vline(nMr-123, self.nlin+2, nH)
-        self.stringcenter(nMr-116.5, self.nlin+5.5, 'NCM/SH')
+        self.vline(nMr-96, self.nlin+2, nH)
+        self.stringcenter(nMr-93, self.nlin+5.5, 'UNID')
+        self.vline(nMr-102, self.nlin+2, nH)
+        self.stringcenter(nMr-99, self.nlin+5.5, 'CFOP')
+        self.vline(nMr-108, self.nlin+2, nH)
+        self.stringcenter(nMr-105, self.nlin+5.5, 'CST')
+        self.vline(nMr-117, self.nlin+2, nH)
+        self.stringcenter(nMr-112.5, self.nlin+5.5, 'NCM/SH')
 
         nWidth_Prod = nMr-135-self.nLeft-11
-        nCol_ = self.nLeft+11 + (nWidth_Prod / 2)
+        nCol_ = self.nLeft+20 + (nWidth_Prod / 2)
         self.stringcenter(nCol_, self.nlin+5.5, 'DESCRIÇÃO DO PRODUTO/SERVIÇO')
 
         # Conteúdo campos
@@ -648,14 +652,14 @@ obsCont[@xCampo='NomeVendedor']")
             vIPI = tagtext(oNode=el_imp_IPI, cTag='vIPI')
             pIPI = tagtext(oNode=el_imp_IPI, cTag='pIPI')
 
-            self.string(self.nLeft+1, nLin,
-                        tagtext(oNode=el_prod, cTag='cProd'))
-            self.stringcenter(nMr-116.5, nLin,
+            #self.string(self.nLeft+1, nLin,
+            #            tagtext(oNode=el_prod, cTag='cProd'))
+            self.stringcenter(nMr-112.5, nLin,
                               tagtext(oNode=el_prod, cTag='NCM'))
-            self.stringcenter(nMr-107, nLin, cCST)
-            self.stringcenter(nMr-101, nLin,
+            self.stringcenter(nMr-105, nLin, cCST)
+            self.stringcenter(nMr-99, nLin,
                               tagtext(oNode=el_prod, cTag='CFOP'))
-            self.stringcenter(nMr-94, nLin,
+            self.stringcenter(nMr-93, nLin,
                               tagtext(oNode=el_prod, cTag='uCom'))
             self.stringRight(nMr-77.5, nLin, format_number(
                 tagtext(oNode=el_prod, cTag='qCom'), precision=4))
@@ -674,13 +678,20 @@ obsCont[@xCampo='NomeVendedor']")
                 self.stringRight(nMr-0.5, nLin,
                                  format_number(pIPI, precision=2))
 
-            self.canvas.setStrokeColor(gray)
-            self.hline(self.nLeft, nLin+0.5, self.width-self.nLeft)
-            self.canvas.setStrokeColor(black)
+            # Código Item
+            line_cod = nLin
+            for des in list_cod_prod[id]:
+                self.string(self.nLeft+0.2, line_cod, des)
+                line_cod += nStep
+
             # Descrição Item
             for des in list_desc[id]:
-                self.string(self.nLeft+12, nLin, des)
+                self.string(self.nLeft+15.5, nLin, des)
                 nLin += nStep
+
+            self.canvas.setStrokeColor(gray)
+            self.hline(self.nLeft, nLin-1.5, self.width-self.nLeft)
+            self.canvas.setStrokeColor(black)
 
         self.nlin += nH + 3
 
