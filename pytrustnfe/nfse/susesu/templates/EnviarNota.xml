@@ -1,0 +1,14 @@
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <EnviarNota xmlns="http://susesu.com.br/">
+      <codPrefeitura>{{ codigo_prefeitura }}</codPrefeitura>
+      <notaFiscal>
+          <![CDATA[
+          {% include 'Nota.xml' %}
+          ]]>
+      </notaFiscal>
+      <cnpjPrestador>{{ cnpj_prestador }}</cnpjPrestador>
+      <senhaNFD>{{ senha_nfd }}</senhaNFD>
+    </EnviarNota>
+    </soap:Body>
+</soap:Envelope>

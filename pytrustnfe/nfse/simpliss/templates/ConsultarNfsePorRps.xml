@@ -1,11 +1,17 @@
-<ConsultarNfseRpsEnvio xmlns="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd">
-    <IdentificacaoRps>
-        <Numero>{{ consulta.numero_rps }}</Numero>
-        <Serie>{{ consulta.serie_rps }}</Serie>
-        <Tipo>{{ consulta.tipo_rps }}</Tipo>
-    </IdentificacaoRps>
-    <Prestador>
-        <Cnpj>{{ consulta.cnpj_prestador }}</Cnpj>
-        <InscricaoMunicipal>{{ consulta.inscricao_prestador }}</InscricaoMunicipal>
-    </Prestador>
-</ConsultarNfseRpsEnvio>
+<ConsultarNfsePorRps xmlns="http://www.sistema.com.br/Sistema.Ws.Nfse">
+    <ConsultarNfseRpsEnvio>
+        <IdentificacaoRps xmlns="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd">
+            <Numero>[nonNegativeInteger?]</Numero>
+            <Serie>[string?]</Serie>
+            <Tipo>[byte]</Tipo>
+        </IdentificacaoRps>
+        <Prestador xmlns="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd">
+            <Cnpj>[string?]</Cnpj>
+            <InscricaoMunicipal>[string?]</InscricaoMunicipal>
+        </Prestador>
+    </ConsultarNfseRpsEnvio>
+    <pParam>
+        <P1 xmlns="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn">[string?]</P1>
+        <P2 xmlns="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn">[string?]</P2>
+    </pParam>
+</ConsultarNfsePorRps>

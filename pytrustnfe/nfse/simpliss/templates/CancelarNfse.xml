@@ -1,13 +1,19 @@
-<CancelarNfseEnvio xmlns="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd">
-    <Pedido>
-        <InfPedidoCancelamento>
-            <IdentificacaoNfse>
-                <Numero>{{ cancelar.numero_nfse }}</Numero>
-                <Cnpj>{{ cancelar.cnpj_prestador }}</Cnpj>
-                <InscricaoMunicipal>{{ cancelar.inscricao_prestador }}</InscricaoMunicipal>
-                <CodigoMunicipio>{{ cancelar.codigo_municipio }}</CodigoMunicipio>
-            </IdentificacaoNfse>
-            <CodigoCancelamento>{{ cancelar.codigo_cancelamento }}</CodigoCancelamento>
-        </InfPedidoCancelamento>
-    </Pedido>
-</CancelarNfseEnvio>
+<CancelarNfse xmlns="http://www.sistema.com.br/Sistema.Ws.Nfse">
+    <CancelarNfseEnvio>
+        <Pedido xmlns="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd">
+            <InfPedidoCancelamento>
+                <IdentificacaoNfse>
+                    <Numero>[nonNegativeInteger?]</Numero>
+                    <Cnpj>[string?]</Cnpj>
+                    <InscricaoMunicipal>[string?]</InscricaoMunicipal>
+                    <CodigoMunicipio>[int]</CodigoMunicipio>
+                </IdentificacaoNfse>
+                <CodigoCancelamento>[string?]</CodigoCancelamento>
+            </InfPedidoCancelamento>
+        </Pedido>
+    </CancelarNfseEnvio>
+    <pParam>
+        <P1 xmlns="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn">[string?]</P1>
+        <P2 xmlns="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn">[string?]</P2>
+    </pParam>
+</CancelarNfse>

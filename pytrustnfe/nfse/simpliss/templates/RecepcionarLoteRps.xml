@@ -1,11 +1,19 @@
-<EnviarLoteRpsEnvio xmlns = "http://www.betha.com.br/e-nota-contribuinte-ws">
-    <LoteRps  Id="lote1" versao="2.02">
-        <NumeroLote>2012024</NumeroLote>
-        <Cnpj>45111111111100</Cnpj>
-        <InscricaoMunicipal>123498</InscricaoMunicipal>
-        <QuantidadeRps>1</QuantidadeRps>
-        <ListaRps>
-            {% include 'rps.xml' %}
-        </ListaRps>
-    </LoteRps>
-</EnviarLoteRpsEnvio>
+<RecepcionarLoteRps xmlns="http://www.sistema.com.br/Sistema.Ws.Nfse">
+    <EnviarLoteRpsEnvio>
+        <LoteRps xmlns="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd">
+            <NumeroLote>{{ nfse.numero_lote }}</NumeroLote>
+            <Cnpj>{{ nfse.cnpj_prestador }}</Cnpj>
+            <InscricaoMunicipal>{{ nfse.inscricao_municipal }}</InscricaoMunicipal>
+            <QuantidadeRps>1</QuantidadeRps>
+            <ListaRps>
+                {% for rps in nfse.lista_rps -%}
+                {% include 'Rps.xml' %}
+                {% endfor %}
+            </ListaRps>
+        </LoteRps>
+    </EnviarLoteRpsEnvio>
+    <pParam>
+        <P1 xmlns="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn">{{ nfse.cnpj_prestador }}</P1>
+        <P2 xmlns="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn">{{ nfse.senha }}</P2>
+    </pParam>
+</RecepcionarLoteRps>
