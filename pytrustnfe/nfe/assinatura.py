@@ -2,6 +2,7 @@
 # © 2016 Danimar Ribeiro, Trustcode
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from builtins import object
 import signxml
 from lxml import etree
 from pytrustnfe.certificado import extract_cert_and_key_from_pfx

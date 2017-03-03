@@ -5,6 +5,9 @@
 import xmlsec
 import libxml2
 import os.path
+from builtins import str
+from builtins import range
+from builtins import object
 
 NAMESPACE_SIG = 'http://www.w3.org/2000/09/xmldsig#'
 

@@ -2,6 +2,9 @@
 # © 2016 Danimar Ribeiro, Trustcode
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from __future__ import division
+from builtins import str
+from past.utils import old_div
 from decimal import Decimal
 from datetime import date
 from datetime import datetime
@@ -13,8 +16,8 @@ def normalize_str(string):
     Remove special characters and return the ascii string
     """
     if string:
-        if not isinstance(string, unicode):
-            string = unicode(string, 'utf-8', 'replace')
+        if not isinstance(string, str):
+            string = str(string, 'utf-8', 'replace')
 
         string = string.encode('utf-8')
         return normalize(
@@ -24,7 +27,7 @@ def normalize_str(string):
 
 def format_percent(value):
     if value:
-        return Decimal(value) / 100
+        return old_div(Decimal(value), 100)
 
 
 def format_datetime(value):
