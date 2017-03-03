@@ -1,6 +1,30 @@
-<ConsultarNfseEnvio xmlns="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd">
-    <Prestador>
-        <Cnpj>{{ consulta.cnpj_prestador }}</Cnpj>
-    </Prestador>
-    <NumeroNfse>{{ consulta.numero_nfse }}</NumeroNfse>
-</ConsultarNfseEnvio>
+<ConsultarNfse xmlns="http://www.sistema.com.br/Sistema.Ws.Nfse">
+    <ConsultarNfseEnvio>
+        <Prestador xmlns="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd">
+            <Cnpj>[string?]</Cnpj>
+            <InscricaoMunicipal>[string?]</InscricaoMunicipal>
+        </Prestador>
+        <NumeroNfse xmlns="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd">[nonNegativeInteger?]</NumeroNfse>
+        <PeriodoEmissao xmlns="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd">
+            <DataInicial>[date]</DataInicial>
+            <DataFinal>[date]</DataFinal>
+        </PeriodoEmissao>
+        <Tomador xmlns="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd">
+            <CpfCnpj>
+                <Cnpj>[string?]</Cnpj>
+            </CpfCnpj>
+            <InscricaoMunicipal>[string?]</InscricaoMunicipal>
+        </Tomador>
+        <IntermediarioServico xmlns="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd">
+            <RazaoSocial>[string?]</RazaoSocial>
+            <CpfCnpj>
+                <Cnpj>[string?]</Cnpj>
+            </CpfCnpj>
+            <InscricaoMunicipal>[string?]</InscricaoMunicipal>
+        </IntermediarioServico>
+    </ConsultarNfseEnvio>
+    <pParam>
+        <P1 xmlns="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn">[string?]</P1>
+        <P2 xmlns="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn">[string?]</P2>
+    </pParam>
+</ConsultarNfse>

@@ -1,0 +1,32 @@
+<NOTA>
+    <NUMERO_NOTA>{{ nfse.numero }}</NUMERO_NOTA>
+    <DATA_EMISSAO>{{ nfse.data_emissao }}</DATA_EMISSAO>
+    <CODIGO_GERAL_ATIVIDADE>{{ nfse.codigo_atividade }}</CODIGO_GERAL_ATIVIDADE>
+    <CODIGO_ATIVIDADE/>
+    <OUTRAS_INFORMACOES>{{ nfse.observacoes}}</OUTRAS_INFORMACOES>
+    <DESCRICAO_SERVICOS>{{ nfse.descricao }}</DESCRICAO_SERVICOS>
+    <VALOR_TOTAL_NOTA>{{ nfse.total_servicos }}</VALOR_TOTAL_NOTA>
+    <STATUS_ISS_NOTA>1</STATUS_ISS_NOTA>
+    <IRRF>{{ nfse.valor_ir }}</IRRF>
+    <INSS>{{ nfse.valor_inss }}</INSS>
+    <PIS>{{ nfse.valor_pis }}</PIS>
+    <COFINS>{{ nfse.valor_pis }}</COFINS>
+    <CONTRIBUICAO_SOCIAL>0,00</CONTRIBUICAO_SOCIAL>
+    <VALOR_LIQUIDO>{{ nfse.total_servicos }}</VALOR_LIQUIDO>
+    <VALOR_DEDUCAO_MATERIAIS>{{ nfse.valor_deducao }}</VALOR_DEDUCAO_MATERIAIS>
+    <COD_MUNICIPIO_EXECUCAO_SERVICO>{{ nfse.prestador.cidade }}</COD_MUNICIPIO_EXECUCAO_SERVICO>
+    <LOCAL_EXECUCAO_SERVICO>{{ nfse.prestador.cidade_descricao }}</LOCAL_EXECUCAO_SERVICO>
+    <TOMADOR_ESTRANGEIRO>N</TOMADOR_ESTRANGEIRO>
+    <TOMADOR_DOCUMENTO>{{ nfse.tomador.cpf_cnpj }}</TOMADOR_DOCUMENTO>
+    <TOMADOR_RAZAO>{{ nfse.tomador.razao_social }}</TOMADOR_RAZAO>
+    <TOMADOR_LOGRADOURO>{{ nfse.tomador.logradouro }}</TOMADOR_LOGRADOURO>
+    <TOMADOR_BAIRRO>{{ nfse.tomador.bairro }}</TOMADOR_BAIRRO>
+    <TOMADOR_CEP>{{ nfse.tomador.cep }}</TOMADOR_CEP>
+    <TOMADOR_INSCRICAO_ESTADUAL>{{ nfse.tomador.inscricao_estadual }}</TOMADOR_INSCRICAO_ESTADUAL>
+    <TOMADOR_INSCRICAO_MUNICIPAL>{{ nfse.tomador.inscricao_municipal }}</TOMADOR_INSCRICAO_MUNICIPAL>
+    <TOMADOR_EMAIL>{{ nfse.tomador.email }}</TOMADOR_EMAIL>
+    <TOMADOR_TELEFONE>{{ nfse.tomador.telefone }}</TOMADOR_TELEFONE>
+    <TOMADOR_MUNICIPIO>{{ nfse.tomador.cidade }}</TOMADOR_MUNICIPIO>
+    <ALIQUOTA>{{ nfse.tomador.aliquota_atividade }}</ALIQUOTA>
+    <PORCENTAGEM_REGIME_ESPECIAL>0</PORCENTAGEM_REGIME_ESPECIAL>
+</NOTA>

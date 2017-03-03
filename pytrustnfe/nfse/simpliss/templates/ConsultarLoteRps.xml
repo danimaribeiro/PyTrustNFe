@@ -1,6 +1,13 @@
-<ConsultarLoteRpsEnvio xmlns="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd">
-    <Prestador>
-        <Cnpj>{{ consulta.cnpj_prestador }}</Cnpj>
-    </Prestador>
-    <Protocolo>{{ consulta.protocolo }}</Protocolo>
-</ConsultarLoteRpsEnvio>
+<ConsultarLoteRps xmlns="http://www.sistema.com.br/Sistema.Ws.Nfse">
+    <ConsultarLoteRpsEnvio>
+        <Prestador xmlns="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd">
+            <Cnpj>[string?]</Cnpj>
+            <InscricaoMunicipal>[string?]</InscricaoMunicipal>
+        </Prestador>
+        <Protocolo xmlns="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd">[string?]</Protocolo>
+    </ConsultarLoteRpsEnvio>
+    <pParam>
+        <P1 xmlns="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn">[string?]</P1>
+        <P2 xmlns="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn">[string?]</P2>
+    </pParam>
+</ConsultarLoteRps>
