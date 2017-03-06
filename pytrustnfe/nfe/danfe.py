@@ -77,7 +77,7 @@ class danfe(object):
         self.nLeft = 10
         self.nRight = 10
         self.nTop = 7
-        self.nBottom = 15
+        self.nBottom = 8
         self.nlin = self.nTop
         self.logo = logo
         self.oFrete = {'0': '0 - Emitente',
@@ -104,7 +104,7 @@ class danfe(object):
 
             # Calculando total linhas usadas para descrições dos itens
             # Com bloco fatura, apenas 29 linhas para itens na primeira folha
-            nNr_Lin_Pg_1 = 34 if oXML_cobr is None else 29
+            nNr_Lin_Pg_1 = 34 if oXML_cobr is None else 30
             # [ rec_ini , rec_fim , lines , limit_lines ]
             oPaginator = [[0, 0, 0, nNr_Lin_Pg_1]]
             el_det = oXML.findall(".//{http://www.portalfiscal.inf.br/nfe}det")
@@ -163,7 +163,8 @@ class danfe(object):
                 self.newpage()
                 self.ide_emit(oXML=oXML)
                 self.produtos(oXML=oXML, el_det=el_det, oPaginator=oPag,
-                              list_desc=list_desc, nHeight=77)
+                              list_desc=list_desc, nHeight=77,
+                              list_cod_prod=list_cod_prod)
 
             self.newpage()
 
@@ -185,6 +186,8 @@ class danfe(object):
         self.rect(self.nLeft+115, self.nlin+1,
                   self.width-self.nLeft-self.nRight-115, 39)
 
+        self.hline(self.nLeft+85, self.nlin+1, 125)
+
         self.rect(self.nLeft+116, self.nlin+15,
                   self.width-self.nLeft-self.nRight-117, 6)
 
@@ -196,7 +199,7 @@ class danfe(object):
 
         # Labels
         self.canvas.setFont('NimbusSanL-Bold', 12)
-        self.stringcenter(self.nLeft+98, self.nlin+4, 'DANFE')
+        self.stringcenter(self.nLeft+98, self.nlin+5, 'DANFE')
         self.stringcenter(self.nLeft+109, self.nlin+19.5,
                           tagtext(oNode=elem_ide, cTag='tpNF'))
         self.canvas.setFont('NimbusSanL-Bold', 8)
@@ -342,9 +345,9 @@ class danfe(object):
         self.string(nMr-69, self.nlin+7.5,
                     format_cnpj_cpf(tagtext(oNode=elem_dest, cTag='CNPJ')))
         cDt, cHr = getdateUTC(tagtext(oNode=elem_ide, cTag='dhEmi'))
-        self.string(nMr-24, self.nlin+7.7, cDt)
+        self.string(nMr-24, self.nlin+7.7, cDt + ' ' + cHr)
         cDt, cHr = getdateUTC(tagtext(oNode=elem_ide, cTag='dhSaiEnt'))
-        self.string(nMr-24, self.nlin+14.3, cDt)  # Dt saída
+        self.string(nMr-24, self.nlin+14.3, cDt + ' ' + cHr)  # Dt saída
         cEnd = tagtext(oNode=elem_dest, cTag='xLgr') + ', ' + tagtext(
             oNode=elem_dest, cTag='nro')
         self.string(self.nLeft+1, self.nlin+14.3, cEnd)
@@ -442,65 +445,67 @@ obsCont[@xCampo='NomeVendedor']")
                   self.width-self.nLeft-self.nRight, 13)
         self.hline(self.nLeft, self.nlin+8.5, self.width-self.nLeft)
         self.vline(nMr-35, self.nlin+2, 6.5)
-        self.vline(nMr-72, self.nlin+2, 6.5)
-        self.vline(nMr-110, self.nlin+2, 6.5)
-        self.vline(nMr-148, self.nlin+2, 6.5)
+        self.vline(nMr-65, self.nlin+2, 6.5)
+        self.vline(nMr-95, self.nlin+2, 6.5)
+        self.vline(nMr-125, self.nlin+2, 6.5)
+        self.vline(nMr-155, self.nlin+2, 6.5)
         self.vline(nMr-35, self.nlin+8.5, 6.5)
-        self.vline(nMr-66, self.nlin+8.5, 6.5)
-        self.vline(nMr-90, self.nlin+8.5, 6.5)
-        self.vline(nMr-119, self.nlin+8.5, 6.5)
-        self.vline(nMr-140, self.nlin+8.5, 6.5)
-        self.vline(nMr-163, self.nlin+8.5, 6.5)
+        self.vline(nMr-65, self.nlin+8.5, 6.5)
+        self.vline(nMr-95, self.nlin+8.5, 6.5)
+        self.vline(nMr-125, self.nlin+8.5, 6.5)
+        self.vline(nMr-155, self.nlin+8.5, 6.5)
         # Labels
         self.canvas.setFont('NimbusSanL-Regu', 5)
-        self.string(nMr-34, self.nlin+3.8, 'VALOR TOTAL DOS PRODUTOS')
-        self.string(nMr-71, self.nlin+3.8, 'VALOR DO ICMS ST')
-        self.string(nMr-109, self.nlin+3.8, 'BASE DE CÁLCULO DO ICMS ST')
-        self.string(nMr-147, self.nlin+3.8, 'VALOR DO ICMS')
         self.string(self.nLeft+1, self.nlin+3.8, 'BASE DE CÁLCULO DO ICMS')
-        self.string(nMr-34, self.nlin+10.2, 'VALOR TOTAL DA NOTA')
-        self.string(nMr-65, self.nlin+10.2, 'VALOR APROX TRIBUTOS')
-        self.string(nMr-89, self.nlin+10.2, 'VALOR DO IPI')
-        self.string(nMr-118, self.nlin+10.2, 'OUTRAS DESP. ACESSÓRIAS')
-        self.string(nMr-139, self.nlin+10.2, 'DESCONTO')
-        self.string(nMr-162, self.nlin+10.2, 'VALOR DO SEGURO')
+        self.string(nMr-154, self.nlin+3.8, 'VALOR DO ICMS')
+        self.string(nMr-124, self.nlin+3.8, 'BASE DE CÁLCULO DO ICMS ST')
+        self.string(nMr-94, self.nlin+3.8, 'VALOR DO ICMS ST')
+        self.string(nMr-64, self.nlin+3.8, 'VALOR APROX TRIBUTOS')
+        self.string(nMr-34, self.nlin+3.8, 'VALOR TOTAL DOS PRODUTOS')
+
         self.string(self.nLeft+1, self.nlin+10.2, 'VALOR DO FRETE')
+        self.string(nMr-154, self.nlin+10.2, 'VALOR DO SEGURO')
+        self.string(nMr-124, self.nlin+10.2, 'DESCONTO')
+        self.string(nMr-94, self.nlin+10.2, 'OUTRAS DESP. ACESSÓRIAS')
+        self.string(nMr-64, self.nlin+10.2, 'VALOR DO IPI')
+        self.string(nMr-34, self.nlin+10.2, 'VALOR TOTAL DA NOTA')
+
         # Conteúdo campos
         self.canvas.setFont('NimbusSanL-Regu', 8)
         self.stringRight(
-            self.nLeft+41, self.nlin+7.7,
+            self.nLeft+34, self.nlin+7.7,
             format_number(tagtext(oNode=el_total, cTag='vBC'), precision=2))
         self.stringRight(
-            self.nLeft+79, self.nlin+7.7,
+            self.nLeft+64, self.nlin+7.7,
             format_number(tagtext(oNode=el_total, cTag='vICMS'), precision=2))
         self.stringRight(
-            self.nLeft+117, self.nlin+7.7,
+            self.nLeft+94, self.nlin+7.7,
             format_number(tagtext(oNode=el_total, cTag='vBCST'), precision=2))
         self.stringRight(
-            nMr-36, self.nlin+7.7,
+            nMr-66, self.nlin+7.7,
             format_number(tagtext(oNode=el_total, cTag='vST'), precision=2))
+        self.stringRight(
+            nMr-36, self.nlin+7.7,
+            format_number(tagtext(oNode=el_total, cTag='vTotTrib'),
+                          precision=2))
         self.stringRight(
             nMr-1, self.nlin+7.7,
             format_number(tagtext(oNode=el_total, cTag='vProd'), precision=2))
         self.stringRight(
-            self.nLeft+26, self.nlin+14.1,
+            self.nLeft+34, self.nlin+14.1,
             format_number(tagtext(oNode=el_total, cTag='vFrete'), precision=2))
         self.stringRight(
-            self.nLeft+49, self.nlin+14.1,
+            self.nLeft+64, self.nlin+14.1,
             format_number(tagtext(oNode=el_total, cTag='vSeg'), precision=2))
         self.stringRight(
-            self.nLeft+70, self.nlin+14.1,
+            self.nLeft+94, self.nlin+14.1,
             format_number(tagtext(oNode=el_total, cTag='vDesc'), precision=2))
         self.stringRight(
-            self.nLeft+99, self.nlin+14.1,
+            self.nLeft+124, self.nlin+14.1,
             format_number(tagtext(oNode=el_total, cTag='vOutro'), precision=2))
         self.stringRight(
-            self.nLeft+123, self.nlin+14.1,
-            format_number(tagtext(oNode=el_total, cTag='vIPI'), precision=2))
-        self.stringRight(
             self.nLeft+154, self.nlin+14.1,
-            format_number(tagtext(oNode=el_total, cTag='vTotTrib'),
-                          precision=2))
+            format_number(tagtext(oNode=el_total, cTag='vIPI'), precision=2))
         self.stringRight(
             nMr-1, self.nlin+14.1,
             format_number(tagtext(oNode=el_total, cTag='vNF'), precision=2))
@@ -652,8 +657,6 @@ obsCont[@xCampo='NomeVendedor']")
             vIPI = tagtext(oNode=el_imp_IPI, cTag='vIPI')
             pIPI = tagtext(oNode=el_imp_IPI, cTag='pIPI')
 
-            #self.string(self.nLeft+1, nLin,
-            #            tagtext(oNode=el_prod, cTag='cProd'))
             self.stringcenter(nMr-112.5, nLin,
                               tagtext(oNode=el_prod, cTag='NCM'))
             self.stringcenter(nMr-105, nLin, cCST)
@@ -685,12 +688,14 @@ obsCont[@xCampo='NomeVendedor']")
                 line_cod += nStep
 
             # Descrição Item
+            line_desc = nLin
             for des in list_desc[id]:
-                self.string(self.nLeft+15.5, nLin, des)
-                nLin += nStep
+                self.string(self.nLeft+15.5, line_desc, des)
+                line_desc += nStep
 
+            nLin = max(line_cod, line_desc)
             self.canvas.setStrokeColor(gray)
-            self.hline(self.nLeft, nLin-1.5, self.width-self.nLeft)
+            self.hline(self.nLeft, nLin-2, self.width-self.nLeft)
             self.canvas.setStrokeColor(black)
 
         self.nlin += nH + 3
@@ -706,8 +711,8 @@ obsCont[@xCampo='NomeVendedor']")
         self.string(self.nLeft+1, self.nlin+4, 'INFORMAÇÕES COMPLEMENTARES')
         self.string((self.width/2)+1, self.nlin+4, 'RESERVADO AO FISCO')
         self.rect(self.nLeft, self.nlin+2,
-                  self.width-self.nLeft-self.nRight, 34)
-        self.vline(self.width/2, self.nlin+2, 34)
+                  self.width-self.nLeft-self.nRight, 42)
+        self.vline(self.width/2, self.nlin+2, 42)
         # Conteúdo campos
         styles = getSampleStyleSheet()
         styleN = styles['Normal']
@@ -715,11 +720,14 @@ obsCont[@xCampo='NomeVendedor']")
         styleN.fontName = 'NimbusSanL-Regu'
         styleN.leading = 7
 
-        P = Paragraph(tagtext(oNode=el_infAdic,
-                              cTag='infCpl'), styles['Normal'])
+        fisco = tagtext(oNode=el_infAdic, cTag='infAdFisco')
+        observacoes = tagtext(oNode=el_infAdic, cTag='infCpl')
+        if fisco:
+            observacoes = fisco + ' ' + observacoes
+        P = Paragraph(observacoes, styles['Normal'])
         w, h = P.wrap(92*mm, 32*mm)
-        P.drawOn(self.canvas, (self.nLeft+1)*mm, (self.height-self.nlin-17)*mm)
-
+        altura = (self.height-self.nlin-5)*mm
+        P.drawOn(self.canvas, (self.nLeft+1)*mm, altura - h)
         self.nlin += 36
 
     def recibo_entrega(self, oXML=None):
@@ -778,7 +786,7 @@ obsCont[@xCampo='NomeVendedor']")
         P = Paragraph(cString, styleN)
         w, h = P.wrap(149*mm, 7*mm)
         P.drawOn(self.canvas, (self.nLeft+1)*mm,
-                 (self.height-self.nlin-7.5)*mm)
+                 ((self.height-self.nlin)*mm) - h)
 
         self.nlin += 20
         self.hline(self.nLeft, self.nlin, self.width-self.nRight)
