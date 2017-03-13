@@ -43,18 +43,18 @@
     {% if rps.tomador.inscricao_municipal -%}
     <InscricaoMunicipalTomador>{{ rps.tomador.inscricao_municipal }}</InscricaoMunicipalTomador>
     {% endif %}
-    <RazaoSocialTomador>{{ rps.tomador.razao_social }}</RazaoSocialTomador>
+    <RazaoSocialTomador>{{ rps.tomador.razao_social|normalize|escape }}</RazaoSocialTomador>
     <EnderecoTomador>
       <TipoLogradouro>{{ rps.tomador.tipo_logradouro }}</TipoLogradouro>
-      <Logradouro>{{ rps.tomador.logradouro }}</Logradouro>
+      <Logradouro>{{ rps.tomador.logradouro|normalize|escape }}</Logradouro>
       <NumeroEndereco>{{ rps.tomador.numero }}</NumeroEndereco>
-      <ComplementoEndereco>{{ rps.tomador.complemento }}</ComplementoEndereco>
+      <ComplementoEndereco>{{ rps.tomador.complemento|normalize|escape }}</ComplementoEndereco>
       <Bairro>{{ rps.tomador.bairro }}</Bairro>
       <Cidade>{{ rps.tomador.cidade }}</Cidade>
       <UF>{{ rps.tomador.uf }}</UF>
       <CEP>{{ rps.tomador.cep }}</CEP>
     </EnderecoTomador>
-    <Discriminacao>{{ rps.descricao }}</Discriminacao>
+    <Discriminacao>{{ rps.descricao|normalize|escape }}</Discriminacao>
   </RPS>
   {% endfor %}
 </PedidoEnvioLoteRPS>
