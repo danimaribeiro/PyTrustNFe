@@ -6,7 +6,7 @@
     <OUTRAS_INFORMACOES>{{ nfse.observacoes}}</OUTRAS_INFORMACOES>
     <DESCRICAO_SERVICOS>{{ nfse.descricao }}</DESCRICAO_SERVICOS>
     <VALOR_TOTAL_NOTA>{{ nfse.total_servicos }}</VALOR_TOTAL_NOTA>
-    <STATUS_ISS_NOTA>1</STATUS_ISS_NOTA>
+    <STATUS_ISS_NOTA>{{ nfse.status_nota }}</STATUS_ISS_NOTA>
     <IRRF>{{ nfse.valor_ir }}</IRRF>
     <INSS>{{ nfse.valor_inss }}</INSS>
     <PIS>{{ nfse.valor_pis }}</PIS>
@@ -27,6 +27,6 @@
     <TOMADOR_EMAIL>{{ nfse.tomador.email }}</TOMADOR_EMAIL>
     <TOMADOR_TELEFONE>{{ nfse.tomador.telefone }}</TOMADOR_TELEFONE>
     <TOMADOR_MUNICIPIO>{{ nfse.tomador.cidade }}</TOMADOR_MUNICIPIO>
-    <ALIQUOTA>{{ nfse.tomador.aliquota_atividade }}</ALIQUOTA>
+    <ALIQUOTA>{{ nfse.aliquota_atividade }}</ALIQUOTA>
     <PORCENTAGEM_REGIME_ESPECIAL>0</PORCENTAGEM_REGIME_ESPECIAL>
 </NOTA>
