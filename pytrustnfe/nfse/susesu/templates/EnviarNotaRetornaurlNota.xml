@@ -1,5 +1,5 @@
-<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-  <soap:Body>
+<Envelope xmlns="http://www.w3.org/2003/05/soap-envelope">
+  <Body>
     <EnviarNotaRetornaurlNota xmlns="http://susesu.com.br/">
       <codPrefeitura>{{ nfse.codigo_prefeitura }}</codPrefeitura>
       <notaFiscal>
@@ -10,5 +10,5 @@
       <cnpjPrestador>{{ nfse.cnpj_prestador }}</cnpjPrestador>
       <senhaNFD>{{ nfse.senha_nfd }}</senhaNFD>
     </EnviarNotaRetornaurlNota>
-    </soap:Body>
-</soap:Envelope>
+  </Body>
+</Envelope>

@@ -29,7 +29,8 @@ def render_xml(path, template_name, remove_empty, **nfe):
     template = env.get_template(template_name)
 
     xml = template.render(**nfe)
-    parser = etree.XMLParser(remove_blank_text=True, remove_comments=True)
+    parser = etree.XMLParser(remove_blank_text=True, remove_comments=True,
+                             strip_cdata=False)
     root = etree.fromstring(xml, parser=parser)
     if remove_empty:
         context = etree.iterwalk(root)
