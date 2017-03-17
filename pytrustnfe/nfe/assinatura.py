@@ -30,14 +30,16 @@ class Assinatura(object):
         ns[None] = signer.namespaces['ds']
         signer.namespaces = ns
 
+        ref_uri = ('#%s' % reference) if reference else None
         signed_root = signer.sign(
             xml_element, key=key, cert=cert,
-            reference_uri=('#%s' % reference))
-        element_signed = signed_root.find(".//*[@Id='%s']" % reference)
-        signature = signed_root.find(
-            ".//{http://www.w3.org/2000/09/xmldsig#}Signature")
+            reference_uri=ref_uri)
+        if reference:
+            element_signed = signed_root.find(".//*[@Id='%s']" % reference)
+            signature = signed_root.find(
+                ".//{http://www.w3.org/2000/09/xmldsig#}Signature")
 
-        if element_signed is not None and signature is not None:
-            parent = element_signed.getparent()
-            parent.append(signature)
+            if element_signed is not None and signature is not None:
+                parent = element_signed.getparent()
+                parent.append(signature)
         return etree.tostring(signed_root)

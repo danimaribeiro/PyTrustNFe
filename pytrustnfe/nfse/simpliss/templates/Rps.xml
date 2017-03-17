@@ -3,7 +3,7 @@
         <IdentificacaoRps>
             <Numero>{{ rps.numero }}</Numero>
             <Serie>{{ rps.serie }}</Serie>
-            <Tipo>{{ rps.tipo }}</Tipo>
+            <Tipo>{{ rps.tipo_rps }}</Tipo>
         </IdentificacaoRps>
         <DataEmissao>{{ rps.data_emissao }}</DataEmissao>
         <NaturezaOperacao>{{ rps.natureza_operacao }}</NaturezaOperacao>
@@ -55,8 +55,12 @@
         <Tomador>
             <IdentificacaoTomador>
                 <CpfCnpj>
+                    {% if rps.tomador.cnpj_cpf|length == 14  %}
                     <Cnpj>{{ rps.tomador.cnpj_cpf }}</Cnpj>
+                    {% endif %}
+                    {% if rps.tomador.cnpj_cpf|length == 11  %}
                     <Cpf>{{ rps.tomador.cnpj_cpf }}</Cpf>
+                    {% endif %}
                 </CpfCnpj>
                 <InscricaoMunicipal>{{ rps.tomador.inscricao_municipal }}</InscricaoMunicipal>
             </IdentificacaoTomador>
@@ -66,7 +70,7 @@
                 <Numero>{{ rps.tomador.numero }}</Numero>
                 <Complemento>{{ rps.tomador.complemento }}</Complemento>
                 <Bairro>{{ rps.tomador.bairro }}</Bairro>
-                <CodigoMunicipio>{{ rps.tomador.codigo_municipio }}</CodigoMunicipio>
+                <CodigoMunicipio>{{ rps.tomador.cidade }}</CodigoMunicipio>
                 <Uf>{{ rps.tomador.uf }}</Uf>
                 <Cep>{{ rps.tomador.cep }}</Cep>
             </Endereco>

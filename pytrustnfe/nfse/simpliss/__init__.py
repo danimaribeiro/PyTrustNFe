@@ -12,22 +12,20 @@ import os
 from lxml import etree
 from pytrustnfe import HttpClient
 from pytrustnfe.xml import render_xml, sanitize_response
-from pytrustnfe.certificado import extract_cert_and_key_from_pfx, save_cert_key
-from pytrustnfe.nfse.assinatura import Assinatura
 
 
 def _render_xml(certificado, method, **kwargs):
     path = os.path.join(os.path.dirname(__file__), 'templates')
-    xml_send = render_xml(path, '%s.xml' % method, False, **kwargs)
+    xml_send = render_xml(path, '%s.xml' % method, True, **kwargs)
+    xml_send = etree.tostring(xml_send)
 
-    cert, key = extract_cert_and_key_from_pfx(
-        certificado.pfx, certificado.password)
-    cert, key = save_cert_key(cert, key)
-
-    pfx_path = certificado.save_pfx()
-    signer = Assinatura(pfx_path, certificado.password)
-    xml_send = signer.assina_xml(xml_send, '')
-
+    # cert, key = extract_cert_and_key_from_pfx(
+    #     certificado.pfx, certificado.password)
+    # cert, key = save_cert_key(cert, key)
+    #
+    # pfx_path = certificado.save_pfx()
+    # signer = Assinatura(pfx_path, certificado.password)
+    # xml_send = signer.assina_xml(xml_send, '')
     return xml_send
 
 
@@ -44,10 +42,11 @@ def _validate(method, xml):
 
 def _send(method, **kwargs):
     if kwargs['ambiente'] == 'producao':
-        base_url = 'http://sistemas.pmp.sp.gov.br/semfi/simpliss/ws_nfse/nfseservice.svc?WSDL'  # noqa
+        base_url = 'http://sistemas.pmp.sp.gov.br/semfi/simpliss/ws_nfse/nfseservice.svc'  # noqa
     else:
-        base_url = 'http://wshomologacao.simplissweb.com.br/nfseservice.svc?WSDL'  # noqa
+        base_url = 'http://wshomologacao.simplissweb.com.br/nfseservice.svc'  # noqa
 
+    base_url = 'http://wshomologacao.simplissweb.com.br/nfseservice.svc'
     xml_send = kwargs["xml"].replace('<?xml version="1.0"?>', '')
     path = os.path.join(os.path.dirname(__file__), 'templates')
     soap = render_xml(path, 'SoapRequest.xml', False, soap_body=xml_send)
@@ -57,7 +56,6 @@ def _send(method, **kwargs):
     client = HttpClient(base_url)
     response = client.post_soap(soap, act)
 
-    print response
     response, obj = sanitize_response(response)
     return {
         'sent_xml': xml_send,
@@ -90,13 +88,29 @@ def consultar_nfse_por_rps(certificado, **kwargs):
     return _send('ConsultarNfsePorRps', **kwargs)
 
 
+def xml_consultar_lote_rps(certificado, **kwargs):
+    return _render_xml(certificado, 'ConsultarLoteRps', **kwargs)
+
+
 def consultar_lote_rps(certificado, **kwargs):
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_consultar_lote_rps(certificado, **kwargs)
     return _send('ConsultarLoteRps', **kwargs)
+
+
+def xml_consultar_nfse(certificado, **kwargs):
+    return _render_xml(certificado, 'ConsultarNfse', **kwargs)
 
 
 def consultar_nfse(certificado, **kwargs):
     return _send('ConsultarNfse', **kwargs)
 
 
+def xml_cancelar_nfse(certificado, **kwargs):
+    return _render_xml(certificado, 'CancelarNfse', **kwargs)
+
+
 def cancelar_nfse(certificado, **kwargs):
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_cancelar_nfse(certificado, **kwargs)
     return _send('CancelarNfse', **kwargs)
