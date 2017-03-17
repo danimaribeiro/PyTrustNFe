@@ -19,5 +19,5 @@ class test_nfse_simpliss(unittest.TestCase):
                  'inscricao_prestador': '123',
                  'protocolo': '123'}
         response = recepcionar_lote_rps(
-            pfx, consulta=dados, ambiente='homologacao')
+            pfx, nfse=dados, ambiente='homologacao')
         print response

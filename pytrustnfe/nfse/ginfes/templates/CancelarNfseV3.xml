@@ -1,15 +1,15 @@
-<CancelarNfseEnvio xmlns = "http://www.betha.com.br/e-nota-contribuinte-ws">
+<CancelarNfseEnvio xmlns="http://www.betha.com.br/e-nota-contribuinte-ws">
     <Pedido>
         <InfPedidoCancelamento Id="1">
             <IdentificacaoNfse>
-                <Numero>58</Numero>
+                <Numero>{{ cancelamento.numero_nfse }}</Numero>
                 <CpfCnpj>
-                    <Cnpj>45111111111100</Cnpj>
+                    <Cnpj>{{ cancelamento.cnpj_prestador }}</Cnpj>
                 </CpfCnpj>
-                <InscricaoMunicipal>123498</InscricaoMunicipal>
-                <CodigoMunicipio>4204608</CodigoMunicipio>
+                <InscricaoMunicipal>{{ cancelamento.inscricao_municipal }}</InscricaoMunicipal>
+                <CodigoMunicipio>{{ cancelamento.cidade }}</CodigoMunicipio>
             </IdentificacaoNfse>
-            <CodigoCancelamento>1</CodigoCancelamento>
+            <CodigoCancelamento>{{ cancelamento.codigo_cancelamento }}</CodigoCancelamento>
         </InfPedidoCancelamento>
     </Pedido>
 </CancelarNfseEnvio>
