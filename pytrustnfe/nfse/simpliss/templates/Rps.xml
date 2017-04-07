@@ -30,7 +30,7 @@
                 <ValorIssRetido>{{ rps.valor_iss_retido }}</ValorIssRetido>
                 <OutrasRetencoes>{{ rps.outras_retencoes }}</OutrasRetencoes>
                 <BaseCalculo>{{ rps.base_calculo }}</BaseCalculo>
-                <Aliquota>{{ rps.aliquota }}</Aliquota>
+                <Aliquota>{{ rps.aliquota_issqn }}</Aliquota>
                 <ValorLiquidoNfse>{{ rps.valor_liquido_nfse }}</ValorLiquidoNfse>
                 <DescontoIncondicionado>{{ rps.desconto_incondicionado }}</DescontoIncondicionado>
                 <DescontoCondicionado>{{ rps.desconto_condicionado }}</DescontoCondicionado>
