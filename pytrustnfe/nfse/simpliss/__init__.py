@@ -19,13 +19,6 @@ def _render_xml(certificado, method, **kwargs):
     xml_send = render_xml(path, '%s.xml' % method, True, **kwargs)
     xml_send = etree.tostring(xml_send)
 
-    # cert, key = extract_cert_and_key_from_pfx(
-    #     certificado.pfx, certificado.password)
-    # cert, key = save_cert_key(cert, key)
-    #
-    # pfx_path = certificado.save_pfx()
-    # signer = Assinatura(pfx_path, certificado.password)
-    # xml_send = signer.assina_xml(xml_send, '')
     return xml_send
 
 
@@ -114,3 +107,13 @@ def cancelar_nfse(certificado, **kwargs):
     if "xml" not in kwargs:
         kwargs['xml'] = xml_cancelar_nfse(certificado, **kwargs)
     return _send('CancelarNfse', **kwargs)
+
+
+def xml_gerar_nfse(certificado, **kwargs):
+    return _render_xml(certificado, 'GerarNfse', **kwargs)
+
+
+def gerar_nfse(certificado, **kwargs):
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_recepcionar_lote_rps(certificado, **kwargs)
+    return _send('GerarNfse', **kwargs)
