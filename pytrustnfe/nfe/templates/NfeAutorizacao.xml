@@ -636,6 +636,9 @@
                     <vBC>{{ total.vBC }}</vBC>
                     <vICMS>{{ total.vICMS }}</vICMS>
                     <vICMSDeson>{{ total.vICMSDeson }}</vICMSDeson>
+                    <vFCPUFDest>{{ total.vFCPUFDest }}</vFCPUFDest>
+                    <vICMSUFDest>{{ total.vICMSUFDest }}</vICMSUFDest>
+                    <vICMSUFRemet>{{ total.vICMSUFRemet }}</vICMSUFRemet>
                     <vBCST>{{ total.vBCST }}</vBCST>
                     <vST>{{ total.vST }}</vST>
                     <vProd>{{ total.vProd }}</vProd>
