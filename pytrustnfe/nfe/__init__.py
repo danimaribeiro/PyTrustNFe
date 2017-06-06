@@ -24,6 +24,8 @@ def _build_header(method, **kwargs):
         'NfeInutilizacao': ('NfeInutilizacao2', '3.10'),
         'RecepcaoEventoCancelamento': ('RecepcaoEvento', '1.00'),
         'RecepcaoEventoCarta': ('RecepcaoEvento', '1.00'),
+        'NfeConsultaDest': ('NfeConsultaDest', '3.10'),
+        'NfeDownloadNF': ('NfeDownloadNF', '3.10'),
     }
     vals = {'estado': kwargs['estado'],
             'soap_action': action[method][0],
