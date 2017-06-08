@@ -24,8 +24,8 @@ def _build_header(method, **kwargs):
         'NfeInutilizacao': ('NfeInutilizacao2', '3.10'),
         'RecepcaoEventoCancelamento': ('RecepcaoEvento', '1.00'),
         'RecepcaoEventoCarta': ('RecepcaoEvento', '1.00'),
-        'NfeConsultaDest': ('NfeConsultaDest', '3.10'),
-        'NfeDownloadNF': ('NfeDownloadNF', '3.10'),
+        'NFeDistribuicaoDFe': ('NFeDistribuicaoDFe/nfeDistDFeInteresse',
+                               '1.00'),
     }
     vals = {'estado': kwargs['estado'],
             'soap_action': action[method][0],
@@ -177,7 +177,12 @@ def _send(certificado, method, sign, **kwargs):
                         kwargs['ambiente'])
     cabecalho = _build_header(method, **kwargs)
 
-    response, obj = executar_consulta(certificado, url, cabecalho, xml_send)
+    send_raw = False
+    if method == 'NFeDistribuicaoDFe':
+        send_raw = True
+
+    response, obj = executar_consulta(certificado, url, cabecalho, xml_send,
+                                      send_raw=send_raw)
     return {
         'sent_xml': xml_send,
         'received_xml': response,
@@ -226,9 +231,5 @@ def recepcao_evento_epec(certificado, **kwargs):  # Assinar
     return _send(certificado, 'RecepcaoEventoEPEC', True, **kwargs)
 
 
-def consulta_nfe_destinada(certificado, **kwargs):
-    return _send(certificado, 'NfeConsultaDest', False, **kwargs)
-
-
-def download_nfe(certificado, **kwargs):
-    return _send(certificado, 'NfeDownloadNF', False, **kwargs)
+def consulta_distribuicao_nfe(certificado, **kwargs):
+    return _send(certificado, 'NFeDistribuicaoDFe', False, **kwargs)

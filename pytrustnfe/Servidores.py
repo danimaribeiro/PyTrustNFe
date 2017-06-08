@@ -21,7 +21,6 @@ WS_NFCE_RECEPCAO_EVENTO = 'RecepcaoEventoCarta'
 WS_NFCE_QR_CODE = 'NfeQRCode'
 WS_NFCE_RET_AUTORIZACAO = 'NFeRetAutorizacao',
 WS_NFCE_CONSULTA_DESTINADAS = 'NfeConsultaDest',
-WS_NFCE_DOWNLOAD = 'NfeDownloadNF',
 
 
 WS_NFE_CADASTRO = 'NfeConsultaCadastro'
@@ -29,9 +28,7 @@ WS_DPEC_RECEPCAO = 'RecepcaoEventoEPEC'
 WS_DPEC_CONSULTA = 8
 
 WS_NFE_RECEPCAO_EVENTO = 'RecepcaoEventoCarta'
-WS_NFE_DOWNLOAD = 'NfeDownloadNF'
-WS_NFE_CONSULTA_DESTINADAS = 'NfeConsultaDest'
-WS_DFE_DISTRIBUICAO = 12
+WS_DFE_DISTRIBUICAO = 'NFeDistribuicaoDFe'
 
 NFE_AMBIENTE_PRODUCAO = 1
 NFE_AMBIENTE_HOMOLOGACAO = 2
@@ -76,7 +73,7 @@ def localizar_url(servico, estado, mod='55', ambiente=2):
     sigla = SIGLA_ESTADO[estado]
     ws = ESTADO_WS[sigla]
 
-    if servico in (WS_NFE_CONSULTA_DESTINADAS, WS_NFE_DOWNLOAD):
+    if servico in (WS_DFE_DISTRIBUICAO):
         ws = AN
 
     if mod in ws:
@@ -133,14 +130,6 @@ METODO_WS = {
         'webservice': 'RecepcaoEvento',
         'metodo': 'nfeRecepcaoEvento',
     },
-    WS_NFE_DOWNLOAD: {
-        'webservice': 'NfeDownloadNF',
-        'metodo': 'nfeDownloadNF',
-    },
-    WS_NFE_CONSULTA_DESTINADAS: {
-        'webservice': 'NfeConsultaDest',
-        'metodo': 'nfeConsultaNFDest',
-    },
     WS_DFE_DISTRIBUICAO: {
         'webservice': 'NFeDistribuicaoDFe',
         'metodo': 'nfeDistDFeInteresse'
@@ -181,7 +170,6 @@ SVAN = {
         WS_NFE_INUTILIZACAO: 'NfeInutilizacao2/NfeInutilizacao2.asmx',
         WS_NFE_CONSULTA: 'NfeConsulta2/NfeConsulta2.asmx',
         WS_NFE_SITUACAO: 'NfeStatusServico2/NfeStatusServico2.asmx',
-        WS_NFE_DOWNLOAD: 'NfeDownloadNF/NfeDownloadNF.asmx',
     },
     NFE_AMBIENTE_HOMOLOGACAO: {
         'servidor': 'hom.sefazvirtual.fazenda.gov.br',
@@ -191,7 +179,6 @@ SVAN = {
         WS_NFE_INUTILIZACAO: 'NfeInutilizacao2/NfeInutilizacao2.asmx',
         WS_NFE_CONSULTA: 'NfeConsulta2/NfeConsulta2.asmx',
         WS_NFE_SITUACAO: 'NfeStatusServico2/NfeStatusServico2.asmx',
-        WS_NFE_DOWNLOAD: 'NfeDownloadNF/NfeDownloadNF.asmx',
     }
 }
 
@@ -269,17 +256,13 @@ DPEC = {
 
 AN = {
     NFE_AMBIENTE_PRODUCAO: {
-        'servidor': 'www.nfe.fazenda.gov.br',
+        'servidor': 'www1.nfe.fazenda.gov.br',
         WS_NFE_RECEPCAO_EVENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
-        WS_NFE_CONSULTA_DESTINADAS: 'NFeConsultaDest/NFeConsultaDest.asmx',
-        WS_NFE_DOWNLOAD: 'NfeDownloadNF/NfeDownloadNF.asmx',
         WS_DFE_DISTRIBUICAO: 'NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx',
     },
     NFE_AMBIENTE_HOMOLOGACAO: {
         'servidor': 'hom.nfe.fazenda.gov.br',
         WS_NFE_RECEPCAO_EVENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
-        WS_NFE_CONSULTA_DESTINADAS: 'NFeConsultaDest/NFeConsultaDest.asmx',
-        WS_NFE_DOWNLOAD: 'NfeDownloadNF/NfeDownloadNF.asmx',
         WS_DFE_DISTRIBUICAO: 'NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx',
     },
 }
@@ -522,8 +505,6 @@ UFRS = {
             WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao.asmx',
             WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx',
             WS_NFE_CADASTRO: 'ws/cadconsultacadastro/cadconsultacadastro2.asmx',
-            WS_NFE_CONSULTA_DESTINADAS: 'ws/nfeConsultaDest/nfeConsultaDest.asmx',
-            WS_NFE_DOWNLOAD: 'ws/nfeDownloadNF/nfeDownloadNF.asmx',
             WS_NFE_INUTILIZACAO: 'ws/NfeInutilizacao/NfeInutilizacao2.asmx',
             WS_NFE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
             WS_NFE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
@@ -535,8 +516,6 @@ UFRS = {
             WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao.asmx',
             WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx',
             WS_NFE_CADASTRO: 'ws/cadconsultacadastro/cadconsultacadastro2.asmx',
-            WS_NFE_CONSULTA_DESTINADAS: 'ws/nfeConsultaDest/nfeConsultaDest.asmx',
-            WS_NFE_DOWNLOAD: 'ws/nfeDownloadNF/nfeDownloadNF.asmx',
             WS_NFE_INUTILIZACAO: 'ws/NfeInutilizacao/NfeInutilizacao2.asmx',
             WS_NFE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
             WS_NFE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
@@ -550,8 +529,6 @@ UFRS = {
             WS_NFCE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao.asmx',
             WS_NFCE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx',
             WS_NFCE_CADASTRO: 'ws/cadconsultacadastro/cadconsultacadastro2.asmx',
-            WS_NFCE_CONSULTA_DESTINADAS: 'ws/nfeConsultaDest/nfeConsultaDest.asmx',
-            WS_NFCE_DOWNLOAD: 'ws/nfeDownloadNF/nfeDownloadNF.asmx',
             WS_NFCE_INUTILIZACAO: 'ws/NfeInutilizacao/NfeInutilizacao2.asmx',
             WS_NFCE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
             WS_NFCE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
@@ -564,8 +541,6 @@ UFRS = {
             WS_NFCE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao.asmx',
             WS_NFCE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx',
             WS_NFCE_CADASTRO: 'ws/cadconsultacadastro/cadconsultacadastro2.asmx',
-            WS_NFCE_CONSULTA_DESTINADAS: 'ws/nfeConsultaDest/nfeConsultaDest.asmx',
-            WS_NFCE_DOWNLOAD: 'ws/nfeDownloadNF/nfeDownloadNF.asmx',
             WS_NFCE_INUTILIZACAO: 'ws/NfeInutilizacao/NfeInutilizacao2.asmx',
             WS_NFCE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
             WS_NFCE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
