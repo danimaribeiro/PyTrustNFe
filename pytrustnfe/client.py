@@ -2,9 +2,11 @@
 # © 2016 Danimar Ribeiro, Trustcode
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import urllib3
 import requests
 import suds.client
 import suds_requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 
 def get_authenticated_client(base_url, cert, key):
@@ -48,6 +50,7 @@ class HttpClient(object):
 
     def post_soap(self, xml_soap, cabecalho):
         header = self._headers(cabecalho.soap_action)
+        urllib3.disable_warnings(category=InsecureRequestWarning)
         res = requests.post(self.url, data=xml_soap,
                             cert=(self.cert_path, self.key_path),
                             verify=False, headers=header)
