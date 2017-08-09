@@ -2,13 +2,16 @@
     <Body>
         <nfeDistDFeInteresse xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/NFeDistribuicaoDFe">
             <nfeDadosMsg>
-                <distDFeInt xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.00">
+                <distDFeInt xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.01">
                     <tpAmb>{{ ambiente }}</tpAmb>
                     <cUFAutor>{{ estado }}</cUFAutor>
-                    <CNPJ>{{ consulta.cnpj_cpf }}</CNPJ>
+                    <CNPJ>{{ cnpj_cpf }}</CNPJ>
                     <distNSU>
-                        <ultNSU>{{ consulta.ultimo_nsu }}</ultNSU>
+                        <ultNSU>{{ ultimo_nsu }}</ultNSU>
                     </distNSU>
+                    <consChNFe>
+                        <chNFe>{{ chave_nfe }}</chNFe>
+                    </consChNFe>
                 </distDFeInt>
             </nfeDadosMsg>
         </nfeDistDFeInteresse>
