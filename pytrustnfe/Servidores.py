@@ -19,8 +19,8 @@ WS_NFCE_SITUACAO = 'NfeStatusServico'
 WS_NFCE_CADASTRO = 'NfeConsultaCadastro'
 WS_NFCE_RECEPCAO_EVENTO = 'RecepcaoEventoCarta'
 WS_NFCE_QR_CODE = 'NfeQRCode'
-WS_NFCE_RET_AUTORIZACAO = 'NFeRetAutorizacao',
 WS_NFCE_CONSULTA_DESTINADAS = 'NfeConsultaDest',
+WS_NFCE_RET_AUTORIZACAO = 'NFeRetAutorizacao',
 
 
 WS_NFE_CADASTRO = 'NfeConsultaCadastro'
@@ -28,7 +28,9 @@ WS_DPEC_RECEPCAO = 'RecepcaoEventoEPEC'
 WS_DPEC_CONSULTA = 8
 
 WS_NFE_RECEPCAO_EVENTO = 'RecepcaoEventoCarta'
+WS_NFE_RECEPCAO_EVENTO_MANIFESTO = 'RecepcaoEventoManifesto'
 WS_DFE_DISTRIBUICAO = 'NFeDistribuicaoDFe'
+WS_DOWNLOAD_NFE = 'nfeDistDFeInteresse'
 
 NFE_AMBIENTE_PRODUCAO = 1
 NFE_AMBIENTE_HOMOLOGACAO = 2
@@ -73,7 +75,8 @@ def localizar_url(servico, estado, mod='55', ambiente=2):
     sigla = SIGLA_ESTADO[estado]
     ws = ESTADO_WS[sigla]
 
-    if servico in (WS_DFE_DISTRIBUICAO):
+    if servico in (WS_DFE_DISTRIBUICAO, WS_DOWNLOAD_NFE,
+                   WS_NFE_RECEPCAO_EVENTO_MANIFESTO):
         ws = AN
 
     if mod in ws:
@@ -120,6 +123,7 @@ METODO_WS = {
     },
     WS_NFE_SITUACAO: {
         'webservice': 'NfeStatusServico2',
+
         'metodo': 'nfeStatusServicoNF2',
     },
     WS_NFE_CADASTRO: {
@@ -130,10 +134,6 @@ METODO_WS = {
         'webservice': 'RecepcaoEvento',
         'metodo': 'nfeRecepcaoEvento',
     },
-    WS_DFE_DISTRIBUICAO: {
-        'webservice': 'NFeDistribuicaoDFe',
-        'metodo': 'nfeDistDFeInteresse'
-    }
 }
 
 SVRS = {
@@ -259,11 +259,15 @@ AN = {
         'servidor': 'www1.nfe.fazenda.gov.br',
         WS_NFE_RECEPCAO_EVENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
         WS_DFE_DISTRIBUICAO: 'NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx',
+        WS_DOWNLOAD_NFE: 'NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx',
+        WS_NFE_RECEPCAO_EVENTO_MANIFESTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
     },
     NFE_AMBIENTE_HOMOLOGACAO: {
         'servidor': 'hom.nfe.fazenda.gov.br',
         WS_NFE_RECEPCAO_EVENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
         WS_DFE_DISTRIBUICAO: 'NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx',
+        WS_DOWNLOAD_NFE: 'NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx',
+        WS_NFE_RECEPCAO_EVENTO_MANIFESTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
     },
 }
 
