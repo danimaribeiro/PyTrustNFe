@@ -26,6 +26,7 @@ def _build_header(method, **kwargs):
         'RecepcaoEventoCarta': ('RecepcaoEvento', '1.00'),
         'NFeDistribuicaoDFe': ('NFeDistribuicaoDFe/nfeDistDFeInteresse',
                                '1.00'),
+        'RecepcaoEventoManifesto': ('RecepcaoEvento', '1.00'),
     }
     vals = {'estado': kwargs['estado'],
             'soap_action': action[method][0],
@@ -166,6 +167,9 @@ def _send(certificado, method, sign, **kwargs):
         if method == 'RecepcaoEventoCarta':
             xml_send = signer.assina_xml(
                 xmlElem_send, kwargs['Id'])
+        elif method == 'RecepcaoEventoManifesto':
+            xml_send = signer.assina_xml(
+                xmlElem_send, kwargs['manifesto']['identificador'])
 
         if modelo == '65':
             xml_send = _add_qrCode(xml_send, **kwargs)
@@ -232,4 +236,8 @@ def recepcao_evento_epec(certificado, **kwargs):  # Assinar
 
 
 def consulta_distribuicao_nfe(certificado, **kwargs):
+    return _send(certificado, 'NFeDistribuicaoDFe', False, **kwargs)
+
+
+def download_nfe(certificado, **kwargs):
     return _send(certificado, 'NFeDistribuicaoDFe', False, **kwargs)
