@@ -35,8 +35,8 @@ later (LGPLv2+)',
     long_description=open('README.md', 'r').read(),
     install_requires=[
         'Jinja2 >= 2.8',
-        'signxml == 2.2.6',
-        'lxml >= 3.6.0, < 3.7',
+        'signxml >= 2.4.0',
+        'lxml >= 3.5.0, < 4',
         'suds >= 0.4',
         'suds_requests >= 0.3',
         'reportlab'
