@@ -15,7 +15,7 @@ DPEC	../pytrustnfe/Servidores.py	/^DPEC = {$/;"	kind:variable	line:244
 ESTADO_WS	../pytrustnfe/Servidores.py	/^ESTADO_WS = {$/;"	kind:variable	line:609
 ESTADO_WS_CONTINGENCIA	../pytrustnfe/Servidores.py	/^ESTADO_WS_CONTINGENCIA = {$/;"	kind:variable	line:652
 HttpClient	../pytrustnfe/__init__.py	/^class HttpClient(object):$/;"	kind:class	line:8
-HttpClient	../pytrustnfe/client.py	/^class HttpClient(object):$/;"	kind:class	line:36
+HttpClient	../pytrustnfe/client.py	/^class HttpClient(object):$/;"	kind:class	line:38
 METODO_WS	../pytrustnfe/Servidores.py	/^METODO_WS = {$/;"	kind:variable	line:107
 NAMESPACE_SIG	../pytrustnfe/nfse/assinatura.py	/^NAMESPACE_SIG = 'http:\/\/www.w3.org\/2000\/09\/xmldsig#'$/;"	kind:variable	line:9
 NFCE_AMBIENTE_HOMOLOGACAO	../pytrustnfe/Servidores.py	/^NFCE_AMBIENTE_HOMOLOGACAO = 2$/;"	kind:variable	line:38
@@ -47,7 +47,7 @@ UFPE	../pytrustnfe/Servidores.py	/^UFPE = {$/;"	kind:variable	line:478
 UFPR	../pytrustnfe/Servidores.py	/^UFPR = {$/;"	kind:variable	line:453
 UFRS	../pytrustnfe/Servidores.py	/^UFRS = {$/;"	kind:variable	line:504
 UFSP	../pytrustnfe/Servidores.py	/^UFSP = {$/;"	kind:variable	line:557
-VERSION	../setup.py	/^VERSION = "0.1.35"$/;"	kind:variable	line:4
+VERSION	../setup.py	/^VERSION = "0.1.38"$/;"	kind:variable	line:4
 WS_DFE_DISTRIBUICAO	../pytrustnfe/Servidores.py	/^WS_DFE_DISTRIBUICAO = 'NFeDistribuicaoDFe'$/;"	kind:variable	line:32
 WS_DOWNLOAD_NFE	../pytrustnfe/Servidores.py	/^WS_DOWNLOAD_NFE = 'nfeDistDFeInteresse'$/;"	kind:variable	line:33
 WS_DPEC_CONSULTA	../pytrustnfe/Servidores.py	/^WS_DPEC_CONSULTA = 8$/;"	kind:variable	line:28
@@ -76,7 +76,7 @@ WS_NFE_SITUACAO	../pytrustnfe/Servidores.py	/^WS_NFE_SITUACAO = 'NfeStatusServic
 XML_RETORNO	../pytrustnfe/test/test_comunicacao.py	/^                '<cUF>42<\/cUF><\/retEnviNFe>'$/;"	kind:variable	line:12
 __init__	../pytrustnfe/__init__.py	/^    def __init__(self, url):$/;"	kind:member	line:10
 __init__	../pytrustnfe/certificado.py	/^    def __init__(self, pfx, password):$/;"	kind:member	line:11
-__init__	../pytrustnfe/client.py	/^    def __init__(self, url, cert_path, key_path):$/;"	kind:member	line:38
+__init__	../pytrustnfe/client.py	/^    def __init__(self, url, cert_path, key_path):$/;"	kind:member	line:40
 __init__	../pytrustnfe/exceptions.py	/^    def __init__(self, message, *args, **kwargs):$/;"	kind:member	line:9
 __init__	../pytrustnfe/nfe/assinatura.py	/^    def __init__(self, arquivo, senha):$/;"	kind:member	line:13
 __init__	../pytrustnfe/nfe/danfe.py	/^    def __init__(self, sizepage=A4, list_xml=None, recibo=True,$/;"	kind:member	line:73
@@ -107,7 +107,7 @@ _generate_nfe_id	../pytrustnfe/nfe/__init__.py	/^def _generate_nfe_id(**kwargs):
 _get_cancelamento	../pytrustnfe/test/test_nfse_paulistana.py	/^    def _get_cancelamento(self):$/;"	kind:member	line:96
 _get_nfse	../pytrustnfe/test/test_nfse_paulistana.py	/^    def _get_nfse(self):$/;"	kind:member	line:17
 _headers	../pytrustnfe/__init__.py	/^    def _headers(self, action):$/;"	kind:member	line:13
-_headers	../pytrustnfe/client.py	/^    def _headers(self, action):$/;"	kind:member	line:43
+_headers	../pytrustnfe/client.py	/^    def _headers(self, action):$/;"	kind:member	line:45
 _inicializar_cripto	../pytrustnfe/nfse/assinatura.py	/^    def _inicializar_cripto(self):$/;"	kind:member	line:22
 _render	../pytrustnfe/nfse/ginfes/__init__.py	/^def _render(certificado, method, **kwargs):$/;"	kind:function	line:14
 _render_xml	../pytrustnfe/nfse/simpliss/__init__.py	/^def _render_xml(certificado, method, **kwargs):$/;"	kind:function	line:17
@@ -200,8 +200,8 @@ gerar_chave	../pytrustnfe/utils.py	/^def gerar_chave(obj_chave, prefix=None):$/;
 gerar_nfeproc	../pytrustnfe/utils.py	/^def gerar_nfeproc(envio, recibo):$/;"	kind:function	line:85
 gerar_nfse	../pytrustnfe/nfse/betha/__init__.py	/^def gerar_nfse(certificado, **kwargs):$/;"	kind:function	line:68
 gerar_nfse	../pytrustnfe/nfse/simpliss/__init__.py	/^def gerar_nfse(certificado, **kwargs):$/;"	kind:function	line:116
-get_authenticated_client	../pytrustnfe/client.py	/^def get_authenticated_client(base_url, cert, key):$/;"	kind:function	line:10
-get_client	../pytrustnfe/client.py	/^def get_client(base_url):$/;"	kind:function	line:23
+get_authenticated_client	../pytrustnfe/client.py	/^def get_authenticated_client(base_url, cert, key):$/;"	kind:function	line:12
+get_client	../pytrustnfe/client.py	/^def get_client(base_url):$/;"	kind:function	line:25
 get_image	../pytrustnfe/nfe/danfe.py	/^def get_image(path, width=1*cm):$/;"	kind:function	line:65
 getdateUTC	../pytrustnfe/nfe/danfe.py	/^def getdateUTC(cDateUTC):$/;"	kind:function	line:36
 hline	../pytrustnfe/nfe/danfe.py	/^    def hline(self, x, y, width):$/;"	kind:member	line:800
@@ -231,7 +231,7 @@ package_data	../setup.py	/^    package_data={'pytrustnfe': [$/;"	kind:variable	l
 packages	../setup.py	/^    packages=find_packages(exclude=['*test*']),$/;"	kind:variable	line:22
 pop_encoding	../pytrustnfe/xml/validate.py	/^def pop_encoding(xml):$/;"	kind:function	line:14
 post_soap	../pytrustnfe/__init__.py	/^    def post_soap(self, xml_soap, action):$/;"	kind:member	line:21
-post_soap	../pytrustnfe/client.py	/^    def post_soap(self, xml_soap, cabecalho):$/;"	kind:member	line:49
+post_soap	../pytrustnfe/client.py	/^    def post_soap(self, xml_soap, cabecalho):$/;"	kind:member	line:51
 produtos	../pytrustnfe/nfe/danfe.py	/^    def produtos(self, oXML=None, el_det=None, oPaginator=None,$/;"	kind:member	line:587
 project	../docs/conf.py	/^project = u'PyTrustNFe'$/;"	kind:variable	line:52
 pygments_style	../docs/conf.py	/^pygments_style = 'sphinx'$/;"	kind:variable	line:98
