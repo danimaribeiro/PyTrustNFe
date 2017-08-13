@@ -272,27 +272,53 @@ AN = {
 }
 
 UFAM = {
-    NFE_AMBIENTE_PRODUCAO: {
-        'servidor': 'nfe.sefaz.am.gov.br',
-        WS_NFE_RECEPCAO_EVENTO: 'services2/services/RecepcaoEvento',
-        WS_NFE_CANCELAMENTO: 'services2/services/RecepcaoEvento',
-        WS_NFE_AUTORIZACAO: 'services2/services/NfeAutorizacao',
-        WS_NFE_RET_AUTORIZACAO: 'services2/services/NfeRetAutorizacao',
-        WS_NFE_INUTILIZACAO: 'services2/services/NfeInutilizacao2',
-        WS_NFE_CONSULTA: 'services2/services/NfeConsulta2',
-        WS_NFE_SITUACAO: 'services2/services/NfeStatusServico2',
-        WS_NFE_CADASTRO: 'services2/services/cadconsultacadastro2',
+    NFE_MODELO: {
+        NFE_AMBIENTE_PRODUCAO: {
+            'servidor': 'nfe.sefaz.am.gov.br',
+            WS_NFE_RECEPCAO_EVENTO: 'services2/services/RecepcaoEvento',
+            WS_NFE_CANCELAMENTO: 'services2/services/RecepcaoEvento',
+            WS_NFE_AUTORIZACAO: 'services2/services/NfeAutorizacao',
+            WS_NFE_RET_AUTORIZACAO: 'services2/services/NfeRetAutorizacao',
+            WS_NFE_INUTILIZACAO: 'services2/services/NfeInutilizacao2',
+            WS_NFE_CONSULTA: 'services2/services/NfeConsulta2',
+            WS_NFE_SITUACAO: 'services2/services/NfeStatusServico2',
+            WS_NFE_CADASTRO: 'services2/services/cadconsultacadastro2',
+        },
+        NFE_AMBIENTE_HOMOLOGACAO: {
+            'servidor': 'homnfe.sefaz.am.gov.br',
+            WS_NFE_RECEPCAO_EVENTO: 'services2/services/RecepcaoEvento',
+            WS_NFE_CANCELAMENTO: 'services2/services/RecepcaoEvento',
+            WS_NFE_AUTORIZACAO: 'services2/services/NfeAutorizacao',
+            WS_NFE_RET_AUTORIZACAO: 'services2/services/NfeRetAutorizacao',
+            WS_NFE_INUTILIZACAO: 'services2/services/NfeInutilizacao2',
+            WS_NFE_CONSULTA: 'services2/services/NfeConsulta2',
+            WS_NFE_SITUACAO: 'services2/services/NfeStatusServico2',
+            WS_NFE_CADASTRO: 'services2/services/cadconsultacadastro2',
+        }
     },
-    NFE_AMBIENTE_HOMOLOGACAO: {
-        'servidor': 'homnfe.sefaz.am.gov.br',
-        WS_NFE_RECEPCAO_EVENTO: 'services2/services/RecepcaoEvento',
-        WS_NFE_CANCELAMENTO: 'services2/services/RecepcaoEvento',
-        WS_NFE_AUTORIZACAO: 'services2/services/NfeAutorizacao',
-        WS_NFE_RET_AUTORIZACAO: 'services2/services/NfeRetAutorizacao',
-        WS_NFE_INUTILIZACAO: 'services2/services/NfeInutilizacao2',
-        WS_NFE_CONSULTA: 'services2/services/NfeConsulta2',
-        WS_NFE_SITUACAO: 'services2/services/NfeStatusServico2',
-        WS_NFE_CADASTRO: 'services2/services/cadconsultacadastro2',
+    NFCE_MODELO: {
+        NFE_AMBIENTE_PRODUCAO: {
+            'servidor': 'nfe.sefaz.am.gov.br',
+            WS_NFE_RECEPCAO_EVENTO: 'services2/services/RecepcaoEvento',
+            WS_NFE_CANCELAMENTO: 'services2/services/RecepcaoEvento',
+            WS_NFE_AUTORIZACAO: 'services2/services/NfeAutorizacao',
+            WS_NFE_RET_AUTORIZACAO: 'services2/services/NfeRetAutorizacao',
+            WS_NFE_INUTILIZACAO: 'services2/services/NfeInutilizacao2',
+            WS_NFE_CONSULTA: 'services2/services/NfeConsulta2',
+            WS_NFE_SITUACAO: 'services2/services/NfeStatusServico2',
+            WS_NFE_CADASTRO: 'services2/services/cadconsultacadastro2',
+        },
+        NFE_AMBIENTE_HOMOLOGACAO: {
+            'servidor': 'homnfce.sefaz.am.gov.br',
+            WS_NFE_RECEPCAO_EVENTO: 'nfce-services-nac/services/RecepcaoEvento',
+            WS_NFE_CANCELAMENTO: 'nfce-services-nac/services/RecepcaoEvento',
+            WS_NFE_AUTORIZACAO: 'nfce-services-nac/services/NfeAutorizacao',
+            WS_NFE_RET_AUTORIZACAO: 'nfce-services-nac/services/NfeRetAutorizacao',
+            WS_NFE_INUTILIZACAO: 'nfce-services-nac/services/NfeInutilizacao2',
+            WS_NFE_CONSULTA: 'nfce-services-nac/services/NfeConsulta2',
+            WS_NFE_SITUACAO: 'nfce-services-nac/services/NfeStatusServico2',
+            WS_NFCE_QR_CODE: 'nfceweb/consultarNFCe.jsp',
+        }
     }
 }
 
