@@ -1,4 +1,4 @@
-lxml >= 3.6.0, < 3.7
+lxml >= 3.5.0, < 4
 nose
 mock
 coveralls
@@ -8,9 +8,9 @@ Jinja2
 signxml
 suds >= 0.4
 suds_requests >= 0.3
-defusedxml >= 0.4.1, < 0.5
-eight >= 0.3.0, < 0.4
-cryptography >= 1.4, < 1.8
+defusedxml >= 0.4.1, < 0.6
+eight >= 0.3.0, < 0.5
+cryptography >= 1.8, < 1.10
 pyOpenSSL >= 16.0.0, < 17
 certifi >= 2015.11.20.1
 reportlab

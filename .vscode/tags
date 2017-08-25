@@ -1,0 +1,349 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AN	../pytrustnfe/Servidores.py	/^AN = {$/;"	kind:variable	line:257
+Assinatura	../pytrustnfe/nfe/assinatura.py	/^class Assinatura(object):$/;"	kind:class	line:11
+Assinatura	../pytrustnfe/nfse/assinatura.py	/^class Assinatura(object):$/;"	kind:class	line:12
+CHAVE	../pytrustnfe/test/test_certificado.py	/^    '-----END PRIVATE KEY-----\\n'$/;"	kind:variable	line:29
+CabecalhoSoap	../pytrustnfe/utils.py	/^class CabecalhoSoap(object):$/;"	kind:class	line:11
+Certificado	../pytrustnfe/certificado.py	/^class Certificado(object):$/;"	kind:class	line:10
+ChaveNFe	../pytrustnfe/utils.py	/^class ChaveNFe(object):$/;"	kind:class	line:19
+DPEC	../pytrustnfe/Servidores.py	/^DPEC = {$/;"	kind:variable	line:244
+ESTADO_WS	../pytrustnfe/Servidores.py	/^ESTADO_WS = {$/;"	kind:variable	line:609
+ESTADO_WS_CONTINGENCIA	../pytrustnfe/Servidores.py	/^ESTADO_WS_CONTINGENCIA = {$/;"	kind:variable	line:652
+HttpClient	../pytrustnfe/__init__.py	/^class HttpClient(object):$/;"	kind:class	line:8
+HttpClient	../pytrustnfe/client.py	/^class HttpClient(object):$/;"	kind:class	line:36
+METODO_WS	../pytrustnfe/Servidores.py	/^METODO_WS = {$/;"	kind:variable	line:107
+NAMESPACE_SIG	../pytrustnfe/nfse/assinatura.py	/^NAMESPACE_SIG = 'http:\/\/www.w3.org\/2000\/09\/xmldsig#'$/;"	kind:variable	line:9
+NFCE_AMBIENTE_HOMOLOGACAO	../pytrustnfe/Servidores.py	/^NFCE_AMBIENTE_HOMOLOGACAO = 2$/;"	kind:variable	line:38
+NFCE_AMBIENTE_PRODUCAO	../pytrustnfe/Servidores.py	/^NFCE_AMBIENTE_PRODUCAO = 1$/;"	kind:variable	line:37
+NFCE_MODELO	../pytrustnfe/Servidores.py	/^NFCE_MODELO = u'65'$/;"	kind:variable	line:41
+NFE_AMBIENTE_HOMOLOGACAO	../pytrustnfe/Servidores.py	/^NFE_AMBIENTE_HOMOLOGACAO = 2$/;"	kind:variable	line:36
+NFE_AMBIENTE_PRODUCAO	../pytrustnfe/Servidores.py	/^NFE_AMBIENTE_PRODUCAO = 1$/;"	kind:variable	line:35
+NFE_MODELO	../pytrustnfe/Servidores.py	/^NFE_MODELO = u'55'$/;"	kind:variable	line:40
+NFeValidationException	../pytrustnfe/exceptions.py	/^class NFeValidationException(ValueError):$/;"	kind:class	line:6
+PATH	../pytrustnfe/xml/validate.py	/^PATH = os.path.dirname(os.path.abspath(__file__))$/;"	kind:variable	line:10
+REGIME_TRIBUTACAO	../pytrustnfe/nfe/danfe.py	/^REGIME_TRIBUTACAO = {$/;"	kind:variable	line:58
+SCAN	../pytrustnfe/Servidores.py	/^SCAN = {$/;"	kind:variable	line:185
+SCHEMA	../pytrustnfe/xml/validate.py	/^SCHEMA = os.path.join(PATH, 'schemas\/nfe_v3.10.xsd')$/;"	kind:variable	line:11
+SIGLA_ESTADO	../pytrustnfe/Servidores.py	/^SIGLA_ESTADO = {$/;"	kind:variable	line:43
+SVAN	../pytrustnfe/Servidores.py	/^SVAN = {$/;"	kind:variable	line:164
+SVC_AN	../pytrustnfe/Servidores.py	/^SVC_AN = {$/;"	kind:variable	line:206
+SVC_RS	../pytrustnfe/Servidores.py	/^SVC_RS = {$/;"	kind:variable	line:225
+SVRS	../pytrustnfe/Servidores.py	/^SVRS = {$/;"	kind:variable	line:139
+Servidores.py	../pytrustnfe/Servidores.py	1;"	kind:file	line:1
+TestAddQRCode	../pytrustnfe/test/test_add_qr_code.py	/^class TestAddQRCode(unittest.TestCase):$/;"	kind:class	line:10
+UFAM	../pytrustnfe/Servidores.py	/^UFAM = {$/;"	kind:variable	line:274
+UFBA	../pytrustnfe/Servidores.py	/^UFBA = {$/;"	kind:variable	line:299
+UFCE	../pytrustnfe/Servidores.py	/^UFCE = {$/;"	kind:variable	line:326
+UFGO	../pytrustnfe/Servidores.py	/^UFGO = {$/;"	kind:variable	line:352
+UFMG	../pytrustnfe/Servidores.py	/^UFMG = {$/;"	kind:variable	line:428
+UFMS	../pytrustnfe/Servidores.py	/^UFMS = {$/;"	kind:variable	line:403
+UFMT	../pytrustnfe/Servidores.py	/^UFMT = {$/;"	kind:variable	line:378
+UFPE	../pytrustnfe/Servidores.py	/^UFPE = {$/;"	kind:variable	line:478
+UFPR	../pytrustnfe/Servidores.py	/^UFPR = {$/;"	kind:variable	line:453
+UFRS	../pytrustnfe/Servidores.py	/^UFRS = {$/;"	kind:variable	line:504
+UFSP	../pytrustnfe/Servidores.py	/^UFSP = {$/;"	kind:variable	line:557
+VERSION	../setup.py	/^VERSION = "0.1.35"$/;"	kind:variable	line:4
+WS_DFE_DISTRIBUICAO	../pytrustnfe/Servidores.py	/^WS_DFE_DISTRIBUICAO = 'NFeDistribuicaoDFe'$/;"	kind:variable	line:32
+WS_DOWNLOAD_NFE	../pytrustnfe/Servidores.py	/^WS_DOWNLOAD_NFE = 'nfeDistDFeInteresse'$/;"	kind:variable	line:33
+WS_DPEC_CONSULTA	../pytrustnfe/Servidores.py	/^WS_DPEC_CONSULTA = 8$/;"	kind:variable	line:28
+WS_DPEC_RECEPCAO	../pytrustnfe/Servidores.py	/^WS_DPEC_RECEPCAO = 'RecepcaoEventoEPEC'$/;"	kind:variable	line:27
+WS_NFCE_AUTORIZACAO	../pytrustnfe/Servidores.py	/^WS_NFCE_AUTORIZACAO = 'NfeAutorizacao'$/;"	kind:variable	line:13
+WS_NFCE_CADASTRO	../pytrustnfe/Servidores.py	/^WS_NFCE_CADASTRO = 'NfeConsultaCadastro'$/;"	kind:variable	line:19
+WS_NFCE_CANCELAMENTO	../pytrustnfe/Servidores.py	/^WS_NFCE_CANCELAMENTO = 'RecepcaoEventoCancelamento'$/;"	kind:variable	line:15
+WS_NFCE_CONSULTA	../pytrustnfe/Servidores.py	/^WS_NFCE_CONSULTA = 'NfeConsultaProtocolo'$/;"	kind:variable	line:17
+WS_NFCE_CONSULTA_DESTINADAS	../pytrustnfe/Servidores.py	/^WS_NFCE_CONSULTA_DESTINADAS = 'NfeConsultaDest',$/;"	kind:variable	line:22
+WS_NFCE_INUTILIZACAO	../pytrustnfe/Servidores.py	/^WS_NFCE_INUTILIZACAO = 'NfeInutilizacao'$/;"	kind:variable	line:16
+WS_NFCE_QR_CODE	../pytrustnfe/Servidores.py	/^WS_NFCE_QR_CODE = 'NfeQRCode'$/;"	kind:variable	line:21
+WS_NFCE_RECEPCAO_EVENTO	../pytrustnfe/Servidores.py	/^WS_NFCE_RECEPCAO_EVENTO = 'RecepcaoEventoCarta'$/;"	kind:variable	line:20
+WS_NFCE_RET_AUTORIZACAO	../pytrustnfe/Servidores.py	/^WS_NFCE_RET_AUTORIZACAO = 'NFeRetAutorizacao',$/;"	kind:variable	line:23
+WS_NFCE_RET_AUTORIZACAO	../pytrustnfe/Servidores.py	/^WS_NFCE_RET_AUTORIZACAO = 'NfeRetAutorizacao'$/;"	kind:variable	line:14
+WS_NFCE_SITUACAO	../pytrustnfe/Servidores.py	/^WS_NFCE_SITUACAO = 'NfeStatusServico'$/;"	kind:variable	line:18
+WS_NFE_AUTORIZACAO	../pytrustnfe/Servidores.py	/^WS_NFE_AUTORIZACAO = 'NfeAutorizacao'$/;"	kind:variable	line:5
+WS_NFE_CADASTRO	../pytrustnfe/Servidores.py	/^WS_NFE_CADASTRO = 'NfeConsultaCadastro'$/;"	kind:variable	line:11
+WS_NFE_CADASTRO	../pytrustnfe/Servidores.py	/^WS_NFE_CADASTRO = 'NfeConsultaCadastro'$/;"	kind:variable	line:26
+WS_NFE_CANCELAMENTO	../pytrustnfe/Servidores.py	/^WS_NFE_CANCELAMENTO = 'RecepcaoEventoCancelamento'$/;"	kind:variable	line:7
+WS_NFE_CONSULTA	../pytrustnfe/Servidores.py	/^WS_NFE_CONSULTA = 'NfeConsultaProtocolo'$/;"	kind:variable	line:9
+WS_NFE_INUTILIZACAO	../pytrustnfe/Servidores.py	/^WS_NFE_INUTILIZACAO = 'NfeInutilizacao'$/;"	kind:variable	line:8
+WS_NFE_RECEPCAO_EVENTO	../pytrustnfe/Servidores.py	/^WS_NFE_RECEPCAO_EVENTO = 'RecepcaoEventoCarta'$/;"	kind:variable	line:30
+WS_NFE_RECEPCAO_EVENTO_MANIFESTO	../pytrustnfe/Servidores.py	/^WS_NFE_RECEPCAO_EVENTO_MANIFESTO = 'RecepcaoEventoManifesto'$/;"	kind:variable	line:31
+WS_NFE_RET_AUTORIZACAO	../pytrustnfe/Servidores.py	/^WS_NFE_RET_AUTORIZACAO = 'NfeRetAutorizacao'$/;"	kind:variable	line:6
+WS_NFE_SITUACAO	../pytrustnfe/Servidores.py	/^WS_NFE_SITUACAO = 'NfeStatusServico'$/;"	kind:variable	line:10
+XML_RETORNO	../pytrustnfe/test/test_comunicacao.py	/^                '<cUF>42<\/cUF><\/retEnviNFe>'$/;"	kind:variable	line:12
+__init__	../pytrustnfe/__init__.py	/^    def __init__(self, url):$/;"	kind:member	line:10
+__init__	../pytrustnfe/certificado.py	/^    def __init__(self, pfx, password):$/;"	kind:member	line:11
+__init__	../pytrustnfe/client.py	/^    def __init__(self, url, cert_path, key_path):$/;"	kind:member	line:38
+__init__	../pytrustnfe/exceptions.py	/^    def __init__(self, message, *args, **kwargs):$/;"	kind:member	line:9
+__init__	../pytrustnfe/nfe/assinatura.py	/^    def __init__(self, arquivo, senha):$/;"	kind:member	line:13
+__init__	../pytrustnfe/nfe/danfe.py	/^    def __init__(self, sizepage=A4, list_xml=None, recibo=True,$/;"	kind:member	line:73
+__init__	../pytrustnfe/nfse/assinatura.py	/^    def __init__(self, arquivo, senha):$/;"	kind:member	line:14
+__init__	../pytrustnfe/utils.py	/^    def __init__(self, **kwargs):$/;"	kind:member	line:13
+__init__	../pytrustnfe/utils.py	/^    def __init__(self, **kwargs):$/;"	kind:member	line:21
+__init__.py	../pytrustnfe/__init__.py	1;"	kind:file	line:1
+__init__.py	../pytrustnfe/nfe/__init__.py	1;"	kind:file	line:1
+__init__.py	../pytrustnfe/nfse/__init__.py	1;"	kind:file	line:1
+__init__.py	../pytrustnfe/nfse/betha/__init__.py	1;"	kind:file	line:1
+__init__.py	../pytrustnfe/nfse/ginfes/__init__.py	1;"	kind:file	line:1
+__init__.py	../pytrustnfe/nfse/issintel/__init__.py	1;"	kind:file	line:1
+__init__.py	../pytrustnfe/nfse/issnet/__init__.py	1;"	kind:file	line:1
+__init__.py	../pytrustnfe/nfse/paulistana/__init__.py	1;"	kind:file	line:1
+__init__.py	../pytrustnfe/nfse/saatri/__init__.py	1;"	kind:file	line:1
+__init__.py	../pytrustnfe/nfse/simpliss/__init__.py	1;"	kind:file	line:1
+__init__.py	../pytrustnfe/nfse/susesu/__init__.py	1;"	kind:file	line:1
+__init__.py	../pytrustnfe/nfse/webiss/__init__.py	1;"	kind:file	line:1
+__init__.py	../pytrustnfe/test/__init__.py	1;"	kind:file	line:1
+__init__.py	../pytrustnfe/xml/__init__.py	1;"	kind:file	line:1
+_add_qrCode	../pytrustnfe/nfe/__init__.py	/^def _add_qrCode(xml, **kwargs):$/;"	kind:function	line:76
+_add_required_node	../pytrustnfe/nfe/__init__.py	/^def _add_required_node(elemTree):$/;"	kind:function	line:56
+_build_header	../pytrustnfe/nfe/__init__.py	/^def _build_header(method, **kwargs):$/;"	kind:function	line:19
+_checar_certificado	../pytrustnfe/nfse/assinatura.py	/^    def _checar_certificado(self):$/;"	kind:member	line:18
+_finalizar_cripto	../pytrustnfe/nfse/assinatura.py	/^    def _finalizar_cripto(self):$/;"	kind:member	line:30
+_find_node	../pytrustnfe/utils.py	/^def _find_node(xml, node):$/;"	kind:function	line:74
+_generate_nfe_id	../pytrustnfe/nfe/__init__.py	/^def _generate_nfe_id(**kwargs):$/;"	kind:function	line:37
+_get_cancelamento	../pytrustnfe/test/test_nfse_paulistana.py	/^    def _get_cancelamento(self):$/;"	kind:member	line:96
+_get_nfse	../pytrustnfe/test/test_nfse_paulistana.py	/^    def _get_nfse(self):$/;"	kind:member	line:17
+_headers	../pytrustnfe/__init__.py	/^    def _headers(self, action):$/;"	kind:member	line:13
+_headers	../pytrustnfe/client.py	/^    def _headers(self, action):$/;"	kind:member	line:43
+_inicializar_cripto	../pytrustnfe/nfse/assinatura.py	/^    def _inicializar_cripto(self):$/;"	kind:member	line:22
+_render	../pytrustnfe/nfse/ginfes/__init__.py	/^def _render(certificado, method, **kwargs):$/;"	kind:function	line:14
+_render_xml	../pytrustnfe/nfse/simpliss/__init__.py	/^def _render_xml(certificado, method, **kwargs):$/;"	kind:function	line:17
+_render_xml	../pytrustnfe/nfse/susesu/__init__.py	/^def _render_xml(method, **kwargs):$/;"	kind:function	line:11
+_send	../pytrustnfe/nfe/__init__.py	/^def _send(certificado, method, sign, **kwargs):$/;"	kind:function	line:127
+_send	../pytrustnfe/nfse/betha/__init__.py	/^def _send(certificado, method, **kwargs):$/;"	kind:function	line:27
+_send	../pytrustnfe/nfse/ginfes/__init__.py	/^def _send(certificado, method, **kwargs):$/;"	kind:function	line:27
+_send	../pytrustnfe/nfse/paulistana/__init__.py	/^def _send(certificado, method, **kwargs):$/;"	kind:function	line:27
+_send	../pytrustnfe/nfse/simpliss/__init__.py	/^def _send(method, **kwargs):$/;"	kind:function	line:36
+_send	../pytrustnfe/nfse/susesu/__init__.py	/^def _send(method, **kwargs):$/;"	kind:function	line:17
+_soap_xml	../pytrustnfe/nfe/comunicacao.py	/^def _soap_xml(body, cabecalho):$/;"	kind:function	line:12
+_validate	../pytrustnfe/nfse/simpliss/__init__.py	/^def _validate(method, xml):$/;"	kind:function	line:25
+adicionais	../pytrustnfe/nfe/danfe.py	/^    def adicionais(self, oXML=None):$/;"	kind:member	line:703
+assina_xml	../pytrustnfe/nfe/assinatura.py	/^    def assina_xml(self, xml_element, reference):$/;"	kind:member	line:17
+assina_xml	../pytrustnfe/nfse/assinatura.py	/^    def assina_xml(self, xml, reference):$/;"	kind:member	line:37
+assinatura.py	../pytrustnfe/nfe/assinatura.py	1;"	kind:file	line:1
+assinatura.py	../pytrustnfe/nfse/assinatura.py	1;"	kind:file	line:1
+author	../docs/conf.py	/^author = u'Danimar Ribeiro'$/;"	kind:variable	line:54
+author	../setup.py	/^    author="Danimar Ribeiro",$/;"	kind:variable	line:9
+author_email	../setup.py	/^    author_email='danimaribeiro@gmail.com',$/;"	kind:variable	line:10
+autorizar_nfe	../pytrustnfe/nfe/__init__.py	/^def autorizar_nfe(certificado, **kwargs):  # Assinar$/;"	kind:function	line:197
+caminho	../pytrustnfe/test/test_assinatura.py	/^    caminho = os.path.dirname(__file__)$/;"	kind:variable	line:32
+caminho	../pytrustnfe/test/test_certificado.py	/^    caminho = os.path.dirname(__file__)$/;"	kind:variable	line:49
+caminho	../pytrustnfe/test/test_comunicacao.py	/^    caminho = os.path.dirname(__file__)$/;"	kind:variable	line:17
+caminho	../pytrustnfe/test/test_consulta_cadastro.py	/^    caminho = os.path.dirname(__file__)$/;"	kind:variable	line:12
+caminho	../pytrustnfe/test/test_danfe.py	/^    caminho = os.path.dirname(__file__)$/;"	kind:variable	line:12
+caminho	../pytrustnfe/test/test_ginfes.py	/^    caminho = os.path.dirname(__file__)$/;"	kind:variable	line:12
+caminho	../pytrustnfe/test/test_nfse_paulistana.py	/^    caminho = os.path.dirname(__file__)$/;"	kind:variable	line:15
+cancelamento_nfe	../pytrustnfe/nfse/paulistana/__init__.py	/^def cancelamento_nfe(certificado, **kwargs):$/;"	kind:function	line:80
+cancelar_nfse	../pytrustnfe/nfse/betha/__init__.py	/^def cancelar_nfse(certificado, **kwargs):$/;"	kind:function	line:80
+cancelar_nfse	../pytrustnfe/nfse/ginfes/__init__.py	/^def cancelar_nfse(certificado, **kwargs):$/;"	kind:function	line:99
+cancelar_nfse	../pytrustnfe/nfse/simpliss/__init__.py	/^def cancelar_nfse(certificado, **kwargs):$/;"	kind:function	line:106
+certificado.py	../pytrustnfe/certificado.py	1;"	kind:file	line:1
+chunks	../pytrustnfe/nfe/danfe.py	/^def chunks(cString, nLen):$/;"	kind:function	line:21
+classifiers	../setup.py	/^    classifiers=[$/;"	kind:variable	line:12
+client.py	../pytrustnfe/client.py	1;"	kind:file	line:1
+comunicacao.py	../pytrustnfe/nfe/comunicacao.py	1;"	kind:file	line:1
+conf.py	../docs/conf.py	1;"	kind:file	line:1
+consulta_cadastro	../pytrustnfe/nfe/__init__.py	/^def consulta_cadastro(certificado, **kwargs):$/;"	kind:function	line:222
+consulta_cnpj	../pytrustnfe/nfse/betha/__init__.py	/^def consulta_cnpj(certificado, **kwargs):$/;"	kind:function	line:112
+consulta_cnpj	../pytrustnfe/nfse/paulistana/__init__.py	/^def consulta_cnpj(certificado, **kwargs):$/;"	kind:function	line:110
+consulta_distribuicao_nfe	../pytrustnfe/nfe/__init__.py	/^def consulta_distribuicao_nfe(certificado, **kwargs):$/;"	kind:function	line:238
+consulta_informacoes_lote	../pytrustnfe/nfse/paulistana/__init__.py	/^def consulta_informacoes_lote(certificado, **kwargs):$/;"	kind:function	line:105
+consulta_lote	../pytrustnfe/nfse/paulistana/__init__.py	/^def consulta_lote(certificado, **kwargs):$/;"	kind:function	line:100
+consulta_nfe	../pytrustnfe/nfse/paulistana/__init__.py	/^def consulta_nfe(certificado, **kwargs):$/;"	kind:function	line:85
+consulta_nfe_emitidas	../pytrustnfe/nfse/paulistana/__init__.py	/^def consulta_nfe_emitidas(certificado, **kwargs):$/;"	kind:function	line:95
+consulta_nfe_recebidas	../pytrustnfe/nfse/paulistana/__init__.py	/^def consulta_nfe_recebidas(certificado, **kwargs):$/;"	kind:function	line:90
+consulta_nfse_faixe	../pytrustnfe/nfse/betha/__init__.py	/^def consulta_nfse_faixe(certificado, **kwargs):$/;"	kind:function	line:108
+consulta_nfse_por_rps	../pytrustnfe/nfse/betha/__init__.py	/^def consulta_nfse_por_rps(certificado, **kwargs):$/;"	kind:function	line:92
+consulta_nfse_servico_prestado	../pytrustnfe/nfse/betha/__init__.py	/^def consulta_nfse_servico_prestado(certificado, **kwargs):$/;"	kind:function	line:100
+consulta_situacao_lote_rps	../pytrustnfe/nfse/betha/__init__.py	/^def consulta_situacao_lote_rps(certificado, **kwargs):$/;"	kind:function	line:88
+consultar_lote_rps	../pytrustnfe/nfse/betha/__init__.py	/^def consultar_lote_rps(certificado, **kwargs):$/;"	kind:function	line:96
+consultar_lote_rps	../pytrustnfe/nfse/ginfes/__init__.py	/^def consultar_lote_rps(certificado, **kwargs):$/;"	kind:function	line:85
+consultar_lote_rps	../pytrustnfe/nfse/simpliss/__init__.py	/^def consultar_lote_rps(certificado, **kwargs):$/;"	kind:function	line:88
+consultar_nfse	../pytrustnfe/nfse/ginfes/__init__.py	/^def consultar_nfse(certificado, **kwargs):$/;"	kind:function	line:91
+consultar_nfse	../pytrustnfe/nfse/simpliss/__init__.py	/^def consultar_nfse(certificado, **kwargs):$/;"	kind:function	line:98
+consultar_nfse_por_rps	../pytrustnfe/nfse/ginfes/__init__.py	/^def consultar_nfse_por_rps(certificado, **kwargs):$/;"	kind:function	line:77
+consultar_nfse_por_rps	../pytrustnfe/nfse/simpliss/__init__.py	/^def consultar_nfse_por_rps(certificado, **kwargs):$/;"	kind:function	line:80
+consultar_nfse_servico_tomado	../pytrustnfe/nfse/betha/__init__.py	/^def consultar_nfse_servico_tomado(certificado, **kwargs):$/;"	kind:function	line:104
+consultar_protocolo_nfe	../pytrustnfe/nfe/__init__.py	/^def consultar_protocolo_nfe(certificado, **kwargs):$/;"	kind:function	line:214
+consultar_situacao_lote	../pytrustnfe/nfse/ginfes/__init__.py	/^def consultar_situacao_lote(certificado, **kwargs):$/;"	kind:function	line:71
+consultar_situacao_lote	../pytrustnfe/nfse/simpliss/__init__.py	/^def consultar_situacao_lote(certificado, **kwargs):$/;"	kind:function	line:74
+copyright	../docs/conf.py	/^copyright = u'2015, Danimar Ribeiro'$/;"	kind:variable	line:53
+danfe	../pytrustnfe/nfe/danfe.py	/^class danfe(object):$/;"	kind:class	line:72
+danfe.py	../pytrustnfe/nfe/danfe.py	1;"	kind:file	line:1
+date_tostring	../pytrustnfe/utils.py	/^def date_tostring(data):$/;"	kind:function	line:42
+datetime_tostring	../pytrustnfe/utils.py	/^def datetime_tostring(data):$/;"	kind:function	line:47
+description	../setup.py	/^    description='PyTrustNFe é uma biblioteca para envio de NF-e',$/;"	kind:variable	line:34
+destinatario	../pytrustnfe/nfe/danfe.py	/^    def destinatario(self, oXML=None):$/;"	kind:member	line:307
+download_nfe	../pytrustnfe/nfe/__init__.py	/^def download_nfe(certificado, **kwargs):$/;"	kind:function	line:242
+enviar_nota	../pytrustnfe/nfse/susesu/__init__.py	/^def enviar_nota(**kwargs):$/;"	kind:function	line:44
+enviar_nota_retorna_url	../pytrustnfe/nfse/susesu/__init__.py	/^def enviar_nota_retorna_url(**kwargs):$/;"	kind:function	line:54
+envio_lote_rps	../pytrustnfe/nfse/betha/__init__.py	/^def envio_lote_rps(certificado, **kwargs):$/;"	kind:function	line:76
+envio_lote_rps	../pytrustnfe/nfse/paulistana/__init__.py	/^def envio_lote_rps(certificado, **kwargs):$/;"	kind:function	line:71
+envio_lote_rps_assincrono	../pytrustnfe/nfse/betha/__init__.py	/^def envio_lote_rps_assincrono(certificado, **kwargs):$/;"	kind:function	line:72
+envio_rps	../pytrustnfe/nfse/paulistana/__init__.py	/^def envio_rps(certificado, **kwargs):$/;"	kind:function	line:66
+exceptions.py	../pytrustnfe/exceptions.py	1;"	kind:file	line:1
+exclude_patterns	../docs/conf.py	/^exclude_patterns = ['_build']$/;"	kind:variable	line:80
+executar_consulta	../pytrustnfe/nfe/comunicacao.py	/^def executar_consulta(certificado, url, cabecalho, xmlEnviar, send_raw=False):$/;"	kind:function	line:23
+extensions	../docs/conf.py	/^extensions = [$/;"	kind:variable	line:32
+extract_cert_and_key_from_pfx	../pytrustnfe/certificado.py	/^def extract_cert_and_key_from_pfx(pfx, password):$/;"	kind:function	line:23
+faturas	../pytrustnfe/nfe/danfe.py	/^    def faturas(self, oXML=None):$/;"	kind:member	line:369
+filters.py	../pytrustnfe/xml/filters.py	1;"	kind:file	line:1
+format_cnpj_cpf	../pytrustnfe/nfe/danfe.py	/^def format_cnpj_cpf(value):$/;"	kind:function	line:26
+format_date	../pytrustnfe/xml/filters.py	/^def format_date(value):$/;"	kind:function	line:54
+format_datetime	../pytrustnfe/xml/filters.py	/^def format_datetime(value):$/;"	kind:function	line:44
+format_number	../pytrustnfe/nfe/danfe.py	/^def format_number(cNumber, precision=0, group_sep='.', decimal_sep=','):$/;"	kind:function	line:42
+format_percent	../pytrustnfe/xml/filters.py	/^def format_percent(value):$/;"	kind:function	line:39
+gerar_chave	../pytrustnfe/utils.py	/^def gerar_chave(obj_chave, prefix=None):$/;"	kind:function	line:52
+gerar_nfeproc	../pytrustnfe/utils.py	/^def gerar_nfeproc(envio, recibo):$/;"	kind:function	line:85
+gerar_nfse	../pytrustnfe/nfse/betha/__init__.py	/^def gerar_nfse(certificado, **kwargs):$/;"	kind:function	line:68
+gerar_nfse	../pytrustnfe/nfse/simpliss/__init__.py	/^def gerar_nfse(certificado, **kwargs):$/;"	kind:function	line:116
+get_authenticated_client	../pytrustnfe/client.py	/^def get_authenticated_client(base_url, cert, key):$/;"	kind:function	line:10
+get_client	../pytrustnfe/client.py	/^def get_client(base_url):$/;"	kind:function	line:23
+get_image	../pytrustnfe/nfe/danfe.py	/^def get_image(path, width=1*cm):$/;"	kind:function	line:65
+getdateUTC	../pytrustnfe/nfe/danfe.py	/^def getdateUTC(cDateUTC):$/;"	kind:function	line:36
+hline	../pytrustnfe/nfe/danfe.py	/^    def hline(self, x, y, width):$/;"	kind:member	line:800
+html_static_path	../docs/conf.py	/^html_static_path = ['_static']$/;"	kind:variable	line:143
+html_theme	../docs/conf.py	/^html_theme = 'nature'$/;"	kind:variable	line:114
+htmlhelp_basename	../docs/conf.py	/^htmlhelp_basename = 'PyTrustNFedoc'$/;"	kind:variable	line:206
+ide_emit	../pytrustnfe/nfe/danfe.py	/^    def ide_emit(self, oXML=None):$/;"	kind:member	line:173
+impostos	../pytrustnfe/nfe/danfe.py	/^    def impostos(self, oXML=None):$/;"	kind:member	line:437
+install_requires	../setup.py	/^    install_requires=[$/;"	kind:variable	line:36
+inutilizar_nfe	../pytrustnfe/nfe/__init__.py	/^def inutilizar_nfe(certificado, **kwargs):  # Assinar$/;"	kind:function	line:210
+keywords	../setup.py	/^    keywords=['nfe', 'mdf-e'],$/;"	kind:variable	line:11
+kwargs	../pytrustnfe/test/test_utils.py	/^    kwargs = {$/;"	kind:variable	line:15
+language	../docs/conf.py	/^language = 'pt_BR'$/;"	kind:variable	line:70
+latex_documents	../docs/conf.py	/^latex_documents = [$/;"	kind:variable	line:227
+latex_elements	../docs/conf.py	/^latex_elements = {$/;"	kind:variable	line:210
+license	../setup.py	/^    license='LGPL-v2.1+',$/;"	kind:variable	line:33
+localizar_qrcode	../pytrustnfe/Servidores.py	/^def localizar_qrcode(estado, ambiente=2):$/;"	kind:function	line:98
+localizar_url	../pytrustnfe/Servidores.py	/^def localizar_url(servico, estado, mod='55', ambiente=2):$/;"	kind:function	line:74
+long_description	../setup.py	/^    long_description=open('README.md', 'r').read(),$/;"	kind:variable	line:35
+man_pages	../docs/conf.py	/^man_pages = [$/;"	kind:variable	line:257
+master_doc	../docs/conf.py	/^master_doc = 'index'$/;"	kind:variable	line:49
+name	../setup.py	/^    name="PyTrustNFe",$/;"	kind:variable	line:7
+newpage	../pytrustnfe/nfe/danfe.py	/^    def newpage(self):$/;"	kind:member	line:795
+nfe_status_servico	../pytrustnfe/nfe/__init__.py	/^def nfe_status_servico(certificado, **kwargs):$/;"	kind:function	line:218
+normalize_str	../pytrustnfe/xml/filters.py	/^def normalize_str(string):$/;"	kind:function	line:11
+package_data	../setup.py	/^    package_data={'pytrustnfe': [$/;"	kind:variable	line:23
+packages	../setup.py	/^    packages=find_packages(exclude=['*test*']),$/;"	kind:variable	line:22
+pop_encoding	../pytrustnfe/xml/validate.py	/^def pop_encoding(xml):$/;"	kind:function	line:14
+post_soap	../pytrustnfe/__init__.py	/^    def post_soap(self, xml_soap, action):$/;"	kind:member	line:21
+post_soap	../pytrustnfe/client.py	/^    def post_soap(self, xml_soap, cabecalho):$/;"	kind:member	line:49
+produtos	../pytrustnfe/nfe/danfe.py	/^    def produtos(self, oXML=None, el_det=None, oPaginator=None,$/;"	kind:member	line:587
+project	../docs/conf.py	/^project = u'PyTrustNFe'$/;"	kind:variable	line:52
+pygments_style	../docs/conf.py	/^pygments_style = 'sphinx'$/;"	kind:variable	line:98
+recepcao_evento_cancelamento	../pytrustnfe/nfe/__init__.py	/^def recepcao_evento_cancelamento(certificado, **kwargs):  # Assinar$/;"	kind:function	line:206
+recepcao_evento_carta_correcao	../pytrustnfe/nfe/__init__.py	/^def recepcao_evento_carta_correcao(certificado, **kwargs):  # Assinar$/;"	kind:function	line:226
+recepcao_evento_epec	../pytrustnfe/nfe/__init__.py	/^def recepcao_evento_epec(certificado, **kwargs):  # Assinar$/;"	kind:function	line:234
+recepcao_evento_manifesto	../pytrustnfe/nfe/__init__.py	/^def recepcao_evento_manifesto(certificado, **kwargs):  # Assinar$/;"	kind:function	line:230
+recepcionar_lote_rps	../pytrustnfe/nfse/ginfes/__init__.py	/^def recepcionar_lote_rps(certificado, **kwargs):$/;"	kind:function	line:61
+recepcionar_lote_rps	../pytrustnfe/nfse/simpliss/__init__.py	/^def recepcionar_lote_rps(certificado, **kwargs):$/;"	kind:function	line:64
+recibo_entrega	../pytrustnfe/nfe/danfe.py	/^    def recibo_entrega(self, oXML=None):$/;"	kind:member	line:733
+rect	../pytrustnfe/nfe/danfe.py	/^    def rect(self, col, lin, nWidth, nHeight, fill=False):$/;"	kind:member	line:809
+recursively_empty	../pytrustnfe/xml/__init__.py	/^def recursively_empty(e):$/;"	kind:function	line:13
+release	../docs/conf.py	/^release = '1.0'$/;"	kind:variable	line:63
+render_xml	../pytrustnfe/xml/__init__.py	/^def render_xml(path, template_name, remove_empty, **nfe):$/;"	kind:function	line:19
+retorno_autorizar_nfe	../pytrustnfe/nfe/__init__.py	/^def retorno_autorizar_nfe(certificado, **kwargs):$/;"	kind:function	line:202
+sanitize_response	../pytrustnfe/xml/__init__.py	/^def sanitize_response(response):$/;"	kind:function	line:45
+save_cert_key	../pytrustnfe/certificado.py	/^def save_cert_key(cert, key):$/;"	kind:function	line:34
+save_pfx	../pytrustnfe/certificado.py	/^    def save_pfx(self):$/;"	kind:member	line:15
+setUp	../pytrustnfe/test/test_add_qr_code.py	/^    def setUp(self):$/;"	kind:member	line:11
+setup.py	../setup.py	1;"	kind:file	line:1
+sign_tag	../pytrustnfe/nfse/betha/__init__.py	/^def sign_tag(certificado, **kwargs):$/;"	kind:function	line:15
+sign_tag	../pytrustnfe/nfse/paulistana/__init__.py	/^def sign_tag(certificado, **kwargs):$/;"	kind:function	line:15
+source_suffix	../docs/conf.py	/^source_suffix = '.rst'$/;"	kind:variable	line:43
+string	../pytrustnfe/nfe/danfe.py	/^    def string(self, x, y, value):$/;"	kind:member	line:814
+stringRight	../pytrustnfe/nfe/danfe.py	/^    def stringRight(self, x, y, value):$/;"	kind:member	line:818
+stringcenter	../pytrustnfe/nfe/danfe.py	/^    def stringcenter(self, x, y, value):$/;"	kind:member	line:822
+strip_line_feed	../pytrustnfe/xml/filters.py	/^def strip_line_feed(string):$/;"	kind:function	line:25
+substituir_nfse	../pytrustnfe/nfse/betha/__init__.py	/^def substituir_nfse(certificado, **kwargs):$/;"	kind:function	line:84
+tagtext	../pytrustnfe/nfe/danfe.py	/^def tagtext(oNode=None, cTag=None):$/;"	kind:function	line:50
+templates_path	../docs/conf.py	/^templates_path = ['_templates']$/;"	kind:variable	line:38
+test_add_qrCode	../pytrustnfe/test/test_add_qr_code.py	/^    def test_add_qrCode(self):$/;"	kind:member	line:31
+test_add_qr_code.py	../pytrustnfe/test/test_add_qr_code.py	1;"	kind:file	line:1
+test_assinar_xml_invalido	../pytrustnfe/test/test_assinatura.py	/^    def test_assinar_xml_invalido(self):$/;"	kind:member	line:41
+test_assinar_xml_senha_invalida	../pytrustnfe/test/test_assinatura.py	/^    def test_assinar_xml_senha_invalida(self):$/;"	kind:member	line:34
+test_assinar_xml_valido	../pytrustnfe/test/test_assinatura.py	/^    def test_assinar_xml_valido(self):$/;"	kind:member	line:48
+test_assinatura	../pytrustnfe/test/test_assinatura.py	/^class test_assinatura(unittest.TestCase):$/;"	kind:class	line:30
+test_assinatura	../pytrustnfe/test/test_certificado.py	/^class test_assinatura(unittest.TestCase):$/;"	kind:class	line:47
+test_assinatura.py	../pytrustnfe/test/test_assinatura.py	1;"	kind:file	line:1
+test_cabecalho_soap	../pytrustnfe/test/test_utils.py	/^    def test_cabecalho_soap(self):$/;"	kind:member	line:21
+test_can_generate_danfe	../pytrustnfe/test/test_danfe.py	/^    def test_can_generate_danfe(self):$/;"	kind:member	line:14
+test_cancelamento_nfse_com_erro	../pytrustnfe/test/test_nfse_paulistana.py	/^    def test_cancelamento_nfse_com_erro(self):$/;"	kind:member	line:124
+test_cancelamento_nfse_ok	../pytrustnfe/test/test_nfse_paulistana.py	/^    def test_cancelamento_nfse_ok(self):$/;"	kind:member	line:105
+test_certificado.py	../pytrustnfe/test/test_certificado.py	1;"	kind:file	line:1
+test_chave_nfe	../pytrustnfe/test/test_utils.py	/^    def test_chave_nfe(self):$/;"	kind:member	line:56
+test_comunicacao	../pytrustnfe/test/test_comunicacao.py	/^class test_comunicacao(unittest.TestCase):$/;"	kind:class	line:15
+test_comunicacao.py	../pytrustnfe/test/test_comunicacao.py	1;"	kind:file	line:1
+test_consulta_cadastro	../pytrustnfe/test/test_consulta_cadastro.py	/^class test_consulta_cadastro(unittest.TestCase):$/;"	kind:class	line:10
+test_consulta_cadastro.py	../pytrustnfe/test/test_consulta_cadastro.py	1;"	kind:file	line:1
+test_consulta_situacao_lote	../pytrustnfe/test/test_ginfes.py	/^    def test_consulta_situacao_lote(self):$/;"	kind:member	line:15
+test_conta_de_cadastro	../pytrustnfe/test/test_consulta_cadastro.py	/^    def test_conta_de_cadastro(self):$/;"	kind:member	line:14
+test_danfe	../pytrustnfe/test/test_danfe.py	/^class test_danfe(unittest.TestCase):$/;"	kind:class	line:10
+test_danfe.py	../pytrustnfe/test/test_danfe.py	1;"	kind:file	line:1
+test_date_tostring	../pytrustnfe/test/test_utils.py	/^    def test_date_tostring(self):$/;"	kind:member	line:27
+test_datetime_tostring	../pytrustnfe/test/test_utils.py	/^    def test_datetime_tostring(self):$/;"	kind:member	line:34
+test_envio_nfe	../pytrustnfe/test/test_comunicacao.py	/^    def test_envio_nfe(self):$/;"	kind:member	line:19
+test_envio_nfse	../pytrustnfe/test/test_nfse_paulistana.py	/^    def test_envio_nfse(self):$/;"	kind:member	line:56
+test_geracao_chave	../pytrustnfe/test/test_utils.py	/^    def test_geracao_chave(self):$/;"	kind:member	line:41
+test_ginfes.py	../pytrustnfe/test/test_ginfes.py	1;"	kind:file	line:1
+test_localizar_qrcode	../pytrustnfe/test/test_servidores.py	/^    def test_localizar_qrcode(self):$/;"	kind:member	line:46
+test_localizar_url	../pytrustnfe/test/test_servidores.py	/^    def test_localizar_url(self):$/;"	kind:member	line:30
+test_nfse_ginfes	../pytrustnfe/test/test_ginfes.py	/^class test_nfse_ginfes(unittest.TestCase):$/;"	kind:class	line:10
+test_nfse_paulistana	../pytrustnfe/test/test_nfse_paulistana.py	/^class test_nfse_paulistana(unittest.TestCase):$/;"	kind:class	line:13
+test_nfse_paulistana.py	../pytrustnfe/test/test_nfse_paulistana.py	1;"	kind:file	line:1
+test_nfse_signature	../pytrustnfe/test/test_nfse_paulistana.py	/^    def test_nfse_signature(self):$/;"	kind:member	line:79
+test_pfx_nao_existe	../pytrustnfe/test/test_certificado.py	/^    def test_pfx_nao_existe(self):$/;"	kind:member	line:75
+test_pfx_senha_invalida	../pytrustnfe/test/test_certificado.py	/^    def test_pfx_senha_invalida(self):$/;"	kind:member	line:79
+test_preparar_pfx	../pytrustnfe/test/test_certificado.py	/^    def test_preparar_pfx(self):$/;"	kind:member	line:51
+test_sanitize_response	../pytrustnfe/test/test_xml_serializacao.py	/^    def test_sanitize_response(self):$/;"	kind:member	line:28
+test_save_cert_and_key	../pytrustnfe/test/test_certificado.py	/^    def test_save_cert_and_key(self):$/;"	kind:member	line:65
+test_save_pfx	../pytrustnfe/test/test_certificado.py	/^    def test_save_pfx(self):$/;"	kind:member	line:57
+test_serializacao_default	../pytrustnfe/test/test_xml_serializacao.py	/^    def test_serializacao_default(self):$/;"	kind:member	line:12
+test_serializacao_remove_empty	../pytrustnfe/test/test_xml_serializacao.py	/^    def test_serializacao_remove_empty(self):$/;"	kind:member	line:20
+test_servidores	../pytrustnfe/test/test_servidores.py	/^class test_servidores(unittest.TestCase):$/;"	kind:class	line:28
+test_servidores.py	../pytrustnfe/test/test_servidores.py	1;"	kind:file	line:1
+test_suite	../setup.py	/^    test_suite='nose.collector',$/;"	kind:variable	line:44
+test_utils	../pytrustnfe/test/test_utils.py	/^class test_utils(unittest.TestCase):$/;"	kind:class	line:14
+test_utils.py	../pytrustnfe/test/test_utils.py	1;"	kind:file	line:1
+test_xml.py	../pytrustnfe/test/test_xml.py	1;"	kind:file	line:1
+test_xml_serializacao	../pytrustnfe/test/test_xml_serializacao.py	/^class test_xml_serializacao(unittest.TestCase):$/;"	kind:class	line:10
+test_xml_serializacao.py	../pytrustnfe/test/test_xml_serializacao.py	1;"	kind:file	line:1
+test_xmlfilters	../pytrustnfe/test/test_xml.py	/^    def test_xmlfilters(self):$/;"	kind:member	line:18
+test_xmlfilters	../pytrustnfe/test/test_xml.py	/^class test_xmlfilters(unittest.TestCase):$/;"	kind:class	line:16
+teste_envio_lote_rps	../pytrustnfe/nfse/paulistana/__init__.py	/^def teste_envio_lote_rps(certificado, **kwargs):$/;"	kind:function	line:76
+tests_require	../setup.py	/^    tests_require=[$/;"	kind:variable	line:45
+texinfo_documents	../docs/conf.py	/^texinfo_documents = [$/;"	kind:variable	line:271
+todo_include_todos	../docs/conf.py	/^todo_include_todos = False$/;"	kind:variable	line:107
+transportes	../pytrustnfe/nfe/danfe.py	/^    def transportes(self, oXML=None):$/;"	kind:member	line:515
+url	../setup.py	/^    url='https:\/\/github.com\/danimaribeiro\/PyTrustNFe',$/;"	kind:variable	line:32
+url_ba	../pytrustnfe/test/test_servidores.py	/^cao.asmx'$/;"	kind:variable	line:11
+url_cad_rs	../pytrustnfe/test/test_servidores.py	/^sultacadastro2.asmx'$/;"	kind:variable	line:22
+url_cad_sc	../pytrustnfe/test/test_servidores.py	/^aCadastro2.asmx'$/;"	kind:variable	line:25
+url_qrcode_homologacao_sp	../pytrustnfe/test/test_servidores.py	/^url_qrcode_homologacao_sp = 'https:\/\/homologacao.nfce.fazenda.sp.gov.br\/NFCEConsultaPublica\/Paginas\/ConstultaQRCode.aspx'$/;"	kind:variable	line:15
+url_rs	../pytrustnfe/test/test_servidores.py	/^url_rs = 'https:\/\/nfe.sefazrs.rs.gov.br\/ws\/NfeAutorizacao\/NFeAutorizacao.asmx'$/;"	kind:variable	line:19
+url_sc	../pytrustnfe/test/test_servidores.py	/^url_sc = 'https:\/\/nfe.svrs.rs.gov.br\/ws\/NfeAutorizacao\/NfeAutorizacao.asmx'$/;"	kind:variable	line:17
+url_sp	../pytrustnfe/test/test_servidores.py	/^url_sp = 'https:\/\/nfe.fazenda.sp.gov.br\/ws\/nfeautorizacao.asmx'$/;"	kind:variable	line:13
+utils.py	../pytrustnfe/utils.py	1;"	kind:file	line:1
+valida_nfe	../pytrustnfe/xml/validate.py	/^def valida_nfe(nfe):$/;"	kind:function	line:21
+validar	../pytrustnfe/utils.py	/^    def validar(self):$/;"	kind:member	line:31
+validate.py	../pytrustnfe/xml/validate.py	1;"	kind:file	line:1
+version	../docs/conf.py	/^version = '1.0'$/;"	kind:variable	line:61
+version	../setup.py	/^    version=VERSION,$/;"	kind:variable	line:8
+vline	../pytrustnfe/nfe/danfe.py	/^    def vline(self, x, y, width):$/;"	kind:member	line:804
+writeto_pdf	../pytrustnfe/nfe/danfe.py	/^    def writeto_pdf(self, fileObj):$/;"	kind:member	line:826
+xml_cancelar_nfse	../pytrustnfe/nfse/ginfes/__init__.py	/^def xml_cancelar_nfse(certificado, **kwargs):$/;"	kind:function	line:95
+xml_cancelar_nfse	../pytrustnfe/nfse/simpliss/__init__.py	/^def xml_cancelar_nfse(certificado, **kwargs):$/;"	kind:function	line:102
+xml_consultar_lote_rps	../pytrustnfe/nfse/ginfes/__init__.py	/^def xml_consultar_lote_rps(certificado, **kwargs):$/;"	kind:function	line:81
+xml_consultar_lote_rps	../pytrustnfe/nfse/simpliss/__init__.py	/^def xml_consultar_lote_rps(certificado, **kwargs):$/;"	kind:function	line:84
+xml_consultar_nfse	../pytrustnfe/nfse/simpliss/__init__.py	/^def xml_consultar_nfse(certificado, **kwargs):$/;"	kind:function	line:94
+xml_consultar_situacao_lote	../pytrustnfe/nfse/ginfes/__init__.py	/^def xml_consultar_situacao_lote(certificado, **kwargs):$/;"	kind:function	line:67
+xml_consultar_situacao_lote	../pytrustnfe/nfse/simpliss/__init__.py	/^def xml_consultar_situacao_lote(certificado, **kwargs):$/;"	kind:function	line:70
+xml_enviar_nota	../pytrustnfe/nfse/susesu/__init__.py	/^def xml_enviar_nota(**kwargs):$/;"	kind:function	line:40
+xml_enviar_nota_retorna_url	../pytrustnfe/nfse/susesu/__init__.py	/^def xml_enviar_nota_retorna_url(**kwargs):$/;"	kind:function	line:50
+xml_gerar_nfse	../pytrustnfe/nfse/simpliss/__init__.py	/^def xml_gerar_nfse(certificado, **kwargs):$/;"	kind:function	line:112
+xml_recepcionar_lote_rps	../pytrustnfe/nfse/ginfes/__init__.py	/^def xml_recepcionar_lote_rps(certificado, **kwargs):$/;"	kind:function	line:57
+xml_recepcionar_lote_rps	../pytrustnfe/nfse/simpliss/__init__.py	/^def xml_recepcionar_lote_rps(certificado, **kwargs):$/;"	kind:function	line:60

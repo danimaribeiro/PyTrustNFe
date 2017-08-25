@@ -1,0 +1,19 @@
+<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+    <Body>
+        <nfeDistDFeInteresse xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/NFeDistribuicaoDFe">
+            <nfeDadosMsg>
+                <distDFeInt xmlns="http://www.portalfiscal.inf.br/nfe" versao="1.01">
+                    <tpAmb>{{ ambiente }}</tpAmb>
+                    <cUFAutor>{{ estado }}</cUFAutor>
+                    <CNPJ>{{ cnpj_cpf }}</CNPJ>
+                    <distNSU>
+                        <ultNSU>{{ ultimo_nsu }}</ultNSU>
+                    </distNSU>
+                    <consChNFe>
+                        <chNFe>{{ chave_nfe }}</chNFe>
+                    </consChNFe>
+                </distDFeInt>
+            </nfeDadosMsg>
+        </nfeDistDFeInteresse>
+    </Body>
+</Envelope>

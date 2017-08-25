@@ -12,7 +12,7 @@ from ..xml import sanitize_response
 def _soap_xml(body, cabecalho):
     xml = '<?xml version="1.0" encoding="utf-8"?>'
     xml += '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header>'
-    xml += '<nfeCabecMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/'+ cabecalho.soap_action +  '">'
+    xml += '<nfeCabecMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/' + cabecalho.soap_action + '">'
     xml += '<cUF>' + cabecalho.estado + '</cUF><versaoDados>' + cabecalho.versao + '</versaoDados></nfeCabecMsg></soap:Header><soap:Body>'
     xml += '<nfeDadosMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/' + cabecalho.soap_action + '">'
     xml += body
@@ -20,12 +20,15 @@ def _soap_xml(body, cabecalho):
     return xml.rstrip('\n')
 
 
-def executar_consulta(certificado, url, cabecalho, xmlEnviar):
+def executar_consulta(certificado, url, cabecalho, xmlEnviar, send_raw=False):
     cert, key = extract_cert_and_key_from_pfx(
         certificado.pfx, certificado.password)
     cert_path, key_path = save_cert_key(cert, key)
     client = HttpClient(url, cert_path, key_path)
 
     xml_enviar = _soap_xml(xmlEnviar, cabecalho)
+    if send_raw:
+        xml = '<?xml version="1.0" encoding="utf-8"?>' + xmlEnviar.rstrip('\n')
+        xml_enviar = xml
     xml_retorno = client.post_soap(xml_enviar, cabecalho)
     return sanitize_response(xml_retorno)
