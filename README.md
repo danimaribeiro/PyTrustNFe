@@ -10,8 +10,8 @@ Dependências:
 * PyXmlSec
 * lxml
 * signxml
-* suds
-* suds_requests
+* suds-jurko
+* suds-jurko-requests
 * reportlab
 * Jinja2
 

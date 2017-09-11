@@ -1,16 +1,14 @@
 lxml >= 3.5.0, < 4
-nose
-mock
 coveralls
-http://xmlsoft.org/sources/python/libxml2-python-2.6.21.tar.gz
-https://github.com/odoo-brazil/pyxmlsec/archive/master.zip
 Jinja2
 signxml
-suds >= 0.4
-suds_requests >= 0.3
+suds-jurko >= 0.6
+suds-jurko-requests >= 1.0
 defusedxml >= 0.4.1, < 0.6
 eight >= 0.3.0, < 0.5
 cryptography >= 1.8, < 1.10
 pyOpenSSL >= 16.0.0, < 17
 certifi >= 2015.11.20.1
 reportlab
+pytest
+pytest-cov

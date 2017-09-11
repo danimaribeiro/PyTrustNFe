@@ -37,13 +37,11 @@ later (LGPLv2+)',
         'Jinja2 >= 2.8',
         'signxml >= 2.4.0',
         'lxml >= 3.5.0, < 4',
-        'suds >= 0.4',
-        'suds_requests >= 0.3',
+        'suds-jurko >= 0.6',
+        'suds-jurko-requests >= 0.3',
         'reportlab'
     ],
-    test_suite='nose.collector',
     tests_require=[
-        'nose',
-        'mock',
+        'pytest',
     ],
 )
