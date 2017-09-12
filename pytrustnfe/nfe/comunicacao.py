@@ -10,7 +10,6 @@ from ..xml import sanitize_response
 
 
 def _soap_xml(body, cabecalho):
-    print(type(body))
     xml = '<?xml version="1.0" encoding="utf-8"?>'
     xml += '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header>'
     xml += '<nfeCabecMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/' + cabecalho.soap_action + '">'
@@ -32,4 +31,4 @@ def executar_consulta(certificado, url, cabecalho, xmlEnviar, send_raw=False):
         xml = '<?xml version="1.0" encoding="utf-8"?>' + xmlEnviar.rstrip('\n')
         xml_enviar = xml
     xml_retorno = client.post_soap(xml_enviar, cabecalho)
-    return sanitize_response(xml_retorno)
+    return sanitize_response(xml_retorno.encode())

@@ -29,7 +29,6 @@ class test_xml_serializacao(unittest.TestCase):
         path = os.path.join(os.path.dirname(__file__), 'XMLs')
         xml_to_clear = open(os.path.join(path, 'jinja_result.xml'), 'r').read()
         xml, obj = sanitize_response(xml_to_clear)
-        print(type(xml))
         self.assertEqual(xml, xml_to_clear)
         self.assertEqual(obj.tpAmb, 'oi')
         self.assertEqual(obj.CNPJ, 'ola')
