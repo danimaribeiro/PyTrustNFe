@@ -8,7 +8,8 @@ virtual_env:
 install:
 - pip install --upgrade pip
 - pip install -r requirements.txt
-script: coverage run --source=pytrustnfe setup.py nosetests
+script:
+    pytest --cov=pytrustnfe
 before_install:
 - sudo apt-get update -qq
 - sudo apt-get install -qq python-dev libffi-dev libxml2-dev libxslt1-dev libssl-dev

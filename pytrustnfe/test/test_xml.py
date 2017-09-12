@@ -26,5 +26,5 @@ class test_xmlfilters(unittest.TestCase):
         self.assertEqual('2016-09-17', format_date(dt.date()))
         self.assertEqual('2016-09-17T12:12:12', format_datetime(dt))
 
-        word = strip_line_feed(u"olá\ncomo vai\r senhor ")
-        self.assertEqual(word, u"olá como vai senhor")
+        word = strip_line_feed("olá\ncomo vai\r senhor ")
+        self.assertEqual(word, "olá como vai senhor")

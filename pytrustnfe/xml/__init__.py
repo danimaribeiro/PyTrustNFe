@@ -39,14 +39,14 @@ def render_xml(path, template_name, remove_empty, **nfe):
             if recursively_empty(elem):
                 parent.remove(elem)
         return root
-    return etree.tostring(root)
+    for element in root.iter("*"):  # remove espaços em branco
+        if element.text is not None and not element.text.strip():
+            element.text = None
+    return etree.tostring(root, encoding=str)
 
 
 def sanitize_response(response):
-    response = unicode(response)
-    response = unicodedata.normalize('NFKD', response).encode('ascii',
-                                                              'ignore')
-
+    print(response)
     tree = etree.fromstring(response)
     # Remove namespaces inuteis na resposta
     for elem in tree.getiterator():

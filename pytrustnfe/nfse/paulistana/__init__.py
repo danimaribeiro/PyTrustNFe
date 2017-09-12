@@ -18,10 +18,10 @@ def sign_tag(certificado, **kwargs):
     if 'nfse' in kwargs:
         for item in kwargs['nfse']['lista_rps']:
             signed = crypto.sign(key, item['assinatura'], 'SHA1')
-            item['assinatura'] = b64encode(signed)
+            item['assinatura'] = b64encode(signed).decode()
     if 'cancelamento' in kwargs:
         signed = crypto.sign(key, kwargs['cancelamento']['assinatura'], 'SHA1')
-        kwargs['cancelamento']['assinatura'] = b64encode(signed)
+        kwargs['cancelamento']['assinatura'] = b64encode(signed).decode()
 
 
 def _send(certificado, method, **kwargs):
@@ -42,13 +42,12 @@ def _send(certificado, method, **kwargs):
     cert, key = save_cert_key(cert, key)
     client = get_authenticated_client(base_url, cert, key)
 
-    pfx_path = certificado.save_pfx()
-    signer = Assinatura(pfx_path, certificado.password)
+    signer = Assinatura(cert, key, certificado.password)
     xml_send = signer.assina_xml(xml_send, '')
 
     try:
         response = getattr(client.service, method)(1, xml_send)
-    except suds.WebFault, e:
+    except suds.WebFault as e:
         return {
             'sent_xml': xml_send,
             'received_xml': e.fault.faultstring,

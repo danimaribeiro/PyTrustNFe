@@ -29,7 +29,7 @@ def _send(method, **kwargs):
             'sent_xml': xml_send,
             'received_xml': e.fault.faultstring,
         }
-    result = unicode(result)
+    result = str(result)
     result = unicodedata.normalize('NFKD', result).encode('ascii', 'ignore')
     return {
         'sent_xml': xml_send,

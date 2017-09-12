@@ -10,6 +10,7 @@ from ..xml import sanitize_response
 
 
 def _soap_xml(body, cabecalho):
+    print(type(body))
     xml = '<?xml version="1.0" encoding="utf-8"?>'
     xml += '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header>'
     xml += '<nfeCabecMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/' + cabecalho.soap_action + '">'

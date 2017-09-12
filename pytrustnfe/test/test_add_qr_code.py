@@ -12,7 +12,7 @@ class TestAddQRCode(unittest.TestCase):
         self.xml_sem_qrcode = open('pytrustnfe/test/xml_sem_qrcode.xml', 'r')
         self.xml_com_qrcode = open('pytrustnfe/test/xml_com_qrcode.xml', 'r')
         dhEmi = '2016-11-09T16:03:25-00:00'
-        chave_nfe = u'NFe35161121332917000163650010000000011448875034'
+        chave_nfe = 'NFe35161121332917000163650010000000011448875034'
         ambiente = 2
         valor_total = '324.00'
         icms_total = '61.56'

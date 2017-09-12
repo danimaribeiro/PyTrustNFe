@@ -44,8 +44,8 @@ class HttpClient(object):
 
     def _headers(self, action):
         return {
-            u'Content-type': u'application/soap+xml; charset=utf-8; action="http://www.portalfiscal.inf.br/nfe/wsdl/%s"' % action,
-            u'Accept': u'application/soap+xml; charset=utf-8',
+            'Content-type': 'application/soap+xml; charset=utf-8; action="http://www.portalfiscal.inf.br/nfe/wsdl/%s"' % action,
+            'Accept': 'application/soap+xml; charset=utf-8',
         }
 
     def post_soap(self, xml_soap, cabecalho):

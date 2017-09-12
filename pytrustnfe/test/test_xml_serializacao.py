@@ -15,13 +15,13 @@ class test_xml_serializacao(unittest.TestCase):
                          tag2='ola', tag3='comovai')
 
         result = open(os.path.join(path, 'jinja_result.xml'), 'r').read()
-        self.assertEqual(xml + '\n', result)
+        self.assertEqual(xml + "\n", result)
 
     def test_serializacao_remove_empty(self):
         path = os.path.join(os.path.dirname(__file__), 'XMLs')
         xmlElem = render_xml(path, 'jinja_template.xml', True, tag1='oi',
                              tag2='ola', tag3='comovai')
-        xml = etree.tostring(xmlElem)
+        xml = etree.tostring(xmlElem, encoding=str)
         result = open(os.path.join(path, 'jinja_remove_empty.xml'), 'r').read()
         self.assertEqual(xml + '\n', result)
 
@@ -29,7 +29,7 @@ class test_xml_serializacao(unittest.TestCase):
         path = os.path.join(os.path.dirname(__file__), 'XMLs')
         xml_to_clear = open(os.path.join(path, 'jinja_result.xml'), 'r').read()
         xml, obj = sanitize_response(xml_to_clear)
-
+        print(type(xml))
         self.assertEqual(xml, xml_to_clear)
         self.assertEqual(obj.tpAmb, 'oi')
         self.assertEqual(obj.CNPJ, 'ola')

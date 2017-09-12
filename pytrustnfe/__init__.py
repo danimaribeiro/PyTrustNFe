@@ -12,10 +12,10 @@ class HttpClient(object):
 
     def _headers(self, action):
         return {
-            u'Content-type':
-            u'text/xml; charset=utf-8;',
-            u'Accept': u'application/soap+xml; charset=utf-8',
-            u'SOAPAction': action
+            'Content-type':
+            'text/xml; charset=utf-8;',
+            'Accept': 'application/soap+xml; charset=utf-8',
+            'SOAPAction': action
         }
 
     def post_soap(self, xml_soap, action):

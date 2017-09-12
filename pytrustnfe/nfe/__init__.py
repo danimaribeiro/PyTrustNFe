@@ -5,6 +5,7 @@
 
 import os
 import hashlib
+import binascii
 from lxml import etree
 from .comunicacao import executar_consulta
 from .assinatura import Assinatura
@@ -80,7 +81,7 @@ def _add_qrCode(xml, **kwargs):
     infnfesupl = etree.Element('infNFeSupl')
     qrcode = etree.Element('qrCode')
     chave_nfe = inf_nfe['Id'][3:]
-    dh_emissao = inf_nfe['ide']['dhEmi'].encode('hex')
+    dh_emissao = binascii.hexlify(inf_nfe['ide']['dhEmi'].encode()).decode()
     versao = '100'
     ambiente = kwargs['ambiente']
     valor_total = inf_nfe['total']['vNF']
@@ -98,9 +99,8 @@ def _add_qrCode(xml, **kwargs):
             dest.append(cpf)
             dest_parent.append(dest)
     icms_total = inf_nfe['total']['vICMS']
-    dig_val = xml.find(
-        ".//{http://www.w3.org/2000/09/xmldsig#}DigestValue")\
-        .text.encode('hex')
+    dig_val = binascii.hexlify(xml.find(
+        ".//{http://www.w3.org/2000/09/xmldsig#}DigestValue").text.encode()).decode()
     cid_token = kwargs['NFes'][0]['infNFe']['codigo_seguranca']['cid_token']
     csc = kwargs['NFes'][0]['infNFe']['codigo_seguranca']['csc']
 
@@ -108,7 +108,7 @@ def _add_qrCode(xml, **kwargs):
 ={5}&vICMS={6}&digVal={7}&cIdToken={8}{9}".\
         format(chave_nfe, versao, ambiente, dest_cpf, dh_emissao,
                valor_total, icms_total, dig_val, cid_token, csc)
-    c_hash_QR_code = hashlib.sha1(c_hash_QR_code).hexdigest()
+    c_hash_QR_code = hashlib.sha1(c_hash_QR_code.encode()).hexdigest()
 
     QR_code_url = "?chNFe={0}&nVersao={1}&tpAmb={2}&{3}dhEmi={4}&vNF={5}&vICMS\
 ={6}&digVal={7}&cIdToken={8}&cHashQRCode={9}".\
@@ -121,7 +121,7 @@ def _add_qrCode(xml, **kwargs):
     qrcode.text = etree.CDATA(qrcode_text)
     infnfesupl.append(qrcode)
     nfe.insert(1, infnfesupl)
-    return etree.tostring(xml)
+    return etree.tostring(xml, encoding=str)
 
 
 def _send(certificado, method, sign, **kwargs):
@@ -175,7 +175,7 @@ def _send(certificado, method, sign, **kwargs):
             xml_send = _add_qrCode(xml_send, **kwargs)
 
     else:
-        xml_send = etree.tostring(xmlElem_send)
+        xml_send = etree.tostring(xmlElem_send, encoding=str)
 
     url = localizar_url(method,  kwargs['estado'], modelo,
                         kwargs['ambiente'])

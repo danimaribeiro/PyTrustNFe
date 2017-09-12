@@ -60,7 +60,7 @@ class test_utils(unittest.TestCase):
             chave.validar()
         chave.cnpj = '1234567891011'
         self.assertEqual('CNPJ necessário para criar chave NF-e',
-                         cm.exception.message,
+                         str(cm.exception),
                          'Validação da chave nf-e incorreta')
 
         with self.assertRaises(AssertionError) as cm:
@@ -68,7 +68,7 @@ class test_utils(unittest.TestCase):
             chave.validar()
         chave.estado = '42'
         self.assertEqual('Estado necessário para criar chave NF-e',
-                         cm.exception.message,
+                         str(cm.exception),
                          'Validação da chave nf-e incorreta')
 
         with self.assertRaises(AssertionError) as cm:
@@ -76,7 +76,7 @@ class test_utils(unittest.TestCase):
             chave.validar()
         chave.emissao = '0'
         self.assertEqual('Emissão necessário para criar chave NF-e',
-                         cm.exception.message,
+                         str(cm.exception),
                          'Validação da chave nf-e incorreta')
 
         with self.assertRaises(AssertionError) as cm:
@@ -84,7 +84,7 @@ class test_utils(unittest.TestCase):
             chave.validar()
         chave.modelo = '55'
         self.assertEqual('Modelo necessário para criar chave NF-e',
-                         cm.exception.message,
+                         str(cm.exception),
                          'Validação da chave nf-e incorreta')
 
         with self.assertRaises(AssertionError) as cm:
@@ -92,7 +92,7 @@ class test_utils(unittest.TestCase):
             chave.validar()
         chave.serie = '012'
         self.assertEqual('Série necessária para criar chave NF-e',
-                         cm.exception.message,
+                         str(cm.exception),
                          'Validação da chave nf-e incorreta')
 
         with self.assertRaises(AssertionError) as cm:
@@ -100,7 +100,7 @@ class test_utils(unittest.TestCase):
             chave.validar()
         chave.numero = '000000780'
         self.assertEqual('Número necessário para criar chave NF-e',
-                         cm.exception.message,
+                         str(cm.exception),
                          'Validação da chave nf-e incorreta')
 
         with self.assertRaises(AssertionError) as cm:
@@ -108,12 +108,12 @@ class test_utils(unittest.TestCase):
             chave.validar()
         chave.tipo = '42'
         self.assertEqual('Tipo necessário para criar chave NF-e',
-                         cm.exception.message,
+                         str(cm.exception),
                          'Validação da chave nf-e incorreta')
 
         with self.assertRaises(AssertionError) as cm:
             chave.codigo = ''
             chave.validar()
         self.assertEqual('Código necessário para criar chave NF-e',
-                         cm.exception.message,
+                         str(cm.exception),
                          'Validação da chave nf-e incorreta')
