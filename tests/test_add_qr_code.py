@@ -9,8 +9,8 @@ from pytrustnfe.nfe import _add_qrCode
 
 class TestAddQRCode(unittest.TestCase):
     def setUp(self):
-        self.xml_sem_qrcode = open('pytrustnfe/test/xml_sem_qrcode.xml', 'r')
-        self.xml_com_qrcode = open('pytrustnfe/test/xml_com_qrcode.xml', 'r')
+        self.xml_sem_qrcode = open('tests/xml_sem_qrcode.xml', 'r')
+        self.xml_com_qrcode = open('tests/xml_com_qrcode.xml', 'r')
         dhEmi = '2016-11-09T16:03:25-00:00'
         chave_nfe = 'NFe35161121332917000163650010000000011448875034'
         ambiente = 2
