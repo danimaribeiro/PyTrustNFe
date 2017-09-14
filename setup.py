@@ -1,7 +1,7 @@
 # coding=utf-8
 from setuptools import setup, find_packages
 
-VERSION = "0.1.39"
+VERSION = "0.1.40"
 
 setup(
     name="PyTrustNFe",
@@ -27,6 +27,7 @@ later (LGPLv2+)',
         'nfse/simpliss/templates/*xml',
         'nfse/betha/templates/*xml',
         'nfse/susesu/templates/*xml',
+        'nfse/imperial/templates/*xml',
         'xml/schemas/*xsd',
     ]},
     url='https://github.com/danimaribeiro/PyTrustNFe',

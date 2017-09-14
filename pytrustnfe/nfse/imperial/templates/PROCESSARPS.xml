@@ -1,13 +1,13 @@
 <ws_nfe.PROCESSARPS xmlns="NFe">
     <Sdt_processarpsin>
         <Login>
-            <CodigoUsuario>[string]</CodigoUsuario>
-            <CodigoContribuinte>[string]</CodigoContribuinte>
+            <CodigoUsuario>{{ nfse.codigo_usuario }}</CodigoUsuario>
+            <CodigoContribuinte>{{ nfse.codigo_contribuinte }}</CodigoContribuinte>
         </Login>
         <SDTRPS>
-            <Ano>[string]</Ano>
-            <Mes>[string]</Mes>
-            <CPFCNPJ>[string]</CPFCNPJ>
+            <Ano>{{ nfse.ano }}</Ano>
+            <Mes>{{ nfse.mes }}</Mes>
+            <CPFCNPJ>{{ nfse.cnpj_prestador }}</CPFCNPJ>
             <DTIni>[string]</DTIni>
             <DTFin>[string]</DTFin>
             <TipoTrib>[string]</TipoTrib>
