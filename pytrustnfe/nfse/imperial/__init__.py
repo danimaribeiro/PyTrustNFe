@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import os
+from lxml import etree
 from pytrustnfe import HttpClient
 from pytrustnfe.xml import render_xml, sanitize_response
 
@@ -10,13 +11,13 @@ from pytrustnfe.xml import render_xml, sanitize_response
 def _render(certificado, method, **kwargs):
     path = os.path.join(os.path.dirname(__file__), 'templates')
     xml_send = render_xml(path, '%s.xml' % method, True, **kwargs)
-    return xml_send
+    return etree.tostring(xml_send)
 
 
 def _send(certificado, method, **kwargs):
     base_url = ''
     if kwargs['ambiente'] == 'producao':
-        base_url = 'https://producao.ginfes.com.br/ServiceGinfesImpl?wsdl'
+        base_url = 'https://nfe.etransparencia.com.br/rj.petropolis/nfe/principal.aspx'  # noqa
     else:
         base_url = 'https://nfehomologacao.etransparencia.com.br/rj.petropolis/webservice/aws_nfe.aspx'  # noqa
 
