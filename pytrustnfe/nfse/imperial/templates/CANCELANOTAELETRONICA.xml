@@ -1,0 +1,17 @@
+<ws_nfe.CANCELANOTAELETRONICA xmlns="NFe">
+    <Sdt_cancelanfe>
+        <Login>
+            <CodigoUsuario>[string]</CodigoUsuario>
+            <CodigoContribuinte>[string]</CodigoContribuinte>
+        </Login>
+        <Nota>
+            <SerieNota>[string]</SerieNota>
+            <NumeroNota>[int]</NumeroNota>
+            <SerieRPS>[string]</SerieRPS>
+            <NumeroRps>[int]</NumeroRps>
+            <ValorNota>[double]</ValorNota>
+            <MotivoCancelamento>[string]</MotivoCancelamento>
+            <PodeCancelarGuia>[string]</PodeCancelarGuia>
+        </Nota>
+    </Sdt_cancelanfe>
+</ws_nfe.CANCELANOTAELETRONICA>

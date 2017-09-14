@@ -1,0 +1,9 @@
+<ws_nfe.CONSULTANOTASPROTOCOLO xmlns="NFe">
+    <Sdt_consultanotasprotocoloin>
+        <Protocolo>[string]</Protocolo>
+        <Login>
+            <CodigoUsuario>[string]</CodigoUsuario>
+            <CodigoContribuinte>[string]</CodigoContribuinte>
+        </Login>
+    </Sdt_consultanotasprotocoloin>
+</ws_nfe.CONSULTANOTASPROTOCOLO>
