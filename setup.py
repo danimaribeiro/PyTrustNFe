@@ -25,6 +25,7 @@ later (LGPLv2+)',
     packages=find_packages(exclude=['*test*']),
     package_data={'pytrustnfe': [
         'nfe/templates/*xml',
+        'nfe/fonts/*ttf',
         'nfse/paulistana/templates/*xml',
         'nfse/ginfes/templates/*xml',
         'nfse/simpliss/templates/*xml',
