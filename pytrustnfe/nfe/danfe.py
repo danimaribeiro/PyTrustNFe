@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 # Classe para geração de PDF da DANFE a partir de xml etree.fromstring
 
-
+import os
 from io import BytesIO
 from textwrap import wrap
 
@@ -18,7 +18,6 @@ from reportlab.lib.enums import TA_CENTER
 from reportlab.platypus import Paragraph, Image
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-
 
 
 def chunks(cString, nLen):
@@ -75,10 +74,14 @@ def get_image(path, width=1*cm):
 class danfe(object):
     def __init__(self, sizepage=A4, list_xml=None, recibo=True,
                  orientation='portrait', logo=None):
+
+        path = os.path.join(os.path.dirname(__file__), 'fonts')
         pdfmetrics.registerFont(
-            TTFont('NimbusSanL-Regu', '../fonts/NimbusSanL Regular.ttf'))
+            TTFont('NimbusSanL-Regu',
+                   os.path.join(path, 'NimbusSanL Regular.ttf')))
         pdfmetrics.registerFont(
-            TTFont('NimbusSanL-Bold', '../fonts/NimbusSanL Bold.ttf'))
+            TTFont('NimbusSanL-Bold',
+                   os.path.join(path, 'NimbusSanL Bold.ttf')))
         self.width = 210    # 21 x 29,7cm
         self.height = 297
         self.nLeft = 10
