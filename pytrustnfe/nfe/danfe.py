@@ -16,6 +16,9 @@ from reportlab.graphics.barcode import code128
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.enums import TA_CENTER
 from reportlab.platypus import Paragraph, Image
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+
 
 
 def chunks(cString, nLen):
@@ -72,6 +75,10 @@ def get_image(path, width=1*cm):
 class danfe(object):
     def __init__(self, sizepage=A4, list_xml=None, recibo=True,
                  orientation='portrait', logo=None):
+        pdfmetrics.registerFont(
+            TTFont('NimbusSanL-Regu', '../fonts/NimbusSanL Regular.ttf'))
+        pdfmetrics.registerFont(
+            TTFont('NimbusSanL-Bold', '../fonts/NimbusSanL Bold.ttf'))
         self.width = 210    # 21 x 29,7cm
         self.height = 297
         self.nLeft = 10
