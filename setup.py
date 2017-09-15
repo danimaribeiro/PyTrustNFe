@@ -1,7 +1,7 @@
 # coding=utf-8
 from setuptools import setup, find_packages
 
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 
 setup(
     name="PyTrustNFe3",
@@ -41,7 +41,7 @@ later (LGPLv2+)',
         'signxml >= 2.4.0',
         'lxml >= 3.5.0, < 4',
         'suds-jurko >= 0.6',
-        'suds-jurko-requests >= 0.3',
+        'suds-jurko-requests >= 1.1',
         'reportlab'
     ],
     tests_require=[
