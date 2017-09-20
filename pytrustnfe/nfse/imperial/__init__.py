@@ -17,7 +17,7 @@ def _render(certificado, method, **kwargs):
 def _send(certificado, method, **kwargs):
     base_url = ''
     if kwargs['ambiente'] == 'producao':
-        base_url = 'https://nfe.etransparencia.com.br/rj.petropolis/nfe/principal.aspx'  # noqa
+        base_url = 'https://nfe.etransparencia.com.br/rj.petropolis/webservice/aws_nfe.aspx'  # noqa
     else:
         base_url = 'https://nfehomologacao.etransparencia.com.br/rj.petropolis/webservice/aws_nfe.aspx'  # noqa
 

@@ -59,3 +59,9 @@ def format_date(value):
     if isinstance(value, date):
         return value.strftime(dt_format)
     return value
+
+
+def format_with_comma(value):
+    if isinstance(value, float):
+        return ('%.2f' % value).replace('.', ',')
+    return value
