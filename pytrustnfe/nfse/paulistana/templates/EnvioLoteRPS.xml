@@ -54,7 +54,7 @@
       <UF>{{ rps.tomador.uf }}</UF>
       <CEP>{{ rps.tomador.cep }}</CEP>
     </EnderecoTomador>
-    <Discriminacao>{{ rps.descricao|normalize|escape }}</Discriminacao>
+    <Discriminacao>{{ rps.descricao }}</Discriminacao>
   </RPS>
   {% endfor %}
 </PedidoEnvioLoteRPS>
