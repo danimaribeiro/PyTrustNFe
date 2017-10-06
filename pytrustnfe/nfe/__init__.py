@@ -124,9 +124,10 @@ def _add_qrCode(xml, **kwargs):
     return etree.tostring(xml, encoding=str)
 
 
-def _send(certificado, method, sign, **kwargs):
+def _render(certificado, method, sign, **kwargs):
     path = os.path.join(os.path.dirname(__file__), 'templates')
     xmlElem_send = render_xml(path, '%s.xml' % method, True, **kwargs)
+
     modelo = xmlElem_send.find(".//{http://www.portalfiscal.inf.br/nfe}mod")
     modelo = modelo.text if modelo is not None else '55'
     if modelo == '65':
@@ -176,8 +177,12 @@ def _send(certificado, method, sign, **kwargs):
 
     else:
         xml_send = etree.tostring(xmlElem_send, encoding=str)
+    return xml_send
 
-    url = localizar_url(method,  kwargs['estado'], modelo,
+
+def _send(certificado, method, **kwargs):
+    xml_send = kwargs["xml"]
+    url = localizar_url(method,  kwargs['estado'], '55',
                         kwargs['ambiente'])
     cabecalho = _build_header(method, **kwargs)
 
@@ -194,50 +199,123 @@ def _send(certificado, method, sign, **kwargs):
     }
 
 
-def autorizar_nfe(certificado, **kwargs):  # Assinar
+def xml_autorizar_nfe(certificado, **kwargs):
     _generate_nfe_id(**kwargs)
-    return _send(certificado, 'NfeAutorizacao', True, **kwargs)
+    return _render(certificado, 'NfeAutorizacao', True, **kwargs)
+
+
+def autorizar_nfe(certificado, **kwargs):  # Assinar
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_autorizar_nfe(certificado, **kwargs)
+    return _send(certificado, 'NfeAutorizacao', **kwargs)
+
+
+def xml_retorno_autorizar_nfe(certificado, **kwargs):
+    return _render(certificado, 'NfeRetAutorizacao', False, **kwargs)
 
 
 def retorno_autorizar_nfe(certificado, **kwargs):
-    return _send(certificado, 'NfeRetAutorizacao', False, **kwargs)
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_retorno_autorizar_nfe(certificado, **kwargs)
+    return _send(certificado, 'NfeRetAutorizacao', **kwargs)
+
+
+def xml_recepcao_evento_cancelamento(certificado, **kwargs):  # Assinar
+    return _render(certificado, 'RecepcaoEventoCancelamento', True, **kwargs)
 
 
 def recepcao_evento_cancelamento(certificado, **kwargs):  # Assinar
-    return _send(certificado, 'RecepcaoEventoCancelamento', True, **kwargs)
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_recepcao_evento_cancelamento(certificado, **kwargs)
+    return _send(certificado, 'RecepcaoEventoCancelamento', **kwargs)
 
 
-def inutilizar_nfe(certificado, **kwargs):  # Assinar
-    return _send(certificado, 'NfeInutilizacao', True, **kwargs)
+def xml_inutilizar_nfe(certificado, **kwargs):
+    return _render(certificado, 'NfeInutilizacao', True, **kwargs)
+
+
+def inutilizar_nfe(certificado, **kwargs):
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_inutilizar_nfe(certificado, **kwargs)
+    return _send(certificado, 'NfeInutilizacao', **kwargs)
+
+
+def xml_consultar_protocolo_nfe(certificado, **kwargs):
+    return _render(certificado, 'NfeConsultaProtocolo', True, **kwargs)
 
 
 def consultar_protocolo_nfe(certificado, **kwargs):
-    return _send(certificado, 'NfeConsultaProtocolo', True, **kwargs)
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_consultar_protocolo_nfe(certificado, **kwargs)
+    return _send(certificado, 'NfeConsultaProtocolo', **kwargs)
+
+
+def xml_nfe_status_servico(certificado, **kwargs):
+    return _render(certificado, 'NfeStatusServico', False, **kwargs)
 
 
 def nfe_status_servico(certificado, **kwargs):
-    return _send(certificado, 'NfeStatusServico', False, **kwargs)
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_nfe_status_servico(certificado, **kwargs)
+    return _send(certificado, 'NfeStatusServico', **kwargs)
+
+
+def xml_consulta_cadastro(certificado, **kwargs):
+    return _render(certificado, 'NfeConsultaCadastro', False, **kwargs)
 
 
 def consulta_cadastro(certificado, **kwargs):
-    return _send(certificado, 'NfeConsultaCadastro', False, **kwargs)
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_consulta_cadastro(certificado, **kwargs)
+    return _send(certificado, 'NfeConsultaCadastro', **kwargs)
+
+
+def xml_recepcao_evento_carta_correcao(certificado, **kwargs):  # Assinar
+    return _render(certificado, 'RecepcaoEventoCarta', True, **kwargs)
 
 
 def recepcao_evento_carta_correcao(certificado, **kwargs):  # Assinar
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_recepcao_evento_carta_correcao(
+            certificado, **kwargs)
     return _send(certificado, 'RecepcaoEventoCarta', True, **kwargs)
 
 
+def xml_recepcao_evento_manifesto(certificado, **kwargs):  # Assinar
+    return _render(certificado, 'RecepcaoEventoManifesto', True, **kwargs)
+
+
 def recepcao_evento_manifesto(certificado, **kwargs):  # Assinar
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_recepcao_evento_manifesto(certificado, **kwargs)
     return _send(certificado, 'RecepcaoEventoManifesto', True, **kwargs)
 
 
+def xml_recepcao_evento_epec(certificado, **kwargs):  # Assinar
+    return _render(certificado, 'RecepcaoEventoEPEC', True, **kwargs)
+
+
 def recepcao_evento_epec(certificado, **kwargs):  # Assinar
-    return _send(certificado, 'RecepcaoEventoEPEC', True, **kwargs)
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_recepcao_evento_epec(certificado, **kwargs)
+    return _send(certificado, 'RecepcaoEventoEPEC', **kwargs)
+
+
+def xml_consulta_distribuicao_nfe(certificado, **kwargs):  # Assinar
+    return _render(certificado, 'NFeDistribuicaoDFe', False, **kwargs)
 
 
 def consulta_distribuicao_nfe(certificado, **kwargs):
-    return _send(certificado, 'NFeDistribuicaoDFe', False, **kwargs)
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_consulta_distribuicao_nfe(certificado, **kwargs)
+    return _send(certificado, 'NFeDistribuicaoDFe', **kwargs)
+
+
+def xml_download_nfe(certificado, **kwargs):  # Assinar
+    return _render(certificado, 'NFeDistribuicaoDFe', False, **kwargs)
 
 
 def download_nfe(certificado, **kwargs):
-    return _send(certificado, 'NFeDistribuicaoDFe', False, **kwargs)
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_download_nfe(certificado, **kwargs)
+    return _send(certificado, 'NFeDistribuicaoDFe', **kwargs)
