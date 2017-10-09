@@ -1,10 +1,10 @@
 # PyTrustNFe
 Biblioteca Python que tem por objetivo enviar NFe, NFCe e NFSe no Brasil
 
-[![Coverage Status](https://coveralls.io/repos/danimaribeiro/PyTrustNFe/badge.svg?branch=master)](https://coveralls.io/r/danimaribeiro/PyTrustNFe?branch=master)
-[![Code Health](https://landscape.io/github/danimaribeiro/PyTrustNFe/master/landscape.svg?style=flat)](https://landscape.io/github/danimaribeiro/PyTrustNFe/master)
-[![Build Status](https://travis-ci.org/danimaribeiro/PyTrustNFe.svg?branch=master)](https://travis-ci.org/danimaribeiro/PyTrustNFe)
-[![PyPI version](https://badge.fury.io/py/PyTrustNFe.svg)](https://badge.fury.io/py/PyTrustNFe)
+[![Coverage Status](https://coveralls.io/repos/danimaribeiro/PyTrustNFe/badge.svg?branch=master3)](https://coveralls.io/r/danimaribeiro/PyTrustNFe?branch=master3)
+[![Code Health](https://landscape.io/github/danimaribeiro/PyTrustNFe/master3/landscape.svg?style=flat)](https://landscape.io/github/danimaribeiro/PyTrustNFe/master3)
+[![Build Status](https://travis-ci.org/danimaribeiro/PyTrustNFe.svg?branch=master3)](https://travis-ci.org/danimaribeiro/PyTrustNFe)
+[![PyPI version](https://badge.fury.io/py/PyTrustNFe3.svg)](https://badge.fury.io/py/PyTrustNFe3)
 
 Dependências:
 * PyXmlSec
@@ -19,7 +19,7 @@ NFSe - Cidades atendidas
 --------------
 * [Ariss](cidades/ariss.md) - 4 cidades atendidas
 * [Simpliss](cidades/simpliss.md) - 18 cidade atendidas
-
+* [GINFES](cidades/ginfes.md) - 79 cidades atendidas
 
 Roadmap
 --------------
@@ -31,7 +31,6 @@ Compatibilidade [python 2 e 3](https://github.com/danimaribeiro/PyTrustNFe/pull/
 
 Implementar novos provedores de NFSe
 * [Betha](cidades/betha.md) - 81 cidades atendidas  WIP
-* [GINFES](cidades/ginfes.md) - 79 cidades atendidas
 * [WebISS](cidades/webiss.md) - 51 cidades atendidas
 * [ISSIntel](cidades/issintel.md) - 32 cidades atendidas
 * [ISSNET](cidades/issnet.md) - 32 cidades atendidas
