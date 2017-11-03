@@ -1,7 +1,7 @@
 # coding=utf-8
 from setuptools import setup, find_packages
 
-VERSION = "0.9.0"
+VERSION = "0.9.1"
 
 setup(
     name="PyTrustNFe3",
