@@ -278,17 +278,17 @@ def recepcao_evento_carta_correcao(certificado, **kwargs):  # Assinar
     if "xml" not in kwargs:
         kwargs['xml'] = xml_recepcao_evento_carta_correcao(
             certificado, **kwargs)
-    return _send(certificado, 'RecepcaoEventoCarta', True, **kwargs)
+    return _send(certificado, 'RecepcaoEventoCarta', **kwargs)
 
 
 def xml_recepcao_evento_manifesto(certificado, **kwargs):  # Assinar
-    return _render(certificado, 'RecepcaoEventoManifesto', True, **kwargs)
+    return _render(certificado, 'RecepcaoEventoManifesto', **kwargs)
 
 
 def recepcao_evento_manifesto(certificado, **kwargs):  # Assinar
     if "xml" not in kwargs:
         kwargs['xml'] = xml_recepcao_evento_manifesto(certificado, **kwargs)
-    return _send(certificado, 'RecepcaoEventoManifesto', True, **kwargs)
+    return _send(certificado, 'RecepcaoEventoManifesto', **kwargs)
 
 
 def xml_recepcao_evento_epec(certificado, **kwargs):  # Assinar
