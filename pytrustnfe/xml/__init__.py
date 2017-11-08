@@ -2,7 +2,6 @@
 # © 2016 Danimar Ribeiro, Trustcode
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import unicodedata
 from lxml import etree
 
 from lxml import objectify
@@ -17,6 +16,7 @@ def recursively_empty(e):
 
 
 def render_xml(path, template_name, remove_empty, **nfe):
+    nfe = recursively_normalize(nfe)
     env = Environment(
         loader=FileSystemLoader(path), extensions=['jinja2.ext.with_'])
 
@@ -53,6 +53,18 @@ def sanitize_response(response):
             continue
         i = elem.tag.find('}')
         if i >= 0:
-            elem.tag = elem.tag[i+1:]
+            elem.tag = elem.tag[i + 1:]
     objectify.deannotate(tree, cleanup_namespaces=True)
     return response, objectify.fromstring(etree.tostring(tree))
+
+
+def recursively_normalize(vals):
+    for item in vals:
+        if type(vals[item]) is str:
+            vals[item] = filters.normalize_str(vals[item])
+        elif type(vals[item]) is dict:
+            recursively_normalize(vals[item])
+        elif type(vals[item]) is list:
+            for a in vals[item]:
+                recursively_normalize(a)
+    return vals
