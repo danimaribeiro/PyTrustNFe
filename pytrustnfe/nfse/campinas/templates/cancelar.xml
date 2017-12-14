@@ -1,0 +1,18 @@
+<ns1:ReqCancelamentoNFSe xmlns:ns1="http://localhost:8080/WsNFe2/lote"
+	xmlns:tipos="http://localhost:8080/WsNFe2/tp" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://localhost:8080/WsNFe2/lote http://localhost:8080/WsNFe2/xsd/ReqCancelamentoNFSe.xsd">
+	<Cabecalho>
+		<CodCidade>{{ cancelamento.cidade }}</CodCidade>
+		<CPFCNPJRemetente>{{ cancelamento.cpf_cnpj }}</CPFCNPJRemetente>
+		<transacao>true</transacao>
+		<Versao>1</Versao>
+	</Cabecalho>
+	<Lote Id="lote:1ABCDZ">
+		<Nota Id="nota:{{ cancelamento.nota_id }}">
+			<InscricaoMunicipalPrestador>{{ cancelamento.inscricao_municipal }}</InscricaoMunicipalPrestador>
+			<NumeroNota>{{ cancelamento.nota_id }}</NumeroNota>
+			<CodigoVerificacao>{{ cancelamento.assinatura }}</CodigoVerificacao>
+			<MotivoCancelamento>{{ cancelamento.motivo }}</MotivoCancelamento>
+		</Nota>		
+	</Lote>
+</ns1:ReqCancelamentoNFSe>

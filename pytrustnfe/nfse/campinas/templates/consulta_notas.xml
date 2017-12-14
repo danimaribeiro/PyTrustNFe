@@ -1,0 +1,11 @@
+<ns1:ReqConsultaNotas xmlns:ns1="http://localhost:8080/WsNFe2/lote" xmlns:tipos="http://localhost:8080/WsNFe2/tp" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://localhost:8080/WsNFe2/lote http://localhost:8080/WsNFe2/xsd/ReqConsultaNotas.xsd">
+<Cabecalho Id="Consulta:notas">
+<CodCidade>{{ consulta.cidade }}</CodCidade>
+<CPFCNPJRemetente>{{ consulta.cpf_cnpj }}</CPFCNPJRemetente>
+<InscricaoMunicipalPrestador>{{ consulta.inscricao_municipal }}</InscricaoMunicipalPrestador>
+<dtInicio>{{ consulta.data_inicio }}</dtInicio>
+<dtFim>{{ consulta.data_final }}</dtFim>
+<NotaInicial>{{ consulta.nota_inicial }}</NotaInicial>
+<Versao>1</Versao>
+</Cabecalho>
+</ns1:ReqConsultaNotas>
