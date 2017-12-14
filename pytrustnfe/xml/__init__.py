@@ -17,6 +17,10 @@ def recursively_empty(e):
 
 
 def render_xml(path, template_name, remove_empty, **nfe):
+    for item in nfe:
+        if type(nfe[item]) is str:
+            nfe[item] = nfe[item].strip()
+
     env = Environment(
         loader=FileSystemLoader(path), extensions=['jinja2.ext.with_'])
 
