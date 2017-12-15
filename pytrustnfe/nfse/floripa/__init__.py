@@ -54,7 +54,7 @@ def _send(certificado, method, **kwargs):
     else:
         url = 'https://nfps-e-hml.pmf.sc.gov.br/api/v1/processamento/notas/processa'
 
-    xml_send = '<?xml version="1.0" encoding="UTF-8"?>' + kwargs['xml']
+    xml_send = kwargs['xml']
 
     base = dict(
         ambiente='homologacao', client_id="trustcode-tecnologia-client",
@@ -89,6 +89,16 @@ def processar_nota(certificado, **kwargs):
     if "xml" not in kwargs:
         kwargs['xml'] = xml_processar_nota(certificado, **kwargs)
     return _send(certificado, 'processar_nota', **kwargs)
+
+
+def xml_cancelar_nota(certificado, **kwargs):
+    return _render(certificado, 'cancelar_nota', **kwargs)
+
+
+def cancelar_nota(certificado, **kwargs):
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_cancelar_nota(certificado, **kwargs)
+    return _send(certificado, 'cancelar_nota', **kwargs)
 
 
 def consultar_nota(certificado, **kwargs):

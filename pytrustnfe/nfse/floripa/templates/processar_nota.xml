@@ -34,7 +34,7 @@
   <razaoSocialTomador>{{ rps.tomador.razao_social }}</razaoSocialTomador>
   <telefoneTomador>{{ rps.tomador.telefone }}</telefoneTomador>
   <ufTomador>{{ rps.tomador.uf }}</ufTomador>
-  <valorISSQN>{{rps.valor_iss }}</valorISSQN>
+  <valorISSQN>{{rps.valor_issqn }}</valorISSQN>
   <valorISSQNSubstituicao>0.0</valorISSQNSubstituicao>
-  <valorTotalServicos>{{ rps.valor_liquido_nfse }}</valorTotalServicos>
+  <valorTotalServicos>{{ rps.valor_total }}</valorTotalServicos>
 </xmlProcessamentoNfpse>
