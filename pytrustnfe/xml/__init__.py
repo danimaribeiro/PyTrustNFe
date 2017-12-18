@@ -29,7 +29,7 @@ def recursively_normalize(vals):
 
 
 def render_xml(path, template_name, remove_empty, **nfe):
-    nfe = recursively_normalize(**nfe)
+    nfe = recursively_normalize(nfe)
     env = Environment(
         loader=FileSystemLoader(path), extensions=['jinja2.ext.with_'])
 
