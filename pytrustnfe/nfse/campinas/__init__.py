@@ -6,27 +6,22 @@ import os
 import suds
 from lxml import etree
 from pytrustnfe.xml import render_xml, sanitize_response
+from pytrustnfe.certificado import extract_cert_and_key_from_pfx, save_cert_key
 from pytrustnfe.nfse.assinatura import Assinatura
-from pytrustnfe import HttpClient
+from pytrustnfe.client import get_client
 
 
-def _render_xml(certificado, method, **kwargs):
+def _render(certificado, method, **kwargs):
     path = os.path.join(os.path.dirname(__file__), 'templates')
-    xml_send = render_xml(path, '%s.xml' % method, True, **kwargs)
-    xml_send = etree.tostring(xml_send)
+    if method == "testeEnviar":
+        xml_send = render_xml(path, 'enviar.xml', True, **kwargs)
+    else:
+        xml_send = render_xml(path, '%s.xml' % method, False, **kwargs)
+
+    if type(xml_send) != str:
+        xml_send = etree.tostring(xml_send)
 
     return xml_send
-
-
-def _validate(method, xml):
-    path = os.path.join(os.path.dirname(__file__), 'templates')
-    schema = os.path.join(path, '%s.xsd' % method)
-
-    nfe = etree.fromstring(xml)
-    esquema = etree.XMLSchema(etree.parse(schema))
-    esquema.validate(nfe)
-    erros = [x.message for x in esquema.error_log]
-    return erros
 
 
 def _send(certificado, method, **kwargs):
@@ -34,19 +29,19 @@ def _send(certificado, method, **kwargs):
 
     path = os.path.join(os.path.dirname(__file__), 'templates')
 
-    if method == "testeEnviar":
-        xml_send = render_xml(path, 'testeEnviar', **kwargs)
-    else:
-        xml_send = render_xml(path, '%s.xml' % method, False)
-    client = HttpClient(url)
+    xml_send = _render(path, method, **kwargs)
+    client = get_client(url)
 
-    pfx_path = certificado.save_pfx()
-    signer = Assinatura(pfx_path, certificado.password)
-    xml_signed = signer.assina_xml(xml_send, '')
+    if certificado:
+        cert, key = extract_cert_and_key_from_pfx(
+            certificado.pfx, certificado.password)
+        cert, key = save_cert_key(cert, key)
+        signer = Assinatura(cert, key, certificado.password)
+        xml_send = signer.assina_xml(xml_send, '')
 
     try:
-        response = getattr(client.service, method)(xml_signed)
-        response, obj = sanitize_response(response)
+        response = getattr(client.service, method)(xml_send)
+        response, obj = sanitize_response(response.encode())
     except suds.WebFault as e:
         return {
             'sent_xml': xml_send,
@@ -62,18 +57,19 @@ def _send(certificado, method, **kwargs):
 
 
 def enviar(certificado, **kwargs):
-    if kwargs['ambiente'] == 'producao':
-        return _send(certificado, 'enviar', **kwargs)
-    else:
-        return _send(certificado, 'testeEnviar', **kwargs)
+    return _send(certificado, 'enviar', **kwargs)
+
+
+def teste_enviar(certificado, **kwargs):
+    return _send(certificado, 'testeEnviar', **kwargs)
 
 
 def cancelar(certificado, ** kwargs):
     return _send(certificado, 'cancelar', **kwargs)
 
 
-def consulta_lote(certificado, **kwargs):
-    return _send(certificado, 'ConsultarLote', **kwargs)
+def consulta_lote(**kwargs):
+    return _send(False, 'consultarLote', **kwargs)
 
 
 def consultar_lote_rps(certificado, **kwarg):
