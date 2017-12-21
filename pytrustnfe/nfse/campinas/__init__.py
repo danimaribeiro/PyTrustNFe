@@ -24,8 +24,35 @@ def _render(certificado, method, **kwargs):
     return xml_send
 
 
+def _get_url(**kwargs):
+
+    try:
+        cod_cidade = kwargs['CodCidade']
+    except (KeyError, TypeError):
+        return ''
+
+    urls = {
+        # Belém - PA
+        '2715': 'http://www.issdigitalbel.com.br/WsNFe2/LoteRps.jws',
+        # Sorocaba - SP
+        '5363': 'http://issdigital.sorocaba.sp.gov.br/WsNFe2/LoteRps.jws',
+        # Teresina - PI
+        '3182': 'http://www.issdigitalthe.com.br/WsNFe2/LoteRps.jws',
+        # Campinas - SP
+        '4888': 'http://issdigital.campinas.sp.gov.br/WsNFe2/LoteRps.jws?wsdl',
+        # Uberlandia - MG
+        '2170': 'http://udigital.uberlandia.mg.gov.br/WsNFe2/LoteRps.jws',
+        # São Luis - MA
+        '1314': 'https://stm.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps?wsdl',
+        # Campo Grande - MS
+        '2218': 'http://issdigital.pmcg.ms.gov.br/WsNFe2/LoteRps.jws',
+    }
+
+    return urls[str(cod_cidade)]
+
+
 def _send(certificado, method, **kwargs):
-    url = 'http://issdigital.campinas.sp.gov.br/WsNFe2/LoteRps.jws?wsdl'  # noqa
+    url = _get_url(**kwargs)
 
     path = os.path.join(os.path.dirname(__file__), 'templates')
 
