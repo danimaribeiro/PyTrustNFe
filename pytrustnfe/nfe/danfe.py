@@ -55,6 +55,7 @@ def tagtext(oNode=None, cTag=None):
         cText = ''
     return cText
 
+
 REGIME_TRIBUTACAO = {
     '1': 'Simples Nacional',
     '2': 'Simples Nacional, excesso sublimite de receita bruta',
@@ -81,7 +82,7 @@ class danfe(object):
         self.nlin = self.nTop
         self.logo = logo
         self.oFrete = {'0': '0 - Emitente',
-                       '1': '1 - Dest/Remet',
+                       '1': '1 - Destinatário',
                        '2': '2 - Terceiros',
                        '9': '9 - Sem Frete'}
 
@@ -342,8 +343,10 @@ class danfe(object):
         self.canvas.setFont('NimbusSanL-Regu', 8)
         self.string(self.nLeft+1, self.nlin+7.5,
                     tagtext(oNode=elem_dest, cTag='xNome'))
-        self.string(nMr-69, self.nlin+7.5,
-                    format_cnpj_cpf(tagtext(oNode=elem_dest, cTag='CNPJ')))
+        cnpj_cpf = format_cnpj_cpf(tagtext(oNode=elem_dest, cTag='CNPJ'))
+        if cnpj_cpf == '..-' or not cnpj_cpf:
+            cnpj_cpf = format_cnpj_cpf(tagtext(oNode=elem_dest, cTag='CPF'))
+        self.string(nMr-69, self.nlin+7.5, cnpj_cpf)
         cDt, cHr = getdateUTC(tagtext(oNode=elem_ide, cTag='dhEmi'))
         self.string(nMr-24, self.nlin+7.7, cDt + ' ' + cHr)
         cDt, cHr = getdateUTC(tagtext(oNode=elem_ide, cTag='dhSaiEnt'))
@@ -647,9 +650,8 @@ obsCont[@xCampo='NomeVendedor']")
                 ".//{http://www.portalfiscal.inf.br/nfe}ICMS")
             el_imp_IPI = el_imp.find(
                 ".//{http://www.portalfiscal.inf.br/nfe}IPI")
-
             cCST = tagtext(oNode=el_imp_ICMS, cTag='orig') + \
-                tagtext(oNode=el_imp_ICMS, cTag='CST')
+                tagtext(oNode=el_imp_ICMS, cTag='CSOSN')
             vBC = tagtext(oNode=el_imp_ICMS, cTag='vBC')
             vICMS = tagtext(oNode=el_imp_ICMS, cTag='vICMS')
             pICMS = tagtext(oNode=el_imp_ICMS, cTag='pICMS')
@@ -719,7 +721,6 @@ obsCont[@xCampo='NomeVendedor']")
         styleN.fontSize = 6
         styleN.fontName = 'NimbusSanL-Regu'
         styleN.leading = 7
-
         fisco = tagtext(oNode=el_infAdic, cTag='infAdFisco')
         observacoes = tagtext(oNode=el_infAdic, cTag='infCpl')
         if fisco:
