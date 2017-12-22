@@ -3,8 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 # Classe para geração de PDF da DANFE a partir de xml etree.fromstring
 
-
-from cStringIO import StringIO as IO
+import os
+from io import BytesIO
 from textwrap import wrap
 
 from reportlab.lib import utils
@@ -16,6 +16,8 @@ from reportlab.graphics.barcode import code128
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.enums import TA_CENTER
 from reportlab.platypus import Paragraph, Image
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 
 
 def chunks(cString, nLen):
@@ -55,7 +57,6 @@ def tagtext(oNode=None, cTag=None):
         cText = ''
     return cText
 
-
 REGIME_TRIBUTACAO = {
     '1': 'Simples Nacional',
     '2': 'Simples Nacional, excesso sublimite de receita bruta',
@@ -73,6 +74,14 @@ def get_image(path, width=1*cm):
 class danfe(object):
     def __init__(self, sizepage=A4, list_xml=None, recibo=True,
                  orientation='portrait', logo=None):
+
+        path = os.path.join(os.path.dirname(__file__), 'fonts')
+        pdfmetrics.registerFont(
+            TTFont('NimbusSanL-Regu',
+                   os.path.join(path, 'NimbusSanL Regular.ttf')))
+        pdfmetrics.registerFont(
+            TTFont('NimbusSanL-Bold',
+                   os.path.join(path, 'NimbusSanL Bold.ttf')))
         self.width = 210    # 21 x 29,7cm
         self.height = 297
         self.nLeft = 10
@@ -86,7 +95,7 @@ class danfe(object):
                        '2': '2 - Terceiros',
                        '9': '9 - Sem Frete'}
 
-        self.oPDF_IO = IO()
+        self.oPDF_IO = BytesIO()
         if orientation == 'landscape':
             raise NameError('Rotina não implementada')
         else:
@@ -208,7 +217,7 @@ class danfe(object):
         cNF = '{0:011,}'.format(int(cNF)).replace(",", ".")
         self.stringcenter(self.nLeft+100, self.nlin+25, "Nº %s" % (cNF))
 
-        self.stringcenter(self.nLeft+100, self.nlin+29, u"SÉRIE %s" % (
+        self.stringcenter(self.nLeft+100, self.nlin+29, "SÉRIE %s" % (
             tagtext(oNode=elem_ide, cTag='serie')))
         cPag = "Página %s de %s" % (str(self.Page), str(self.NrPages))
         self.stringcenter(self.nLeft+100, self.nlin+32, cPag)
@@ -284,7 +293,7 @@ class danfe(object):
             oNode=elem_emit, cTag='CEP')
 
         regime = tagtext(oNode=elem_emit, cTag='CRT')
-        cEnd += u'<br />Regime Tributário: %s' % (REGIME_TRIBUTACAO[regime])
+        cEnd += '<br />Regime Tributário: %s' % (REGIME_TRIBUTACAO[regime])
 
         styleN.fontName = 'NimbusSanL-Regu'
         styleN.fontSize = 7
@@ -640,7 +649,7 @@ obsCont[@xCampo='NomeVendedor']")
         self.canvas.setFont('NimbusSanL-Regu', 5)
         nLin = self.nlin+10.5
 
-        for id in xrange(oPaginator[0], oPaginator[1]):
+        for id in range(oPaginator[0], oPaginator[1]):
             item = el_det[id]
             el_prod = item.find(".//{http://www.portalfiscal.inf.br/nfe}prod")
             el_imp = item.find(
@@ -650,6 +659,7 @@ obsCont[@xCampo='NomeVendedor']")
                 ".//{http://www.portalfiscal.inf.br/nfe}ICMS")
             el_imp_IPI = el_imp.find(
                 ".//{http://www.portalfiscal.inf.br/nfe}IPI")
+
             cCST = tagtext(oNode=el_imp_ICMS, cTag='orig') + \
                 tagtext(oNode=el_imp_ICMS, cTag='CSOSN')
             vBC = tagtext(oNode=el_imp_ICMS, cTag='vBC')
@@ -721,6 +731,7 @@ obsCont[@xCampo='NomeVendedor']")
         styleN.fontSize = 6
         styleN.fontName = 'NimbusSanL-Regu'
         styleN.leading = 7
+
         fisco = tagtext(oNode=el_infAdic, cTag='infAdFisco')
         observacoes = tagtext(oNode=el_infAdic, cTag='infCpl')
         if fisco:
@@ -759,7 +770,7 @@ obsCont[@xCampo='NomeVendedor']")
         cNF = '{0:011,}'.format(int(cNF)).replace(",", ".")
         self.string(self.width-self.nRight-nW+2, self.nlin+8, "Nº %s" % (cNF))
         self.string(self.width-self.nRight-nW+2, self.nlin+14,
-                    u"SÉRIE %s" % (tagtext(oNode=el_ide, cTag='serie')))
+                    "SÉRIE %s" % (tagtext(oNode=el_ide, cTag='serie')))
 
         cDt, cHr = getdateUTC(tagtext(oNode=el_ide, cTag='dhEmi'))
         cTotal = format_number(tagtext(oNode=el_total, cTag='vNF'),
@@ -772,7 +783,7 @@ obsCont[@xCampo='NomeVendedor']")
             oNode=el_dest, cTag='xMun') + ' - '
         cEnd += tagtext(oNode=el_dest, cTag='UF')
 
-        cString = u"""
+        cString = """
         RECEBEMOS DE %s OS PRODUTOS/SERVIÇOS CONSTANTES DA NOTA FISCAL INDICADA
         ABAIXO. EMISSÃO: %s VALOR TOTAL: %s
         DESTINATARIO: %s""" % (tagtext(oNode=el_emit, cTag='xNome'),
