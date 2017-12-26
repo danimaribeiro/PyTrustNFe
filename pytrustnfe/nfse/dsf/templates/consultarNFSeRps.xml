@@ -1,0 +1,22 @@
+<ns1:ReqConsultaNFSeRPS 
+    xmlns:ns1="http://localhost:8080/WsNFe2/lote" 
+    xmlns:tipos="http://localhost:8080/WsNFe2/tp" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://localhost:8080/WsNFe2/lote http://localhost:8080/WsNFe2/xsd/ReqConsultaNFSeRPS.xsd">
+    <Cabecalho>
+        <CodCidade>{{ nfse.cidade }}</CodCidade>
+        <CPFCNPJRemetente>{{ nfse.cpf_cnpj }}</CPFCNPJRemetente>
+        <transacao>true</transacao>
+        <Versao>1</Versao>
+    </Cabecalho>
+    <Lote Id="lote:{{ nfse.lote }}">
+        {% for rps in nfse.lista_rps -%}		
+            <RPSConsulta>
+                <RPS Id="rps:{{ rps.numero }}">
+                    <InscricaoMunicipalPrestador>{{ rps.prestador.inscricao_municipal }}</InscricaoMunicipalPrestador>
+                    <NumeroRPS>{{ rps.numero }}</NumeroRPS>
+                    <SeriePrestacao>{{ rps.serie_prestacao }}</SeriePrestacao>
+                </RPS>
+            </RPSConsulta>
+        {% endfor %}	
+    </Lote>
+</ns1:ReqConsultaNFSeRPS>

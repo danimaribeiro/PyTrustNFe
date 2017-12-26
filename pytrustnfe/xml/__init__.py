@@ -27,7 +27,6 @@ def render_xml(path, template_name, remove_empty, **nfe):
     env.filters["format_date"] = filters.format_date
 
     template = env.get_template(template_name)
-
     xml = template.render(**nfe)
     parser = etree.XMLParser(remove_blank_text=True, remove_comments=True,
                              strip_cdata=False)
