@@ -45,7 +45,7 @@ def _get_url(**kwargs):
         # São Luis - MA
         '0921': 'https://stm.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps?wsdl',
         # Campo Grande - MS
-        '2729': 'http://issdigital.pmcg.ms.gov.br/WsNFe2/LoteRps.jws',
+        '2729': 'http://issdigital.pmcg.ms.gov.br/WsNFe2/LoteRps.jws?wsdl',
     }
 
     try:
@@ -62,7 +62,7 @@ def _send(certificado, method, **kwargs):
 
     xml_send = _render(path, method, **kwargs)
     client = get_client(url)
-
+    response = False
     if certificado:
         cert, key = extract_cert_and_key_from_pfx(
             certificado.pfx, certificado.password)
@@ -80,8 +80,10 @@ def _send(certificado, method, **kwargs):
             'object': None
         }
     except Exception as e:
-        print (response)
-        print (e)
+        if response:
+            raise Exception(response)
+        else:
+            raise e
 
     return {
         'sent_xml': xml_send,
