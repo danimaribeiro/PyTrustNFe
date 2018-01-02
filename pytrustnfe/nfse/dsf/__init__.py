@@ -63,6 +63,7 @@ def _send(certificado, method, **kwargs):
     xml_send = _render(path, method, **kwargs)
     client = get_client(url)
     response = False
+
     if certificado:
         cert, key = extract_cert_and_key_from_pfx(
             certificado.pfx, certificado.password)
