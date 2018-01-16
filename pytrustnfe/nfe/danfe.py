@@ -16,6 +16,7 @@ from reportlab.graphics.barcode import code128
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.enums import TA_CENTER
 from reportlab.platypus import Paragraph, Image
+from reportlab.lib.styles import ParagraphStyle
 
 
 def chunks(cString, nLen):
@@ -73,7 +74,7 @@ def get_image(path, width=1 * cm):
 class danfe(object):
 
     def __init__(self, sizepage=A4, list_xml=None, recibo=True,
-                 orientation='portrait', logo=None):
+                 orientation='portrait', logo=None, cce_xml=None):
         self.width = 210    # 21 x 29,7cm
         self.height = 297
         self.nLeft = 10
@@ -169,7 +170,9 @@ class danfe(object):
                               list_cod_prod=list_cod_prod)
 
             self.newpage()
-
+        for xml in cce_xml:
+            self._generate_cce(cce_xml=xml, oXML=oXML)
+            self.newpage()
         self.canvas.save()
 
     def ide_emit(self, oXML=None):
@@ -840,3 +843,82 @@ obsCont[@xCampo='NomeVendedor']")
         pdf_out = self.oPDF_IO.getvalue()
         self.oPDF_IO.close()
         fileObj.write(pdf_out)
+
+    def _generate_cce(self, cce_xml=None, oXML=None):
+        self.canvas.setLineWidth(.2)
+
+        # labels
+        self.canvas.setFont('NimbusSanL-Bold', 12)
+        self.stringcenter(105, 10, u"Carta de Correção")
+        self.canvas.setFont('NimbusSanL-Regu', 6)
+        self.string(10, 18, u"RAZÃO SOCIAL DO EMITENTE")
+        self.string(10, 24, u"CNPJ DO EMITENTE")
+        self.string(10, 30, u"CHAVE DE ACESSO DA NF-E")
+        self.string(10, 36, u"DATA DA CORREÇÃO")
+        self.string(10, 42, u"ID")
+        self.stringcenter(105, 48, u"CORREÇÃO")
+
+        # lines
+        self.hline(9, 14, 200)
+        self.hline(9, 20, 200)
+        self.hline(9, 26, 200)
+        self.hline(9, 32, 200)
+        self.hline(9, 38, 200)
+        self.hline(9, 44, 200)
+        self.hline(9, 50, 200)
+
+        # values
+        infNFe = oXML.find(
+            ".//{http://www.portalfiscal.inf.br/nfe}infNFe")
+        res_partner = infNFe.find(
+            ".//{http://www.portalfiscal.inf.br/nfe}xNome")
+
+        elem_infNFe = cce_xml.find(
+            ".//{http://www.portalfiscal.inf.br/nfe}infEvento")
+
+        res_partner = tagtext(oNode=infNFe, cTag='xNome')
+        self.string(82, 18, res_partner)
+        cnpj = format_cnpj_cpf(tagtext
+                               (oNode=elem_infNFe, cTag='CNPJ'))
+        self.string(82, 24, cnpj)
+        chave_acesso = tagtext(oNode=elem_infNFe, cTag='chNFe')
+        self.string(82, 30, chave_acesso)
+        data_correcao = getdateUTC(tagtext(
+            oNode=elem_infNFe, cTag='dhEvento'))
+        data_correcao = data_correcao[0] + "  " + data_correcao[1]
+        self.string(82, 36, data_correcao)
+        cce_id = elem_infNFe.values()[0]
+        self.string(82, 42, cce_id)
+
+        correcao = tagtext(oNode=elem_infNFe, cTag='xCorrecao')
+
+        w, h, paragraph = self._paragraph(
+            correcao, 'NimbusSanL-Regu', 10, 190*mm, 20*mm)
+        paragraph.drawOn(self.canvas, 10*mm, (297-52)*mm - h)
+
+        self.hline(9, 54+(h/mm), 200)
+        self.stringcenter(105, 58+(h/mm), u"CONDIÇÃO DE USO")
+        self.hline(9, 60+(h/mm), 200)
+
+        condicoes = tagtext(oNode=elem_infNFe, cTag='xCondUso')
+
+        w2, h2, paragraph = self._paragraph(
+            condicoes, 'NimbusSanL-Regu', 10, 190*mm, 20*mm)
+        paragraph.drawOn(self.canvas, 10*mm, (297-62)*mm-h-h2)
+
+        self.hline(9, 68+((h+h2)/mm), 200)
+
+        self.vline(80, 14, 30)
+        self.vline(9, 14, 54+((h+h2)/mm))
+        self.vline(200, 14, 54+((h+h2)/mm))
+
+    def _paragraph(self, text, font, font_size, x, y):
+        ptext = '<font size=%s>%s</font>' % (font_size, text)
+        style = ParagraphStyle(name='Normal',
+                               fontName=font,
+                               fontSize=font_size,
+                               )
+        paragraph = Paragraph(ptext, style=style)
+        w, h = paragraph.wrapOn(self.canvas, x, y)
+        return w, h, paragraph
+
