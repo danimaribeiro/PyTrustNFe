@@ -170,9 +170,10 @@ class danfe(object):
                               list_cod_prod=list_cod_prod)
 
             self.newpage()
-        for xml in cce_xml:
-            self._generate_cce(cce_xml=xml, oXML=oXML)
-            self.newpage()
+        if cce_xml:
+            for xml in cce_xml:
+                self._generate_cce(cce_xml=xml, oXML=oXML)
+                self.newpage()
         self.canvas.save()
 
     def ide_emit(self, oXML=None):
