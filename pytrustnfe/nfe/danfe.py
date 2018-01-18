@@ -40,11 +40,9 @@ def getdateUTC(cDateUTC):
     return '/'.join(cDt), cDateUTC[11:16]
 
 
-def format_number(cNumber, precision=0, group_sep='.', decimal_sep=','):
+def format_number(cNumber):
     if cNumber:
-        number = float(cNumber)
-        return ("{:,." + str(precision) + "f}").format(number).\
-            replace(",", "X").replace(".", ",").replace("X", ".")
+        return cNumber.replace(",", "X").replace(".", ",").replace("X", ".")
     return ""
 
 
@@ -417,8 +415,7 @@ class danfe(object):
             self.string(self.nLeft + nCol + 17, self.nlin + nLin, cDt)
             self.stringRight(
                 self.nLeft + nCol + 47, self.nlin + nLin,
-                format_number(tagtext(oNode=oXML_dup, cTag='vDup'),
-                              precision=2))
+                format_number(tagtext(oNode=oXML_dup, cTag='vDup')))
 
             if nPar == 3:
                 nLin = 7
@@ -486,41 +483,40 @@ obsCont[@xCampo='NomeVendedor']")
         self.canvas.setFont('NimbusSanL-Regu', 8)
         self.stringRight(
             self.nLeft + 34, self.nlin + 7.7,
-            format_number(tagtext(oNode=el_total, cTag='vBC'), precision=2))
+            format_number(tagtext(oNode=el_total, cTag='vBC')))
         self.stringRight(
             self.nLeft + 64, self.nlin + 7.7,
-            format_number(tagtext(oNode=el_total, cTag='vICMS'), precision=2))
+            format_number(tagtext(oNode=el_total, cTag='vICMS')))
         self.stringRight(
             self.nLeft + 94, self.nlin + 7.7,
-            format_number(tagtext(oNode=el_total, cTag='vBCST'), precision=2))
+            format_number(tagtext(oNode=el_total, cTag='vBCST')))
         self.stringRight(
             nMr - 66, self.nlin + 7.7,
-            format_number(tagtext(oNode=el_total, cTag='vST'), precision=2))
+            format_number(tagtext(oNode=el_total, cTag='vST')))
         self.stringRight(
             nMr - 36, self.nlin + 7.7,
-            format_number(tagtext(oNode=el_total, cTag='vTotTrib'),
-                          precision=2))
+            format_number(tagtext(oNode=el_total, cTag='vTotTrib')))
         self.stringRight(
             nMr - 1, self.nlin + 7.7,
-            format_number(tagtext(oNode=el_total, cTag='vProd'), precision=2))
+            format_number(tagtext(oNode=el_total, cTag='vProd')))
         self.stringRight(
             self.nLeft + 34, self.nlin + 14.1,
-            format_number(tagtext(oNode=el_total, cTag='vFrete'), precision=2))
+            format_number(tagtext(oNode=el_total, cTag='vFrete')))
         self.stringRight(
             self.nLeft + 64, self.nlin + 14.1,
-            format_number(tagtext(oNode=el_total, cTag='vSeg'), precision=2))
+            format_number(tagtext(oNode=el_total, cTag='vSeg')))
         self.stringRight(
             self.nLeft + 94, self.nlin + 14.1,
-            format_number(tagtext(oNode=el_total, cTag='vDesc'), precision=2))
+            format_number(tagtext(oNode=el_total, cTag='vDesc')))
         self.stringRight(
             self.nLeft + 124, self.nlin + 14.1,
-            format_number(tagtext(oNode=el_total, cTag='vOutro'), precision=2))
+            format_number(tagtext(oNode=el_total, cTag='vOutro')))
         self.stringRight(
             self.nLeft + 154, self.nlin + 14.1,
-            format_number(tagtext(oNode=el_total, cTag='vIPI'), precision=2))
+            format_number(tagtext(oNode=el_total, cTag='vIPI')))
         self.stringRight(
             nMr - 1, self.nlin + 14.1,
-            format_number(tagtext(oNode=el_total, cTag='vNF'), precision=2))
+            format_number(tagtext(oNode=el_total, cTag='vNF')))
 
         self.nlin += 17   # Nr linhas ocupadas pelo bloco
 
@@ -589,10 +585,10 @@ obsCont[@xCampo='NomeVendedor']")
                     tagtext(oNode=el_transp, cTag='nVol'))
         self.stringRight(
             nMr - 27, self.nlin + 21.2,
-            format_number(tagtext(oNode=el_transp, cTag='pesoB'), precision=3))
+            format_number(tagtext(oNode=el_transp, cTag='pesoB')))
         self.stringRight(
             nMr - 1, self.nlin + 21.2,
-            format_number(tagtext(oNode=el_transp, cTag='pesoL'), precision=3))
+            format_number(tagtext(oNode=el_transp, cTag='pesoL')))
 
         self.nlin += 23
 
@@ -628,10 +624,10 @@ obsCont[@xCampo='NomeVendedor']")
         self.stringcenter(nMr - 44, self.nlin + 5.5, 'BC ICMS')
         self.vline(nMr - 64, self.nlin + 2, nH)
         self.stringcenter(nMr - 57, self.nlin + 5.5, 'VLR TOTAL')
-        self.vline(nMr - 77, self.nlin + 2, nH)
+        self.vline(nMr - 78, self.nlin + 2, nH)
         self.stringcenter(nMr - 70.5, self.nlin + 5.5, 'VLR UNIT')
         self.vline(nMr - 90, self.nlin + 2, nH)
-        self.stringcenter(nMr - 83.5, self.nlin + 5.5, 'QTD')
+        self.stringcenter(nMr - 83.8, self.nlin + 5.5, 'QTD')
         self.vline(nMr - 96, self.nlin + 2, nH)
         self.stringcenter(nMr - 93, self.nlin + 5.5, 'UNID')
         self.vline(nMr - 102, self.nlin + 2, nH)
@@ -677,24 +673,20 @@ obsCont[@xCampo='NomeVendedor']")
                               tagtext(oNode=el_prod, cTag='CFOP'))
             self.stringcenter(nMr - 93, nLin,
                               tagtext(oNode=el_prod, cTag='uCom'))
-            self.stringRight(nMr - 77.5, nLin, format_number(
-                tagtext(oNode=el_prod, cTag='qCom'), precision=4))
+            self.stringRight(nMr - 78.5, nLin, format_number(
+                tagtext(oNode=el_prod, cTag='qCom')))
             self.stringRight(nMr - 64.5, nLin, format_number(
-                tagtext(oNode=el_prod, cTag='vUnCom'), precision=2))
-            self.stringRight(nMr - 50.5, nLin, format_number(
-                tagtext(oNode=el_prod, cTag='vProd'), precision=2))
-            self.stringRight(nMr - 38.5, nLin, format_number(vBC, precision=2))
-            self.stringRight(nMr - 26.5, nLin,
-                             format_number(vICMS, precision=2))
-            self.stringRight(
-                nMr - 7.5, nLin, format_number(pICMS, precision=2))
+                tagtext(oNode=el_prod, cTag='vUnCom')))
+            self.stringRight(nMr - 50.5, nLin,
+                             tagtext(oNode=el_prod, cTag='vProd'))
+            self.stringRight(nMr - 38.5, nLin, format_number(vBC))
+            self.stringRight(nMr - 26.5, nLin, format_number(vICMS))
+            self.stringRight(nMr - 7.5, nLin, format_number(pICMS))
 
             if vIPI:
-                self.stringRight(nMr - 14.5, nLin,
-                                 format_number(vIPI, precision=2))
+                self.stringRight(nMr - 14.5, nLin, format_number(vIPI))
             if pIPI:
-                self.stringRight(nMr - 0.5, nLin,
-                                 format_number(pIPI, precision=2))
+                self.stringRight(nMr - 0.5, nLin, format_number(pIPI))
 
             # Código Item
             line_cod = nLin
@@ -778,8 +770,7 @@ obsCont[@xCampo='NomeVendedor']")
                     u"SÉRIE %s" % (tagtext(oNode=el_ide, cTag='serie')))
 
         cDt, cHr = getdateUTC(tagtext(oNode=el_ide, cTag='dhEmi'))
-        cTotal = format_number(tagtext(oNode=el_total, cTag='vNF'),
-                               precision=2)
+        cTotal = format_number(tagtext(oNode=el_total, cTag='vNF'))
 
         cEnd = tagtext(oNode=el_dest, cTag='xNome') + ' - '
         cEnd += tagtext(oNode=el_dest, cTag='xLgr') + ', ' + tagtext(
@@ -894,24 +885,24 @@ obsCont[@xCampo='NomeVendedor']")
         correcao = tagtext(oNode=elem_infNFe, cTag='xCorrecao')
 
         w, h, paragraph = self._paragraph(
-            correcao, 'NimbusSanL-Regu', 10, 190*mm, 20*mm)
-        paragraph.drawOn(self.canvas, 10*mm, (297-52)*mm - h)
+            correcao, 'NimbusSanL-Regu', 10, 190 * mm, 20 * mm)
+        paragraph.drawOn(self.canvas, 10 * mm, (297 - 52) * mm - h)
 
-        self.hline(9, 54+(h/mm), 200)
-        self.stringcenter(105, 58+(h/mm), u"CONDIÇÃO DE USO")
-        self.hline(9, 60+(h/mm), 200)
+        self.hline(9, 54 + (h / mm), 200)
+        self.stringcenter(105, 58 + (h / mm), u"CONDIÇÃO DE USO")
+        self.hline(9, 60 + (h / mm), 200)
 
         condicoes = tagtext(oNode=elem_infNFe, cTag='xCondUso')
 
         w2, h2, paragraph = self._paragraph(
-            condicoes, 'NimbusSanL-Regu', 10, 190*mm, 20*mm)
-        paragraph.drawOn(self.canvas, 10*mm, (297-62)*mm-h-h2)
+            condicoes, 'NimbusSanL-Regu', 10, 190 * mm, 20 * mm)
+        paragraph.drawOn(self.canvas, 10 * mm, (297 - 62) * mm - h - h2)
 
-        self.hline(9, 68+((h+h2)/mm), 200)
+        self.hline(9, 68 + ((h + h2) / mm), 200)
 
         self.vline(80, 14, 30)
-        self.vline(9, 14, 54+((h+h2)/mm))
-        self.vline(200, 14, 54+((h+h2)/mm))
+        self.vline(9, 14, 54 + ((h + h2) / mm))
+        self.vline(200, 14, 54 + ((h + h2) / mm))
 
     def _paragraph(self, text, font, font_size, x, y):
         ptext = '<font size=%s>%s</font>' % (font_size, text)
@@ -922,4 +913,3 @@ obsCont[@xCampo='NomeVendedor']")
         paragraph = Paragraph(ptext, style=style)
         w, h = paragraph.wrapOn(self.canvas, x, y)
         return w, h, paragraph
-
