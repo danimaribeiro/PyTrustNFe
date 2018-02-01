@@ -4,7 +4,6 @@
 
 import os
 import suds
-from lxml import etree
 from pytrustnfe.xml import render_xml, sanitize_response
 from pytrustnfe.client import get_authenticated_client
 from pytrustnfe.certificado import extract_cert_and_key_from_pfx, save_cert_key

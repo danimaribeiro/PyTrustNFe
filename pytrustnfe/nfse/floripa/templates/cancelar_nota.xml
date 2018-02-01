@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<xmlCancelamentoNfpse>
+  <motivoCancelamento>{{ cancelamento.motivo }}</motivoCancelamento>
+  <nuAedf>{{ cancelamento.aedf }}</nuAedf>
+  <nuNotaFiscal>{{ cancelamento.numero }}</nuNotaFiscal>
+  <codigoVerificacao>{{ cancelamento.codigo_verificacao }}</codigoVerificacao>
+</xmlCancelamentoNfpse>
