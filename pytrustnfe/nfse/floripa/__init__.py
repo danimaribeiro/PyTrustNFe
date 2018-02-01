@@ -50,17 +50,12 @@ def _get_oauth_token(**kwargs):
 
 def _send(certificado, method, **kwargs):
     if kwargs['ambiente'] == 'producao':
-        url = 'https://nfps-e.pmf.sc.gov.br/api/v1/processamento/notas/processa'
+        url = 'https://nfps-e.pmf.sc.gov.br/api/v1/processamento/notas/processa'  #noqa
     else:
         url = 'https://nfps-e-hml.pmf.sc.gov.br/api/v1/processamento/notas/processa'
 
     xml_send = kwargs['xml']
 
-    base = dict(
-        ambiente='homologacao', client_id="trustcode-tecnologia-client",
-        secret_id="", username="",
-        password=""
-    )
     token = _get_oauth_token(**kwargs)
 
     kwargs.update({"numero": 1, 'access_token': token["access_token"]})
@@ -68,16 +63,13 @@ def _send(certificado, method, **kwargs):
     headers = {"Accept": "application/xml",
                "Authorization": "Bearer %s" % kwargs['access_token']}
     r = requests.post(url, headers=headers, data=xml_send)
-    print(r.status_code)
-    if r.status_code != 200:
-        raise Exception(r.text)
 
-    print(r.text)
-    response, obj = sanitize_response(r.text)
+    response, obj = sanitize_response(r.text.strip().encode('utf-8'))
     return {
         'sent_xml': xml_send,
         'received_xml': response,
-        'object': obj
+        'object': obj,
+        'status_code': r.status_code,
     }
 
 
