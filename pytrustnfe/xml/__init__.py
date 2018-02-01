@@ -27,7 +27,6 @@ def render_xml(path, template_name, remove_empty, **nfe):
     env.filters["format_date"] = filters.format_date
 
     template = env.get_template(template_name)
-
     xml = template.render(**nfe)
     parser = etree.XMLParser(remove_blank_text=True, remove_comments=True,
                              strip_cdata=False)
@@ -61,6 +60,7 @@ def sanitize_response(response):
 def recursively_normalize(vals):
     for item in vals:
         if type(vals[item]) is str:
+            vals[item] = vals[item].strip()
             vals[item] = filters.normalize_str(vals[item])
         elif type(vals[item]) is dict:
             recursively_normalize(vals[item])
