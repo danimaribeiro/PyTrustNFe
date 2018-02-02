@@ -7,7 +7,7 @@ from lxml import etree
 from lxml import objectify
 from jinja2 import Environment, FileSystemLoader
 from . import filters
-
+import re
 
 def recursively_empty(e):
     if e.text:
