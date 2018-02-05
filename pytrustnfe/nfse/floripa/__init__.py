@@ -45,7 +45,7 @@ def _get_oauth_token(**kwargs):
     if r.status_code == 200:
         return r.json()
     else:
-        return r.text
+        return r.json()
 
 
 def _send(certificado, method, **kwargs):
@@ -57,7 +57,9 @@ def _send(certificado, method, **kwargs):
     xml_send = kwargs['xml']
 
     token = _get_oauth_token(**kwargs)
-
+    if "access_token" not in token:
+        raise Exception("%s - %s: %s" % (token["status"], token["error"],
+                                         token["message"]))
     kwargs.update({"numero": 1, 'access_token': token["access_token"]})
 
     headers = {"Accept": "application/xml",
@@ -94,8 +96,10 @@ def cancelar_nota(certificado, **kwargs):
 
 
 def consultar_nota(certificado, **kwargs):
-    url = "https://nfps-e-hml.pmf.sc.gov.br/api/v1/consultas/notas/numero/%s" % (kwargs["numero"])
-    url = 'https://nfps-e-hml.pmf.sc.gov.br/api/v1/consultas/notas/prestador/24158233000185?pagina=1'
+    if kwargs['ambiente'] == 'producao':
+        url = "https://nfps-e.pmf.sc.gov.br/api/v1/consultas/notas/numero/%s" % (kwargs["numero"])
+    else:
+        url = "https://nfps-e-hml.pmf.sc.gov.br/api/v1/consultas/notas/numero/%s" % (kwargs["numero"])
 
     headers = {"Accept": "application/json",
                "Authorization": "Bearer %s" % kwargs['access_token']}
