@@ -58,8 +58,6 @@ def render_xml(path, template_name, remove_empty, **nfe):
 
 
 def sanitize_response(response):
-    if 'encoding="utf-8"' in response or 'encoding="UTF-8"' in response:
-        response = re.sub('encoding="UTF-8"', '', response)
     tree = etree.fromstring(response)
     # Remove namespaces inuteis na resposta
     for elem in tree.getiterator():
