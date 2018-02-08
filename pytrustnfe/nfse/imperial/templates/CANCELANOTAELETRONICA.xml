@@ -1,0 +1,17 @@
+<ws_nfe.CANCELANOTAELETRONICA xmlns="NFe">
+    <Sdt_cancelanfe>
+        <Login>
+            <CodigoUsuario>{{ cancelamento.codigo_usuario }}</CodigoUsuario>
+            <CodigoContribuinte>{{ cancelamento.codigo_contribuinte }}</CodigoContribuinte>
+        </Login>
+        <Nota>
+            <SerieNota>{{ cancelamento.serie_nota }}</SerieNota>
+            <NumeroNota>{{ cancelamento.numero_nota }}</NumeroNota>
+            <SerieRPS>{{ cancelamento.serie_rps }}</SerieRPS>
+            <NumeroRps>{{ cancelamento.numero_rps }}</NumeroRps>
+            <ValorNota>{{ cancelamento.valor }}</ValorNota>
+            <MotivoCancelamento>{{ cancelamento.motivo }}</MotivoCancelamento>
+            <PodeCancelarGuia>{{ cancelamento.cancelar_guia }}</PodeCancelarGuia>
+        </Nota>
+    </Sdt_cancelanfe>
+</ws_nfe.CANCELANOTAELETRONICA>

@@ -1,7 +1,9 @@
 # coding=utf-8
 from setuptools import setup, find_packages
 
+
 VERSION = "0.9.8"
+
 
 setup(
     name="PyTrustNFe3",
@@ -32,6 +34,7 @@ later (LGPLv2+)',
         'nfse/simpliss/templates/*xml',
         'nfse/betha/templates/*xml',
         'nfse/susesu/templates/*xml',
+        'nfse/imperial/templates/*xml',
         'nfse/floripa/templates/*xml',
         'xml/schemas/*xsd',
     ]},
