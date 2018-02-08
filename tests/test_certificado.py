@@ -49,21 +49,21 @@ class test_assinatura(unittest.TestCase):
     caminho = os.path.dirname(__file__)
 
     def test_preparar_pfx(self):
-        dir_pfx = open(os.path.join(self.caminho, 'teste.pfx'), 'r').read()
+        dir_pfx = open(os.path.join(self.caminho, 'teste.pfx'), 'rb').read()
         cert, key = extract_cert_and_key_from_pfx(dir_pfx, '123456')
         self.assertEqual(key, CHAVE, 'Chave gerada inválida')
         self.assertEqual(cert, CERTIFICADO, 'Certificado inválido')
 
     def test_save_pfx(self):
-        pfx_source = open(os.path.join(self.caminho, 'teste.pfx'), 'r').read()
+        pfx_source = open(os.path.join(self.caminho, 'teste.pfx'), 'rb').read()
         pfx = Certificado(pfx_source, '123')
         path = pfx.save_pfx()
-        saved = open(path, 'r').read()
+        saved = open(path, 'rb').read()
         self.assertEqual(pfx_source, saved,
                          'Arquivo pfx salvo não bate com arquivo lido')
 
     def test_save_cert_and_key(self):
-        dir_pfx = open(os.path.join(self.caminho, 'teste.pfx'), 'r').read()
+        dir_pfx = open(os.path.join(self.caminho, 'teste.pfx'), 'rb').read()
         cert, key = extract_cert_and_key_from_pfx(dir_pfx, '123456')
         cert_path, key_path = save_cert_key(cert, key)
         cert_saved = open(cert_path, 'r').read()

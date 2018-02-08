@@ -1,13 +1,15 @@
-dist: precise
 language: python
 python:
-- '2.7'
+- "3.4"
+- "3.5"
+- "3.6"
 virtual_env:
   system_site_packages: true
 install:
 - pip install --upgrade pip
 - pip install -r requirements.txt
-script: coverage run --source=pytrustnfe setup.py nosetests
+script:
+    pytest --cov=pytrustnfe
 before_install:
 - sudo apt-get update -qq
 - sudo apt-get install -qq python-dev libffi-dev libxml2-dev libxslt1-dev libssl-dev
@@ -19,5 +21,5 @@ deploy:
   password:
     secure: wV+DH+WVji4qyCRXxugOsu8/u9MgUN9YggIBozh2Si1z6OlONZVr/oCaJDW8UD+Qg0EF87RbHuEmmlpAZVERAZv5uGsxjSO/NyvAsr99sOlTy9TSLi6TLp4aPnOCgjBTFDWkwkNyDTGYGNfendS7KO2jaHUsr/eDZcpTz42lOfDgpmccz822wwI6Uu1hNC61qlskPkKVzFhHT61/XAgmjHvw1wAMWVmv9/E6J8VAlZoI9/v3K0RTRisB/+0+sSvY86crYyuW/zIEhQJnMu/gfFWDSxNdY+0S3VyFgERn5S7IYlpBPUUlukX5aPXy+OQD2ygeu7w9f6aOSaJZsoyhe4pPXDjA9XNyfiazuZrz51fzhricMvdsMPAcukK/sJzGICAFgOutAjy+nGBkNqA2genKL8gMtJGUrPW5Yq5MGMC7FEgEQi5SgEj+01FgSY5mHlR3qo9bEgXWcxhNL/uZ3C1ElnGNLbyn5hjWzCnMEe70JwfWNQxGgtNm73vrrsZJ7M5wGjrEKVAvTERQegRQm2ObX7YsPmTY+tF15Hxs8GiZ0T/MzpxGe6yAkIutKI0CxpoUMXBnrmcMbn74GT8KWQjS724AA3K5ePO5ogLECxIq3huyB9USeeXmYBhUtcLpKSSH7gA/8vT/tvXK0+/YNTKzIIrOjuZ9IOVrwq2PyUY=
   on:
-    branch: master
+    branch: master3
   distributions: "bdist_wheel"

@@ -38,7 +38,7 @@ def _send(certificado, method, **kwargs):
         xml_send = kwargs['xml']
         header = '<ns2:cabecalho xmlns:ns2="http://www.ginfes.com.br/cabecalho_v03.xsd" versao="3"><versaoDados>3</versaoDados></ns2:cabecalho>' #noqa
         response = getattr(client.service, method)(header, xml_send)
-    except suds.WebFault, e:
+    except suds.WebFault as e:
         return {
             'sent_xml': xml_send,
             'received_xml': e.fault.faultstring,

@@ -32,7 +32,7 @@ class Assinatura(object):
 
         ref_uri = ('#%s' % reference) if reference else None
         signed_root = signer.sign(
-            xml_element, key=key, cert=cert,
+            xml_element, key=key.encode(), cert=cert.encode(),
             reference_uri=ref_uri)
         if reference:
             element_signed = signed_root.find(".//*[@Id='%s']" % reference)
@@ -42,4 +42,4 @@ class Assinatura(object):
             if element_signed is not None and signature is not None:
                 parent = element_signed.getparent()
                 parent.append(signature)
-        return etree.tostring(signed_root)
+        return etree.tostring(signed_root, encoding=str)

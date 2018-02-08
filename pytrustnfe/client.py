@@ -42,14 +42,20 @@ class HttpClient(object):
         self.cert_path = cert_path
         self.key_path = key_path
 
-    def _headers(self, action):
+    def _headers(self, action, send_raw):
+        if send_raw:
+            return {
+                'Content-type': 'text/xml; charset=utf-8; action="http://www.portalfiscal.inf.br/nfe/wsdl/%s"' % action,
+                'Accept': 'application/soap+xml; charset=utf-8',
+            }
+
         return {
-            u'Content-type': u'application/soap+xml; charset=utf-8; action="http://www.portalfiscal.inf.br/nfe/wsdl/%s"' % action,
-            u'Accept': u'application/soap+xml; charset=utf-8',
+            'Content-type': 'application/soap+xml; charset=utf-8; action="http://www.portalfiscal.inf.br/nfe/wsdl/%s"' % action,
+            'Accept': 'application/soap+xml; charset=utf-8',
         }
 
-    def post_soap(self, xml_soap, cabecalho):
-        header = self._headers(cabecalho.soap_action)
+    def post_soap(self, xml_soap, cabecalho, send_raw):
+        header = self._headers(cabecalho.soap_action, send_raw)
         urllib3.disable_warnings(category=InsecureRequestWarning)
         res = requests.post(self.url, data=xml_soap,
                             cert=(self.cert_path, self.key_path),

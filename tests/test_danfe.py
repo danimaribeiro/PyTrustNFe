@@ -22,5 +22,5 @@ class test_danfe(unittest.TestCase):
 
         # Para testar localmente o Danfe
         # with open('/home/danimar/danfe.pdf', 'w') as oFile:
-        with tempfile.TemporaryFile(mode='w') as oFile:
+        with tempfile.TemporaryFile(mode='wb') as oFile:
             oDanfe.writeto_pdf(oFile)

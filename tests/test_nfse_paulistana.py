@@ -54,7 +54,7 @@ class test_nfse_paulistana(unittest.TestCase):
         return nfse
 
     def test_envio_nfse(self):
-        pfx_source = open(os.path.join(self.caminho, 'teste.pfx'), 'r').read()
+        pfx_source = open(os.path.join(self.caminho, 'teste.pfx'), 'rb').read()
         pfx = Certificado(pfx_source, '123456')
 
         nfse = self._get_nfse()
@@ -77,7 +77,7 @@ class test_nfse_paulistana(unittest.TestCase):
                 retorno['object'].ChaveNFeRPS.ChaveRPS.NumeroRPS, 6)
 
     def test_nfse_signature(self):
-        pfx_source = open(os.path.join(self.caminho, 'teste.pfx'), 'r').read()
+        pfx_source = open(os.path.join(self.caminho, 'teste.pfx'), 'rb').read()
         pfx = Certificado(pfx_source, '123456')
 
         nfse = self._get_nfse()
@@ -103,7 +103,7 @@ class test_nfse_paulistana(unittest.TestCase):
         }
 
     def test_cancelamento_nfse_ok(self):
-        pfx_source = open(os.path.join(self.caminho, 'teste.pfx'), 'r').read()
+        pfx_source = open(os.path.join(self.caminho, 'teste.pfx'), 'rb').read()
         pfx = Certificado(pfx_source, '123456')
         cancelamento = self._get_cancelamento()
 
@@ -122,7 +122,7 @@ class test_nfse_paulistana(unittest.TestCase):
             self.assertEqual(retorno['object'].Cabecalho.Sucesso, True)
 
     def test_cancelamento_nfse_com_erro(self):
-        pfx_source = open(os.path.join(self.caminho, 'teste.pfx'), 'r').read()
+        pfx_source = open(os.path.join(self.caminho, 'teste.pfx'), 'rb').read()
         pfx = Certificado(pfx_source, '123456')
         cancelamento = self._get_cancelamento()
 

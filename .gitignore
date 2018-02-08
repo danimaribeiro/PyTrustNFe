@@ -11,4 +11,4 @@ dist/
 *egg*/
 docs/_build
 .vscode/tags
-.cache/
+.cache
