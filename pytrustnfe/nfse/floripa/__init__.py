@@ -10,6 +10,17 @@ from pytrustnfe.xml import render_xml, sanitize_response
 from pytrustnfe.certificado import extract_cert_and_key_from_pfx, save_cert_key
 from pytrustnfe.nfse.assinatura import Assinatura
 
+URLS = {
+    'producao': {
+        'processar_nota': 'https://nfps-e.pmf.sc.gov.br/api/v1/processamento/notas/processa',
+        'cancelar_nota': 'https://nfps-e.pmf.sc.gov.br/api/v1/cancelamento/notas/cancela'
+    },
+    'homologacao': {
+        'processar_nota': 'https://nfps-e-hml.pmf.sc.gov.br/api/v1/processamento/notas/processa',
+        'cancelar_nota': 'https://nfps-e-hml.pmf.sc.gov.br/api/v1/cancelamento/notas/cancela'
+    }
+}
+
 
 def _render(certificado, method, **kwargs):
     path = os.path.join(os.path.dirname(__file__), 'templates')
@@ -45,22 +56,21 @@ def _get_oauth_token(**kwargs):
     if r.status_code == 200:
         return r.json()
     else:
-        return r.text
+        return r.json()
 
 
 def _send(certificado, method, **kwargs):
-    if kwargs['ambiente'] == 'producao':
-        url = 'https://nfps-e.pmf.sc.gov.br/api/v1/processamento/notas/processa'  #noqa
-    else:
-        url = 'https://nfps-e-hml.pmf.sc.gov.br/api/v1/processamento/notas/processa'
-
+    url = URLS[kwargs['ambiente']][method]
     xml_send = kwargs['xml']
 
     token = _get_oauth_token(**kwargs)
-
+    if "access_token" not in token:
+        raise Exception("%s - %s: %s" % (token["status"], token["error"],
+                                         token["message"]))
     kwargs.update({"numero": 1, 'access_token': token["access_token"]})
 
-    headers = {"Accept": "application/xml",
+    headers = {"Accept": "application/xml;charset=UTF-8",
+               "Content-Type": "application/xml",
                "Authorization": "Bearer %s" % kwargs['access_token']}
     r = requests.post(url, headers=headers, data=xml_send)
 
@@ -94,8 +104,10 @@ def cancelar_nota(certificado, **kwargs):
 
 
 def consultar_nota(certificado, **kwargs):
-    url = "https://nfps-e-hml.pmf.sc.gov.br/api/v1/consultas/notas/numero/%s" % (kwargs["numero"])
-    url = 'https://nfps-e-hml.pmf.sc.gov.br/api/v1/consultas/notas/prestador/24158233000185?pagina=1'
+    if kwargs['ambiente'] == 'producao':
+        url = "https://nfps-e.pmf.sc.gov.br/api/v1/consultas/notas/numero/%s" % (kwargs["numero"])
+    else:
+        url = "https://nfps-e-hml.pmf.sc.gov.br/api/v1/consultas/notas/numero/%s" % (kwargs["numero"])
 
     headers = {"Accept": "application/json",
                "Authorization": "Bearer %s" % kwargs['access_token']}
