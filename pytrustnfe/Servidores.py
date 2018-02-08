@@ -165,6 +165,7 @@ SVAN = {
     NFE_AMBIENTE_PRODUCAO: {
         'servidor': 'www.sefazvirtual.fazenda.gov.br',
         WS_NFE_RECEPCAO_EVENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
+        WS_NFE_CANCELAMENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
         WS_NFE_AUTORIZACAO: 'NfeAutorizacao/NfeAutorizacao.asmx',
         WS_NFE_RET_AUTORIZACAO: 'NfeRetAutorizacao/NfeRetAutorizacao.asmx',
         WS_NFE_INUTILIZACAO: 'NfeInutilizacao2/NfeInutilizacao2.asmx',
@@ -174,6 +175,7 @@ SVAN = {
     NFE_AMBIENTE_HOMOLOGACAO: {
         'servidor': 'hom.sefazvirtual.fazenda.gov.br',
         WS_NFE_RECEPCAO_EVENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
+        WS_NFE_CANCELAMENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
         WS_NFE_AUTORIZACAO: 'NfeAutorizacao/NfeAutorizacao.asmx',
         WS_NFE_RET_AUTORIZACAO: 'NfeRetAutorizacao/NfeRetAutorizacao.asmx',
         WS_NFE_INUTILIZACAO: 'NfeInutilizacao2/NfeInutilizacao2.asmx',
