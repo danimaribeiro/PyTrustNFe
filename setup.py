@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 
-VERSION = "0.9.9"
+VERSION = "0.9.10"
 
 
 setup(
@@ -47,7 +47,7 @@ later (LGPLv2+)',
         'signxml >= 2.4.0',
         'lxml >= 3.5.0, < 5',
         'suds-jurko >= 0.6',
-        'suds-jurko-requests >= 1.1',
+        'suds-jurko-requests >= 1.2',
         'reportlab'
     ],
     tests_require=[
