@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <xmlProcessamentoNfpse>
-  <bairroTomador>{{ rps.tomador.bairro }}</bairroTomador>
+  <bairroTomador>{{ rps.tomador.bairro|normalize|escape }}</bairroTomador>
   <baseCalculo>{{ rps.base_calculo }}</baseCalculo>
   <baseCalculoSubstituicao>0.0</baseCalculoSubstituicao>
   <cfps>{{ rps.cfps }}</cfps>
   <codigoMunicipioTomador>{{ rps.tomador.cidade }}</codigoMunicipioTomador>
   <codigoPostalTomador>{{ rps.tomador.cep }}</codigoPostalTomador>
-  <complementoEnderecoTomador>{{ rps.tomador.complemento }}</complementoEnderecoTomador>
-  <dadosAdicionais>{{ rps.observacoes }}</dadosAdicionais>
+  <complementoEnderecoTomador>{{ rps.tomador.complemento|normalize|escape }}</complementoEnderecoTomador>
+  <dadosAdicionais>{{ rps.observacoes|normalize|escape }}</dadosAdicionais>
   <dataEmissao>{{ rps.data_emissao }}</dataEmissao>
   <emailTomador>{{ rps.tomador.email }}</emailTomador>
   <identificacao>{{ rps.numero }}</identificacao>
@@ -18,7 +18,7 @@
     <itemServico>
       <aliquota>{{ item.aliquota }}</aliquota>
       <cst>{{ item.cst_servico }}</cst>
-      <descricaoServico>{{ item.descricao }}</descricaoServico>
+      <descricaoServico>{{ item.descricao|normalize|escape }}</descricaoServico>
       <idCNAE>{{ item.cnae }}</idCNAE>
       <quantidade>{{ item.quantidade }}</quantidade>
       <valorTotal>{{ item.valor_total }}</valorTotal>
@@ -26,12 +26,12 @@
     </itemServico>
     {% endfor %}
   </itensServico>
-  <logradouroTomador>{{ rps.tomador.logradouro }}</logradouroTomador>
+  <logradouroTomador>{{ rps.tomador.logradouro|normalize|escape }}</logradouroTomador>
   <nomeMunicipioTomador></nomeMunicipioTomador>
   <numeroAEDF>{{ rps.aedf }}</numeroAEDF>
   <numeroEnderecoTomador>{{ rps.tomador.numero }}</numeroEnderecoTomador>
   <paisTomador>1058</paisTomador>
-  <razaoSocialTomador>{{ rps.tomador.razao_social }}</razaoSocialTomador>
+  <razaoSocialTomador>{{ rps.tomador.razao_social|normalize|escape }}</razaoSocialTomador>
   <telefoneTomador>{{ rps.tomador.telefone }}</telefoneTomador>
   <ufTomador>{{ rps.tomador.uf }}</ufTomador>
   <valorISSQN>{{rps.valor_issqn }}</valorISSQN>
