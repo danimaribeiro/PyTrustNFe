@@ -3,12 +3,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import os
-import suds
-from lxml import etree
+import requests
 from pytrustnfe.xml import render_xml, sanitize_response
 from pytrustnfe.certificado import extract_cert_and_key_from_pfx, save_cert_key
 from pytrustnfe.nfse.assinatura import Assinatura
-from pytrustnfe.client import get_client
 
 
 def _render(certificado, method, **kwargs):
@@ -18,19 +16,16 @@ def _render(certificado, method, **kwargs):
     else:
         xml_send = render_xml(path, '%s.xml' % method, False, **kwargs)
 
-    if type(xml_send) != str:
-        xml_send = etree.tostring(xml_send)
+    cert, key = extract_cert_and_key_from_pfx(
+        certificado.pfx, certificado.password)
+    cert, key = save_cert_key(cert, key)
+    signer = Assinatura(cert, key, certificado.password)
+    xml_send = signer.assina_xml(xml_send, '')
 
     return xml_send
 
 
 def _get_url(**kwargs):
-
-    try:
-        cod_cidade = kwargs['nfse']['cidade']
-    except (KeyError, TypeError):
-        raise KeyError("Código de cidade inválido!")
-
     urls = {
         # Belém - PA
         '2715': 'http://www.issdigitalbel.com.br/WsNFe2/LoteRps.jws',
@@ -45,48 +40,35 @@ def _get_url(**kwargs):
         # São Luis - MA
         '0921': 'https://stm.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps?wsdl',
         # Campo Grande - MS
-        '2729': 'http://issdigital.pmcg.ms.gov.br/WsNFe2/LoteRps.jws?wsdl',
+        '9051': 'http://issdigital.pmcg.ms.gov.br/WsNFe2/LoteRps.jws?wsdl',
     }
-
-    try:
-        return urls[str(cod_cidade)]
-    except KeyError:
-        raise KeyError("DSF não emite notas da cidade {}!".format(
-            cod_cidade))
+    return urls[kwargs['siafi_code']]
 
 
 def _send(certificado, method, **kwargs):
     url = _get_url(**kwargs)
 
-    path = os.path.join(os.path.dirname(__file__), 'templates')
+    xml_send = '<?xml version="1.0" encoding="utf-8"?>' +\
+        kwargs['xml'].decode('utf-8')
 
-    xml_send = _render(path, method, **kwargs)
-    client = get_client(url)
     response = False
+    soap = '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">'\
+        '<Body>'\
+        '<enviarSincrono xmlns="http://issdigital.pmcg.ms.gov.br/WsNFe2/LoteRps.jws">'\
+        '<mensagemXml><![CDATA[' + xml_send + ']]></mensagemXml>'\
+        '</enviarSincrono>'\
+        '</Body>'\
+        '</Envelope>'
 
-    if certificado:
-        cert, key = extract_cert_and_key_from_pfx(
-            certificado.pfx, certificado.password)
-        cert, key = save_cert_key(cert, key)
-        signer = Assinatura(cert, key, certificado.password)
-        xml_send = signer.assina_xml(xml_send, '')
-
-    try:
-        response = getattr(client.service, method)(xml_send)
-        response, obj = sanitize_response(response.encode())
-    except suds.WebFault as e:
-        return {
-            'sent_xml': xml_send,
-            'received_xml': e.fault.faultstring,
-            'object': None
-        }
-    except Exception as e:
-        if response:
-            raise Exception(response)
-        else:
-            raise e
+    headers = {
+        "Content-Type": 'text/xml; charset="utf-8"',
+        "SOAPAction": "",
+    }
+    http_response = requests.post(url, data=soap, headers=headers)
+    response, obj = sanitize_response(http_response.text.encode('utf-8'))
 
     return {
+        'status_code': http_response.status_code,
         'sent_xml': xml_send,
         'received_xml': response,
         'object': obj
