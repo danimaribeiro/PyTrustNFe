@@ -27,6 +27,7 @@ def executar_consulta(certificado, url, cabecalho, xmlEnviar, send_raw=False):
     client = HttpClient(url, cert_path, key_path)
 
     xml_enviar = _soap_xml(xmlEnviar, cabecalho)
+    xml_enviar = xml_enviar.encode('utf-8')
     if send_raw:
         xml = '<?xml version="1.0" encoding="utf-8"?>' + xmlEnviar.rstrip('\n')
         xml_enviar = xml
