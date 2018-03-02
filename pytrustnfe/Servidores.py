@@ -20,7 +20,6 @@ WS_NFCE_CADASTRO = 'NfeConsultaCadastro'
 WS_NFCE_RECEPCAO_EVENTO = 'RecepcaoEventoCarta'
 WS_NFCE_QR_CODE = 'NfeQRCode'
 WS_NFCE_CONSULTA_DESTINADAS = 'NfeConsultaDest',
-WS_NFCE_RET_AUTORIZACAO = 'NFeRetAutorizacao',
 
 
 WS_NFE_CADASTRO = 'NfeConsultaCadastro'
