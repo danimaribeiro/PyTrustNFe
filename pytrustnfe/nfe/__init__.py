@@ -89,9 +89,7 @@ def _add_qrCode(xml, **kwargs):
     valor_total = inf_nfe['total']['vNF']
     dest_cpf = 'Inexistente'
     dest = nfe.find(".//{http://www.portalfiscal.inf.br/nfe}dest")
-    if dest:
-        dest_parent = dest.getparent()
-        dest_parent.remove(dest)
+
     if inf_nfe.get('dest', False):
         if inf_nfe['dest'].get('CPF', False):
             dest_cpf = inf_nfe['dest']['CPF']
@@ -99,7 +97,7 @@ def _add_qrCode(xml, **kwargs):
             cpf = etree.Element('CPF')
             cpf.text = dest_cpf
             dest.append(cpf)
-            dest_parent.append(dest)
+
     icms_total = inf_nfe['total']['vICMS']
     dig_val = binascii.hexlify(xml.find(
         ".//{http://www.w3.org/2000/09/xmldsig#}DigestValue").text.encode()).decode()

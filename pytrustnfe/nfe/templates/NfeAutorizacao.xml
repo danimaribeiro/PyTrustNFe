@@ -491,7 +491,6 @@
                         </IPINT>
                         {% endif %}
                     </IPI>
-                    {% endif %}
                     {% if imposto.II is defined %}
                     <II>
                         <vBC>{{ imposto.II.vBC }}</vBC>
@@ -499,6 +498,7 @@
                         <vII>{{ imposto.II.vII }}</vII>
                         <vIOF>{{ imposto.II.vIOF }}</vIOF>
                     </II>
+                    {% endif %}
                     {% endif %}
                     <PIS>
                         {% if imposto.PIS.CST in ('01', '02') %}
