@@ -96,13 +96,8 @@ def localizar_url(servico, estado, mod='55', ambiente=2):
 
 def localizar_qrcode(estado, ambiente=2):
     sigla = SIGLA_ESTADO[estado]
-    # dominio = ESTADO_WS[sigla][NFCE_MODELO][ambiente]['servidor']
-    # complemento = ESTADO_WS[sigla][NFCE_MODELO][ambiente][WS_NFCE_QR_CODE]
     ws_qrcode = ESTADO_WS[sigla][NFCE_MODELO][ambiente][WS_NFCE_QR_CODE]
     return ws_qrcode
-    # if 'https://' in ws_qrcode:
-    #     return ws_qrcode
-    # return "https://%s/" % (ws_qrcode)
 
 
 METODO_WS = {
