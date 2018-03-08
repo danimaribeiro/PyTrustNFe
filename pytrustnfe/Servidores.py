@@ -648,7 +648,7 @@ UFSP = {
             WS_NFCE_SITUACAO: 'ws/nfestatusservico2.asmx',
             WS_NFCE_CADASTRO: 'ws/cadconsultacadastro2.asmx',
             WS_NFCE_RECEPCAO_EVENTO: 'ws/recepcaoevento.asmx',
-            WS_NFCE_QR_CODE: 'NFCEConsultaPublica/Paginas/ConstultaQRCode.aspx',
+            WS_NFCE_QR_CODE: 'https://homologacao.nfce.fazenda.sp.gov.br/NFCEConsultaPublica/Paginas/ConstultaQRCode.aspx',
         }
     }
 }
