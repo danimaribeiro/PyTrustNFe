@@ -265,6 +265,7 @@ def xml_consulta_cadastro(certificado, **kwargs):
 def consulta_cadastro(certificado, **kwargs):
     if "xml" not in kwargs:
         kwargs['xml'] = xml_consulta_cadastro(certificado, **kwargs)
+        kwargs['modelo'] = '55'
     return _send(certificado, 'NfeConsultaCadastro', **kwargs)
 
 
