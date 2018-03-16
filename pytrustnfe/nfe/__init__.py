@@ -27,6 +27,7 @@ def _build_header(method, **kwargs):
         'NFeDistribuicaoDFe': ('NFeDistribuicaoDFe/nfeDistDFeInteresse',
                                '1.00'),
         'RecepcaoEventoManifesto': ('RecepcaoEvento', '1.00'),
+        'NfeConsulta2': ('NfeConsulta2', '3.10')
     }
     vals = {'estado': kwargs['estado'],
             'soap_action': action[method][0],
@@ -139,7 +140,7 @@ def _send(certificado, method, sign, **kwargs):
         pagamento.append(tipo_pagamento)
         pagamento.append(valor)
         transp = xmlElem_send.find(
-                ".//{http://www.portalfiscal.inf.br/nfe}transp")
+            ".//{http://www.portalfiscal.inf.br/nfe}transp")
         transp.addnext(pagamento)
 
     if sign:
@@ -212,7 +213,7 @@ def inutilizar_nfe(certificado, **kwargs):  # Assinar
 
 
 def consultar_protocolo_nfe(certificado, **kwargs):
-    return _send(certificado, 'NfeConsultaProtocolo', True, **kwargs)
+    return _send(certificado, 'NfeConsulta2', False, **kwargs)
 
 
 def nfe_status_servico(certificado, **kwargs):

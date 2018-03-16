@@ -6,7 +6,7 @@ WS_NFE_AUTORIZACAO = 'NfeAutorizacao'
 WS_NFE_RET_AUTORIZACAO = 'NfeRetAutorizacao'
 WS_NFE_CANCELAMENTO = 'RecepcaoEventoCancelamento'
 WS_NFE_INUTILIZACAO = 'NfeInutilizacao'
-WS_NFE_CONSULTA = 'NfeConsultaProtocolo'
+WS_NFE_CONSULTA = 'NfeConsulta2'
 WS_NFE_SITUACAO = 'NfeStatusServico'
 WS_NFE_CADASTRO = 'NfeConsultaCadastro'
 
