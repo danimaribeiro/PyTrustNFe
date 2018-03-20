@@ -1,7 +1,9 @@
 # coding=utf-8
 from setuptools import setup, find_packages
 
-VERSION = "0.9.4"
+
+VERSION = "0.9.11"
+
 
 setup(
     name="PyTrustNFe3",
@@ -27,11 +29,13 @@ later (LGPLv2+)',
         'nfe/templates/*xml',
         'nfe/fonts/*ttf',
         'nfse/paulistana/templates/*xml',
-        'nfse/campinas/templates/*xml',
+        'nfse/dsf/templates/*xml',
         'nfse/ginfes/templates/*xml',
         'nfse/simpliss/templates/*xml',
         'nfse/betha/templates/*xml',
         'nfse/susesu/templates/*xml',
+        'nfse/imperial/templates/*xml',
+        'nfse/floripa/templates/*xml',
         'xml/schemas/*xsd',
     ]},
     url='https://github.com/danimaribeiro/PyTrustNFe',
@@ -41,9 +45,9 @@ later (LGPLv2+)',
     install_requires=[
         'Jinja2 >= 2.8',
         'signxml >= 2.4.0',
-        'lxml >= 3.5.0, < 4',
+        'lxml >= 3.5.0, < 5',
         'suds-jurko >= 0.6',
-        'suds-jurko-requests >= 1.1',
+        'suds-jurko-requests >= 1.2',
         'reportlab'
     ],
     tests_require=[

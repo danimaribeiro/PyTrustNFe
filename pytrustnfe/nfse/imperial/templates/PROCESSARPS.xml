@@ -1,0 +1,81 @@
+<ws_nfe.PROCESSARPS xmlns="NFe">
+    <Sdt_processarpsin>
+        <Login>
+            <CodigoUsuario>{{ nfse.codigo_usuario }}</CodigoUsuario>
+            <CodigoContribuinte>{{ nfse.codigo_contribuinte }}</CodigoContribuinte>
+        </Login>
+        <SDTRPS>
+            <Ano>{{ nfse.ano }}</Ano>
+            <Mes>{{ nfse.mes }}</Mes>
+            <CPFCNPJ>{{ nfse.cnpj_prestador }}</CPFCNPJ>
+            <DTIni>{{ nfse.data_emissao }}</DTIni>
+            <DTFin>{{ nfse.data_emissao }}</DTFin>
+            <TipoTrib>{{ nfse.tipo_tributacao }}</TipoTrib>
+            <DtAdeSN>{{ nfse.data_adesao_simples }}</DtAdeSN>
+            <AlqIssSN_IP>{{ nfse.aliquota_simples_isencao|comma }}</AlqIssSN_IP>
+            <Versao>2.00</Versao>
+            {% for rps in nfse.lista_rps -%}
+            <Reg20>
+                <!-- Optional -->
+                <Reg20Item>
+                    <TipoNFS>{{ rps.tipo_nfse }}</TipoNFS>
+                    <NumRps>{{ rps.numero }}</NumRps>
+                    <SerRps>{{ rps.serie }}</SerRps>
+                    <DtEmi>{{ rps.data_emissao }}</DtEmi>
+                    <RetFonte>{{ rps.iss_retido }}</RetFonte>
+                    <CodSrv>{{ rps.codigo_servico }}</CodSrv>
+                    <DiscrSrv>{{ rps.descricao}}</DiscrSrv>
+                    <VlNFS>{{ rps.valor_liquido_nfse|comma }}</VlNFS>
+                    <VlDed>{{ rps.valor_deducao|comma }}</VlDed>
+                    <DiscrDed>{{ rps.discriminacao_deducao }}</DiscrDed>
+                    <VlBasCalc>{{ rps.base_calculo|comma }}</VlBasCalc>
+                    <AlqIss>{{ rps.aliquota_issqn|comma }}</AlqIss>
+                    <VlIss>{{ rps.valor_iss|comma }}</VlIss>
+                    <VlIssRet>{{ rps.valor_iss_retido|comma }}</VlIssRet>
+                    <CpfCnpTom>{{ rps.tomador.cnpj_cpf }}</CpfCnpTom>
+                    <RazSocTom>{{ rps.tomador.razao_social }}</RazSocTom>
+                    <TipoLogtom>{{ rps.tomador.tipo_logradouro }}</TipoLogtom>
+                    <LogTom>{{ rps.tomador.logradouro }}</LogTom>
+                    <NumEndTom>{{ rps.tomador.numero }}</NumEndTom>
+                    <ComplEndTom>{{ rps.tomador.complemento }}</ComplEndTom>
+                    <BairroTom>{{ rps.tomador.bairro }}</BairroTom>
+                    <MunTom>{{ rps.tomador.municipio }}</MunTom>
+                    <SiglaUFTom>{{ rps.tomador.uf }}</SiglaUFTom>
+                    <CepTom>{{ rps.tomador.cep }}</CepTom>
+                    <Telefone>{{ rps.tomador.telefone }}</Telefone>
+                    <InscricaoMunicipal>{{ rps.tomador.inscricao_municipal }}</InscricaoMunicipal>
+                    {% if rps.local_prestacao == 'prestador' %}
+                        <TipoLogLocPre>{{ rps.prestador.tipo_logradouro }}</TipoLogLocPre>
+                        <LogLocPre>{{ rps.prestador.logradouro }}</LogLocPre>
+                        <NumEndLocPre>{{ rps.prestador.numero }}</NumEndLocPre>
+                        <ComplEndLocPre>{{ rps.prestador.complemento }}</ComplEndLocPre>
+                        <BairroLocPre>{{ rps.prestador.bairro }}</BairroLocPre>
+                        <MunLocPre>{{ rps.prestador.municipio }}</MunLocPre>
+                        <SiglaUFLocpre>{{ rps.prestador.uf }}</SiglaUFLocpre>
+                        <CepLocPre>{{ rps.prestador.cep }}</CepLocPre>
+                    {% endif %}
+                    <Email1>{{ rps.tomador.email }}</Email1>
+                    {% for imposto in rps.impostos -%}
+                    <Reg30>
+                        <Reg30Item>
+                            <TributoSigla>{{ imposto.sigla }}</TributoSigla>
+                            <TributoAliquota>{{ imposto.aliquota|comma }}</TributoAliquota>
+                            <TributoValor>{{ imposto.valor|comma }}</TributoValor>
+                        </Reg30Item>
+                    </Reg30>
+                    {% endfor %}
+                </Reg20Item>
+            </Reg20>
+            {% endfor %}
+            <Reg90>
+                <QtdRegNormal>{{ nfse.lista_rps|length }}</QtdRegNormal>
+                <ValorNFS>{{ nfse.lista_rps|sum(attribute='valor_liquido_nfse')|comma }}</ValorNFS>
+                <ValorISS>{{ nfse.lista_rps|sum(attribute='valor_iss')|comma }}</ValorISS>
+                <ValorDed>{{ nfse.lista_rps|sum(attribute='valor_deducao')|comma }}</ValorDed>
+                <ValorIssRetTom>{{ nfse.lista_rps|sum(attribute='valor_iss_retido')|comma }}</ValorIssRetTom>
+                <QtdReg30>{{ nfse.quantidade_impostos }}</QtdReg30>
+                <ValorTributos>{{ nfse.valor_tributos|comma }}</ValorTributos>
+            </Reg90>
+        </SDTRPS>
+    </Sdt_processarpsin>
+</ws_nfe.PROCESSARPS>
