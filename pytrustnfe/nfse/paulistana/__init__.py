@@ -54,10 +54,10 @@ def _send(certificado, method, **kwargs):
             'object': None
         }
 
-    response, obj = sanitize_response(response)
+    response, obj = sanitize_response(response.encode('utf-8'))
     return {
         'sent_xml': xml_send,
-        'received_xml': response,
+        'received_xml': response.decode(),
         'object': obj
     }
 
