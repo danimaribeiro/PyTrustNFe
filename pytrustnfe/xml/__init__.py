@@ -46,7 +46,7 @@ def render_xml(path, template_name, remove_empty, **nfe):
 
 
 def sanitize_response(response):
-    tree = etree.fromstring(response)
+    tree = etree.fromstring(response.encode('utf-8'))
     # Remove namespaces inuteis na resposta
     for elem in tree.getiterator():
         if not hasattr(elem.tag, 'find'):
