@@ -24,13 +24,45 @@ def _render(certificado, method, **kwargs):
     return xml_send
 
 
+def _get_url(**kwargs):
+
+    try:
+        cod_cidade = kwargs['nfse']['cidade']
+    except (KeyError, TypeError):
+        raise KeyError("Código de cidade inválido!")
+
+    urls = {
+        # Belém - PA
+        '2715': 'http://www.issdigitalbel.com.br/WsNFe2/LoteRps.jws',
+        # Sorocaba - SP
+        '7145': 'http://issdigital.sorocaba.sp.gov.br/WsNFe2/LoteRps.jws',
+        # Teresina - PI
+        '1219': 'http://www.issdigitalthe.com.br/WsNFe2/LoteRps.jws',
+        # Campinas - SP
+        '6291': 'http://issdigital.campinas.sp.gov.br/WsNFe2/LoteRps.jws?wsdl',
+        # Uberlandia - MG
+        '5403': 'http://udigital.uberlandia.mg.gov.br/WsNFe2/LoteRps.jws',
+        # São Luis - MA
+        '0921': 'https://stm.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps?wsdl',
+        # Campo Grande - MS
+        '2729': 'http://issdigital.pmcg.ms.gov.br/WsNFe2/LoteRps.jws?wsdl',
+    }
+
+    try:
+        return urls[str(cod_cidade)]
+    except KeyError:
+        raise KeyError("DSF não emite notas da cidade {}!".format(
+            cod_cidade))
+
+
 def _send(certificado, method, **kwargs):
-    url = 'http://issdigital.campinas.sp.gov.br/WsNFe2/LoteRps.jws?wsdl'  # noqa
+    url = _get_url(**kwargs)
 
     path = os.path.join(os.path.dirname(__file__), 'templates')
 
     xml_send = _render(path, method, **kwargs)
     client = get_client(url)
+    response = False
 
     if certificado:
         cert, key = extract_cert_and_key_from_pfx(
@@ -48,6 +80,11 @@ def _send(certificado, method, **kwargs):
             'received_xml': e.fault.faultstring,
             'object': None
         }
+    except Exception as e:
+        if response:
+            raise Exception(response)
+        else:
+            raise e
 
     return {
         'sent_xml': xml_send,
@@ -56,11 +93,23 @@ def _send(certificado, method, **kwargs):
     }
 
 
+def xml_enviar(certificado, **kwargs):
+    return _render(certificado, 'enviar', **kwargs)
+
+
 def enviar(certificado, **kwargs):
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_enviar(certificado, **kwargs)
     return _send(certificado, 'enviar', **kwargs)
 
 
+def xml_teste_enviar(certificado, **kwargs):
+    return _render(certificado, 'testeEnviar', **kwargs)
+
+
 def teste_enviar(certificado, **kwargs):
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_teste_enviar(certificado, **kwargs)
     return _send(certificado, 'testeEnviar', **kwargs)
 
 
@@ -72,5 +121,11 @@ def consulta_lote(**kwargs):
     return _send(False, 'consultarLote', **kwargs)
 
 
-def consultar_lote_rps(certificado, **kwarg):
-    return _send(certificado, 'consultarNFSeRps', **kwarg)
+def xml_consultar_nfse_rps(certificado, **kwargs):
+    return _render(certificado, 'consultarNFSeRps', **kwargs)
+
+
+def consultar_nfse_rps(certificado, **kwargs):
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_consultar_nfse_rps(certificado, **kwargs)
+    return _send(certificado, 'consultarNFSeRps', **kwargs)

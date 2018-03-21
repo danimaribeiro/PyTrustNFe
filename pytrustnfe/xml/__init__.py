@@ -15,6 +15,18 @@ def recursively_empty(e):
     return all((recursively_empty(c) for c in e.iterchildren()))
 
 
+def recursively_normalize(vals):
+    for item in vals:
+        if type(vals[item]) is str:
+            vals[item] = vals[item].strip()
+        elif type(vals[item]) is dict:
+            recursively_normalize(vals[item])
+        elif type(vals[item]) is list:
+            for a in vals[item]:
+                recursively_normalize(a)
+    return vals
+
+
 def render_xml(path, template_name, remove_empty, **nfe):
     nfe = recursively_normalize(nfe)
     env = Environment(
@@ -28,7 +40,6 @@ def render_xml(path, template_name, remove_empty, **nfe):
     env.filters["comma"] = filters.format_with_comma
 
     template = env.get_template(template_name)
-
     xml = template.render(**nfe)
     parser = etree.XMLParser(remove_blank_text=True, remove_comments=True,
                              strip_cdata=False)
