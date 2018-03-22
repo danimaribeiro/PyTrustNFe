@@ -20,18 +20,15 @@ def _send(certificado, method, **kwargs):
         base_url = 'https://nfe.etransparencia.com.br/rj.petropolis/webservice/aws_nfe.aspx'  # noqa
     else:
         base_url = 'https://nfehomologacao.etransparencia.com.br/rj.petropolis/webservice/aws_nfe.aspx'  # noqa
-
     xml_send = kwargs["xml"]
     path = os.path.join(os.path.dirname(__file__), 'templates')
-    soap = render_xml(path, 'SoapRequest.xml', False, soap_body=xml_send)
-
+    soap = render_xml(path, 'SoapRequest.xml', False, soap_body=xml_send.decode())
     client = HttpClient(base_url)
     response = client.post_soap(soap, 'NFeaction/AWS_NFE.%s' % method)
-
-    response, obj = sanitize_response(response)
+    response, obj = sanitize_response(response.encode('utf-8'))
     return {
         'sent_xml': xml_send,
-        'received_xml': response,
+        'received_xml': response.decode(),
         'object': obj
     }
 
