@@ -1,0 +1,5 @@
+<consSitNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="3.10">
+   <tpAmb>{{ ambiente }}</tpAmb>
+   <xServ>CONSULTAR</xServ>
+   <chNFe>{{ chave_nfe }}</chNFe>
+</consSitNFe>
