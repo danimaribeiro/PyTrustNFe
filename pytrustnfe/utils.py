@@ -85,8 +85,9 @@ def _find_node(xml, node):
 def gerar_nfeproc(envio, recibo):
     NSMAP = {None: 'http://www.portalfiscal.inf.br/nfe'}
     root = ET.Element("nfeProc", versao="3.10", nsmap=NSMAP)
-    docEnvio = ET.fromstring(envio)
-    docRecibo = ET.fromstring(recibo)
+    parser = ET.XMLParser(encoding='utf-8')
+    docEnvio = ET.fromstring(envio.encode('utf-8'), parser=parser)
+    docRecibo = ET.fromstring(recibo.encode('utf-8'), parser=parser)
 
     nfe = _find_node(docEnvio, "NFe")
     protocolo = _find_node(docRecibo, "protNFe")
