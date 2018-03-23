@@ -282,7 +282,7 @@ def recepcao_evento_carta_correcao(certificado, **kwargs):  # Assinar
 
 
 def xml_recepcao_evento_manifesto(certificado, **kwargs):  # Assinar
-    return _render(certificado, 'RecepcaoEventoManifesto', **kwargs)
+    return _render(certificado, 'RecepcaoEventoManifesto', True, **kwargs)
 
 
 def recepcao_evento_manifesto(certificado, **kwargs):  # Assinar
