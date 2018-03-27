@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ConsultarNfseEnvio xmlns="http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd">
+    <Prestador>
+        <Cnpj>{{ rps.emitter.cnpj }}</Cnpj>
+        <InscricaoMunicipal>{{ rps.emitter.city_inscription }}</InscricaoMunicipal>
+    </Prestador>
+    <NumeroNfse>{{ rps.nfse_number }}</NumeroNfse>
+</ConsultarNfseEnvio>
