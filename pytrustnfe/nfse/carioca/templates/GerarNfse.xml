@@ -1,0 +1,3 @@
+<GerarNfseEnvio xmlns="http://notacarioca.rio.gov.br/WSNacional/XSD/1/nfse_pcrj_v01.xsd">
+    {% include 'Rps.xml' %}
+</GerarNfseEnvio>
