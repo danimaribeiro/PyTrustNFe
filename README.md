@@ -15,19 +15,20 @@ Dependências:
 * reportlab
 * Jinja2
 
+
 NFSe - Cidades atendidas
 --------------
-* [Ariss](cidades/ariss.md) - 4 cidades atendidas
+* **Paulistana** - São Paulo/SP
+* **Nota Carioca** - Rio de Janeiro/RJ
+* **Imperial** - Petrópolis/RH
+* [Susesu](cidades/susesu.md) - 3 cidades atendidas
 * [Simpliss](cidades/simpliss.md) - 18 cidade atendidas
-* [GINFES](cidades/ginfes.md) - 79 cidades atendidas
+* [GINFES](cidaes/ginfes.md) - 79 cidades atendidas
+* [DSF](cidades/dsf.md) - 7 cidades atendidas
 
 Roadmap
 --------------
 Teste unitários
-
-Emissão de NFCe
-
-Compatibilidade [python 2 e 3](https://github.com/danimaribeiro/PyTrustNFe/pull/6)
 
 Implementar novos provedores de NFSe
 * [Betha](cidades/betha.md) - 81 cidades atendidas  WIP
