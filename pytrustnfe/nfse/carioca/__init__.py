@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import os
+import suds
 from pytrustnfe.client import get_authenticated_client
 from pytrustnfe.certificado import extract_cert_and_key_from_pfx, save_cert_key
 from pytrustnfe.xml import render_xml, sanitize_response
@@ -15,6 +16,8 @@ def _render(certificado, method, **kwargs):
     reference = ''
     if method == 'GerarNfse':
         reference = 'r%s' % kwargs['rps']['numero']
+    elif method == 'CancelarNfse':
+        reference = 'Cancelamento_NF%s' % kwargs['cancelamento']['numero_nfse']
 
     signer = Assinatura(certificado.pfx, certificado.password)
     xml_send = signer.assina_xml(xml_send, reference)
@@ -35,7 +38,7 @@ def _send(certificado, method, **kwargs):
     client = get_authenticated_client(base_url, cert, key)
 
     try:
-        response = client.service.GerarNfse(xml_send)
+        response = getattr(client.service, method)(xml_send)
     except suds.WebFault as e:
         return {
             'sent_xml': str(xml_send),
@@ -62,10 +65,10 @@ def gerar_nfse(certificado, **kwargs):
 
 
 def xml_cancelar_nfse(certificado, **kwargs):
-    return _render(certificado, 'CancelarNfseEnvio', **kwargs)
+    return _render(certificado, 'CancelarNfse', **kwargs)
 
 
 def cancelar_nfse(certificado, **kwargs):
     if "xml" not in kwargs:
         kwargs['xml'] = xml_cancelar_nfse(certificado, **kwargs)
-    return _send(certificado, 'CancelarNfseEnvio', **kwargs)
+    return _send(certificado, 'CancelarNfse', **kwargs)
