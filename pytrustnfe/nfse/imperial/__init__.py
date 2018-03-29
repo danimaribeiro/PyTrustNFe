@@ -27,7 +27,7 @@ def _send(certificado, method, **kwargs):
     response = client.post_soap(soap, 'NFeaction/AWS_NFE.%s' % method)
     response, obj = sanitize_response(response.encode('utf-8'))
     return {
-        'sent_xml': xml_send,
+        'sent_xml': xml_send.decode(),
         'received_xml': response.decode(),
         'object': obj
     }
