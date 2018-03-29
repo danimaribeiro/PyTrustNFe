@@ -191,6 +191,8 @@ class danfe(object):
             ".//{http://www.portalfiscal.inf.br/nfe}protNFe")
         elem_emit = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}emit")
         elem_ide = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}ide")
+        elem_evento = oXML.find(
+            ".//{http://www.portalfiscal.inf.br/nfe}infEvento")
 
         cChave = elem_infNFe.attrib.get('Id')[3:]
         barcode128 = code128.Code128(
@@ -316,6 +318,16 @@ class danfe(object):
             self.canvas.setFont('Times-Bold', 40)
             self.canvas.setFillColorRGB(0.57, 0.57, 0.57)
             self.string(self.nLeft + 65, 449, 'SEM VALOR FISCAL')
+            self.canvas.restoreState()
+
+        # Cancelado
+        if tagtext(oNode=elem_evento, cTag='xEvento') == \
+                'Cancelamento registrado':
+            self.canvas.saveState()
+            self.canvas.rotate(45)
+            self.canvas.setFont('NimbusSanL-Bold', 60)
+            self.canvas.setFillColorRGB(1, 0.2, 0.2)
+            self.string(self.nLeft + 80, 275, 'CANCELADO')
             self.canvas.restoreState()
 
         self.nlin += 48
