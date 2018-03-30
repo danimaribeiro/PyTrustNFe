@@ -2,6 +2,7 @@
 # © 2017 Johny Chen Jy, Trustcode
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import re
 from textwrap import wrap
 from io import BytesIO
 
@@ -56,15 +57,16 @@ def get_image(path, width=1 * cm):
     return Image(path, width=width, height=(width * aspect))
 
 
-def format_telefone(numero_telefone):
-    if len(numero_telefone) == 10:
-        telefone = '(%s) %s-%s' % (numero_telefone[0:2],
-                                   numero_telefone[2:6],
-                                   numero_telefone[6:])
-    else:
-        telefone = '(%s) %s-%s' % (numero_telefone[0:2],
-                                   numero_telefone[2:7],
-                                   numero_telefone[7:])
+def format_telefone(telefone):
+    telefone = re.sub('[^0-9]', '', telefone)
+    if len(telefone) == 10:
+        telefone = '(%s) %s-%s' % (telefone[0:2],
+                                   telefone[2:6],
+                                   telefone[6:])
+    elif len(telefone) == 11:
+        telefone = '(%s) %s-%s' % (telefone[0:2],
+                                   telefone[2:7],
+                                   telefone[7:])
     return telefone
 
 
@@ -134,7 +136,7 @@ class danfce(object):
     def produtos(self, oXML=None, el_det=None, oPaginator=None,
                  list_desc=None, list_cod_prod=None):
 
-        rows = [['Codigo', 'Descricao', 'Qtde', 'Un', 'Vl Unit', 'Vl Total']]
+        rows = [['Cód', 'Descrição', 'Qtde', 'Un', 'Unit.', 'Total']]
         colWidths = (25, 90, 15, 15, 25, 25)
         rowHeights = [7]
 
@@ -145,7 +147,9 @@ class danfce(object):
 
             cod = tagtext(oNode=el_prod, cTag='cProd')
             descricao = tagtext(oNode=el_prod, cTag='xProd')
+            descricao = (descricao[:20] + '..') if len(descricao) > 20 else descricao
             Un = tagtext(oNode=el_prod, cTag='uCom')
+            Un = (Un[:2]) if len(Un) > 2 else Un
             qtde = format_number(tagtext(oNode=el_prod, cTag='qCom'),
                                  precision=2)
             vl_unit = format_number(tagtext(oNode=el_prod, cTag='vUnCom'),
