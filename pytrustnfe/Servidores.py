@@ -339,7 +339,7 @@ UFAM = {
             WS_NFE_INUTILIZACAO: 'nfce-services-nac/services/NfeInutilizacao2',
             WS_NFE_CONSULTA: 'nfce-services-nac/services/NfeConsulta2',
             WS_NFE_SITUACAO: 'nfce-services-nac/services/NfeStatusServico2',
-            WS_NFCE_QR_CODE: 'https://homnfce.sefaz.am.gov.br/nfceweb/consultarNFCe.jsp',
+            WS_NFCE_QR_CODE: 'http://homnfce.sefaz.am.gov.br/nfceweb/consultarNFCe.jsp',
         }
     }
 }
