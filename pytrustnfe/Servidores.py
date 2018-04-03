@@ -6,7 +6,7 @@ WS_NFE_AUTORIZACAO = 'NfeAutorizacao'
 WS_NFE_RET_AUTORIZACAO = 'NfeRetAutorizacao'
 WS_NFE_CANCELAMENTO = 'RecepcaoEventoCancelamento'
 WS_NFE_INUTILIZACAO = 'NfeInutilizacao'
-WS_NFE_CONSULTA = 'NfeConsultaProtocolo'
+WS_NFE_CONSULTA = 'NfeConsulta2'
 WS_NFE_SITUACAO = 'NfeStatusServico'
 WS_NFE_CADASTRO = 'NfeConsultaCadastro'
 
@@ -165,6 +165,7 @@ SVAN = {
     NFE_AMBIENTE_PRODUCAO: {
         'servidor': 'www.sefazvirtual.fazenda.gov.br',
         WS_NFE_RECEPCAO_EVENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
+        WS_NFE_CANCELAMENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
         WS_NFE_AUTORIZACAO: 'NfeAutorizacao/NfeAutorizacao.asmx',
         WS_NFE_RET_AUTORIZACAO: 'NfeRetAutorizacao/NfeRetAutorizacao.asmx',
         WS_NFE_INUTILIZACAO: 'NfeInutilizacao2/NfeInutilizacao2.asmx',
@@ -174,6 +175,7 @@ SVAN = {
     NFE_AMBIENTE_HOMOLOGACAO: {
         'servidor': 'hom.sefazvirtual.fazenda.gov.br',
         WS_NFE_RECEPCAO_EVENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
+        WS_NFE_CANCELAMENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
         WS_NFE_AUTORIZACAO: 'NfeAutorizacao/NfeAutorizacao.asmx',
         WS_NFE_RET_AUTORIZACAO: 'NfeRetAutorizacao/NfeRetAutorizacao.asmx',
         WS_NFE_INUTILIZACAO: 'NfeInutilizacao2/NfeInutilizacao2.asmx',
