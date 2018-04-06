@@ -19,9 +19,7 @@ from reportlab.platypus import Paragraph, Image
 from reportlab.lib.styles import ParagraphStyle
 
 import pytz
-from datetime import datetime
-
-from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT as DTFT
+from datetime import datetime, timedelta
 
 
 def chunks(cString, nLen):
@@ -39,14 +37,40 @@ def format_cnpj_cpf(value):
     return cValue
 
 
-def getdateUTC(cDateUTC, timezone):
-    print(cDateUTC)
+def getdateByTimezone(cDateUTC, timezone=None):
+
+    '''
+    Esse método trata a data recebida de acordo com o timezone do
+    usuário. O seu retorno é dividido em duas partes:
+    1) A data em si;
+    2) As horas;
+    :param cDateUTC: string contendo as informações da data
+    :param timezone: timezone do usuário do sistema
+    :return: data e hora convertidos para a timezone do usuário
+    '''
+
+    # Aqui cortamos a informação do timezone da string (+03:00)
     dt = cDateUTC[0:19]
-    if timezone and len(cDateUTC) > 16:
+
+    # Verificamos se a string está completa (data + hora + timezone)
+    if timezone and len(cDateUTC) == 25:
+
+        # tz irá conter informações da timezone contida em cDateUTC
+        tz = cDateUTC[19:25]
+        tz = int(tz.split(':')[0])
+
         dt = datetime.strptime(dt, '%Y-%m-%dT%H:%M:%S')
+
+        # dt agora será convertido para o horario em UTC
+        dt = dt - timedelta(hours=tz)
+
+        # tzinfo passará a apontar para <UTC>
         dt = pytz.utc.localize(dt)
+
+        # valor de dt é convertido para a timezone do usuário
         dt = timezone.normalize(dt)
         dt = dt.strftime('%Y-%m-%dT%H:%M:%S')
+
     cDt = dt[0:10].split('-')
     cDt.reverse()
     return '/'.join(cDt), dt[11:16]
@@ -265,7 +289,7 @@ class danfe(object):
         self.stringcenter(self.nLeft + 116.5 + nW_Rect, self.nlin + 19.5,
                           ' '.join(chunks(cChave, 4)))  # Chave
         self.canvas.setFont('NimbusSanL-Regu', 8)
-        cDt, cHr = getdateUTC(
+        cDt, cHr = getdateByTimezone(
             tagtext(oNode=elem_protNFe, cTag='dhRecbto'), timezone)
         cProtocolo = tagtext(oNode=elem_protNFe, cTag='nProt')
         cDt = cProtocolo + ' - ' + cDt + ' ' + cHr
@@ -380,9 +404,10 @@ class danfe(object):
         else:
             cnpj_cpf = format_cnpj_cpf(tagtext(oNode=elem_dest, cTag='CPF'))
         self.string(nMr - 69, self.nlin + 7.5, cnpj_cpf)
-        cDt, cHr = getdateUTC(tagtext(oNode=elem_ide, cTag='dhEmi'), timezone)
+        cDt, cHr = getdateByTimezone(tagtext(oNode=elem_ide, cTag='dhEmi'),
+                                     timezone)
         self.string(nMr - 24, self.nlin + 7.7, cDt + ' ' + cHr)
-        cDt, cHr = getdateUTC(
+        cDt, cHr = getdateByTimezone(
             tagtext(oNode=elem_ide, cTag='dhSaiEnt'), timezone)
         self.string(nMr - 24, self.nlin + 14.3, cDt + ' ' + cHr)  # Dt saída
         cEnd = tagtext(oNode=elem_dest, cTag='xLgr') + ', ' + tagtext(
@@ -436,8 +461,8 @@ class danfe(object):
         line_iter = iter(oXML[1:10])  # Salta elemt 1 e considera os próximos 9
         for oXML_dup in line_iter:
 
-            cDt, cHr = getdateUTC(tagtext(oNode=oXML_dup, cTag='dVenc'),
-                                  timezone)
+            cDt, cHr = getdateByTimezone(tagtext(oNode=oXML_dup, cTag='dVenc'),
+                                         timezone)
             self.string(self.nLeft + nCol + 1, self.nlin + nLin,
                         tagtext(oNode=oXML_dup, cTag='nDup'))
             self.string(self.nLeft + nCol + 17, self.nlin + nLin, cDt)
@@ -797,7 +822,8 @@ obsCont[@xCampo='NomeVendedor']")
         self.string(self.width - self.nRight - nW + 2, self.nlin + 14,
                     u"SÉRIE %s" % (tagtext(oNode=el_ide, cTag='serie')))
 
-        cDt, cHr = getdateUTC(tagtext(oNode=el_ide, cTag='dhEmi'), timezone)
+        cDt, cHr = getdateByTimezone(
+            tagtext(oNode=el_ide, cTag='dhEmi'), timezone)
         cTotal = format_number(tagtext(oNode=el_total, cTag='vNF'))
 
         cEnd = tagtext(oNode=el_dest, cTag='xNome') + ' - '
@@ -903,7 +929,7 @@ obsCont[@xCampo='NomeVendedor']")
         self.string(82, 24, cnpj)
         chave_acesso = tagtext(oNode=elem_infNFe, cTag='chNFe')
         self.string(82, 30, chave_acesso)
-        data_correcao = getdateUTC(tagtext(
+        data_correcao = getdateByTimezone(tagtext(
             oNode=elem_infNFe, cTag='dhEvento'), timezone)
         data_correcao = data_correcao[0] + "  " + data_correcao[1]
         self.string(82, 36, data_correcao)
