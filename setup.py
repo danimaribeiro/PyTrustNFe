@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 
-VERSION = "0.9.15"
+VERSION = "0.9.17"
 
 
 setup(
@@ -45,6 +45,7 @@ later (LGPLv2+)',
     long_description=open('README.md', 'r').read(),
     install_requires=[
         'Jinja2 >= 2.8',
+        'pyOpenSSL >= 16.0.0, < 18',
         'signxml >= 2.4.0',
         'lxml >= 3.5.0, < 5',
         'suds-jurko >= 0.6',
