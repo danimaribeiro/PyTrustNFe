@@ -29,6 +29,9 @@ def _build_header(method, **kwargs):
         'RecepcaoEventoManifesto': ('RecepcaoEvento', '1.00'),
         'NfeConsulta2': ('NfeConsulta2', '3.10')
     }
+    # Método específico para o estado da Bahia
+    if kwargs['estado'] == '29':
+        action['NfeConsulta2'] = ('NfeConsulta', '3.10')
     vals = {'estado': kwargs['estado'],
             'soap_action': action[method][0],
             'versao': action[method][1]}
