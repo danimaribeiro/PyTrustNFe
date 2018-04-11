@@ -141,8 +141,8 @@ class danfe(object):
             self.Page = 1
 
             # Calculando total linhas usadas para descrições dos itens
-            # Com bloco fatura, apenas 29 linhas para itens na primeira folha
-            nNr_Lin_Pg_1 = 34 if oXML_cobr is None else 30
+            # Com bloco fatura, apenas 25 linhas para itens na primeira folha
+            nNr_Lin_Pg_1 = 30 if oXML_cobr is None else 26
             # [ rec_ini , rec_fim , lines , limit_lines ]
             oPaginator = [[0, 0, 0, nNr_Lin_Pg_1]]
             el_det = oXML.findall(".//{http://www.portalfiscal.inf.br/nfe}det")
