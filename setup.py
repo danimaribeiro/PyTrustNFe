@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 
-VERSION = "0.9.18"
+VERSION = "0.9.19"
 
 
 setup(
@@ -50,7 +50,8 @@ later (LGPLv2+)',
         'lxml >= 3.5.0, < 5',
         'suds-jurko >= 0.6',
         'suds-jurko-requests >= 1.2',
-        'reportlab'
+        'reportlab',
+        'pytz',
     ],
     tests_require=[
         'pytest',

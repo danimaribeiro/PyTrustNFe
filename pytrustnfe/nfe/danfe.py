@@ -20,6 +20,9 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
+import pytz
+from datetime import datetime, timedelta
+
 
 def chunks(cString, nLen):
     for start in range(0, len(cString), nLen):
@@ -36,10 +39,43 @@ def format_cnpj_cpf(value):
     return cValue
 
 
-def getdateUTC(cDateUTC):
-    cDt = cDateUTC[0:10].split('-')
+def getdateByTimezone(cDateUTC, timezone=None):
+
+    '''
+    Esse método trata a data recebida de acordo com o timezone do
+    usuário. O seu retorno é dividido em duas partes:
+    1) A data em si;
+    2) As horas;
+    :param cDateUTC: string contendo as informações da data
+    :param timezone: timezone do usuário do sistema
+    :return: data e hora convertidos para a timezone do usuário
+    '''
+
+    # Aqui cortamos a informação do timezone da string (+03:00)
+    dt = cDateUTC[0:19]
+
+    # Verificamos se a string está completa (data + hora + timezone)
+    if timezone and len(cDateUTC) == 25:
+
+        # tz irá conter informações da timezone contida em cDateUTC
+        tz = cDateUTC[19:25]
+        tz = int(tz.split(':')[0])
+
+        dt = datetime.strptime(dt, '%Y-%m-%dT%H:%M:%S')
+
+        # dt agora será convertido para o horario em UTC
+        dt = dt - timedelta(hours=tz)
+
+        # tzinfo passará a apontar para <UTC>
+        dt = pytz.utc.localize(dt)
+
+        # valor de dt é convertido para a timezone do usuário
+        dt = timezone.normalize(dt)
+        dt = dt.strftime('%Y-%m-%dT%H:%M:%S')
+
+    cDt = dt[0:10].split('-')
     cDt.reverse()
-    return '/'.join(cDt), cDateUTC[11:16]
+    return '/'.join(cDt), dt[11:16]
 
 
 def format_number(cNumber):
@@ -74,7 +110,8 @@ def get_image(path, width=1 * cm):
 class danfe(object):
 
     def __init__(self, sizepage=A4, list_xml=None, recibo=True,
-                 orientation='portrait', logo=None, cce_xml=None):
+                 orientation='portrait', logo=None, cce_xml=None,
+                 timezone=None):
 
         path = os.path.join(os.path.dirname(__file__), 'fonts')
         pdfmetrics.registerFont(
@@ -114,8 +151,8 @@ class danfe(object):
             self.Page = 1
 
             # Calculando total linhas usadas para descrições dos itens
-            # Com bloco fatura, apenas 29 linhas para itens na primeira folha
-            nNr_Lin_Pg_1 = 34 if oXML_cobr is None else 30
+            # Com bloco fatura, apenas 25 linhas para itens na primeira folha
+            nNr_Lin_Pg_1 = 30 if oXML_cobr is None else 26
             # [ rec_ini , rec_fim , lines , limit_lines ]
             oPaginator = [[0, 0, 0, nNr_Lin_Pg_1]]
             el_det = oXML.findall(".//{http://www.portalfiscal.inf.br/nfe}det")
@@ -154,13 +191,13 @@ class danfe(object):
                 self.NrPages = len(oPaginator)   # Calculando nr. páginas
 
             if recibo:
-                self.recibo_entrega(oXML=oXML)
+                self.recibo_entrega(oXML=oXML, timezone=timezone)
 
-            self.ide_emit(oXML=oXML)
-            self.destinatario(oXML=oXML)
+            self.ide_emit(oXML=oXML, timezone=timezone)
+            self.destinatario(oXML=oXML, timezone=timezone)
 
             if oXML_cobr is not None:
-                self.faturas(oXML=oXML_cobr)
+                self.faturas(oXML=oXML_cobr, timezone=timezone)
 
             self.impostos(oXML=oXML)
             self.transportes(oXML=oXML)
@@ -172,7 +209,7 @@ class danfe(object):
             # Gera o restante das páginas do XML
             for oPag in oPaginator[1:]:
                 self.newpage()
-                self.ide_emit(oXML=oXML)
+                self.ide_emit(oXML=oXML, timezone=timezone)
                 self.produtos(oXML=oXML, el_det=el_det, oPaginator=oPag,
                               list_desc=list_desc, nHeight=77,
                               list_cod_prod=list_cod_prod)
@@ -180,11 +217,11 @@ class danfe(object):
             self.newpage()
         if cce_xml:
             for xml in cce_xml:
-                self._generate_cce(cce_xml=xml, oXML=oXML)
+                self._generate_cce(cce_xml=xml, oXML=oXML, timezone=timezone)
                 self.newpage()
         self.canvas.save()
 
-    def ide_emit(self, oXML=None):
+    def ide_emit(self, oXML=None, timezone=None):
         elem_infNFe = oXML.find(
             ".//{http://www.portalfiscal.inf.br/nfe}infNFe")
         elem_protNFe = oXML.find(
@@ -262,7 +299,8 @@ class danfe(object):
         self.stringcenter(self.nLeft + 116.5 + nW_Rect, self.nlin + 19.5,
                           ' '.join(chunks(cChave, 4)))  # Chave
         self.canvas.setFont('NimbusSanL-Regu', 8)
-        cDt, cHr = getdateUTC(tagtext(oNode=elem_protNFe, cTag='dhRecbto'))
+        cDt, cHr = getdateByTimezone(
+            tagtext(oNode=elem_protNFe, cTag='dhRecbto'), timezone)
         cProtocolo = tagtext(oNode=elem_protNFe, cTag='nProt')
         cDt = cProtocolo + ' - ' + cDt + ' ' + cHr
         nW_Rect = (self.width - self.nLeft - self.nRight - 110) / 2
@@ -283,9 +321,9 @@ class danfe(object):
 
         # Razão Social emitente
         P = Paragraph(tagtext(oNode=elem_emit, cTag='xNome'), styleN)
-        w, h = P.wrap(55 * mm, 50 * mm)
+        w, h = P.wrap(55 * mm, 40 * mm)
         P.drawOn(self.canvas, (self.nLeft + 30) * mm,
-                 (self.height - self.nlin - 12) * mm)
+                 (self.height - self.nlin - ((5*h + 12)/12)) * mm)
 
         if self.logo:
             img = get_image(self.logo, width=2 * cm)
@@ -332,7 +370,7 @@ class danfe(object):
 
         self.nlin += 48
 
-    def destinatario(self, oXML=None):
+    def destinatario(self, oXML=None, timezone=None):
         elem_ide = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}ide")
         elem_dest = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}dest")
         nMr = self.width - self.nRight
@@ -376,9 +414,11 @@ class danfe(object):
         else:
             cnpj_cpf = format_cnpj_cpf(tagtext(oNode=elem_dest, cTag='CPF'))
         self.string(nMr - 69, self.nlin + 7.5, cnpj_cpf)
-        cDt, cHr = getdateUTC(tagtext(oNode=elem_ide, cTag='dhEmi'))
+        cDt, cHr = getdateByTimezone(tagtext(oNode=elem_ide, cTag='dhEmi'),
+                                     timezone)
         self.string(nMr - 24, self.nlin + 7.7, cDt + ' ' + cHr)
-        cDt, cHr = getdateUTC(tagtext(oNode=elem_ide, cTag='dhSaiEnt'))
+        cDt, cHr = getdateByTimezone(
+            tagtext(oNode=elem_ide, cTag='dhSaiEnt'), timezone)
         self.string(nMr - 24, self.nlin + 14.3, cDt + ' ' + cHr)  # Dt saída
         cEnd = tagtext(oNode=elem_dest, cTag='xLgr') + ', ' + tagtext(
             oNode=elem_dest, cTag='nro')
@@ -398,7 +438,7 @@ class danfe(object):
 
         self.nlin += 24  # Nr linhas ocupadas pelo bloco
 
-    def faturas(self, oXML=None):
+    def faturas(self, oXML=None, timezone=None):
 
         nMr = self.width - self.nRight
 
@@ -431,7 +471,8 @@ class danfe(object):
         line_iter = iter(oXML[1:10])  # Salta elemt 1 e considera os próximos 9
         for oXML_dup in line_iter:
 
-            cDt, cHr = getdateUTC(tagtext(oNode=oXML_dup, cTag='dVenc'))
+            cDt, cHr = getdateByTimezone(tagtext(oNode=oXML_dup, cTag='dVenc'),
+                                         timezone)
             self.string(self.nLeft + nCol + 1, self.nlin + nLin,
                         tagtext(oNode=oXML_dup, cTag='nDup'))
             self.string(self.nLeft + nCol + 17, self.nlin + nLin, cDt)
@@ -759,7 +800,7 @@ obsCont[@xCampo='NomeVendedor']")
         P.drawOn(self.canvas, (self.nLeft + 1) * mm, altura - h)
         self.nlin += 36
 
-    def recibo_entrega(self, oXML=None):
+    def recibo_entrega(self, oXML=None, timezone=None):
         el_ide = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}ide")
         el_dest = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}dest")
         el_total = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}total")
@@ -791,7 +832,8 @@ obsCont[@xCampo='NomeVendedor']")
         self.string(self.width - self.nRight - nW + 2, self.nlin + 14,
                     "SÉRIE %s" % (tagtext(oNode=el_ide, cTag='serie')))
 
-        cDt, cHr = getdateUTC(tagtext(oNode=el_ide, cTag='dhEmi'))
+        cDt, cHr = getdateByTimezone(
+            tagtext(oNode=el_ide, cTag='dhEmi'), timezone)
         cTotal = format_number(tagtext(oNode=el_total, cTag='vNF'))
 
         cEnd = tagtext(oNode=el_dest, cTag='xNome') + ' - '
@@ -858,7 +900,7 @@ obsCont[@xCampo='NomeVendedor']")
         self.oPDF_IO.close()
         fileObj.write(pdf_out)
 
-    def _generate_cce(self, cce_xml=None, oXML=None):
+    def _generate_cce(self, cce_xml=None, oXML=None, timezone=None):
         self.canvas.setLineWidth(.2)
 
         # labels
@@ -897,8 +939,8 @@ obsCont[@xCampo='NomeVendedor']")
         self.string(82, 24, cnpj)
         chave_acesso = tagtext(oNode=elem_infNFe, cTag='chNFe')
         self.string(82, 30, chave_acesso)
-        data_correcao = getdateUTC(tagtext(
-            oNode=elem_infNFe, cTag='dhEvento'))
+        data_correcao = getdateByTimezone(tagtext(
+            oNode=elem_infNFe, cTag='dhEvento'), timezone)
         data_correcao = data_correcao[0] + "  " + data_correcao[1]
         self.string(82, 36, data_correcao)
         cce_id = elem_infNFe.values()[0]
