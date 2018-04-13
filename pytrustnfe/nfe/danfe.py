@@ -141,8 +141,8 @@ class danfe(object):
             self.Page = 1
 
             # Calculando total linhas usadas para descrições dos itens
-            # Com bloco fatura, apenas 29 linhas para itens na primeira folha
-            nNr_Lin_Pg_1 = 34 if oXML_cobr is None else 30
+            # Com bloco fatura, apenas 25 linhas para itens na primeira folha
+            nNr_Lin_Pg_1 = 30 if oXML_cobr is None else 26
             # [ rec_ini , rec_fim , lines , limit_lines ]
             oPaginator = [[0, 0, 0, nNr_Lin_Pg_1]]
             el_det = oXML.findall(".//{http://www.portalfiscal.inf.br/nfe}det")
@@ -311,9 +311,9 @@ class danfe(object):
 
         # Razão Social emitente
         P = Paragraph(tagtext(oNode=elem_emit, cTag='xNome'), styleN)
-        w, h = P.wrap(55 * mm, 50 * mm)
+        w, h = P.wrap(55 * mm, 40 * mm)
         P.drawOn(self.canvas, (self.nLeft + 30) * mm,
-                 (self.height - self.nlin - 12) * mm)
+                 (self.height - self.nlin - ((5*h + 12)/12)) * mm)
 
         if self.logo:
             img = get_image(self.logo, width=2 * cm)
