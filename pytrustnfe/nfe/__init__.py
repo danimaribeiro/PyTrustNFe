@@ -19,19 +19,21 @@ from pytrustnfe.exceptions import NFeValidationException
 
 def _build_header(method, **kwargs):
     action = {
-        'NfeAutorizacao': ('NfeAutorizacao', '3.10'),
-        'NfeRetAutorizacao': ('NfeRetAutorizacao', '3.10'),
-        'NfeConsultaCadastro': ('CadConsultaCadastro2', '2.00'),
-        'NfeInutilizacao': ('NfeInutilizacao2', '3.10'),
-        'RecepcaoEventoCancelamento': ('RecepcaoEvento', '1.00'),
-        'RecepcaoEventoCarta': ('RecepcaoEvento', '1.00'),
-        'NFeDistribuicaoDFe': ('NFeDistribuicaoDFe/nfeDistDFeInteresse',
-                               '1.00'),
-        'RecepcaoEventoManifesto': ('RecepcaoEvento', '1.00'),
+        'NfeAutorizacao': ('NfeAutorizacao', '3.10', 'NfeAutorizacao/nfeAutorizacaoLote'),
+        'NfeRetAutorizacao': ('NfeRetAutorizacao', '3.10', 'NfeRetAutorizacao/nfeRetAutorizacaoLote'),
+        'NfeConsultaCadastro': ('CadConsultaCadastro2', '2.00', 'CadConsultaCadastro2/consultaCadastro2'),
+        'NfeInutilizacao': ('NfeInutilizacao2', '3.10', 'NfeInutilizacao2/nfeInutilizacaoNF2'),
+        'RecepcaoEventoCancelamento': ('RecepcaoEvento', '1.00', 'RecepcaoEvento/nfeRecepcaoEvento'),
+        'RecepcaoEventoCarta': ('RecepcaoEvento', '1.00', 'RecepcaoEvento/nfeRecepcaoEvento'),
+        'NFeDistribuicaoDFe': ('NFeDistribuicaoDFe/nfeDistDFeInteresse', '1.00', 'NFeDistribuicaoDFe/nfeDistDFeInteresse'),
+        'RecepcaoEventoManifesto': ('RecepcaoEvento', '1.00', 'RecepcaoEvento/nfeRecepcaoEvento'),
     }
-    vals = {'estado': kwargs['estado'],
-            'soap_action': action[method][0],
-            'versao': action[method][1]}
+    vals = {
+        'estado': kwargs['estado'],
+        'method': action[method][0],
+        'soap_action': action[method][2],
+        'versao': action[method][1]
+    }
     return CabecalhoSoap(**vals)
 
 
