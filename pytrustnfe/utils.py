@@ -93,7 +93,7 @@ def gerar_nfeproc(envio, recibo):
     nfe = _find_node(docEnvio, "NFe")
     protocolo = _find_node(docRecibo, "protNFe")
     if nfe is None or protocolo is None:
-        return ''
+        return b''
     root.append(nfe)
     root.append(protocolo)
     return ET.tostring(root)
@@ -105,6 +105,6 @@ def gerar_nfeproc_cancel(nfe_proc, cancelamento):
 
     ev_cancelamento = _find_node(docCancel, "retEvento")
     if ev_cancelamento is None:
-        return ''
+        return b''
     docEnvio.append(ev_cancelamento)
     return ET.tostring(docEnvio)

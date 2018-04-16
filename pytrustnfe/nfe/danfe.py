@@ -359,8 +359,7 @@ class danfe(object):
             self.canvas.restoreState()
 
         # Cancelado
-        if tagtext(oNode=elem_evento, cTag='xEvento') == \
-                'Cancelamento registrado':
+        if tagtext(oNode=elem_evento, cTag='cStat') == '135':
             self.canvas.saveState()
             self.canvas.rotate(45)
             self.canvas.setFont('NimbusSanL-Bold', 60)
