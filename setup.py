@@ -1,10 +1,10 @@
 # coding=utf-8
 from setuptools import setup, find_packages
 
-VERSION = "0.1.45"
+VERSION = "0.1.45.post1"
 
 setup(
-    name="PyTrustNFe",
+    name="PyTrustNFeLoggi",
     version=VERSION,
     author="Danimar Ribeiro",
     author_email='danimaribeiro@gmail.com',
