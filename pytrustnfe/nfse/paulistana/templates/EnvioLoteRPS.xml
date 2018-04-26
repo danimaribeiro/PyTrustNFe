@@ -1,4 +1,16 @@
 <PedidoEnvioLoteRPS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.prefeitura.sp.gov.br/nfe">
+  <Cabecalho Versao="1" xmlns="">
+    <CPFCNPJRemetente>
+      <CNPJ>{{ nfse.cpf_cnpj }}</CNPJ>
+    </CPFCNPJRemetente>
+    <transacao>false</transacao>
+    <dtInicio>{{ nfse.data_inicio }}</dtInicio>
+    <dtFim>{{ nfse.data_fim }}</dtFim>
+    <QtdRPS>1</QtdRPS>
+    <ValorTotalServicos>{{ nfse.total_servicos }}</ValorTotalServicos>
+    <ValorTotalDeducoes>{{ nfse.total_deducoes }}</ValorTotalDeducoes>
+  </Cabecalho>
+  {% for rps in nfse.lista_rps -%}
   <RPS xmlns="">
     <Assinatura>{{ rps.assinatura }}</Assinatura>
     <ChaveRPS>
@@ -20,56 +32,29 @@
     <CodigoServico>{{ rps.codigo_atividade }}</CodigoServico>
     <AliquotaServicos>{{ rps.aliquota_atividade }}</AliquotaServicos>
     <ISSRetido>{{ rps.iss_retido | default('false') }}</ISSRetido>
-    {% if rps.tomador.tipo_cpfcnpj != 3 %}
     <CPFCNPJTomador>
-      {% if rps.tomador.tipo_cpfcnpj == 1 -%}
-      <CPF>{{ rps.tomador.cpf_cnpj }}</CPF>
-      {% endif %}
-      {% if rps.tomador.tipo_cpfcnpj == 2 -%}
-      <CNPJ>{{ rps.tomador.cpf_cnpj }}</CNPJ>
-      {% endif %}
+        {% if rps.tomador.tipo_cpfcnpj == 1 -%}
+           <CPF>{{ rps.tomador.cpf_cnpj }}</CPF>
+        {% endif %}
+        {% if rps.tomador.tipo_cpfcnpj == 2 -%}
+           <CNPJ>{{ rps.tomador.cpf_cnpj }}</CNPJ>
+        {% endif %}
     </CPFCNPJTomador>
-    {% endif %}
     {% if rps.tomador.inscricao_municipal -%}
     <InscricaoMunicipalTomador>{{ rps.tomador.inscricao_municipal }}</InscricaoMunicipalTomador>
     {% endif %}
     <RazaoSocialTomador>{{ rps.tomador.razao_social|normalize|escape }}</RazaoSocialTomador>
-    {% if rps.tomador.cidade %}
     <EnderecoTomador>
-      {% if rps.tomador.tipo_logradouro %}
       <TipoLogradouro>{{ rps.tomador.tipo_logradouro }}</TipoLogradouro>
-      {% endif %}
-      {% if rps.tomador.logradouro %}
       <Logradouro>{{ rps.tomador.logradouro|normalize|escape }}</Logradouro>
-      {% endif %}
-      {% if rps.tomador.numero %}
       <NumeroEndereco>{{ rps.tomador.numero }}</NumeroEndereco>
-      {% endif %}
-      {% if rps.tomador.complemento %}
       <ComplementoEndereco>{{ rps.tomador.complemento|normalize|escape }}</ComplementoEndereco>
-      {% endif %}
-      {% if rps.tomador.bairro %}
       <Bairro>{{ rps.tomador.bairro }}</Bairro>
-      {% endif %}
       <Cidade>{{ rps.tomador.cidade }}</Cidade>
       <UF>{{ rps.tomador.uf }}</UF>
-      {% if rps.tomador.cep %}<CEP>{{ rps.tomador.cep }}</CEP>{% endif %}
+      <CEP>{{ rps.tomador.cep }}</CEP>
     </EnderecoTomador>
-    {% endif %}
-    {% if rps.tomador.email %}<EmailTomador>{{ rps.tomador.email }}</EmailTomador>{% endif %}
     <Discriminacao>{{ rps.descricao|normalize|escape }}</Discriminacao>
   </RPS>
-  {% for rps in nfse.lista_rps -%}
-  <Cabecalho Versao="1" xmlns="">
-    <CPFCNPJRemetente>
-      <CNPJ>{{ nfse.cpf_cnpj }}</CNPJ>
-    </CPFCNPJRemetente>
-    <transacao>false</transacao>
-    <dtInicio>{{ nfse.data_inicio }}</dtInicio>
-    <dtFim>{{ nfse.data_fim }}</dtFim>
-    <QtdRPS>1</QtdRPS>
-    <ValorTotalServicos>{{ nfse.total_servicos }}</ValorTotalServicos>
-    <ValorTotalDeducoes>{{ nfse.total_deducoes }}</ValorTotalDeducoes>
-  </Cabecalho>
   {% endfor %}
 </PedidoEnvioLoteRPS>
