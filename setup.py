@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 VERSION = "0.1.45.post1"
 
 setup(
-    name="PyTrustNFeLoggi",
+    name="pytrustnfe",
     version=VERSION,
     author="Danimar Ribeiro",
     author_email='danimaribeiro@gmail.com',
