@@ -2,14 +2,14 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import os
-
+from lxml import etree
 from requests import Session
 from zeep import Client
 from zeep.transports import Transport
 
 from pytrustnfe.certificado import extract_cert_and_key_from_pfx, save_cert_key
 from pytrustnfe.xml import render_xml, sanitize_response
-from pytrustnfe.nfe.assinatura import Assinatura
+from pytrustnfe.nfse.bh.assinatura import Assinatura
 
 
 def _render(certificado, method, **kwargs):
@@ -18,12 +18,14 @@ def _render(certificado, method, **kwargs):
 
     reference = ''
     if method == 'GerarNfse':
-        reference = 'r%s' % kwargs['rps']['numero']
+        reference = 'rps:%s' % kwargs['rps']['numero']
+        ref_lote = 'lote%s' % kwargs['rps']['numero_lote']
     elif method == 'CancelarNfse':
         reference = 'Cancelamento_NF%s' % kwargs['cancelamento']['numero_nfse']
 
     signer = Assinatura(certificado.pfx, certificado.password)
     xml_send = signer.assina_xml(xml_send, reference)
+    xml_send = signer.assina_xml(etree.fromstring(xml_send), ref_lote)
     return xml_send.encode('utf-8')
 
 
@@ -35,7 +37,9 @@ def _send(certificado, method, **kwargs):
         base_url = 'https://bhisshomologa.pbh.gov.br/bhiss-ws/nfse?wsdl'
 
     xml_send = kwargs["xml"].decode('utf-8')
-    xml_cabecalho = ''
+    xml_cabecalho = '<?xml version="1.0" encoding="UTF-8"?>\
+    <cabecalho xmlns="http://www.abrasf.org.br/nfse.xsd" versao="1.00">\
+    <versaoDados>1.00</versaoDados></cabecalho>'
 
     cert, key = extract_cert_and_key_from_pfx(
         certificado.pfx, certificado.password)
@@ -50,7 +54,7 @@ def _send(certificado, method, **kwargs):
 
     response = client.service[method](xml_cabecalho, xml_send)
 
-    response, obj = sanitize_response(response)
+    response, obj = sanitize_response(response.encode('utf-8'))
     return {
         'sent_xml': str(xml_send),
         'received_xml': str(response),
