@@ -13,6 +13,7 @@ class CabecalhoSoap(object):
     def __init__(self, **kwargs):
         self.versao = kwargs.pop('versao', '')
         self.estado = kwargs.pop('estado', '')
+        self.method = kwargs.pop('method', '')
         self.soap_action = kwargs.pop('soap_action', '')
 
 
@@ -92,7 +93,18 @@ def gerar_nfeproc(envio, recibo):
     nfe = _find_node(docEnvio, "NFe")
     protocolo = _find_node(docRecibo, "protNFe")
     if nfe is None or protocolo is None:
-        return ''
+        return b''
     root.append(nfe)
     root.append(protocolo)
     return ET.tostring(root)
+
+
+def gerar_nfeproc_cancel(nfe_proc, cancelamento):
+    docEnvio = ET.fromstring(nfe_proc)
+    docCancel = ET.fromstring(cancelamento)
+
+    ev_cancelamento = _find_node(docCancel, "retEvento")
+    if ev_cancelamento is None:
+        return b''
+    docEnvio.append(ev_cancelamento)
+    return ET.tostring(docEnvio)

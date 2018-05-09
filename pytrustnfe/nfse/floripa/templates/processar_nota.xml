@@ -17,8 +17,9 @@
     {% for item in rps.itens_servico -%}
     <itemServico>
       <aliquota>{{ item.aliquota }}</aliquota>
+      <baseCalculo>{{ item.base_calculo }}</baseCalculo>
       <cst>{{ item.cst_servico }}</cst>
-      <descricaoServico>{{ item.descricao|normalize|escape }}</descricaoServico>
+      <descricaoServico>{{ item.name|normalize|escape }}</descricaoServico>
       <idCNAE>{{ item.cnae }}</idCNAE>
       <quantidade>{{ item.quantidade }}</quantidade>
       <valorTotal>{{ item.valor_total }}</valorTotal>

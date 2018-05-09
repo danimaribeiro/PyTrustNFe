@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 
-VERSION = "0.9.12"
+VERSION = "0.9.21"
 
 
 setup(
@@ -37,6 +37,7 @@ later (LGPLv2+)',
         'nfse/imperial/templates/*xml',
         'nfse/floripa/templates/*xml',
         'nfse/carioca/templates/*xml',
+        'nfse/bh/templates/*xml',
         'xml/schemas/*xsd',
     ]},
     url='https://github.com/danimaribeiro/PyTrustNFe',
@@ -45,11 +46,14 @@ later (LGPLv2+)',
     long_description=open('README.md', 'r').read(),
     install_requires=[
         'Jinja2 >= 2.8',
+        'pyOpenSSL >= 16.0.0, < 18',
         'signxml >= 2.4.0',
         'lxml >= 3.5.0, < 5',
         'suds-jurko >= 0.6',
         'suds-jurko-requests >= 1.2',
-        'reportlab'
+        'reportlab',
+        'pytz',
+        'zeep',
     ],
     tests_require=[
         'pytest',

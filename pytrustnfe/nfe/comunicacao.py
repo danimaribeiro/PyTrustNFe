@@ -12,9 +12,9 @@ from ..xml import sanitize_response
 def _soap_xml(body, cabecalho):
     xml = '<?xml version="1.0" encoding="utf-8"?>'
     xml += '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header>'
-    xml += '<nfeCabecMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/' + cabecalho.soap_action + '">'
+    xml += '<nfeCabecMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/' + cabecalho.method + '">'
     xml += '<cUF>' + cabecalho.estado + '</cUF><versaoDados>' + cabecalho.versao + '</versaoDados></nfeCabecMsg></soap:Header><soap:Body>'
-    xml += '<nfeDadosMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/' + cabecalho.soap_action + '">'
+    xml += '<nfeDadosMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/' + cabecalho.method + '">'
     xml += body
     xml += '</nfeDadosMsg></soap:Body></soap:Envelope>'
     return xml.rstrip('\n')
