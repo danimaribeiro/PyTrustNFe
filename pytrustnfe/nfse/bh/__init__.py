@@ -56,8 +56,8 @@ def _send(certificado, method, **kwargs):
 
     response, obj = sanitize_response(response.encode('utf-8'))
     return {
-        'sent_xml': str(xml_send),
-        'received_xml': str(response),
+        'sent_xml': xml_send,
+        'received_xml': response.decode('utf-8'),
         'object': obj
     }
 
