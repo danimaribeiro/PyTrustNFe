@@ -584,6 +584,8 @@ obsCont[@xCampo='NomeVendedor']")
 
     def transportes(self, oXML=None):
         el_transp = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}transp")
+        veic_transp = oXML.find(
+            ".//{http://www.portalfiscal.inf.br/nfe}veicTransp")
         nMr = self.width - self.nRight
 
         self.canvas.setFont('NimbusSanL-Bold', 7)
@@ -627,6 +629,12 @@ obsCont[@xCampo='NomeVendedor']")
                     tagtext(oNode=el_transp, cTag='xNome')[:40])
         self.string(self.nLeft + 71, self.nlin + 7.7,
                     self.oFrete[tagtext(oNode=el_transp, cTag='modFrete')])
+        self.string(self.nLeft + 99, self.nlin + 7.7,
+                    tagtext(oNode=el_transp, cTag='RNTC'))
+        self.string(self.nLeft + 116, self.nlin + 7.7,
+                    tagtext(oNode=el_transp, cTag='placa'))
+        self.string(self.nLeft + 142, self.nlin + 7.7,
+                    tagtext(oNode=veic_transp, cTag='UF'))
         self.string(nMr - 39, self.nlin + 7.7,
                     format_cnpj_cpf(tagtext(oNode=el_transp, cTag='CNPJ')))
         self.string(self.nLeft + 1, self.nlin + 14.2,
