@@ -2,11 +2,11 @@
 from setuptools import setup, find_packages
 
 
-VERSION = "0.9.18"
+VERSION = "0.9.18.post1"
 
 
 setup(
-    name="PyTrustNFe3",
+    name="pytrustnfe3",
     version=VERSION,
     author="Danimar Ribeiro",
     author_email='danimaribeiro@gmail.com',
