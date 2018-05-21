@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 
-VERSION = "0.9.23"
+VERSION = "0.9.24"
 
 
 setup(
@@ -38,6 +38,7 @@ later (LGPLv2+)',
         'nfse/floripa/templates/*xml',
         'nfse/carioca/templates/*xml',
         'nfse/bh/templates/*xml',
+        'nfse/mga/templates/*xml',
         'xml/schemas/*xsd',
     ]},
     url='https://github.com/danimaribeiro/PyTrustNFe',

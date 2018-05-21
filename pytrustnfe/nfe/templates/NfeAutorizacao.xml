@@ -608,7 +608,7 @@
                     <ICMSUFDest>
                         <vBCUFDest>{{ imposto.ICMSUFDest.vBCUFDest }}</vBCUFDest>
                         <pFCPUFDest>{{ imposto.ICMSUFDest.pFCPUFDest }}</pFCPUFDest>
-                        <pICMSUFDest>{{ imposto.ICMSUFDest.pICMSInter }}</pICMSUFDest>
+                        <pICMSUFDest>{{ imposto.ICMSUFDest.pICMSUFDest }}</pICMSUFDest>
                         <pICMSInter>{{ imposto.ICMSUFDest.pICMSInter }}</pICMSInter>
                         <pICMSInterPart>{{ imposto.ICMSUFDest.pICMSInterPart }}</pICMSInterPart>
                         <vFCPUFDest>{{ imposto.ICMSUFDest.vFCPUFDest }}</vFCPUFDest>
