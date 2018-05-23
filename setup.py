@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 
-VERSION = "0.9.18.post1"
+VERSION = "0.9.18.post2"
 
 
 setup(
@@ -44,6 +44,8 @@ later (LGPLv2+)',
     description='PyTrustNFe é uma biblioteca para envio de NF-e',
     long_description=open('README.md', 'r').read(),
     install_requires=[
+        'urllib3',
+        'xmlsec==1.3.3',  # apt update;apt install libxmlsec1-dev pkg-config -y
         'Jinja2 >= 2.8',
         'pyOpenSSL >= 16.0.0, < 18',
         'signxml >= 2.4.0',
