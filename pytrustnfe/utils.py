@@ -101,7 +101,7 @@ def gerar_nfeproc(envio, recibo):
 
 def gerar_nfeproc_cancel(nfe_proc, cancelamento):
     docEnvio = ET.fromstring(nfe_proc)
-    docCancel = ET.fromstring(cancelamento)
+    docCancel = ET.fromstring(cancelamento.encode())
 
     ev_cancelamento = _find_node(docCancel, "retEvento")
     if ev_cancelamento is None:
