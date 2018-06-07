@@ -1,15 +1,14 @@
-<enviNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="3.10">
+<enviNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="4.00">
     <idLote>{{ idLote }}</idLote>
     <indSinc>{{ indSinc }}</indSinc>
     {% for NFe in NFes %}
     <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
-        <infNFe versao="3.10" Id="{{ NFe.infNFe.Id }}">
+        <infNFe versao="4.00" Id="{{ NFe.infNFe.Id }}">
             <ide>
                 {% with ide = NFe.infNFe.ide %}
                 <cUF>{{ ide.cUF }}</cUF>
                 <cNF>{{ ide.cNF }}</cNF>
                 <natOp>{{ ide.natOp }}</natOp>
-                <indPag>{{ ide.indPag }}</indPag>
                 <mod>{{ ide.mod }}</mod>
                 <serie>{{ ide.serie }}</serie>
                 <nNF>{{ ide.nNF }}</nNF>
@@ -614,6 +613,16 @@
                         <vFCPUFDest>{{ imposto.ICMSUFDest.vFCPUFDest }}</vFCPUFDest>
                         <vICMSUFDest>{{ imposto.ICMSUFDest.vICMSUFDest }}</vICMSUFDest>
                         <vICMSUFRemet>{{ imposto.ICMSUFDest.vICMSUFRemet }}</vICMSUFRemet>
+                        <vBCFCP>{{ imposto.ICMSUFDest.vBCFCP }}</vBCFCP>
+                        <pFCP>{{ imposto.ICMSUFDest.pFCP }}</pFCP>
+                        <vFCP>{{ imposto.ICMSUFDest.pFCP }}</vFCP>
+                        <vBCFCPST>{{ imposto.ICMSUFDest.vBCFCPST }}</vBCFCPST>
+                        <pFCPST>{{ imposto.ICMSUFDest.pFCPST }}</pFCPST>
+                        <vFCPST>{{ imposto.ICMSUFDest.vFCPST }}</vFCPST>
+                        <pFCPSTRet>{{ imposto.ICMSUFDest.pFCPSTRet }}</pFCPSTRet>
+                        <vFCPSTRet>{{ imposto.ICMSUFDest.vFCPSTRet }}</vFCPSTRet>
+                        <pST>{{ imposto.ICMSUFDest.pST }}</pST>
+                        <vBCFCPUFDest>{{ imposto.ICMSUFDest.vBCFCPUFDest }}</vBCFCPUFDest>
                     </ICMSUFDest>
                     {% endif %}
                     {% endwith %}
@@ -647,8 +656,12 @@
                     <vDesc>{{ total.vDesc }}</vDesc>
                     <vII>{{ total.vII }}</vII>
                     <vIPI>{{ total.vIPI }}</vIPI>
+                    <vIPIDevol>{{ total.vIPIDevol }}</vIPIDevol>
                     <vPIS>{{ total.vPIS }}</vPIS>
                     <vCOFINS>{{ total.vCOFINS }}</vCOFINS>
+                    <vFCP>{{ total.vFCP }}</vFCP>
+                    <vFCPST>{{ total.vFCPST }}</vFCPST>
+                    <vFCPSTRet>{{ total.vFCPSTRet }}</vFCPSTRet>
                     <vOutro>{{ total.vOutro }}</vOutro>
                     <vNF>{{ total.vNF }}</vNF>
                     <vTotTrib>{{ total.vTotTrib }}</vTotTrib>
