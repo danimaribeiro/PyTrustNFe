@@ -360,12 +360,18 @@
                             <pRedBC>{{ imposto.ICMS.pRedBC }}</pRedBC>
                             <pICMS>{{ imposto.ICMS.pICMS }}</pICMS>
                             <vICMS>{{ imposto.ICMS.vICMS }}</vICMS>
+                            <vBCFCP>{{ imposto.ICMS.vBCFCP }}</vBCFCP>
+                            <pFCP>{{ imposto.ICMS.pFCP }}</pFCP>
+                            <vFCP>{{ imposto.ICMS.pFCP }}</vFCP>                            
                             <modBCST>{{ imposto.ICMS.modBCST }}</modBCST>
                             <pMVAST>{{ imposto.ICMS.pMVAST }}</pMVAST>
                             <pRedBCST>{{ imposto.ICMS.pRedBCST }}</pRedBCST>
                             <vBCST>{{ imposto.ICMS.vBCST }}</vBCST>
                             <pICMSST>{{ imposto.ICMS.pICMSST }}</pICMSST>
                             <vICMSST>{{ imposto.ICMS.vICMSST }}</vICMSST>
+                            <vBCFCPST>{{ imposto.ICMS.vBCFCPST }}</vBCFCPST>
+                            <pFCPST>{{ imposto.ICMS.pFCPST }}</pFCPST>
+                            <vFCPST>{{ imposto.ICMS.vFCPST }}</vFCPST>
                             <vICMSDeson>{{ imposto.ICMS.vICMSDeson }}</vICMSDeson>
                             <motDesICMS>{{ imposto.ICMS.motDesICMS }}</motDesICMS>
                         </ICMS90>
@@ -379,14 +385,21 @@
                             <pRedBC>{{ imposto.ICMSPart.pRedBC }}</pRedBC>
                             <pICMS>{{ imposto.ICMSPart.pICMS }}</pICMS>
                             <vICMS>{{ imposto.ICMSPart.vICMS }}</vICMS>
+                            <vBCST>{{ imposto.ICMS.vBCST }}</vBCST>
                             <modBCST>{{ imposto.ICMSPart.modBCST }}</modBCST>
                             <pMVAST>{{ imposto.ICMSPart.pMVAST }}</pMVAST>
                             <pRedBCST>{{ imposto.ICMSPart.pRedBCST }}</pRedBCST>
-                            <vBCST>{{ imposto.ICMSPart.vBCST }}</vBCST>
-                            <pICMSST>{{ imposto.ICMSPart.pICMSST }}</pICMSST>
-                            <vICMSST>{{ imposto.ICMSPart.vICMSST }}</vICMSST>
                             <pBCOp>{{ imposto.ICMSPart.pBCOp }}</pBCOp>
                             <UFST>{{ imposto.ICMSPart.UFST }}</UFST>
+                            <pFCP>{{ imposto.ICMSPart.pFCP }}</pFCP>
+                            <vFCP>{{ imposto.ICMSPart.pFCP }}</vFCP>
+                            <vBCFCP>{{ imposto.ICMSPart.vBCFCP }}</vBCFCP>
+                            <vBCFCPST>{{ imposto.ICMSPart.vBCFCPST }}</vBCFCPST>
+                            <pFCPST>{{ imposto.ICMSPart.pFCPST }}</pFCPST>
+                            <vFCPST>{{ imposto.ICMSPart.vFCPST }}</vFCPST>
+                            <pFCPSTRet>{{ imposto.ICMSPart.pFCPSTRet }}</pFCPSTRet>
+                            <vFCPSTRet>{{ imposto.ICMSPart.vFCPSTRet }}</vFCPSTRet>
+                            <pST>{{ imposto.ICMSPart.pST }}</pST>
                         </ICMSPart>
                         {% endif %}
                         {% if imposto.ICMSST is defined -%}
@@ -613,15 +626,6 @@
                         <vFCPUFDest>{{ imposto.ICMSUFDest.vFCPUFDest }}</vFCPUFDest>
                         <vICMSUFDest>{{ imposto.ICMSUFDest.vICMSUFDest }}</vICMSUFDest>
                         <vICMSUFRemet>{{ imposto.ICMSUFDest.vICMSUFRemet }}</vICMSUFRemet>
-                        <vBCFCP>{{ imposto.ICMSUFDest.vBCFCP }}</vBCFCP>
-                        <pFCP>{{ imposto.ICMSUFDest.pFCP }}</pFCP>
-                        <vFCP>{{ imposto.ICMSUFDest.pFCP }}</vFCP>
-                        <vBCFCPST>{{ imposto.ICMSUFDest.vBCFCPST }}</vBCFCPST>
-                        <pFCPST>{{ imposto.ICMSUFDest.pFCPST }}</pFCPST>
-                        <vFCPST>{{ imposto.ICMSUFDest.vFCPST }}</vFCPST>
-                        <pFCPSTRet>{{ imposto.ICMSUFDest.pFCPSTRet }}</pFCPSTRet>
-                        <vFCPSTRet>{{ imposto.ICMSUFDest.vFCPSTRet }}</vFCPSTRet>
-                        <pST>{{ imposto.ICMSUFDest.pST }}</pST>
                         <vBCFCPUFDest>{{ imposto.ICMSUFDest.vBCFCPUFDest }}</vBCFCPUFDest>
                     </ICMSUFDest>
                     {% endif %}
@@ -648,8 +652,11 @@
                     <vFCPUFDest>{{ total.vFCPUFDest }}</vFCPUFDest>
                     <vICMSUFDest>{{ total.vICMSUFDest }}</vICMSUFDest>
                     <vICMSUFRemet>{{ total.vICMSUFRemet }}</vICMSUFRemet>
+                    <vFCP>{{ total.vFCP }}</vFCP>
                     <vBCST>{{ total.vBCST }}</vBCST>
                     <vST>{{ total.vST }}</vST>
+                    <vFCPST>{{ total.vFCPST }}</vFCPST>
+                    <vFCPSTRet>{{ total.vFCPSTRet }}</vFCPSTRet>
                     <vProd>{{ total.vProd }}</vProd>
                     <vFrete>{{ total.vFrete }}</vFrete>
                     <vSeg>{{ total.vSeg }}</vSeg>
@@ -659,9 +666,6 @@
                     <vIPIDevol>{{ total.vIPIDevol }}</vIPIDevol>
                     <vPIS>{{ total.vPIS }}</vPIS>
                     <vCOFINS>{{ total.vCOFINS }}</vCOFINS>
-                    <vFCP>{{ total.vFCP }}</vFCP>
-                    <vFCPST>{{ total.vFCPST }}</vFCPST>
-                    <vFCPSTRet>{{ total.vFCPSTRet }}</vFCPSTRet>
                     <vOutro>{{ total.vOutro }}</vOutro>
                     <vNF>{{ total.vNF }}</vNF>
                     <vTotTrib>{{ total.vTotTrib }}</vTotTrib>
@@ -762,8 +766,8 @@
             </cobr>
             {% endif %}
             {% endif %}
-            {% if NFe.infNFe.pag is defined %}
-            {% for pag in NFe.infNFe.pag %}
+            <!--{% if NFe.infNFe.pag is defined %}
+            {% for pag in NFe.infNFe.pag %}-->
             <pag>
                 <tPag>{{ pag.tPag }}</tPag>
                 <vPag>{{ pag.vPag }}</vPag>
@@ -775,8 +779,8 @@
                 </card>
                 {% endif %}
             </pag>
-            {% endfor %}
-            {% endif %}
+            <!--{% endfor %}
+            {% endif %}-->
             <infAdic>
                 <infAdFisco>{{ NFe.infNFe.infAdic.infAdFisco|normalize|escape }}</infAdFisco>
                 <infCpl>{{ NFe.infNFe.infAdic.infCpl|normalize|escape }}</infCpl>
