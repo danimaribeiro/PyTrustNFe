@@ -2,7 +2,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import os
-from lxml import etree
 from requests import Session
 from zeep import Client
 from zeep.transports import Transport
@@ -19,27 +18,22 @@ def _render(certificado, method, **kwargs):
     reference = ''
     if method == 'GerarNfse':
         reference = 'rps:%s' % kwargs['rps']['numero']
-        ref_lote = 'lote%s' % kwargs['rps']['numero_lote']
     elif method == 'CancelarNfse':
         reference = 'Cancelamento_NF%s' % kwargs['cancelamento']['numero_nfse']
 
     signer = Assinatura(certificado.pfx, certificado.password)
     xml_send = signer.assina_xml(xml_send, reference)
-    xml_send = signer.assina_xml(etree.fromstring(xml_send), ref_lote)
     return xml_send.encode('utf-8')
 
 
 def _send(certificado, method, **kwargs):
     base_url = ''
     if kwargs['ambiente'] == 'producao':
-        base_url = 'https://isse.maringa.gov.br/ws/?wsdl'
+        base_url = 'https://isse.maringa.pr.gov.br/ws/?wsdl'
     else:
-        base_url = 'https://isseteste.maringa.gov.br/ws/?wsdl'
+        base_url = 'https://isseteste.maringa.pr.gov.br/ws/?wsdl'
 
     xml_send = kwargs["xml"].decode('utf-8')
-    xml_cabecalho = '<?xml version="1.0" encoding="UTF-8"?>\
-    <cabecalho xmlns="http://www.abrasf.org.br/nfse.xsd" versao="1.00">\
-    <versaoDados>1.00</versaoDados></cabecalho>'
 
     cert, key = extract_cert_and_key_from_pfx(
         certificado.pfx, certificado.password)
@@ -51,8 +45,7 @@ def _send(certificado, method, **kwargs):
     transport = Transport(session=session)
 
     client = Client(base_url, transport=transport)
-
-    response = client.service[method](xml_cabecalho, xml_send)
+    response = client.service[method](xml_send)
 
     response, obj = sanitize_response(response.encode('utf-8'))
     return {
