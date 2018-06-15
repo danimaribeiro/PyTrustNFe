@@ -181,6 +181,9 @@
                     <NCM>{{ prod.NCM }}</NCM>
                     <NVE>{{ prod.NVE }}</NVE>
                     <CEST>{{ prod.CEST }}</CEST>
+                    <indEscala>{{ prod.indEscala }}</indEscala>
+                    <CNPJFab>{{ prod.CNPJFab }}</CNPJFab>
+                    <cBenef>{{ prod.cBenef }}</cBenef>
                     <EXTIPI>{{ prod.EXTIPI }}</EXTIPI>
                     <CFOP>{{ prod.CFOP }}</CFOP>
                     <uCom>{{ prod.uCom }}</uCom>
@@ -243,6 +246,21 @@
                     <xPed>{{ prod.xPed }}</xPed>
                     <nItemPed>{{ prod.nItemPed }}</nItemPed>
                     <nFCI>{{ prod.nFCI }}</nFCI>
+                    {% for rastro in prod.rastro %}
+                    <rastro>
+                        <nLote>{{ rastro.nLote }}</nLote>
+                        <qLote>{{ rastro.qLote }}</qLote>
+                        <dFab>{{ rastro.dFab }}</dFab>
+                        <dVal>{{ rastro.dVal }}</dVal>
+                        <cAgreg>{{ rastro.cAgreg }}</cAgreg>
+                    </rastro>
+                    {% endfor %}
+                    {% for med in prod.med %}
+                    <med>
+                        <cProdANVISA>{{ med.cProdANVISA }}</cProdANVISA>
+                        <vPMC>{{ med.vPMC }}</vPMC>
+                    </med>
+                    {% endfor %}
                     {% endwith %}
                 </prod>
                 <imposto>
@@ -257,6 +275,8 @@
                             <vBC>{{ imposto.ICMS.vBC }}</vBC>
                             <pICMS>{{ imposto.ICMS.pICMS }}</pICMS>
                             <vICMS>{{ imposto.ICMS.vICMS }}</vICMS>
+                            <pFCP>{{ imposto.ICMS.pFCP }}</pFCP>
+                            <vFCP>{{ imposto.ICMS.vFCP }}</vFCP>
                         </ICMS00>
                         {% endif %}
                         {% if imposto.ICMS.CST == '10' -%}
@@ -267,12 +287,18 @@
                             <vBC>{{ imposto.ICMS.vBC }}</vBC>
                             <pICMS>{{ imposto.ICMS.pICMS }}</pICMS>
                             <vICMS>{{ imposto.ICMS.vICMS }}</vICMS>
+                            <vBCFCP>{{ imposto.ICMS.vBCFCP }}</vBCFCP>
+                            <pFCP>{{ imposto.ICMS.pFCP }}</pFCP>
+                            <vFCP>{{ imposto.ICMS.vFCP }}</vFCP>
                             <modBCST>{{ imposto.ICMS.modBCST }}</modBCST>
                             <pMVAST>{{ imposto.ICMS.pMVAST }}</pMVAST>
                             <pRedBCST>{{ imposto.ICMS.pRedBCST }}</pRedBCST>
                             <vBCST>{{ imposto.ICMS.vBCST }}</vBCST>
                             <pICMSST>{{ imposto.ICMS.pICMSST }}</pICMSST>
                             <vICMSST>{{ imposto.ICMS.vICMSST }}</vICMSST>
+                            <vBCFCPST>{{ imposto.ICMS.vBCFCPST }}</vBCFCPST>
+                            <pFCPST>{{ imposto.ICMS.pFCPST }}</pFCPST>
+                            <vFCPST>{{ imposto.ICMS.vFCPST }}</vFCPST>
                         </ICMS10>
                         {% endif %}
                         {% if imposto.ICMS.CST == '20' -%}
@@ -284,6 +310,9 @@
                             <vBC>{{ imposto.ICMS.vBC }}</vBC>
                             <pICMS>{{ imposto.ICMS.pICMS }}</pICMS>
                             <vICMS>{{ imposto.ICMS.vICMS }}</vICMS>
+                            <vBCFCP>{{ imposto.ICMS.vBCFCP }}</vBCFCP>
+                            <pFCP>{{ imposto.ICMS.pFCP }}</pFCP>
+                            <vFCP>{{ imposto.ICMS.vFCP }}</vFCP>
                             <vICMSDeson>{{ imposto.ICMS.vICMSDeson }}</vICMSDeson>
                             <motDesICMS>{{ imposto.ICMS.motDesICMS }}</motDesICMS>
                         </ICMS20>
@@ -298,6 +327,9 @@
                             <vBCST>{{ imposto.ICMS.vBCST }}</vBCST>
                             <pICMSST>{{ imposto.ICMS.pICMSST }}</pICMSST>
                             <vICMSST>{{ imposto.ICMS.vICMSST }}</vICMSST>
+                            <vBCFCPST>{{ imposto.ICMS.vBCFCPST }}</vBCFCPST>
+                            <pFCPST>{{ imposto.ICMS.pFCPST }}</pFCPST>
+                            <vFCPST>{{ imposto.ICMS.vFCPST }}</vFCPST>
                             <vICMSDeson>{{ imposto.ICMS.vICMSDeson }}</vICMSDeson>
                             <motDesICMS>{{ imposto.ICMS.motDesICMS }}</motDesICMS>
                         </ICMS30>
@@ -322,6 +354,9 @@
                             <pDif>{{ imposto.ICMS.pDif }}</pDif>
                             <vICMSDif>{{ imposto.ICMS.vICMSDif }}</vICMSDif>
                             <vICMS>{{ imposto.ICMS.vICMS }}</vICMS>
+                            <vBCFCP>{{ imposto.ICMS.vBCFCP }}</vBCFCP>
+                            <pFCP>{{ imposto.ICMS.pFCP }}</pFCP>
+                            <vFCP>{{ imposto.ICMS.vFCP }}</vFCP>
                         </ICMS51>
                         {% endif %}
                         {% if imposto.ICMS.CST == '60' -%}
@@ -329,7 +364,11 @@
                             <orig>{{ imposto.ICMS.orig }}</orig>
                             <CST>{{ imposto.ICMS.CST }}</CST>
                             <vBCSTRet>{{ imposto.ICMS.vBCSTRet }}</vBCSTRet>
+                            <pST>{{ imposto.ICMS.pST }}</pST>
                             <vICMSSTRet>{{ imposto.ICMS.vICMSSTRet }}</vICMSSTRet>
+                            <vBCFCPSTRet>{{ imposto.ICMS.vBCFCPSTRet }}</vBCFCPSTRet>
+                            <pFCPSTRet>{{ imposto.ICMS.pFCPSTRet }}</pFCPSTRet>
+                            <vFCPSTRet>{{ imposto.ICMS.vFCPSTRet }}</vFCPSTRet>
                         </ICMS60>
                         {% endif %}
                         {% if imposto.ICMS.CST == '70' -%}
@@ -341,12 +380,18 @@
                             <vBC>{{ imposto.ICMS.vBC }}</vBC>
                             <pICMS>{{ imposto.ICMS.pICMS }}</pICMS>
                             <vICMS>{{ imposto.ICMS.vICMS }}</vICMS>
+                            <vBCFCP>{{ imposto.ICMS.vBCFCP }}</vBCFCP>
+                            <pFCP>{{ imposto.ICMS.pFCP }}</pFCP>
+                            <vFCP>{{ imposto.ICMS.vFCP }}</vFCP>
                             <modBCST>{{ imposto.ICMS.modBCST }}</modBCST>
                             <pMVAST>{{ imposto.ICMS.pMVAST }}</pMVAST>
                             <pRedBCST>{{ imposto.ICMS.pRedBCST }}</pRedBCST>
                             <vBCST>{{ imposto.ICMS.vBCST }}</vBCST>
                             <pICMSST>{{ imposto.ICMS.pICMSST }}</pICMSST>
                             <vICMSST>{{ imposto.ICMS.vICMSST }}</vICMSST>
+                            <vBCFCPST>{{ imposto.ICMS.vBCFCPST }}</vBCFCPST>
+                            <pFCPST>{{ imposto.ICMS.pFCPST }}</pFCPST>
+                            <vFCPST>{{ imposto.ICMS.vFCPST }}</vFCPST>
                             <vICMSDeson>{{ imposto.ICMS.vICMSDeson }}</vICMSDeson>
                             <motDesICMS>{{ imposto.ICMS.motDesICMS }}</motDesICMS>
                         </ICMS70>
@@ -362,7 +407,7 @@
                             <vICMS>{{ imposto.ICMS.vICMS }}</vICMS>
                             <vBCFCP>{{ imposto.ICMS.vBCFCP }}</vBCFCP>
                             <pFCP>{{ imposto.ICMS.pFCP }}</pFCP>
-                            <vFCP>{{ imposto.ICMS.pFCP }}</vFCP>                            
+                            <vFCP>{{ imposto.ICMS.pFCP }}</vFCP>
                             <modBCST>{{ imposto.ICMS.modBCST }}</modBCST>
                             <pMVAST>{{ imposto.ICMS.pMVAST }}</pMVAST>
                             <pRedBCST>{{ imposto.ICMS.pRedBCST }}</pRedBCST>
@@ -391,15 +436,6 @@
                             <pRedBCST>{{ imposto.ICMSPart.pRedBCST }}</pRedBCST>
                             <pBCOp>{{ imposto.ICMSPart.pBCOp }}</pBCOp>
                             <UFST>{{ imposto.ICMSPart.UFST }}</UFST>
-                            <pFCP>{{ imposto.ICMSPart.pFCP }}</pFCP>
-                            <vFCP>{{ imposto.ICMSPart.pFCP }}</vFCP>
-                            <vBCFCP>{{ imposto.ICMSPart.vBCFCP }}</vBCFCP>
-                            <vBCFCPST>{{ imposto.ICMSPart.vBCFCPST }}</vBCFCPST>
-                            <pFCPST>{{ imposto.ICMSPart.pFCPST }}</pFCPST>
-                            <vFCPST>{{ imposto.ICMSPart.vFCPST }}</vFCPST>
-                            <pFCPSTRet>{{ imposto.ICMSPart.pFCPSTRet }}</pFCPSTRet>
-                            <vFCPSTRet>{{ imposto.ICMSPart.vFCPSTRet }}</vFCPSTRet>
-                            <pST>{{ imposto.ICMSPart.pST }}</pST>
                         </ICMSPart>
                         {% endif %}
                         {% if imposto.ICMSST is defined -%}
@@ -436,6 +472,9 @@
                             <vBCST>{{ imposto.ICMS.vBCST }}</vBCST>
                             <pICMSST>{{ imposto.ICMS.pICMSST }}</pICMSST>
                             <vICMSST>{{ imposto.ICMS.vICMSST }}</vICMSST>
+                            <vBCFCPST>{{ imposto.ICMS.vBCFCPST }}</vBCFCPST>
+                            <pFCPST>{{ imposto.ICMS.pFCPST }}</pFCPST>
+                            <vFCPST>{{ imposto.ICMS.vFCPST }}</vFCPST>
                             <pCredSN>{{ imposto.ICMS.pCredSN }}</pCredSN>
                             <vCredICMSSN>{{ imposto.ICMS.vCredICMSSN }}</vCredICMSSN>
                         </ICMSSN201>
@@ -450,6 +489,9 @@
                             <vBCST>{{ imposto.ICMS.vBCST }}</vBCST>
                             <pICMSST>{{ imposto.ICMS.pICMSST }}</pICMSST>
                             <vICMSST>{{ imposto.ICMS.vICMSST }}</vICMSST>
+                            <vBCFCPST>{{ imposto.ICMS.vBCFCPST }}</vBCFCPST>
+                            <pFCPST>{{ imposto.ICMS.pFCPST }}</pFCPST>
+                            <vFCPST>{{ imposto.ICMS.vFCPST }}</vFCPST>
                         </ICMSSN202>
                         {% endif %}
                         {% if imposto.ICMS.CST == '500' -%}
@@ -457,7 +499,11 @@
                             <orig>{{ imposto.ICMS.orig }}</orig>
                             <CSOSN>{{ imposto.ICMS.CST }}</CSOSN>
                             <vBCSTRet>{{ imposto.ICMS.vBCSTRet }}</vBCSTRet>
+                            <pST>{{ imposto.ICMS.pST }}</pST>
                             <vICMSSTRet>{{ imposto.ICMS.vICMSSTRet }}</vICMSSTRet>
+                            <vBCFCPSTRet>{{ imposto.ICMS.vBCFCPSTRet }}</vBCFCPSTRet>
+                            <pFCPSTRet>{{ imposto.ICMS.pFCPSTRet }}</pFCPSTRet>
+                            <pFCPSTRet>{{ imposto.ICMS.pFCPSTRet }}</pFCPSTRet>
                         </ICMSSN500>
                         {% endif %}
                         {% if imposto.ICMS.CST == '900' -%}
@@ -475,6 +521,9 @@
                             <vBCST>{{ imposto.ICMS.vBCST }}</vBCST>
                             <pICMSST>{{ imposto.ICMS.pICMSST }}</pICMSST>
                             <vICMSST>{{ imposto.ICMS.vICMSST }}</vICMSST>
+                            <vBCFCPST>{{ imposto.ICMS.vBCFCPST }}</vBCFCPST>
+                            <pFCPST>{{ imposto.ICMS.pFCPST }}</pFCPST>
+                            <vFCPST>{{ imposto.ICMS.vFCPST }}</vFCPST>
                             <pCredSN>{{ imposto.ICMS.pCredSN }}</pCredSN>
                             <vCredICMSSN>{{ imposto.ICMS.vCredICMSSN }}</vCredICMSSN>
                         </ICMSSN900>
@@ -619,6 +668,7 @@
                     {% if imposto.ICMSUFDest is defined %}
                     <ICMSUFDest>
                         <vBCUFDest>{{ imposto.ICMSUFDest.vBCUFDest }}</vBCUFDest>
+                        <vBCFCPUFDest>{{ imposto.ICMSUFDest.vBCFCPUFDest }}</vBCFCPUFDest>
                         <pFCPUFDest>{{ imposto.ICMSUFDest.pFCPUFDest }}</pFCPUFDest>
                         <pICMSUFDest>{{ imposto.ICMSUFDest.pICMSUFDest }}</pICMSUFDest>
                         <pICMSInter>{{ imposto.ICMSUFDest.pICMSInter }}</pICMSInter>
@@ -626,7 +676,6 @@
                         <vFCPUFDest>{{ imposto.ICMSUFDest.vFCPUFDest }}</vFCPUFDest>
                         <vICMSUFDest>{{ imposto.ICMSUFDest.vICMSUFDest }}</vICMSUFDest>
                         <vICMSUFRemet>{{ imposto.ICMSUFDest.vICMSUFRemet }}</vICMSUFRemet>
-                        <vBCFCPUFDest>{{ imposto.ICMSUFDest.vBCFCPUFDest }}</vBCFCPUFDest>
                     </ICMSUFDest>
                     {% endif %}
                     {% endwith %}
@@ -766,21 +815,26 @@
             </cobr>
             {% endif %}
             {% endif %}
-            <!--{% if NFe.infNFe.pag is defined %}
-            {% for pag in NFe.infNFe.pag %}-->
+            {% if NFe.infNFe.pag is defined %}
             <pag>
-                <tPag>{{ pag.tPag }}</tPag>
-                <vPag>{{ pag.vPag }}</vPag>
-                {% if pag.card is defined %}
-                <card>
-                    <CNPJ>{{ pag.card.CNPJ }}</CNPJ>
-                    <tBand>{{ pag.card.tBand }}</tBand>
-                    <cAut>{{ pag.card.cAut }}</cAut>
-                </card>
-                {% endif %}
+                {% for pag in NFe.infNFe.pag %}
+                <detPag>
+                    <indPag>{{ pag.indPag }}</indPag>
+                    <tPag>{{ pag.tPag }}</tPag>
+                    <vPag>{{ pag.vPag }}</vPag>
+                    {% if pag.card is defined %}
+                    <card>
+                        <tpIntegra>{{ pag.card.tpIntegra }}</tpIntegra>
+                        <CNPJ>{{ pag.card.CNPJ }}</CNPJ>
+                        <tBand>{{ pag.card.tBand }}</tBand>
+                        <cAut>{{ pag.card.cAut }}</cAut>
+                    </card>
+                    {% endif %}
+                    <vTroco>{{ pag.vTroco }}</vTroco>
+                </detPag>
+                {% endfor %}
             </pag>
-            <!--{% endfor %}
-            {% endif %}-->
+            {% endif %}
             <infAdic>
                 <infAdFisco>{{ NFe.infNFe.infAdic.infAdFisco|normalize|escape }}</infAdFisco>
                 <infCpl>{{ NFe.infNFe.infAdic.infCpl|normalize|escape }}</infCpl>

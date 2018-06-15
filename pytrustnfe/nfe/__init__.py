@@ -9,12 +9,18 @@ import binascii
 from lxml import etree
 from .comunicacao import executar_consulta
 from .assinatura import Assinatura
-from pytrustnfe.xml import render_xml
+from pytrustnfe.xml import render_xml, sanitize_response
 from pytrustnfe.utils import CabecalhoSoap
 from pytrustnfe.utils import gerar_chave, ChaveNFe
 from pytrustnfe.Servidores import localizar_url, localizar_qrcode
 from pytrustnfe.xml.validate import valida_nfe
 from pytrustnfe.exceptions import NFeValidationException
+from pytrustnfe.certificado import extract_cert_and_key_from_pfx, save_cert_key
+
+# Zeep
+from requests import Session
+from zeep import Client
+from zeep.transports import Transport
 
 
 def _build_header(method, **kwargs):
@@ -182,21 +188,32 @@ def _render(certificado, method, sign, **kwargs):
 
 def _send(certificado, method, **kwargs):
     xml_send = kwargs["xml"]
-    url = localizar_url(method,  kwargs['estado'], kwargs['modelo'],
-                        kwargs['ambiente'])
-    cabecalho = _build_header(method, **kwargs)
+    base_url = localizar_url(method,  kwargs['estado'], kwargs['modelo'],
+                             kwargs['ambiente'])
 
-    send_raw = False
-    if method == 'NFeDistribuicaoDFe':
-        send_raw = True
+    cert, key = extract_cert_and_key_from_pfx(
+        certificado.pfx, certificado.password)
+    cert, key = save_cert_key(cert, key)
 
-    response, obj = executar_consulta(certificado, url, cabecalho, xml_send,
-                                      send_raw=send_raw)
-    return {
-        'sent_xml': xml_send,
-        'received_xml': response.decode(),
-        'object': obj
-    }
+    session = Session()
+    session.cert = (cert, key)
+    session.verify = False
+    transport = Transport(session=session)
+
+    xml = etree.fromstring(xml_send)
+    client = Client(base_url, transport=transport)
+
+    port = next(iter(client.wsdl.port_types))
+    first_operation = next(iter(client.wsdl.port_types[port].operations))
+    with client.options(raw_response=True):
+        response = client.service[first_operation](xml)
+        response, obj = sanitize_response(response.text)
+
+        return {
+            'sent_xml': xml_send,
+            'received_xml': response,
+            'object': obj.Body.nfeResultMsg
+        }
 
 
 def xml_autorizar_nfe(certificado, **kwargs):
