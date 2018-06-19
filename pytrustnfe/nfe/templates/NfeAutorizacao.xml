@@ -766,21 +766,26 @@
             </cobr>
             {% endif %}
             {% endif %}
-            <!--{% if NFe.infNFe.pag is defined %}
-            {% for pag in NFe.infNFe.pag %}-->
+            {% if NFe.infNFe.pag is defined %}
+            {% for pag in NFe.infNFe.pag %}
             <pag>
-                <tPag>{{ pag.tPag }}</tPag>
-                <vPag>{{ pag.vPag }}</vPag>
-                {% if pag.card is defined %}
-                <card>
-                    <CNPJ>{{ pag.card.CNPJ }}</CNPJ>
-                    <tBand>{{ pag.card.tBand }}</tBand>
-                    <cAut>{{ pag.card.cAut }}</cAut>
-                </card>
-                {% endif %}
+                <detPag>
+                    {% for pg in NFe.infNFe.pag.detPag %}
+                    <tPag>{{ pg.tPag }}</tPag>
+                    <vPag>{{ pg.vPag }}</vPag>
+                    {% if pag.card is defined %}
+                    <card>
+                        <CNPJ>{{ pag.card.CNPJ }}</CNPJ>
+                        <tBand>{{ pag.card.tBand }}</tBand>
+                        <cAut>{{ pag.card.cAut }}</cAut>
+                    </card>
+                    {% endif %}
+                    {% endfor %}
+                </detPag>
+                <vTroco>{{ pag.vTroco }}</vTroco>
             </pag>
-            <!--{% endfor %}
-            {% endif %}-->
+            {% endfor %}
+            {% endif %}
             <infAdic>
                 <infAdFisco>{{ NFe.infNFe.infAdic.infAdFisco|normalize|escape }}</infAdFisco>
                 <infCpl>{{ NFe.infNFe.infAdic.infCpl|normalize|escape }}</infCpl>
