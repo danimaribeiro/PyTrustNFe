@@ -7,40 +7,16 @@ import os
 import hashlib
 import binascii
 from lxml import etree
-from .comunicacao import executar_consulta
 from .assinatura import Assinatura
 from pytrustnfe.xml import render_xml, sanitize_response
-from pytrustnfe.utils import CabecalhoSoap
 from pytrustnfe.utils import gerar_chave, ChaveNFe
 from pytrustnfe.Servidores import localizar_url, localizar_qrcode
-from pytrustnfe.xml.validate import valida_nfe
-from pytrustnfe.exceptions import NFeValidationException
 from pytrustnfe.certificado import extract_cert_and_key_from_pfx, save_cert_key
 
 # Zeep
 from requests import Session
 from zeep import Client
 from zeep.transports import Transport
-
-
-def _build_header(method, **kwargs):
-    action = {
-        'NfeAutorizacao': ('NfeAutorizacao', '3.10', 'NfeAutorizacao/nfeAutorizacaoLote'),
-        'NfeRetAutorizacao': ('NfeRetAutorizacao', '3.10', 'NfeRetAutorizacao/nfeRetAutorizacaoLote'),
-        'NfeConsultaCadastro': ('CadConsultaCadastro2', '2.00', 'CadConsultaCadastro2/consultaCadastro2'),
-        'NfeInutilizacao': ('NfeInutilizacao2', '3.10', 'NfeInutilizacao2/nfeInutilizacaoNF2'),
-        'RecepcaoEventoCancelamento': ('RecepcaoEvento', '1.00', 'RecepcaoEvento/nfeRecepcaoEvento'),
-        'RecepcaoEventoCarta': ('RecepcaoEvento', '1.00', 'RecepcaoEvento/nfeRecepcaoEvento'),
-        'NFeDistribuicaoDFe': ('NFeDistribuicaoDFe/nfeDistDFeInteresse', '1.00', 'NFeDistribuicaoDFe/nfeDistDFeInteresse'),
-        'RecepcaoEventoManifesto': ('RecepcaoEvento', '1.00', 'RecepcaoEvento/nfeRecepcaoEvento'),
-    }
-    vals = {
-        'estado': kwargs['estado'],
-        'method': action[method][0],
-        'soap_action': action[method][2],
-        'versao': action[method][1]
-    }
-    return CabecalhoSoap(**vals)
 
 
 def _generate_nfe_id(**kwargs):
@@ -136,18 +112,6 @@ def _render(certificado, method, sign, **kwargs):
 
     modelo = xmlElem_send.find(".//{http://www.portalfiscal.inf.br/nfe}mod")
     modelo = modelo.text if modelo is not None else '55'
-    if modelo == '65':
-        pagamento = etree.Element('pag')
-        tipo_pagamento = etree.Element('tPag')
-        valor = etree.Element('vPag')
-        valor_pago = kwargs['NFes'][0]['infNFe']['total']['vNF']
-        metodo_pagamento = kwargs['NFes'][0]['infNFe']['pagamento']
-        tipo_pagamento.text, valor.text = metodo_pagamento, valor_pago
-        pagamento.append(tipo_pagamento)
-        pagamento.append(valor)
-        transp = xmlElem_send.find(
-                ".//{http://www.portalfiscal.inf.br/nfe}transp")
-        transp.addnext(pagamento)
 
     if sign:
         # Caso for autorização temos que adicionar algumas tags tipo
@@ -161,19 +125,9 @@ def _render(certificado, method, sign, **kwargs):
         if method == 'NfeAutorizacao':
             xml_send = signer.assina_xml(
                 xmlElem_send, kwargs['NFes'][0]['infNFe']['Id'])
-            if 'validate' in kwargs:
-                erros = valida_nfe(xml_send)
-                if erros:
-                    raise NFeValidationException('Erro ao validar NFe',
-                                                 erros=erros,
-                                                 sent_xml=xml_send)
-        elif method == 'RecepcaoEventoCancelamento':
+        elif method == 'RecepcaoEvento':
             xml_send = signer.assina_xml(
                 xmlElem_send, kwargs['eventos'][0]['Id'])
-
-        if method == 'RecepcaoEventoCarta':
-            xml_send = signer.assina_xml(
-                xmlElem_send, kwargs['Id'])
         elif method == 'RecepcaoEventoManifesto':
             xml_send = signer.assina_xml(
                 xmlElem_send, kwargs['manifesto']['identificador'])
@@ -188,8 +142,8 @@ def _render(certificado, method, sign, **kwargs):
 
 def _send(certificado, method, **kwargs):
     xml_send = kwargs["xml"]
-    base_url = localizar_url(method,  kwargs['estado'], kwargs['modelo'],
-                             kwargs['ambiente'])
+    base_url = localizar_url(
+        method,  kwargs['estado'], kwargs['modelo'], kwargs['ambiente'])
 
     cert, key = extract_cert_and_key_from_pfx(
         certificado.pfx, certificado.password)
@@ -208,7 +162,6 @@ def _send(certificado, method, **kwargs):
     with client.options(raw_response=True):
         response = client.service[first_operation](xml)
         response, obj = sanitize_response(response.text)
-
         return {
             'sent_xml': xml_send,
             'received_xml': response,
@@ -238,13 +191,13 @@ def retorno_autorizar_nfe(certificado, **kwargs):
 
 
 def xml_recepcao_evento_cancelamento(certificado, **kwargs):  # Assinar
-    return _render(certificado, 'RecepcaoEventoCancelamento', True, **kwargs)
+    return _render(certificado, 'RecepcaoEvento', True, **kwargs)
 
 
 def recepcao_evento_cancelamento(certificado, **kwargs):  # Assinar
     if "xml" not in kwargs:
         kwargs['xml'] = xml_recepcao_evento_cancelamento(certificado, **kwargs)
-    return _send(certificado, 'RecepcaoEventoCancelamento', **kwargs)
+    return _send(certificado, 'RecepcaoEvento', **kwargs)
 
 
 def xml_inutilizar_nfe(certificado, **kwargs):
@@ -258,7 +211,7 @@ def inutilizar_nfe(certificado, **kwargs):
 
 
 def xml_consultar_protocolo_nfe(certificado, **kwargs):
-    return _render(certificado, 'NfeConsultaProtocolo', True, **kwargs)
+    return _render(certificado, 'NfeConsultaProtocolo', False, **kwargs)
 
 
 def consultar_protocolo_nfe(certificado, **kwargs):
@@ -289,14 +242,14 @@ def consulta_cadastro(certificado, **kwargs):
 
 
 def xml_recepcao_evento_carta_correcao(certificado, **kwargs):  # Assinar
-    return _render(certificado, 'RecepcaoEventoCarta', True, **kwargs)
+    return _render(certificado, 'RecepcaoEvento', True, **kwargs)
 
 
 def recepcao_evento_carta_correcao(certificado, **kwargs):  # Assinar
     if "xml" not in kwargs:
         kwargs['xml'] = xml_recepcao_evento_carta_correcao(
             certificado, **kwargs)
-    return _send(certificado, 'RecepcaoEventoCarta', **kwargs)
+    return _send(certificado, 'RecepcaoEvento', **kwargs)
 
 
 def xml_recepcao_evento_manifesto(certificado, **kwargs):  # Assinar
