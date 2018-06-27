@@ -56,6 +56,7 @@ SIGLA_ESTADO = {
     '28': 'SE',
     '35': 'SP',
     '17': 'TO',
+    '91': 'AN'
 }
 
 
@@ -250,17 +251,15 @@ SVC_RS = {
 AN = {
     AMBIENTE_PRODUCAO: {
         'servidor': 'www1.nfe.fazenda.gov.br',
-        WS_NFE_RECEPCAO_EVENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
-        WS_DFE_DISTRIBUICAO: 'NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx',
-        WS_DOWNLOAD_NFE: 'NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx',
-        WS_NFE_RECEPCAO_EVENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
+        WS_DFE_DISTRIBUICAO: 'NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx?wsdl',
+        WS_DOWNLOAD_NFE: 'NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx?wsdl',
+        WS_NFE_RECEPCAO_EVENTO: 'NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx?wsdl',
     },
     AMBIENTE_HOMOLOGACAO: {
         'servidor': 'hom.nfe.fazenda.gov.br',
-        WS_NFE_RECEPCAO_EVENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
-        WS_DFE_DISTRIBUICAO: 'NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx',
-        WS_DOWNLOAD_NFE: 'NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx',
-        WS_NFE_RECEPCAO_EVENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
+        WS_DFE_DISTRIBUICAO: 'NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx?wsdl',
+        WS_DOWNLOAD_NFE: 'NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx?wsdl',
+        WS_NFE_RECEPCAO_EVENTO: 'NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx?Wsdl',
     },
 }
 
@@ -626,4 +625,5 @@ ESTADO_WS = {
     'SE': SVRS,
     'SP': UFSP,
     'TO': SVRS,
+    'AN': AN,
 }

@@ -165,7 +165,7 @@ def _send(certificado, method, **kwargs):
         return {
             'sent_xml': xml_send,
             'received_xml': response,
-            'object': obj.Body.nfeResultMsg
+            'object': obj.Body.getchildren()[0]
         }
 
 
@@ -253,23 +253,13 @@ def recepcao_evento_carta_correcao(certificado, **kwargs):  # Assinar
 
 
 def xml_recepcao_evento_manifesto(certificado, **kwargs):  # Assinar
-    return _render(certificado, 'RecepcaoEventoManifesto', True, **kwargs)
+    return _render(certificado, 'RecepcaoEvento', True, **kwargs)
 
 
 def recepcao_evento_manifesto(certificado, **kwargs):  # Assinar
     if "xml" not in kwargs:
         kwargs['xml'] = xml_recepcao_evento_manifesto(certificado, **kwargs)
-    return _send(certificado, 'RecepcaoEventoManifesto', **kwargs)
-
-
-def xml_recepcao_evento_epec(certificado, **kwargs):  # Assinar
-    return _render(certificado, 'RecepcaoEventoEPEC', True, **kwargs)
-
-
-def recepcao_evento_epec(certificado, **kwargs):  # Assinar
-    if "xml" not in kwargs:
-        kwargs['xml'] = xml_recepcao_evento_epec(certificado, **kwargs)
-    return _send(certificado, 'RecepcaoEventoEPEC', **kwargs)
+    return _send(certificado, 'RecepcaoEvento', **kwargs)
 
 
 def xml_consulta_distribuicao_nfe(certificado, **kwargs):  # Assinar
@@ -279,7 +269,34 @@ def xml_consulta_distribuicao_nfe(certificado, **kwargs):  # Assinar
 def consulta_distribuicao_nfe(certificado, **kwargs):
     if "xml" not in kwargs:
         kwargs['xml'] = xml_consulta_distribuicao_nfe(certificado, **kwargs)
-    return _send(certificado, 'NFeDistribuicaoDFe', **kwargs)
+    xml_send = kwargs["xml"]
+    base_url = localizar_url(
+        'NFeDistribuicaoDFe',  kwargs['estado'], kwargs['modelo'],
+        kwargs['ambiente'])
+
+    cert, key = extract_cert_and_key_from_pfx(
+        certificado.pfx, certificado.password)
+    cert, key = save_cert_key(cert, key)
+
+    session = Session()
+    session.cert = (cert, key)
+    session.verify = False
+    transport = Transport(session=session)
+
+    xml = etree.fromstring(xml_send)
+    xml_um = etree.fromstring('<nfeCabecMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/"><cUF>AN</cUF><versaoDados>1.00</versaoDados></nfeCabecMsg>')
+    client = Client(base_url, transport=transport)
+
+    port = next(iter(client.wsdl.port_types))
+    first_operation = next(iter(client.wsdl.port_types[port].operations))
+    with client.options(raw_response=True):
+        response = client.service[first_operation](nfeDadosMsg=xml, _soapheaders=[xml_um])
+        response, obj = sanitize_response(response.text)
+        return {
+            'sent_xml': xml_send,
+            'received_xml': response,
+            'object': obj.Body.nfeDistDFeInteresseResponse.nfeDistDFeInteresseResult
+        }
 
 
 def xml_download_nfe(certificado, **kwargs):  # Assinar

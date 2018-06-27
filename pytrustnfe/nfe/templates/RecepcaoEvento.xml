@@ -15,7 +15,7 @@
         <descEvento>{{ evento.descEvento }}</descEvento>
         <nProt>{{ evento.nProt }}</nProt>
         <xJust>{{ evento.xJust|normalize|escape }}</xJust>
-        <xCondUso>{{ evento.xCondUso }}.</xCondUso>
+        <xCondUso>{{ evento.xCondUso }}</xCondUso>
       </detEvento>
     </infEvento>
   </evento>
