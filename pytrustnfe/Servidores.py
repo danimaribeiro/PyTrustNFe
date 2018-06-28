@@ -71,8 +71,6 @@ SIGLA_ESTADO = {
 
 
 def localizar_url(servico, estado, mod='55', ambiente=2):
-    import ipdb
-    ipdb.set_trace()
     sigla = SIGLA_ESTADO[estado]
     ws = ESTADO_WS[sigla]
 

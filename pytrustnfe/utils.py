@@ -101,8 +101,6 @@ def gerar_nfeproc(envio, recibo):
 
 def gerar_nfeproc_cancel(nfe_proc, cancelamento):
     docEnvio = ET.fromstring(nfe_proc)
-    import ipdb
-    ipdb.set_trace()
     docCancel = ET.fromstring(cancelamento)
 
     ev_cancelamento = _find_node(docCancel, "retEvento")
