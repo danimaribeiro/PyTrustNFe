@@ -182,8 +182,9 @@ def _render(certificado, method, sign, **kwargs):
 
 def _send(certificado, method, **kwargs):
     xml_send = kwargs["xml"]
-    url = localizar_url(method,  kwargs['estado'], kwargs['modelo'],
-                        kwargs['ambiente'])
+    url = localizar_url(method, kwargs.get('estado'),
+                        kwargs.get('modelo', '55'),
+                        kwargs.get('ambiente'))
     cabecalho = _build_header(method, **kwargs)
 
     send_raw = False

@@ -71,6 +71,8 @@ SIGLA_ESTADO = {
 
 
 def localizar_url(servico, estado, mod='55', ambiente=2):
+    import ipdb
+    ipdb.set_trace()
     sigla = SIGLA_ESTADO[estado]
     ws = ESTADO_WS[sigla]
 
@@ -422,7 +424,6 @@ UFGO = {
     }
 }
 
-
 UFMT = {
     NFE_AMBIENTE_PRODUCAO: {
         'servidor': 'nfe.sefaz.mt.gov.br',
@@ -548,7 +549,6 @@ UFPE = {
     }
 }
 
-
 UFRS = {
     NFE_MODELO: {
         NFE_AMBIENTE_PRODUCAO: {
@@ -652,7 +652,6 @@ UFSP = {
         }
     }
 }
-
 
 ESTADO_WS = {
     'AC': SVRS,
