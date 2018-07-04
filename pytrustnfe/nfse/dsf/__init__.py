@@ -20,8 +20,7 @@ def _render(certificado, method, **kwargs):
 
     if type(xml_send) != str:
         xml_send = etree.tostring(xml_send)
-
-    return xml_send
+    return xml_send.decode()
 
 
 def _get_url(**kwargs):
@@ -43,7 +42,8 @@ def _get_url(**kwargs):
         # Uberlandia - MG
         '5403': 'http://udigital.uberlandia.mg.gov.br/WsNFe2/LoteRps.jws',
         # São Luis - MA
-        '0921': 'https://stm.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps?wsdl',
+        '0921':
+        'http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws?wsdl',
         # Campo Grande - MS
         '2729': 'http://issdigital.pmcg.ms.gov.br/WsNFe2/LoteRps.jws?wsdl',
     }
