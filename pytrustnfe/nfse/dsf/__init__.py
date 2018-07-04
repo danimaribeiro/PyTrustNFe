@@ -32,15 +32,15 @@ def _get_url(**kwargs):
 
     urls = {
         # Belém - PA
-        '2715': 'http://www.issdigitalbel.com.br/WsNFe2/LoteRps.jws',
+        '2715': 'http://www.issdigitalbel.com.br/WsNFe2/LoteRps.jws?wsdl',
         # Sorocaba - SP
-        '7145': 'http://issdigital.sorocaba.sp.gov.br/WsNFe2/LoteRps.jws',
+        '7145': 'http://issdigital.sorocaba.sp.gov.br/WsNFe2/LoteRps.jws?wsdl',
         # Teresina - PI
-        '1219': 'http://www.issdigitalthe.com.br/WsNFe2/LoteRps.jws',
+        '1219': 'http://www.issdigitalthe.com.br/WsNFe2/LoteRps.jws?wsdl',
         # Campinas - SP
         '6291': 'http://issdigital.campinas.sp.gov.br/WsNFe2/LoteRps.jws?wsdl',
         # Uberlandia - MG
-        '5403': 'http://udigital.uberlandia.mg.gov.br/WsNFe2/LoteRps.jws',
+        '5403': 'http://udigital.uberlandia.mg.gov.br/WsNFe2/LoteRps.jws?wsdl',
         # São Luis - MA
         '0921':
         'http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws?wsdl',
