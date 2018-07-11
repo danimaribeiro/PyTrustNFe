@@ -9,9 +9,16 @@
                     <distNSU>
                         <ultNSU>{{ ultimo_nsu }}</ultNSU>
                     </distNSU>
-                    <consChNFe>
-                        <chNFe>{{ chave_nfe }}</chNFe>
-                    </consChNFe>
+                    {% if nsu is defined %}
+                    <consNSU>
+                        <NSU>{{ nsu }}</NSU>
+                    </consNSU>
+                    {% endif %}
+                    {% if chNFe is defined %}
+                        <consChNFe>
+                            <chNFe>{{ chNFe }}</chNFe>
+                        </consChNFe>
+                    {% endif %}
                 </distDFeInt>
             </nfeDadosMsg>
         </nfeDistDFeInteresse>
