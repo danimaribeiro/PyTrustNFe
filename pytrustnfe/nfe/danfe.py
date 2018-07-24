@@ -749,6 +749,7 @@ obsCont[@xCampo='NomeVendedor']")
 
             # Descrição Item
             line_desc = nLin
+            self.canvas.setFont('NimbusSanL-Regu', 4.7)
             for des in list_desc[id]:
                 self.string(self.nLeft + 15.5, line_desc, des)
                 line_desc += nStep
@@ -759,6 +760,7 @@ obsCont[@xCampo='NomeVendedor']")
             self.canvas.setStrokeColor(black)
 
         self.nlin += nH + 3
+        self.canvas.setFont('NimbusSanL-Regu', 5)
 
     def adicionais(self, oXML=None):
         el_infAdic = oXML.find(
