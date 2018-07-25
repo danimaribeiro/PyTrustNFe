@@ -749,8 +749,13 @@ obsCont[@xCampo='NomeVendedor']")
 
             # Descrição Item
             line_desc = nLin
-            self.canvas.setFont('NimbusSanL-Regu', 4.7)
+            espaco_disp = 50
             for des in list_desc[id]:
+                if len(des) > espaco_disp:
+                    self.string(
+                        self.nLeft + 15.5, line_desc, des[:espaco_disp])
+                    des = des[espaco_disp:]
+                    line_desc += nStep
                 self.string(self.nLeft + 15.5, line_desc, des)
                 line_desc += nStep
 
@@ -760,7 +765,6 @@ obsCont[@xCampo='NomeVendedor']")
             self.canvas.setStrokeColor(black)
 
         self.nlin += nH + 3
-        self.canvas.setFont('NimbusSanL-Regu', 5)
 
     def adicionais(self, oXML=None):
         el_infAdic = oXML.find(
