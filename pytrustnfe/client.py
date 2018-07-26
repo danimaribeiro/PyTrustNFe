@@ -52,11 +52,12 @@ class HttpClient(object):
 
         return {
             'Content-type': 'application/soap+xml; charset=utf-8;',
-            'SOAPAction': 'http://www.portalfiscal.inf.br/nfe/wsdl/%s' % action,
+            'SOAPAction': '"http://www.portalfiscal.inf.br/nfe/wsdl/NFeRetAutorizacao4"',
         }
 
     def post_soap(self, xml_soap, cabecalho, send_raw):
-        header = self._headers(cabecalho.soap_action, send_raw)
+        #header = self._headers(cabecalho.soap_action, send_raw)
+        header = cabecalho
         urllib3.disable_warnings(category=InsecureRequestWarning)
         res = requests.post(self.url, data=xml_soap.encode('utf-8'),
                             cert=(self.cert_path, self.key_path),

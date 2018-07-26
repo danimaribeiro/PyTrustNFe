@@ -19,12 +19,12 @@ from pytrustnfe.exceptions import NFeValidationException
 
 def _build_header(method, **kwargs):
     action = {
-        'NfeAutorizacao': ('NfeAutorizacao', '4.00', 'NfeAutorizacao/nfeAutorizacaoLote'),
-        'NfeRetAutorizacao': ('NfeRetAutorizacao', '4.00', 'NfeRetAutorizacao/nfeRetAutorizacaoLote'),
-        'NfeConsultaCadastro': ('CadConsultaCadastro2', '2.00', 'CadConsultaCadastro2/consultaCadastro2'),
-        'NfeInutilizacao': ('NfeInutilizacao2', '4.00', 'NfeInutilizacao2/nfeInutilizacaoNF2'),
-        'RecepcaoEventoCancelamento': ('RecepcaoEvento', '1.00', 'RecepcaoEvento/nfeRecepcaoEvento'),
-        'RecepcaoEventoCarta': ('RecepcaoEvento', '1.00', 'RecepcaoEvento/nfeRecepcaoEvento'),
+        'NfeAutorizacao': ('NfeAutorizacao4', '4.00', 'NfeAutorizacaoLote'),
+        'NfeRetAutorizacao': ('NfeRetAutorizacao4', '4.00', 'NfeRetAutorizacao/nfeRetAutorizacaoLote'),
+        'NfeConsultaCadastro': ('CadConsultaCadastro4', '2.00', 'CadConsultaCadastro2/consultaCadastro2'),
+        'NfeInutilizacao': ('NfeInutilizacao4', '4.00', 'NfeInutilizacao2/nfeInutilizacaoNF2'),
+        'RecepcaoEventoCancelamento': ('RecepcaoEvento4', '4.00', 'RecepcaoEvento/nfeRecepcaoEvento'),
+        'RecepcaoEventoCarta': ('RecepcaoEvento4', '4.00', 'RecepcaoEvento/nfeRecepcaoEvento'),
         'NFeDistribuicaoDFe': ('NFeDistribuicaoDFe/nfeDistDFeInteresse', '1.00', 'NFeDistribuicaoDFe/nfeDistDFeInteresse'),
         'RecepcaoEventoManifesto': ('RecepcaoEvento', '1.00', 'RecepcaoEvento/nfeRecepcaoEvento'),
     }
@@ -130,27 +130,6 @@ def _render(certificado, method, sign, **kwargs):
 
     modelo = xmlElem_send.find(".//{http://www.portalfiscal.inf.br/nfe}mod")
     modelo = modelo.text if modelo is not None else '55'
-
-    if 'NFes' in kwargs and modelo == '55':
-        pagamento = etree.Element('pag')
-        detpag = etree.Element('detPag')
-        tipo_pagamento = etree.Element('tPag')
-        valor = etree.Element('vPag')
-        valor_pago = kwargs['NFes'][0]['infNFe']['pag']['detPag']['vPag']
-        metodo_pagamento = kwargs['NFes'][0]['infNFe']['pag']['detPag']
-        tipo_pagamento.text, valor.text = metodo_pagamento['tPag'], valor_pago
-        detpag.append(tipo_pagamento)
-        detpag.append(valor)
-        pagamento.append(detpag)
-        if xmlElem_send.find(".//{http://www.portalfiscal.inf.br/nfe}cobr"):
-            transp = xmlElem_send.find(
-                ".//{http://www.portalfiscal.inf.br/nfe}cobr")
-        else:
-            transp = xmlElem_send.find(
-                ".//{http://www.portalfiscal.inf.br/nfe}transp")
-                
-        transp.addnext(pagamento)
-
     if modelo == '65':
         pagamento = etree.Element('pag')
         tipo_pagamento = etree.Element('tPag')
@@ -205,20 +184,21 @@ def _send(certificado, method, **kwargs):
     xml_send = kwargs["xml"]
     url = localizar_url(method,  kwargs['estado'], kwargs['modelo'],
                         kwargs['ambiente'])
-    cabecalho = _build_header(method, **kwargs)
+
+    # Não há mais necessidade de usar o cabeçalho SOAP
+    # cabecalho = _build_header(method, **kwargs)
 
     send_raw = False
     if method == 'NFeDistribuicaoDFe':
         send_raw = True
 
-    response, obj = executar_consulta(certificado, url, cabecalho, xml_send,
-                                      send_raw=send_raw)
+    response, obj = executar_consulta(certificado, url, method, xml_send, send_raw=send_raw)
+
     return {
         'sent_xml': xml_send,
         'received_xml': response.decode(),
         'object': obj
     }
-
 
 def xml_autorizar_nfe(certificado, **kwargs):
     _generate_nfe_id(**kwargs)
