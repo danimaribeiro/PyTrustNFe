@@ -20,7 +20,7 @@ metodos = {
 }
 def _soap_xml(body, method):
     xml = '<?xml version="1.0" encoding="utf-8"?>'
-    xml += '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header>'
+    xml += '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">'
     xml += '<soap:Body>'
     xml += '<nfeDadosMsg xmlns="http://www.portalfiscal.inf.br/nfe/wsdl/' + metodos[method] + '">'
     xml += body
