@@ -507,8 +507,8 @@ UFPR = {
         WS_NFE_CONSULTA: 'nfe/NFeConsulta3',
         WS_NFE_SITUACAO: 'nfe/NFeStatusServico3',
         WS_NFE_CADASTRO: 'nfe/CadConsultaCadastro2',
-        WS_NFE_RECEPCAO_EVENTO: 'nfe-evento/NFeRecepcaoEvento',
-        WS_NFE_CANCELAMENTO: 'nfe-evento/NFeRecepcaoEvento',
+        WS_NFE_RECEPCAO_EVENTO: 'nfe/NFeRecepcaoEvento',
+        WS_NFE_CANCELAMENTO: 'nfe/NFeRecepcaoEvento',
     },
     NFE_AMBIENTE_HOMOLOGACAO: {
         'servidor': 'homologacao.nfe.fazenda.pr.gov.br',
@@ -518,8 +518,8 @@ UFPR = {
         WS_NFE_CONSULTA: 'nfe/NFeConsulta3',
         WS_NFE_SITUACAO: 'nfe/NFeStatusServico3',
         WS_NFE_CADASTRO: 'nfe/CadConsultaCadastro2',
-        WS_NFE_RECEPCAO_EVENTO: 'nfe-evento/NFeRecepcaoEvento',
-        WS_NFE_CANCELAMENTO: 'nfe-evento/NFeRecepcaoEvento',
+        WS_NFE_RECEPCAO_EVENTO: 'nfe/NFeRecepcaoEvento',
+        WS_NFE_CANCELAMENTO: 'nfe/NFeRecepcaoEvento',
     }
 }
 
