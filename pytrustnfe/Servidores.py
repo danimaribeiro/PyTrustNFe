@@ -422,7 +422,6 @@ UFGO = {
     }
 }
 
-
 UFMT = {
     NFE_AMBIENTE_PRODUCAO: {
         'servidor': 'nfe.sefaz.mt.gov.br',
@@ -548,7 +547,6 @@ UFPE = {
     }
 }
 
-
 UFRS = {
     NFE_MODELO: {
         NFE_AMBIENTE_PRODUCAO: {
@@ -652,7 +650,6 @@ UFSP = {
         }
     }
 }
-
 
 ESTADO_WS = {
     'AC': SVRS,
