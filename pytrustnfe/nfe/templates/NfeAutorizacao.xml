@@ -181,6 +181,9 @@
                     <NCM>{{ prod.NCM }}</NCM>
                     <NVE>{{ prod.NVE }}</NVE>
                     <CEST>{{ prod.CEST }}</CEST>
+                    <indEscala>{{ prod.indEscala }}</indEscala>
+                    <CNPJFab>{{ prod.CNPJFab }}</CNPJFab>
+                    <cBenef>{{ prod.cBenef }}</cBenef>
                     <EXTIPI>{{ prod.EXTIPI }}</EXTIPI>
                     <CFOP>{{ prod.CFOP }}</CFOP>
                     <uCom>{{ prod.uCom }}</uCom>
@@ -243,6 +246,21 @@
                     <xPed>{{ prod.xPed }}</xPed>
                     <nItemPed>{{ prod.nItemPed }}</nItemPed>
                     <nFCI>{{ prod.nFCI }}</nFCI>
+                    {% for rastro in prod.rastro %}
+                    <rastro>
+                        <nLote>{{ rastro.nLote }}</nLote>
+                        <qLote>{{ rastro.qLote }}</qLote>
+                        <dFab>{{ rastro.dFab }}</dFab>
+                        <dVal>{{ rastro.dVal }}</dVal>
+                        <cAgreg>{{ rastro.cAgreg }}</cAgreg>
+                    </rastro>
+                    {% endfor %}
+                    {% for med in prod.med %}
+                    <med>
+                        <cProdANVISA>{{ med.cProdANVISA }}</cProdANVISA>
+                        <vPMC>{{ med.vPMC }}</vPMC>
+                    </med>
+                    {% endfor %}
                     {% endwith %}
                 </prod>
                 <imposto>
@@ -257,8 +275,10 @@
                             <vBC>{{ imposto.ICMS.vBC }}</vBC>
                             <pICMS>{{ imposto.ICMS.pICMS }}</pICMS>
                             <vICMS>{{ imposto.ICMS.vICMS }}</vICMS>
-                            <pFCP>{{ imposto.ICMS.pFCP }}</pFCP>
-                            <vFCP>{{ imposto.ICMS.vFCP }}</vFCP>
+                            {% if imposto.ICMS.vFCP != '0.00' -%}
+                                <pFCP>{{ imposto.ICMS.pFCP }}</pFCP>
+                                <vFCP>{{ imposto.ICMS.vFCP }}</vFCP>
+                            {% endif %}    
                         </ICMS00>
                         {% endif %}
                         {% if imposto.ICMS.CST == '10' -%}
