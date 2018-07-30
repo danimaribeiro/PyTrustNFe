@@ -1,4 +1,4 @@
-<consReciNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="3.10">
+<consReciNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="4.00">
     <tpAmb>{{ obj.ambiente }}</tpAmb>
     <nRec>{{ obj.numero_recibo }}</nRec>
 </consReciNFe>

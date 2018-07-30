@@ -8,15 +8,6 @@ from datetime import date, datetime
 import lxml.etree as ET
 
 
-class CabecalhoSoap(object):
-
-    def __init__(self, **kwargs):
-        self.versao = kwargs.pop('versao', '')
-        self.estado = kwargs.pop('estado', '')
-        self.method = kwargs.pop('method', '')
-        self.soap_action = kwargs.pop('soap_action', '')
-
-
 class ChaveNFe(object):
 
     def __init__(self, **kwargs):
