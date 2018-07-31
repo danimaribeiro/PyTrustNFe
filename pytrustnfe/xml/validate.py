@@ -8,7 +8,7 @@ import re
 from lxml import etree
 
 PATH = os.path.dirname(os.path.abspath(__file__))
-SCHEMA = os.path.join(PATH, 'schemas/nfe_v3.10.xsd')
+SCHEMA = os.path.join(PATH, 'schemas/nfe_v4.00.xsd')
 
 
 def pop_encoding(xml):
@@ -30,7 +30,7 @@ def valida_nfe(nfe):
     mensagens = []
     for erro in erros:
         campo = re.findall(r"'([^']*)'", erro)[0]
-        nome = campo[campo.find('}') + 1: ]
+        nome = campo[campo.find('}') + 1:]
         valor = nfe.find('.//' + campo).text
         if 'Expected is' in erro:
             expected_name = re.findall('\(.*?\)', erro)
