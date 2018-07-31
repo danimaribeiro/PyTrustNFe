@@ -15,6 +15,7 @@
         <descEvento>{{ evento.descEvento }}</descEvento>
         <nProt>{{ evento.nProt }}</nProt>
         <xJust>{{ evento.xJust|normalize|escape }}</xJust>
+        <xCorrecao>{{ evento.xCorrecao|normalize|escape }}</xCorrecao>
         <xCondUso>{{ evento.xCondUso }}</xCondUso>
       </detEvento>
     </infEvento>
