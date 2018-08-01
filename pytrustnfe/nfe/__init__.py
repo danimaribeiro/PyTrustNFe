@@ -134,7 +134,7 @@ def _send(certificado, method, **kwargs):
 
     port = next(iter(client.wsdl.port_types))
     first_operation = next(iter(client.wsdl.port_types[port].operations))
-    with client.options(raw_response=True):
+    with client.settings(raw_response=True):
         response = client.service[first_operation](xml)
         response, obj = sanitize_response(response.text)
         return {
@@ -264,7 +264,7 @@ def consulta_distribuicao_nfe(certificado, **kwargs):
 
     port = next(iter(client.wsdl.port_types))
     first_operation = next(iter(client.wsdl.port_types[port].operations))
-    with client.options(raw_response=True):
+    with client.settings(raw_response=True):
         response = client.service[first_operation](nfeDadosMsg=xml, _soapheaders=[xml_um])
         response, obj = sanitize_response(response.text)
         return {
