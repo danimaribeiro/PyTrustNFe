@@ -54,7 +54,7 @@ later (LGPLv2+)',
         'suds-jurko-requests >= 1.2',
         'reportlab',
         'pytz',
-        'zeep',
+        'zeep == 2.5',
     ],
     tests_require=[
         'pytest',
