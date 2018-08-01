@@ -15,4 +15,4 @@ reportlab
 pytest
 pytest-cov
 pytz
-zeep
+zeep == 2.5
