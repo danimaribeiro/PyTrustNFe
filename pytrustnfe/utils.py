@@ -76,7 +76,7 @@ def _find_node(xml, node):
 
 def gerar_nfeproc(envio, recibo):
     NSMAP = {None: 'http://www.portalfiscal.inf.br/nfe'}
-    root = ET.Element("nfeProc", versao="3.10", nsmap=NSMAP)
+    root = ET.Element("nfeProc", versao="4.00", nsmap=NSMAP)
     docEnvio = ET.fromstring(envio)
     docRecibo = ET.fromstring(recibo)
 
