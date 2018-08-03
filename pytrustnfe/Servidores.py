@@ -336,23 +336,23 @@ UFBA = {
 UFCE = {
     AMBIENTE_PRODUCAO: {
         'servidor': 'nfe.sefaz.ce.gov.br',
-        WS_NFE_AUTORIZACAO: 'nfe4/services/NFeAutorizacao4',
-        WS_NFE_RET_AUTORIZACAO: 'nfe4/services/NFeRetAutorizacao4',
-        WS_NFE_INUTILIZACAO: 'nfe4/services/NFeInutilizacao4',
-        WS_NFE_CONSULTA: 'nfe4/services/NFeConsultaProtocolo4',
-        WS_NFE_SITUACAO: 'nfe4/services/nfe4/services/NFeStatusServico4',
-        WS_NFE_CADASTRO: 'nfe4/services/CadConsultaCadastro4',
-        WS_NFE_RECEPCAO_EVENTO: 'nfe4/services/NFeRecepcaoEvento4',
+        WS_NFE_AUTORIZACAO: 'nfe4/services/NFeAutorizacao4?WSDL',
+        WS_NFE_RET_AUTORIZACAO: 'nfe4/services/NFeRetAutorizacao4?WSDL',
+        WS_NFE_INUTILIZACAO: 'nfe4/services/NFeInutilizacao4?WSDL',
+        WS_NFE_CONSULTA: 'nfe4/services/NFeConsultaProtocolo4?WSDL',
+        WS_NFE_SITUACAO: 'nfe4/services/NFeStatusServico4?WSDL',
+        WS_NFE_CADASTRO: 'nfe4/services/CadConsultaCadastro4?WSDL',
+        WS_NFE_RECEPCAO_EVENTO: 'nfe4/services/NFeRecepcaoEvento4?WSDL',
     },
     AMBIENTE_HOMOLOGACAO: {
         'servidor': 'nfeh.sefaz.ce.gov.br',
-        WS_NFE_AUTORIZACAO: 'nfe4/services/NFeAutorizacao4',
-        WS_NFE_RET_AUTORIZACAO: 'nfe4/services/NFeRetAutorizacao4',
-        WS_NFE_INUTILIZACAO: 'nfe4/services/NFeInutilizacao4',
-        WS_NFE_CONSULTA: 'nfe4/services/NFeConsultaProtocolo4',
-        WS_NFE_SITUACAO: 'nfe4/services/nfe4/services/NFeStatusServico4',
-        WS_NFE_CADASTRO: 'nfe4/services/CadConsultaCadastro4',
-        WS_NFE_RECEPCAO_EVENTO: 'nfe4/services/NFeRecepcaoEvento4',
+        WS_NFE_AUTORIZACAO: 'nfe4/services/NFeAutorizacao4?WSDL',
+        WS_NFE_RET_AUTORIZACAO: 'nfe4/services/NFeRetAutorizacao4?WSDL',
+        WS_NFE_INUTILIZACAO: 'nfe4/services/NFeInutilizacao4?WSDL',
+        WS_NFE_CONSULTA: 'nfe4/services/NFeConsultaProtocolo4?WSDL',
+        WS_NFE_SITUACAO: 'nfe4/services/NFeStatusServico4?WSDL',
+        WS_NFE_CADASTRO: 'nfe4/services/CadConsultaCadastro4?WSDL',
+        WS_NFE_RECEPCAO_EVENTO: 'nfe4/services/NFeRecepcaoEvento4?WSDL',
     }
 }
 
