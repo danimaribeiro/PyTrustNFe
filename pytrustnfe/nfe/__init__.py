@@ -38,26 +38,6 @@ def _generate_nfe_id(**kwargs):
         item['infNFe']['ide']['cDV'] = chave_nfe[len(chave_nfe) - 1:]
 
 
-def _add_required_node(elemTree):
-    ns = elemTree.nsmap
-    if None in ns:
-        ns['ns'] = ns[None]
-        ns.pop(None)
-
-    prods = elemTree.findall('ns:NFe/ns:infNFe/ns:det/ns:prod', namespaces=ns)
-    for prod in prods:
-        element = prod.find('ns:cEAN', namespaces=ns)
-        if element is None:
-            cEan = etree.Element('cEAN')
-            prod.insert(1, cEan)
-        element = prod.find('ns:cEANTrib', namespaces=ns)
-        if element is None:
-            cEANTrib = etree.Element('cEANTrib')
-            vProd = prod.find('ns:vProd', namespaces=ns)
-            prod.insert(prod.index(vProd) + 1, cEANTrib)
-    return elemTree
-
-
 def _add_qrCode(xml, **kwargs):
     xml = etree.fromstring(xml)
     inf_nfe = kwargs['NFes'][0]['infNFe']
@@ -114,11 +94,6 @@ def _render(certificado, method, sign, **kwargs):
     modelo = modelo.text if modelo is not None else '55'
 
     if sign:
-        # Caso for autorização temos que adicionar algumas tags tipo
-        # cEan, cEANTrib porque o governo sempre complica e não segue padrão
-        if method == 'NfeAutorizacao':
-            xmlElem_send = _add_required_node(xmlElem_send)
-
         signer = Assinatura(certificado.pfx, certificado.password)
         if method == 'NfeInutilizacao':
             xml_send = signer.assina_xml(xmlElem_send, kwargs['obj']['id'])
@@ -158,7 +133,8 @@ def _send(certificado, method, **kwargs):
     client = Client(base_url, transport=transport)
 
     port = next(iter(client.wsdl.port_types))
-    first_operation = next(iter(client.wsdl.port_types[port].operations))
+    first_operation = [x for x in iter(
+        client.wsdl.port_types[port].operations) if "Zip" not in x][0]
     with client.settings(raw_response=True):
         response = client.service[first_operation](xml)
         response, obj = sanitize_response(response.text)
