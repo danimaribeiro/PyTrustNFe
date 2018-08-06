@@ -128,10 +128,11 @@ class danfe(object):
         self.nBottom = 8
         self.nlin = self.nTop
         self.logo = logo
-        self.oFrete = {'0': '0 - Emitente',
-                       '1': '1 - Destinatário',
-                       '2': '2 - Terceiros',
-                       '9': '9 - Sem Frete'}
+        self.oFrete = {
+            '0': '0 - Emitente',
+            '1': '1 - Destinatário',
+            '2': '2 - Terceiros',
+            '9': '9 - Sem Frete'}
 
         self.oPDF_IO = BytesIO()
         if orientation == 'landscape':
