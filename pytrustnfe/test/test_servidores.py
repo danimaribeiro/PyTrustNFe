@@ -7,22 +7,21 @@ Created on Jun 14, 2015
 import unittest
 from pytrustnfe.Servidores import localizar_url, localizar_qrcode
 
-url_ba = 'https://nfe.sefaz.ba.gov.br/webservices/NfeAutorizacao/NfeAutoriza\
-cao.asmx'
+url_ba = 'https://nfe.sefaz.ba.gov.br/webservices/NFeAutorizacao4/NFeAutoriza\
+cao4.asmx?wsdl'
 
-url_sp = 'https://nfe.fazenda.sp.gov.br/ws/nfeautorizacao.asmx'
+url_sp = 'https://nfe.fazenda.sp.gov.br/ws/nfeautorizacao4.asmx?wsdl'
 
 url_qrcode_homologacao_sp = 'https://homologacao.nfce.fazenda.sp.gov.br/NFCEConsultaPublica/Paginas/ConstultaQRCode.aspx'
 
-url_sc = 'https://nfe.svrs.rs.gov.br/ws/NfeAutorizacao/NfeAutorizacao.asmx'
+url_sc = 'https://nfe.svrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao4.asmx?wsdl'
 
 url_rs = 'https://nfe.sefazrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao.asmx'
 
 url_cad_rs = 'https://cad.sefazrs.rs.gov.br/ws/cadconsultacadastro/cadcon\
 sultacadastro2.asmx'
 
-url_cad_sc = 'https://cad.svrs.rs.gov.br/ws/CadConsultaCadastro/CadConsult\
-aCadastro2.asmx'
+url_cad_sc = 'https://cad.svrs.rs.gov.br/ws/cadconsultacadastro/cadconsultacadastro2.asmx?wsdl'
 
 
 class test_servidores(unittest.TestCase):
