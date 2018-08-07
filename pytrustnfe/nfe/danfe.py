@@ -156,9 +156,9 @@ class danfe(object):
                     infAdProd = item.find(
                         ".//{http://www.portalfiscal.inf.br/nfe}infAdProd")
 
-                    list_ = wrap(tagtext(oNode=el_prod, cTag='xProd'), 56)
+                    list_ = wrap(tagtext(oNode=el_prod, cTag='xProd'), 50)
                     if infAdProd is not None:
-                        list_.extend(wrap(infAdProd.text, 56))
+                        list_.extend(wrap(infAdProd.text, 50))
                     list_desc.append(list_)
 
                     list_cProd = wrap(tagtext(oNode=el_prod, cTag='cProd'), 14)
@@ -661,8 +661,8 @@ obsCont[@xCampo='NomeVendedor']")
 
         self.canvas.setFont('NimbusSanL-Regu', 5.5)
         # Colunas
-        self.vline(self.nLeft + 12, self.nlin + 2, nH)
-        self.stringcenter(self.nLeft + 5.5, self.nlin + 5.5, 'CÓDIGO')
+        self.vline(self.nLeft + 15, self.nlin + 2, nH)
+        self.stringcenter(self.nLeft + 7.5, self.nlin + 5.5, 'CÓDIGO')
         self.vline(nMr - 7, self.nlin + 2, nH)
         self.stringcenter(nMr - 3.5, self.nlin + 4.5, 'ALÍQ')
         self.stringcenter(nMr - 3.5, self.nlin + 6.5, 'IPI')
@@ -750,7 +750,7 @@ obsCont[@xCampo='NomeVendedor']")
             # Descrição Item
             line_desc = nLin
             for des in list_desc[id]:
-                self.string(self.nLeft + 12.5, line_desc, des)
+                self.string(self.nLeft + 15.5, line_desc, des)
                 line_desc += nStep
 
             nLin = max(line_cod, line_desc)
