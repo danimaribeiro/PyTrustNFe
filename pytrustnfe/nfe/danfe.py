@@ -128,10 +128,13 @@ class danfe(object):
         self.nBottom = 8
         self.nlin = self.nTop
         self.logo = logo
-        self.oFrete = {'0': '0 - Emitente',
-                       '1': '1 - Destinatário',
-                       '2': '2 - Terceiros',
-                       '9': '9 - Sem Frete'}
+        self.oFrete = {
+            '0': '0 - Contratação por conta do Remetente (CIF)',
+            '1': '1 - Contratação por conta do Destinatário (FOB)',
+            '2': '2 - Contratação por conta de Terceiros',
+            '3': '3 - Transporte Próprio por conta do Remetente',
+            '4': '4 - Transporte Próprio por conta do Destinatário',
+            '9': '9 - Sem Ocorrência de Transporte'}
 
         self.oPDF_IO = BytesIO()
         if orientation == 'landscape':
@@ -596,25 +599,26 @@ obsCont[@xCampo='NomeVendedor']")
                   self.width - self.nLeft - self.nRight, 20)
         self.hline(self.nLeft, self.nlin + 8.6, self.width - self.nLeft)
         self.hline(self.nLeft, self.nlin + 15.2, self.width - self.nLeft)
-        self.vline(nMr - 40, self.nlin + 2, 13.2)
-        self.vline(nMr - 49, self.nlin + 2, 20)
-        self.vline(nMr - 92, self.nlin + 2, 6.6)
-        self.vline(nMr - 120, self.nlin + 2, 6.6)
-        self.vline(nMr - 75, self.nlin + 2, 6.6)
+        self.vline(nMr - 26, self.nlin + 2, 13.2)
+        self.vline(nMr - 33, self.nlin + 2, 13.2)
+        self.vline(nMr - 67, self.nlin + 2, 6.6)
+        self.vline(nMr - 123, self.nlin + 2, 6.6)
+        self.vline(nMr - 53, self.nlin + 2, 6.6)
         self.vline(nMr - 26, self.nlin + 15.2, 6.6)
+        self.vline(nMr - 49, self.nlin + 15.2, 6.6)
         self.vline(nMr - 102, self.nlin + 8.6, 6.6)
         self.vline(nMr - 85, self.nlin + 15.2, 6.6)
         self.vline(nMr - 121, self.nlin + 15.2, 6.6)
         self.vline(nMr - 160, self.nlin + 15.2, 6.6)
         # Labels/Fields
-        self.string(nMr - 39, self.nlin + 3.8, 'CNPJ/CPF')
-        self.string(nMr - 74, self.nlin + 3.8, 'PLACA DO VEÍCULO')
-        self.string(nMr - 91, self.nlin + 3.8, 'CÓDIGO ANTT')
-        self.string(nMr - 119, self.nlin + 3.8, 'FRETE POR CONTA')
+        self.string(nMr - 25, self.nlin + 3.8, 'CNPJ/CPF')
+        self.string(nMr - 52, self.nlin + 3.8, 'PLACA DO VEÍCULO')
+        self.string(nMr - 66, self.nlin + 3.8, 'CÓDIGO ANTT')
+        self.string(nMr - 122, self.nlin + 3.8, 'FRETE POR CONTA')
         self.string(self.nLeft + 1, self.nlin + 3.8, 'RAZÃO SOCIAL')
-        self.string(nMr - 48, self.nlin + 3.8, 'UF')
-        self.string(nMr - 39, self.nlin + 10.3, 'INSCRIÇÃO ESTADUAL')
-        self.string(nMr - 48, self.nlin + 10.3, 'UF')
+        self.string(nMr - 32, self.nlin + 3.8, 'UF')
+        self.string(nMr - 25, self.nlin + 10.3, 'INSCRIÇÃO ESTADUAL')
+        self.string(nMr - 32, self.nlin + 10.3, 'UF')
         self.string(nMr - 101, self.nlin + 10.3, 'MUNICÍPIO')
         self.string(self.nLeft + 1, self.nlin + 10.3, 'ENDEREÇO')
         self.string(nMr - 48, self.nlin + 17, 'PESO BRUTO')
@@ -624,26 +628,27 @@ obsCont[@xCampo='NomeVendedor']")
         self.string(nMr - 159, self.nlin + 17, 'ESPÉCIE')
         self.string(self.nLeft + 1, self.nlin + 17, 'QUANTIDADE')
         # Conteúdo campos
-        self.canvas.setFont('NimbusSanL-Regu', 8)
+        self.canvas.setFont('NimbusSanL-Regu', 7)
         self.string(self.nLeft + 1, self.nlin + 7.7,
-                    tagtext(oNode=el_transp, cTag='xNome')[:40])
-        self.string(self.nLeft + 71, self.nlin + 7.7,
+                    tagtext(oNode=el_transp, cTag='xNome')[:42])
+        self.string(self.nLeft + 68, self.nlin + 7.7,
                     self.oFrete[tagtext(oNode=el_transp, cTag='modFrete')])
-        self.string(self.nLeft + 99, self.nlin + 7.7,
+        self.string(self.nLeft + 122, self.nlin + 7.7,
                     tagtext(oNode=el_transp, cTag='RNTC'))
-        self.string(self.nLeft + 116, self.nlin + 7.7,
+        self.string(self.nLeft + 136, self.nlin + 7.7,
                     tagtext(oNode=el_transp, cTag='placa'))
-        self.string(self.nLeft + 142, self.nlin + 7.7,
+        self.string(self.nLeft + 157, self.nlin + 7.7,
                     tagtext(oNode=veic_transp, cTag='UF'))
-        self.string(nMr - 39, self.nlin + 7.7,
+        self.string(nMr - 25, self.nlin + 7.7,
                     format_cnpj_cpf(tagtext(oNode=el_transp, cTag='CNPJ')))
+        self.canvas.setFont('NimbusSanL-Regu', 8)
         self.string(self.nLeft + 1, self.nlin + 14.2,
                     tagtext(oNode=el_transp, cTag='xEnder')[:45])
         self.string(self.nLeft + 89, self.nlin + 14.2,
                     tagtext(oNode=el_transp, cTag='xMun'))
-        self.string(nMr - 48, self.nlin + 14.2,
+        self.string(nMr - 32, self.nlin + 14.2,
                     tagtext(oNode=el_transp, cTag='UF'))
-        self.string(nMr - 39, self.nlin + 14.2,
+        self.string(nMr - 25, self.nlin + 14.2,
                     tagtext(oNode=el_transp, cTag='IE'))
         self.string(self.nLeft + 1, self.nlin + 21.2,
                     tagtext(oNode=el_transp, cTag='qVol'))
