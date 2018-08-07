@@ -661,8 +661,8 @@ obsCont[@xCampo='NomeVendedor']")
 
         self.canvas.setFont('NimbusSanL-Regu', 5.5)
         # Colunas
-        self.vline(self.nLeft + 15, self.nlin + 2, nH)
-        self.stringcenter(self.nLeft + 7.5, self.nlin + 5.5, 'CÓDIGO')
+        self.vline(self.nLeft + 12, self.nlin + 2, nH)
+        self.stringcenter(self.nLeft + 5.5, self.nlin + 5.5, 'CÓDIGO')
         self.vline(nMr - 7, self.nlin + 2, nH)
         self.stringcenter(nMr - 3.5, self.nlin + 4.5, 'ALÍQ')
         self.stringcenter(nMr - 3.5, self.nlin + 6.5, 'IPI')
@@ -749,14 +749,8 @@ obsCont[@xCampo='NomeVendedor']")
 
             # Descrição Item
             line_desc = nLin
-            espaco_disp = 50
             for des in list_desc[id]:
-                if len(des) > espaco_disp:
-                    self.string(
-                        self.nLeft + 15.5, line_desc, des[:espaco_disp])
-                    des = des[espaco_disp:]
-                    line_desc += nStep
-                self.string(self.nLeft + 15.5, line_desc, des)
+                self.string(self.nLeft + 12.5, line_desc, des)
                 line_desc += nStep
 
             nLin = max(line_cod, line_desc)
