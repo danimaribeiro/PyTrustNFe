@@ -124,6 +124,8 @@ def _send(certificado, method, **kwargs):
         certificado.pfx, certificado.password)
     cert, key = save_cert_key(cert, key)
 
+    print('\nEntrei aqui no send do pytrust!!!\n\n\n\n')
+
     session = Session()
     session.cert = (cert, key)
     session.verify = False
