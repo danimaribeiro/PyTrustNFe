@@ -15,7 +15,7 @@ from pytrustnfe.certificado import extract_cert_and_key_from_pfx, save_cert_key
 
 # Zeep
 from requests import Session
-from zeep import Client
+from zeep import Client, Settings
 from zeep.transports import Transport
 
 
