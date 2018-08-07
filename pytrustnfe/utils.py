@@ -8,15 +8,6 @@ from datetime import date, datetime
 import lxml.etree as ET
 
 
-class CabecalhoSoap(object):
-
-    def __init__(self, **kwargs):
-        self.versao = kwargs.pop('versao', '')
-        self.estado = kwargs.pop('estado', '')
-        self.method = kwargs.pop('method', '')
-        self.soap_action = kwargs.pop('soap_action', '')
-
-
 class ChaveNFe(object):
 
     def __init__(self, **kwargs):
@@ -85,7 +76,7 @@ def _find_node(xml, node):
 
 def gerar_nfeproc(envio, recibo):
     NSMAP = {None: 'http://www.portalfiscal.inf.br/nfe'}
-    root = ET.Element("nfeProc", versao="3.10", nsmap=NSMAP)
+    root = ET.Element("nfeProc", versao="4.00", nsmap=NSMAP)
     parser = ET.XMLParser(encoding='utf-8')
     docEnvio = ET.fromstring(envio.encode('utf-8'), parser=parser)
     docRecibo = ET.fromstring(recibo.encode('utf-8'), parser=parser)

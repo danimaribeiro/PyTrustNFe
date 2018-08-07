@@ -1,4 +1,4 @@
-<inutNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="3.10">
+<inutNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="4.00">
   <infInut Id="{{ obj.id }}">
     <tpAmb>{{ obj.ambiente }}</tpAmb>
     <xServ>INUTILIZAR</xServ>

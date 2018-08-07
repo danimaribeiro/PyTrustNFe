@@ -1,8 +1,8 @@
 <GerarNfseEnvio xmlns="http://www.abrasf.org.br/nfse.xsd">
-    <LoteRps Id="lote{{ nfse.numero_lote }}">
-        <NumeroLote>{{ nfse.numero_lote }}</NumeroLote>
-        <Cnpj>{{ nfse.cnpj_prestador }}</Cnpj>
-        <InscricaoMunicipal>{{ nfse.inscricao_municipal }}</InscricaoMunicipal>
+    <LoteRps Id="lote{{ rps.numero_lote }}" versao="1.00">
+        <NumeroLote>{{ rps.numero_lote }}</NumeroLote>
+        <Cnpj>{{ rps.prestador.cnpj }}</Cnpj>
+        <InscricaoMunicipal>{{ rps.prestador.inscricao_municipal }}</InscricaoMunicipal>
         <QuantidadeRps>1</QuantidadeRps>
         <ListaRps xmlns="http://www.abrasf.org.br/nfse.xsd">
             {% include 'Rps.xml' %}

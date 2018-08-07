@@ -7,7 +7,7 @@ import os
 from lxml import etree
 
 PATH = os.path.dirname(os.path.abspath(__file__))
-SCHEMA = os.path.join(PATH, 'schemas/enviNFe_v3.10.xsd')
+SCHEMA = os.path.join(PATH, 'schemas/enviNFe_v4.00.xsd')
 
 
 def valida_nfe(xml_nfe):

@@ -8,7 +8,7 @@ import unittest
 import datetime
 from pytrustnfe.utils import date_tostring, datetime_tostring, \
     gerar_chave
-from pytrustnfe.utils import ChaveNFe, CabecalhoSoap
+from pytrustnfe.utils import ChaveNFe
 
 
 class test_utils(unittest.TestCase):
@@ -17,12 +17,6 @@ class test_utils(unittest.TestCase):
         'modelo': '55', 'serie': '012', 'numero': 780,
         'tipo': 0, 'codigo': '26730161'
     }
-
-    def test_cabecalho_soap(self):
-        head = CabecalhoSoap(versao=1, estado='SC', soap_action='Autorizacao')
-        self.assertEqual(head.versao, 1)
-        self.assertEqual(head.estado, 'SC')
-        self.assertEqual(head.soap_action, 'Autorizacao')
 
     def test_date_tostring(self):
         hoje = datetime.date.today()
