@@ -16,10 +16,9 @@ url_qrcode_homologacao_sp = 'https://homologacao.nfce.fazenda.sp.gov.br/NFCECons
 
 url_sc = 'https://nfe.svrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao4.asmx?wsdl'
 
-url_rs = 'https://nfe.sefazrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao.asmx'
+url_rs = 'https://nfe.sefazrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao4.asmx?wsdl'
 
-url_cad_rs = 'https://cad.sefazrs.rs.gov.br/ws/cadconsultacadastro/cadcon\
-sultacadastro2.asmx'
+url_cad_rs = 'https://cad.sefazrs.rs.gov.br/ws/cadconsultacadastro/cadconsultacadastro4.asmx?wsdl'
 
 url_cad_sc = 'https://cad.svrs.rs.gov.br/ws/cadconsultacadastro/cadconsultacadastro2.asmx?wsdl'
 
