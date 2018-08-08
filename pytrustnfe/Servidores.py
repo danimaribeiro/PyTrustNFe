@@ -167,84 +167,62 @@ SVRS = {
     }
 }
 
-# TODO Daqui pra frente tem que revisar
 SVAN = {
     AMBIENTE_PRODUCAO: {
         'servidor': 'www.sefazvirtual.fazenda.gov.br',
-        WS_NFE_RECEPCAO_EVENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
-        WS_NFE_AUTORIZACAO: 'NfeAutorizacao/NfeAutorizacao.asmx',
-        WS_NFE_RET_AUTORIZACAO: 'NfeRetAutorizacao/NfeRetAutorizacao.asmx',
-        WS_NFE_INUTILIZACAO: 'NfeInutilizacao2/NfeInutilizacao2.asmx',
-        WS_NFE_CONSULTA: 'NfeConsulta2/NfeConsulta2.asmx',
-        WS_NFE_SITUACAO: 'NfeStatusServico2/NfeStatusServico2.asmx',
+        WS_NFE_INUTILIZACAO: 'NFeInutilizacao4/NFeInutilizacao4.asmx?wsdl',
+        WS_NFE_CONSULTA: 'NFeConsultaProtocolo4/NFeConsultaProtocolo4.asmx?wsdl',   # noqa
+        WS_NFE_SITUACAO: 'NFeStatusServico4/NFeStatusServico4.asmx?wsdl',
+        WS_NFE_RECEPCAO_EVENTO: 'NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx?wsdl',  # noqa
+        WS_NFE_AUTORIZACAO: 'NFeAutorizacao4/NFeAutorizacao4.asmx?wsdl',
+        WS_NFE_RET_AUTORIZACAO: 'NFeRetAutorizacao4/NFeRetAutorizacao4.asmx?wsdl',  # noqa
     },
     AMBIENTE_HOMOLOGACAO: {
         'servidor': 'hom.sefazvirtual.fazenda.gov.br',
-        WS_NFE_RECEPCAO_EVENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
-        WS_NFE_AUTORIZACAO: 'NfeAutorizacao/NfeAutorizacao.asmx',
-        WS_NFE_RET_AUTORIZACAO: 'NfeRetAutorizacao/NfeRetAutorizacao.asmx',
-        WS_NFE_INUTILIZACAO: 'NfeInutilizacao2/NfeInutilizacao2.asmx',
-        WS_NFE_CONSULTA: 'NfeConsulta2/NfeConsulta2.asmx',
-        WS_NFE_SITUACAO: 'NfeStatusServico2/NfeStatusServico2.asmx',
-    }
-}
-
-SCAN = {
-    AMBIENTE_PRODUCAO: {
-        'servidor': 'www.scan.fazenda.gov.br',
-        WS_NFE_RECEPCAO_EVENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
-        WS_NFE_AUTORIZACAO: 'NfeAutorizacao/NfeAutorizacao.asmx',
-        WS_NFE_RET_AUTORIZACAO: 'NfeRetAutorizacao/NfeRetAutorizacao.asmx',
-        WS_NFE_INUTILIZACAO: 'NfeInutilizacao2/NfeInutilizacao2.asmx',
-        WS_NFE_CONSULTA: 'NfeConsulta2/NfeConsulta2.asmx',
-        WS_NFE_SITUACAO: 'NfeStatusServico2/NfeStatusServico2.asmx'
-    },
-    AMBIENTE_HOMOLOGACAO: {
-        'servidor': 'hom.nfe.fazenda.gov.br',
-        WS_NFE_RECEPCAO_EVENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
-        WS_NFE_AUTORIZACAO: 'NfeAutorizacao/NfeAutorizacao.asmx',
-        WS_NFE_RET_AUTORIZACAO: 'NfeRetAutorizacao/NfeRetAutorizacao.asmx',
-        WS_NFE_INUTILIZACAO: 'NfeInutilizacao2/NfeInutilizacao2.asmx',
-        WS_NFE_CONSULTA: 'NfeConsulta2/NfeConsulta2.asmx',
-        WS_NFE_SITUACAO: 'NfeStatusServico2/NfeStatusServico2.asmx'
+        WS_NFE_INUTILIZACAO: 'NFeInutilizacao4/NFeInutilizacao4.asmx?wsdl',
+        WS_NFE_CONSULTA: 'NFeConsultaProtocolo4/NFeConsultaProtocolo4.asmx?wsdl',  # noqa
+        WS_NFE_SITUACAO: 'NFeStatusServico4/NFeStatusServico4.asmx?wsdl',
+        WS_NFE_RECEPCAO_EVENTO: 'NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx?wsdl',  # noqa
+        WS_NFE_AUTORIZACAO: 'NFeAutorizacao4/NFeAutorizacao4.asmx?wsdl',
+        WS_NFE_RET_AUTORIZACAO: 'NFeRetAutorizacao4/NFeRetAutorizacao4.asmx?wsdl',  # noqa
     }
 }
 
 SVC_AN = {
     AMBIENTE_PRODUCAO: {
         'servidor': 'www.svc.fazenda.gov.br',
-        WS_NFE_RECEPCAO_EVENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
-        WS_NFE_AUTORIZACAO: 'NfeAutorizacao/NfeAutorizacao.asmx',
-        WS_NFE_RET_AUTORIZACAO: 'NfeRetAutorizacao/NfeRetAutorizacao.asmx',
-        WS_NFE_CONSULTA: 'NfeConsulta2/NfeConsulta2.asmx',
-        WS_NFE_SITUACAO: 'NfeStatusServico2/NfeStatusServico2.asmx'
+        WS_NFE_CONSULTA: 'NFeConsultaProtocolo4/NFeConsultaProtocolo4.asmx?wsdl',  # noqa
+        WS_NFE_SITUACAO: 'NFeStatusServico4/NFeStatusServico4.asmx?wsdl',
+        WS_NFE_RECEPCAO_EVENTO: 'NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx?wsdl',  # noqa
+        WS_NFE_AUTORIZACAO: 'NFeAutorizacao4/NFeAutorizacao4.asmx?wsdl',
+        WS_NFE_RET_AUTORIZACAO: 'NFeRetAutorizacao4/NFeRetAutorizacao4.asmx?wsdl',  # noqa
     },
     AMBIENTE_HOMOLOGACAO: {
-        'servidor': 'hom.nfe.fazenda.gov.br',
-        WS_NFE_RECEPCAO_EVENTO: 'RecepcaoEvento/RecepcaoEvento.asmx',
-        WS_NFE_AUTORIZACAO: 'NfeAutorizacao/NfeAutorizacao.asmx',
-        WS_NFE_RET_AUTORIZACAO: 'NfeRetAutorizacao/NfeRetAutorizacao.asmx',
-        WS_NFE_CONSULTA: 'NfeConsulta2/NfeConsulta2.asmx',
-        WS_NFE_SITUACAO: 'NfeStatusServico2/NfeStatusServico2.asmx'
+        'servidor': 'hom.svc.fazenda.gov.br',
+        WS_NFE_CONSULTA: 'NFeConsultaProtocolo4/NFeConsultaProtocolo4.asmx?wsdl',  # noqa
+        WS_NFE_SITUACAO: 'NFeStatusServico4/NFeStatusServico4.asmx?wsdl',
+        WS_NFE_RECEPCAO_EVENTO: 'NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx?wsdl',  # noqa
+        WS_NFE_AUTORIZACAO: 'NFeAutorizacao4/NFeAutorizacao4.asmx?wsdl',
+        WS_NFE_RET_AUTORIZACAO: 'NFeRetAutorizacao4/NFeRetAutorizacao4.asmx?wsdl',  # noqa
     }
 }
 
 SVC_RS = {
     AMBIENTE_PRODUCAO: {
-        'servidor': 'nfe.sefazvirtual.rs.gov.br',
-        WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
-        WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NfeAutorizacao.asmx',
-        WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NfeRetAutorizacao.asmx',
-        WS_NFE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
-        WS_NFE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
+        'servidor': 'nfe.svrs.rs.gov.br',
+        WS_NFE_RECEPCAO_EVENTO: 'ws/NfeConsulta/NfeConsulta4.asmx?wsdl',
+        WS_NFE_AUTORIZACAO: 'ws/NfeStatusServico/NfeStatusServico4.asmx?wsdl',
+        WS_NFE_RET_AUTORIZACAO: 'ws/recepcaoevento/recepcaoevento4.asmx?wsdl',
+        WS_NFE_CONSULTA: 'ws/NfeAutorizacao/NFeAutorizacao4.asmx?wsdl',
+        WS_NFE_SITUACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao4.asmx?wsdl',
     },
     AMBIENTE_HOMOLOGACAO: {
-        'servidor': 'homologacao.nfe.sefazvirtual.rs.gov.br',
-        WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
-        WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NfeAutorizacao.asmx',
-        WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NfeRetAutorizacao.asmx',
-        WS_NFE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
-        WS_NFE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
+        'servidor': 'nfe-homologacao.svrs.rs.gov.br',
+        WS_NFE_CONSULTA: 'ws/NfeConsulta/NfeConsulta4.asmx?wsdl',
+        WS_NFE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico4.asmx?wsdl',
+        WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento4.asmx?wsdl',
+        WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao4.asmx?wsdl',
+        WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao4.asmx?wsdl',  # noqa
     }
 }
 
@@ -253,13 +231,13 @@ AN = {
         'servidor': 'www1.nfe.fazenda.gov.br',
         WS_DFE_DISTRIBUICAO: 'NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx?wsdl',
         WS_DOWNLOAD_NFE: 'NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx?wsdl',
-        WS_NFE_RECEPCAO_EVENTO: 'NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx?wsdl',
+        WS_NFE_RECEPCAO_EVENTO: 'NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx?wsdl',  # noqa
     },
     AMBIENTE_HOMOLOGACAO: {
         'servidor': 'hom.nfe.fazenda.gov.br',
         WS_DFE_DISTRIBUICAO: 'NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx?wsdl',
         WS_DOWNLOAD_NFE: 'NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx?wsdl',
-        WS_NFE_RECEPCAO_EVENTO: 'NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx?Wsdl',
+        WS_NFE_RECEPCAO_EVENTO: 'NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx?Wsdl',  # noqa
     },
 }
 
@@ -267,23 +245,23 @@ UFAM = {
     NFE_MODELO: {
         AMBIENTE_PRODUCAO: {
             'servidor': 'nfe.sefaz.am.gov.br',
-            WS_NFE_RECEPCAO_EVENTO: 'services2/services/RecepcaoEvento',
-            WS_NFE_AUTORIZACAO: 'services2/services/NfeAutorizacao',
-            WS_NFE_RET_AUTORIZACAO: 'services2/services/NfeRetAutorizacao',
-            WS_NFE_INUTILIZACAO: 'services2/services/NfeInutilizacao2',
-            WS_NFE_CONSULTA: 'services2/services/NfeConsulta2',
-            WS_NFE_SITUACAO: 'services2/services/NfeStatusServico2',
-            WS_NFE_CADASTRO: 'services2/services/cadconsultacadastro2',
+            WS_NFE_INUTILIZACAO: 'services2/services/NfeInutilizacao4?wsdl',
+            WS_NFE_CONSULTA: 'services2/services/NfeConsulta4?wsdl',
+            WS_NFE_SITUACAO: 'services2/services/NfeStatusServico4?wsdl',
+            WS_NFE_RECEPCAO_EVENTO: 'services2/services/RecepcaoEvento4?wsdl',
+            WS_NFE_AUTORIZACAO: 'services2/services/NfeAutorizacao4?wsdl',
+            WS_NFE_RET_AUTORIZACAO: 'services2/services/NfeRetAutorizacao4?wsdl',  # noqa
+            WS_NFE_CADASTRO: 'services2/services/cadconsultacadastro2?wsdl',
         },
         AMBIENTE_HOMOLOGACAO: {
             'servidor': 'homnfe.sefaz.am.gov.br',
-            WS_NFE_RECEPCAO_EVENTO: 'services2/services/RecepcaoEvento',
-            WS_NFE_AUTORIZACAO: 'services2/services/NfeAutorizacao',
-            WS_NFE_RET_AUTORIZACAO: 'services2/services/NfeRetAutorizacao',
-            WS_NFE_INUTILIZACAO: 'services2/services/NfeInutilizacao2',
-            WS_NFE_CONSULTA: 'services2/services/NfeConsulta2',
-            WS_NFE_SITUACAO: 'services2/services/NfeStatusServico2',
-            WS_NFE_CADASTRO: 'services2/services/cadconsultacadastro2',
+            WS_NFE_INUTILIZACAO: 'services2/services/NfeInutilizacao4?wsdl',
+            WS_NFE_CONSULTA: 'services2/services/NfeConsulta4?wsdl',
+            WS_NFE_SITUACAO: 'services2/services/NfeStatusServico4?wsdl',
+            WS_NFE_RECEPCAO_EVENTO: 'services2/services/RecepcaoEvento4?wsdl',
+            WS_NFE_AUTORIZACAO: 'services2/services/NfeAutorizacao4?wsdl',
+            WS_NFE_RET_AUTORIZACAO: 'services2/services/NfeRetAutorizacao4?wsdl',  # noqa
+            WS_NFE_CADASTRO: 'services2/services/cadconsultacadastro2?wsdl',
         }
     },
     NFCE_MODELO: {
@@ -313,46 +291,46 @@ UFAM = {
 UFBA = {
     AMBIENTE_PRODUCAO: {
         'servidor': 'nfe.sefaz.ba.gov.br',
-        WS_NFE_INUTILIZACAO: 'webservices/NFeInutilizacao4/NFeInutilizacao4.asmx?wsdl',
-        WS_NFE_CONSULTA: 'webservices/NFeConsultaProtocolo4/NFeConsultaProtocolo4.asmx?wsdl',
-        WS_NFE_SITUACAO: 'webservices/NFeStatusServico4/NFeStatusServico4.asmx?wsdl',
-        WS_NFE_RECEPCAO_EVENTO: 'webservices/NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx?wsdl',
-        WS_NFE_AUTORIZACAO: 'webservices/NFeAutorizacao4/NFeAutorizacao4.asmx?wsdl',
-        WS_NFE_RET_AUTORIZACAO: 'webservices/NFeRetAutorizacao4/NFeRetAutorizacao4.asmx?wsdl',
-        WS_NFE_CADASTRO: 'webservices/CadConsultaCadastro4/CadConsultaCadastro4.asmx?wsdl',
+        WS_NFE_INUTILIZACAO: 'webservices/NFeInutilizacao4/NFeInutilizacao4.asmx?wsdl',  # noqa
+        WS_NFE_CONSULTA: 'webservices/NFeConsultaProtocolo4/NFeConsultaProtocolo4.asmx?wsdl',  # noqa
+        WS_NFE_SITUACAO: 'webservices/NFeStatusServico4/NFeStatusServico4.asmx?wsdl',  # noqa
+        WS_NFE_RECEPCAO_EVENTO: 'webservices/NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx?wsdl',  # noqa
+        WS_NFE_AUTORIZACAO: 'webservices/NFeAutorizacao4/NFeAutorizacao4.asmx?wsdl',  # noqa
+        WS_NFE_RET_AUTORIZACAO: 'webservices/NFeRetAutorizacao4/NFeRetAutorizacao4.asmx?wsdl',  # noqa
+        WS_NFE_CADASTRO: 'webservices/CadConsultaCadastro4/CadConsultaCadastro4.asmx?wsdl',  # noqa
     },
     AMBIENTE_HOMOLOGACAO: {
         'servidor': 'hnfe.sefaz.ba.gov.br',
-        WS_NFE_INUTILIZACAO: 'webservices/NFeInutilizacao4/NFeInutilizacao4.asmx?wsdl',
-        WS_NFE_CONSULTA: 'webservices/NFeConsultaProtocolo4/NFeConsultaProtocolo4.asmx?wsdl',
-        WS_NFE_SITUACAO: 'webservices/NFeStatusServico4/NFeStatusServico4.asmx?wsdl',
-        WS_NFE_RECEPCAO_EVENTO: 'webservices/NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx?wsdl',
-        WS_NFE_AUTORIZACAO: 'webservices/NFeAutorizacao4/NFeAutorizacao4.asmx?wsdl',
-        WS_NFE_RET_AUTORIZACAO: 'webservices/NFeRetAutorizacao4/NFeRetAutorizacao4.asmx?wsdl',
-        WS_NFE_CADASTRO: 'webservices/CadConsultaCadastro4/CadConsultaCadastro4.asmx?wsdl',
+        WS_NFE_INUTILIZACAO: 'webservices/NFeInutilizacao4/NFeInutilizacao4.asmx?wsdl',  # noqa
+        WS_NFE_CONSULTA: 'webservices/NFeConsultaProtocolo4/NFeConsultaProtocolo4.asmx?wsdl',  # noqa
+        WS_NFE_SITUACAO: 'webservices/NFeStatusServico4/NFeStatusServico4.asmx?wsdl',  # noqa
+        WS_NFE_RECEPCAO_EVENTO: 'webservices/NFeRecepcaoEvento4/NFeRecepcaoEvento4.asmx?wsdl',  # noqa
+        WS_NFE_AUTORIZACAO: 'webservices/NFeAutorizacao4/NFeAutorizacao4.asmx?wsdl',  # noqa
+        WS_NFE_RET_AUTORIZACAO: 'webservices/NFeRetAutorizacao4/NFeRetAutorizacao4.asmx?wsdl',  # noqa
+        WS_NFE_CADASTRO: 'webservices/CadConsultaCadastro4/CadConsultaCadastro4.asmx?wsdl',  # noqa
     }
 }
 
 UFCE = {
     AMBIENTE_PRODUCAO: {
         'servidor': 'nfe.sefaz.ce.gov.br',
-        WS_NFE_AUTORIZACAO: 'nfe4/services/NFeAutorizacao4?WSDL',
-        WS_NFE_RET_AUTORIZACAO: 'nfe4/services/NFeRetAutorizacao4?WSDL',
-        WS_NFE_INUTILIZACAO: 'nfe4/services/NFeInutilizacao4?WSDL',
-        WS_NFE_CONSULTA: 'nfe4/services/NFeConsultaProtocolo4?WSDL',
-        WS_NFE_SITUACAO: 'nfe4/services/NFeStatusServico4?WSDL',
-        WS_NFE_CADASTRO: 'nfe4/services/CadConsultaCadastro4?WSDL',
-        WS_NFE_RECEPCAO_EVENTO: 'nfe4/services/NFeRecepcaoEvento4?WSDL',
+        WS_NFE_INUTILIZACAO: 'nfe4/services/NFeInutilizacao4?wsdl',
+        WS_NFE_CONSULTA: 'nfe4/services/NFeConsultaProtocolo4?wsdl',
+        WS_NFE_SITUACAO: 'nfe4/services/NFeStatusServico4?wsdl',
+        WS_NFE_RECEPCAO_EVENTO: 'nfe4/services/NFeRecepcaoEvento4?wsdl',
+        WS_NFE_AUTORIZACAO: 'nfe4/services/NFeAutorizacao4?wsdl',
+        WS_NFE_RET_AUTORIZACAO: 'nfe4/services/NFeRetAutorizacao4?wsdl',
+        WS_NFE_CADASTRO: 'nfe4/services/CadConsultaCadastro4?wsdl',
     },
     AMBIENTE_HOMOLOGACAO: {
         'servidor': 'nfeh.sefaz.ce.gov.br',
-        WS_NFE_AUTORIZACAO: 'nfe4/services/NFeAutorizacao4?WSDL',
-        WS_NFE_RET_AUTORIZACAO: 'nfe4/services/NFeRetAutorizacao4?WSDL',
-        WS_NFE_INUTILIZACAO: 'nfe4/services/NFeInutilizacao4?WSDL',
-        WS_NFE_CONSULTA: 'nfe4/services/NFeConsultaProtocolo4?WSDL',
-        WS_NFE_SITUACAO: 'nfe4/services/NFeStatusServico4?WSDL',
-        WS_NFE_CADASTRO: 'nfe4/services/CadConsultaCadastro4?WSDL',
-        WS_NFE_RECEPCAO_EVENTO: 'nfe4/services/NFeRecepcaoEvento4?WSDL',
+        WS_NFE_INUTILIZACAO: 'nfe4/services/NFeInutilizacao4?wsdl',
+        WS_NFE_CONSULTA: 'nfe4/services/NFeConsultaProtocolo4?wsdl',
+        WS_NFE_SITUACAO: 'nfe4/services/NFeStatusServico4?wsdl',
+        WS_NFE_RECEPCAO_EVENTO: 'nfe4/services/NFeRecepcaoEvento4?wsdl',
+        WS_NFE_AUTORIZACAO: 'nfe4/services/NFeAutorizacao4?wsdl',
+        WS_NFE_RET_AUTORIZACAO: 'nfe4/services/NFeRetAutorizacao4?wsdl',
+        WS_NFE_CADASTRO: 'nfe4/services/CadConsultaCadastro4?wsdl',
     }
 }
 
@@ -384,46 +362,46 @@ UFGO = {
 UFMT = {
     AMBIENTE_PRODUCAO: {
         'servidor': 'nfe.sefaz.mt.gov.br',
-        WS_NFE_AUTORIZACAO: 'nfews/v2/services/NfeAutorizacao',
-        WS_NFE_RET_AUTORIZACAO: 'nfews/v2/services/NfeRetAutorizacao',
-        WS_NFE_INUTILIZACAO: 'nfews/v2/services/NfeInutilizacao2',
-        WS_NFE_CONSULTA: 'nfews/v2/services/NfeConsulta2',
-        WS_NFE_SITUACAO: 'nfews/v2/services/NfeStatusServico2',
-        WS_NFE_CADASTRO: 'nfews/v2/services/CadConsultaCadastro2',
-        WS_NFE_RECEPCAO_EVENTO: 'nfews/v2/services/RecepcaoEvento',
+        WS_NFE_INUTILIZACAO: 'nfews/v2/services/NfeInutilizacao4?wsdl',
+        WS_NFE_CONSULTA: 'nfews/v2/services/NfeConsulta4?wsdl',
+        WS_NFE_SITUACAO: 'nfews/v2/services/NfeStatusServico4?wsdl',
+        WS_NFE_RECEPCAO_EVENTO: 'nfews/v2/services/RecepcaoEvento4?wsdl',
+        WS_NFE_AUTORIZACAO: 'nfews/v2/services/NfeAutorizacao4?wsdl',
+        WS_NFE_RET_AUTORIZACAO: 'nfews/v2/services/NfeRetAutorizacao4?wsdl',
+        WS_NFE_CADASTRO: 'nfews/v2/services/CadConsultaCadastro4?wsdl',
     },
     AMBIENTE_HOMOLOGACAO: {
         'servidor': 'homologacao.sefaz.mt.gov.br',
-        WS_NFE_AUTORIZACAO: 'nfews/v2/services/NfeAutorizacao',
-        WS_NFE_RET_AUTORIZACAO: 'nfews/v2/services/NfeRetAutorizacao',
-        WS_NFE_INUTILIZACAO: 'nfews/v2/services/NfeInutilizacao2',
-        WS_NFE_CONSULTA: 'nfews/v2/services/NfeConsulta2',
-        WS_NFE_SITUACAO: 'nfews/v2/services/NfeStatusServico2',
-        WS_NFE_CADASTRO: 'nfews/v2/services/CadConsultaCadastro2',
-        WS_NFE_RECEPCAO_EVENTO: 'nfews/v2/services/RecepcaoEvento',
+        WS_NFE_INUTILIZACAO: 'nfews/v2/services/NfeInutilizacao4?wsdl',
+        WS_NFE_CONSULTA: 'nfews/v2/services/NfeConsulta4?wsdl',
+        WS_NFE_SITUACAO: 'nfews/v2/services/NfeStatusServico4?wsdl',
+        WS_NFE_RECEPCAO_EVENTO: 'nfews/v2/services/CadConsultaCadastro4?wsdl',
+        WS_NFE_AUTORIZACAO: 'nfews/v2/services/RecepcaoEvento4?wsdl',
+        WS_NFE_RET_AUTORIZACAO: 'nfews/v2/services/NfeRetAutorizacao4?wsdl',
+        WS_NFE_CADASTRO: 'nfews/v2/services/CadConsultaCadastro4?wsdl',
     }
 }
 
 UFMS = {
     AMBIENTE_PRODUCAO: {
-        'servidor': 'nfe.fazenda.ms.gov.br',
-        WS_NFE_RECEPCAO_EVENTO: 'producao/services2/RecepcaoEvento',
-        WS_NFE_AUTORIZACAO: 'producao/services2/NfeAutorizacao',
-        WS_NFE_RET_AUTORIZACAO: 'producao/services2/NfeRetAutorizacao',
-        WS_NFE_CADASTRO: 'producao/services2/CadConsultaCadastro2',
-        WS_NFE_INUTILIZACAO: 'producao/services2/NfeInutilizacao2',
-        WS_NFE_CONSULTA: 'producao/services2/NfeConsulta2',
-        WS_NFE_SITUACAO: 'producao/services2/NfeStatusServico2',
+        'servidor': 'nfe.sefaz.ms.gov.br',
+        WS_NFE_INUTILIZACAO: 'ws/NFeInutilizacao4?wsdl',
+        WS_NFE_CONSULTA: 'ws/NFeConsultaProtocolo4?wsdl',
+        WS_NFE_SITUACAO: 'ws/NFeStatusServico4?wsdl',
+        WS_NFE_RECEPCAO_EVENTO: 'ws/NFeRecepcaoEvento4?wsdl',
+        WS_NFE_AUTORIZACAO: 'ws/NFeAutorizacao4?wsdl',
+        WS_NFE_RET_AUTORIZACAO: 'ws/NFeRetAutorizacao4?wsdl',
+        WS_NFE_CADASTRO: 'ws/CadConsultaCadastro4?wsdl',
     },
     AMBIENTE_HOMOLOGACAO: {
-        'servidor': 'homologacao.nfe.ms.gov.br',
-        WS_NFE_RECEPCAO_EVENTO: 'homologacao/services2/RecepcaoEvento',
-        WS_NFE_AUTORIZACAO: 'homologacao/services2/NfeAutorizacao',
-        WS_NFE_RET_AUTORIZACAO: 'homologacao/services2/NfeRetAutorizacao',
-        WS_NFE_CADASTRO: 'homologacao/services2/CadConsultaCadastro2',
-        WS_NFE_INUTILIZACAO: 'homologacao/services2/NfeInutilizacao2',
-        WS_NFE_CONSULTA: 'homologacao/services2/NfeConsulta2',
-        WS_NFE_SITUACAO: 'homologacao/services2/NfeStatusServico2',
+        'servidor': 'hom.nfe.sefaz.ms.gov.br',
+        WS_NFE_INUTILIZACAO: 'ws/NFeInutilizacao4?wsdl',
+        WS_NFE_CONSULTA: 'ws/NFeConsultaProtocolo4?wsdl',
+        WS_NFE_SITUACAO: 'ws/NFeStatusServico4?wsdl',
+        WS_NFE_RECEPCAO_EVENTO: 'ws/NFeRecepcaoEvento4?wsdl',
+        WS_NFE_AUTORIZACAO: 'ws/NFeAutorizacao4?wsdl',
+        WS_NFE_RET_AUTORIZACAO: 'ws/NFeRetAutorizacao4?wsdl',
+        WS_NFE_CADASTRO: 'ws/CadConsultaCadastro4?wsdl',
     }
 }
 
@@ -453,47 +431,47 @@ UFMG = {
 
 UFPR = {
     AMBIENTE_PRODUCAO: {
-        'servidor': 'nfe.fazenda.pr.gov.br',
-        WS_NFE_AUTORIZACAO: 'nfe/NFeAutorizacao3',
-        WS_NFE_RET_AUTORIZACAO: 'nfe/NFeRetAutorizacao3',
-        WS_NFE_INUTILIZACAO: 'nfe/NFeInutilizacao3',
-        WS_NFE_CONSULTA: 'nfe/NFeConsulta3',
-        WS_NFE_SITUACAO: 'nfe/NFeStatusServico3',
-        WS_NFE_CADASTRO: 'nfe/CadConsultaCadastro2',
-        WS_NFE_RECEPCAO_EVENTO: 'nfe/NFeRecepcaoEvento',
+        'servidor': 'nfe.sefa.pr.gov.br',
+        WS_NFE_INUTILIZACAO: 'nfe/NFeInutilizacao4?wsdl',
+        WS_NFE_CONSULTA: 'nfe/NFeConsultaProtocolo4?wsdl',
+        WS_NFE_SITUACAO: 'nfe/NFeStatusServico4?wsdl',
+        WS_NFE_RECEPCAO_EVENTO: 'nfe/NFeRecepcaoEvento4?wsdl',
+        WS_NFE_AUTORIZACAO: 'nfe/NFeAutorizacao4?wsdl',
+        WS_NFE_RET_AUTORIZACAO: 'nfe/NFeRetAutorizacao4?wsdl ',
+        WS_NFE_CADASTRO: 'nfe/CadConsultaCadastro4?wsdl',
     },
     AMBIENTE_HOMOLOGACAO: {
-        'servidor': 'homologacao.nfe.fazenda.pr.gov.br',
-        WS_NFE_AUTORIZACAO: 'nfe/NFeAutorizacao3',
-        WS_NFE_RET_AUTORIZACAO: 'nfe/NFeRetAutorizacao3',
-        WS_NFE_INUTILIZACAO: 'nfe/NFeInutilizacao3',
-        WS_NFE_CONSULTA: 'nfe/NFeConsulta3',
-        WS_NFE_SITUACAO: 'nfe/NFeStatusServico3',
-        WS_NFE_CADASTRO: 'nfe/CadConsultaCadastro2',
-        WS_NFE_RECEPCAO_EVENTO: 'nfe/NFeRecepcaoEvento',
+        'servidor': 'homologacao.nfe.sefa.pr.gov.br',
+        WS_NFE_INUTILIZACAO: 'nfe/NFeInutilizacao4?wsdl',
+        WS_NFE_CONSULTA: 'nfe/NFeConsultaProtocolo4?wsdl',
+        WS_NFE_SITUACAO: 'nfe/NFeStatusServico4?wsdl',
+        WS_NFE_RECEPCAO_EVENTO: 'nfe/NFeRecepcaoEvento4?wsdl',
+        WS_NFE_AUTORIZACAO: 'nfe/NFeAutorizacao4?wsdl',
+        WS_NFE_RET_AUTORIZACAO: 'nfe/NFeRetAutorizacao4?wsdl',
+        WS_NFE_CADASTRO: 'nfe/CadConsultaCadastro4?wsdl',
     }
 }
 
 UFPE = {
     AMBIENTE_PRODUCAO: {
         'servidor': 'nfe.sefaz.pe.gov.br',
-        WS_NFE_RECEPCAO_EVENTO: 'nfe-service/services/RecepcaoEvento',
-        WS_NFE_AUTORIZACAO: 'nfe-service/services/NfeAutorizacao',
-        WS_NFE_RET_AUTORIZACAO: 'nfe-service/services/NfeRetAutorizacao',
-        WS_NFE_INUTILIZACAO: 'nfe-service/services/NfeInutilizacao2',
-        WS_NFE_CONSULTA: 'nfe-service/services/NfeConsulta2',
-        WS_NFE_SITUACAO: 'nfe-service/services/NfeStatusServico2',
-        WS_NFE_CADASTRO: 'nfe-service/services/CadConsultaCadastro2',
+        WS_NFE_INUTILIZACAO: 'nfe-service/services/NFeInutilizacao4?wsdl',
+        WS_NFE_CONSULTA: 'nfe-service/services/NFeConsultaProtocolo4?wsdl',
+        WS_NFE_SITUACAO: 'nfe-service/services/NFeStatusServico4?wsdl',
+        WS_NFE_RECEPCAO_EVENTO: 'nfe-service/services/NFeRecepcaoEvento4?wsdl',
+        WS_NFE_AUTORIZACAO: 'nfe-service/services/NFeAutorizacao4?Wsdl',
+        WS_NFE_RET_AUTORIZACAO: 'nfe-service/services/NFeRetAutorizacao4?wsdl',
+        WS_NFE_CADASTRO: 'nfe-service/services/CadConsultaCadastro2?wsdl',
     },
     AMBIENTE_HOMOLOGACAO: {
         'servidor': 'nfehomolog.sefaz.pe.gov.br',
-        WS_NFE_RECEPCAO_EVENTO: 'nfe-service/services/RecepcaoEvento',
-        WS_NFE_AUTORIZACAO: 'nfe-service/services/NfeAutorizacao',
-        WS_NFE_RET_AUTORIZACAO: 'nfe-service/services/NfeRetAutorizacao',
-        WS_NFE_INUTILIZACAO: 'nfe-service/services/NfeInutilizacao2',
-        WS_NFE_CONSULTA: 'nfe-service/services/NfeConsulta2',
-        WS_NFE_SITUACAO: 'nfe-service/services/NfeStatusServico2',
-        WS_NFE_CADASTRO: 'nfe-service/services/CadConsultaCadastro2',
+        WS_NFE_INUTILIZACAO: 'nfe-service/services/NFeInutilizacao4?wsdl',
+        WS_NFE_CONSULTA: 'nfe-service/services/NFeConsultaProtocolo4?wsdl',
+        WS_NFE_SITUACAO: 'nfe-service/services/NFeStatusServico4?wsdl',
+        WS_NFE_RECEPCAO_EVENTO: 'nfe-service/services/NFeRecepcaoEvento4?wsdl',
+        WS_NFE_AUTORIZACAO: 'nfe-service/services/NFeAutorizacao4?wsdl',
+        WS_NFE_RET_AUTORIZACAO: 'nfe-service/services/NFeRetAutorizacao4?wsdl',
+        WS_NFE_CADASTRO: 'nfe-service/services/CadConsultaCadastro2?wsdl',
     }
 }
 
@@ -502,23 +480,23 @@ UFRS = {
     NFE_MODELO: {
         AMBIENTE_PRODUCAO: {
             'servidor': 'nfe.sefazrs.rs.gov.br',
-            WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
-            WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao.asmx',
-            WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx',
-            WS_NFE_CADASTRO: 'ws/cadconsultacadastro/cadconsultacadastro2.asmx',
-            WS_NFE_INUTILIZACAO: 'ws/NfeInutilizacao/NfeInutilizacao2.asmx',
-            WS_NFE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
-            WS_NFE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
+            WS_NFE_INUTILIZACAO: 'ws/nfeinutilizacao/nfeinutilizacao4.asmx?wsdl',  # noqa
+            WS_NFE_CONSULTA: 'ws/NfeConsulta/NfeConsulta4.asmx?wsdl',
+            WS_NFE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico4.asmx?wsdl',
+            WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento4.asmx?wsdl',  # noqa
+            WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao4.asmx?wsdl',
+            WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao4.asmx?wsdl',  # noqa
+            WS_NFE_CADASTRO: 'ws/cadconsultacadastro/cadconsultacadastro4.asmx?wsdl',  # noqa
         },
         AMBIENTE_HOMOLOGACAO: {
             'servidor': 'nfe-homologacao.sefazrs.rs.gov.br',
-            WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
-            WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao.asmx',
-            WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx',
-            WS_NFE_CADASTRO: 'ws/cadconsultacadastro/cadconsultacadastro2.asmx',
-            WS_NFE_INUTILIZACAO: 'ws/NfeInutilizacao/NfeInutilizacao2.asmx',
-            WS_NFE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
-            WS_NFE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
+            WS_NFE_INUTILIZACAO: 'ws/nfeinutilizacao/nfeinutilizacao4.asmx?wsdl',  # noqa
+            WS_NFE_CONSULTA: 'ws/NfeConsulta/NfeConsulta4.asmx?wsdl',
+            WS_NFE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico4.asmx?wsdl',
+            WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento4.asmx?wsdl',  #noqa
+            WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao4.asmx?wsdl',
+            WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao4.asmx?wsdl',  # noqa
+            WS_NFE_CADASTRO: 'ws/cadconsultacadastro/cadconsultacadastro4.asmx?wsdl',  # noqa
         }
     },
     NFCE_MODELO: {
@@ -526,8 +504,8 @@ UFRS = {
             'servidor': 'nfce.sefazrs.rs.gov.br',
             WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
             WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao.asmx',
-            WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx',
-            WS_NFE_CADASTRO: 'ws/cadconsultacadastro/cadconsultacadastro2.asmx',
+            WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx',  # noqa
+            WS_NFE_CADASTRO: 'ws/cadconsultacadastro/cadconsultacadastro2.asmx',   # noqa
             WS_NFE_INUTILIZACAO: 'ws/NfeInutilizacao/NfeInutilizacao2.asmx',
             WS_NFE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
             WS_NFE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
@@ -537,8 +515,8 @@ UFRS = {
             'servidor': 'nfce-homologacao.sefazrs.rs.gov.br',
             WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento.asmx',
             WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao.asmx',
-            WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx',
-            WS_NFE_CADASTRO: 'ws/cadconsultacadastro/cadconsultacadastro2.asmx',
+            WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx',  # noqa
+            WS_NFE_CADASTRO: 'ws/cadconsultacadastro/cadconsultacadastro2.asmx',   # noqa
             WS_NFE_INUTILIZACAO: 'ws/NfeInutilizacao/NfeInutilizacao2.asmx',
             WS_NFE_CONSULTA: 'ws/NfeConsulta/NfeConsulta2.asmx',
             WS_NFE_SITUACAO: 'ws/NfeStatusServico/NfeStatusServico2.asmx',
