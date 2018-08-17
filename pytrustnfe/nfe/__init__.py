@@ -135,10 +135,9 @@ def _send(certificado, method, **kwargs):
     port = next(iter(client.wsdl.port_types))
     first_operation = next(iter(client.wsdl.port_types[port].operations))
     
-    if kwargs['estado'] == '41':
-        namespaceNFe = xml.find(".//{http://www.portalfiscal.inf.br/nfe}NFe")
-        if namespaceNFe is not None:
-            namespaceNFe.set('xmlns', 'http://www.portalfiscal.inf.br/nfe')
+    namespaceNFe = xml.find(".//{http://www.portalfiscal.inf.br/nfe}NFe")
+    if namespaceNFe is not None:
+        namespaceNFe.set('xmlns', 'http://www.portalfiscal.inf.br/nfe')
             
     with client.settings(raw_response=True):
         response = client.service[first_operation](xml)
