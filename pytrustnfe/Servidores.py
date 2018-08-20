@@ -375,8 +375,8 @@ UFMT = {
         WS_NFE_INUTILIZACAO: 'nfews/v2/services/NfeInutilizacao4?wsdl',
         WS_NFE_CONSULTA: 'nfews/v2/services/NfeConsulta4?wsdl',
         WS_NFE_SITUACAO: 'nfews/v2/services/NfeStatusServico4?wsdl',
-        WS_NFE_RECEPCAO_EVENTO: 'nfews/v2/services/CadConsultaCadastro4?wsdl',
-        WS_NFE_AUTORIZACAO: 'nfews/v2/services/RecepcaoEvento4?wsdl',
+        WS_NFE_RECEPCAO_EVENTO: 'nfews/v2/services/RecepcaoEvento4?wsdl',
+        WS_NFE_AUTORIZACAO: 'nfews/v2/services/NfeAutorizacao4?wsdl',
         WS_NFE_RET_AUTORIZACAO: 'nfews/v2/services/NfeRetAutorizacao4?wsdl',
         WS_NFE_CADASTRO: 'nfews/v2/services/CadConsultaCadastro4?wsdl',
     }
