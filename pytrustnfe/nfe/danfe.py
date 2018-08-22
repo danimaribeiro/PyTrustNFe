@@ -461,13 +461,13 @@ class danfe(object):
                     'FATURA         VENCIMENTO            VALOR')
 
         # Conteúdo campos
-        self.canvas.setFont('NimbusSanL-Bold', 6)
-        nLin = 7
+        self.canvas.setFont('NimbusSanL-Bold', 5)
+        nLin = 6
         nPar = 1
         nCol = 0
         nAju = 0
 
-        line_iter = iter(oXML[1:10])  # Salta elemt 1 e considera os próximos 9
+        line_iter = iter(oXML[1:16])  # Salta elemt 1 e considera os próximos 15
         for oXML_dup in line_iter:
 
             cDt, cHr = getdateByTimezone(tagtext(oNode=oXML_dup, cTag='dVenc'),
@@ -479,14 +479,14 @@ class danfe(object):
                 self.nLeft + nCol + 47, self.nlin + nLin,
                 format_number(tagtext(oNode=oXML_dup, cTag='vDup')))
 
-            if nPar == 3:
-                nLin = 7
+            if nPar == 5:
+                nLin = 6
                 nPar = 1
                 nCol += 47
                 nAju += 1
                 nCol += nAju * (0.3)
             else:
-                nLin += 3.3
+                nLin += 2
                 nPar += 1
 
         # Campos adicionais XML - Condicionados a existencia de financeiro

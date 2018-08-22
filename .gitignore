@@ -12,3 +12,6 @@ dist/
 docs/_build
 .vscode/tags
 .cache
+.idea/
+venv/
+*.pytest_cache
