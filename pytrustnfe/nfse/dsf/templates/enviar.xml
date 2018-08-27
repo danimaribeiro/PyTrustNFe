@@ -18,14 +18,12 @@
 		{% for rps in nfse.lista_rps -%}
 		<RPS Id="{{ rps.numero }}">
 			<Assinatura>{{ rps.assinatura }}</Assinatura>
-			<InscricaoMunicipalPrestador>{{ rps.prestador.inscricao_municipal }}
-			</InscricaoMunicipalPrestador>
+			<InscricaoMunicipalPrestador>{{ rps.prestador.inscricao_municipal }}</InscricaoMunicipalPrestador>
 			<RazaoSocialPrestador>{{ rps.prestador.razao_social }}</RazaoSocialPrestador>
 			<TipoRPS>RPS</TipoRPS>
 			<SerieRPS>{{ rps.serie }}</SerieRPS>
 			<NumeroRPS>{{ rps.numero }}</NumeroRPS>
-			<DataEmissaoRPS>{{ rps.data_emissao|format_datetime }}
-			</DataEmissaoRPS>
+			<DataEmissaoRPS>{{ rps.data_emissao|format_datetime }}</DataEmissaoRPS>
 			<SituacaoRPS>{{ rps.situacao }}</SituacaoRPS>
 			<SerieRPSSubstituido></SerieRPSSubstituido>
 			<NumeroRPSSubstituido>0</NumeroRPSSubstituido>
@@ -34,27 +32,21 @@
 			<SeriePrestacao>{{ rps.serie_prestacao }}</SeriePrestacao>
 			<InscricaoMunicipalTomador>{{ rps.tomador.inscricao_municipal }}</InscricaoMunicipalTomador>
 			<CPFCNPJTomador>{{ rps.tomador.cpf_cnpj }}</CPFCNPJTomador>
-			<RazaoSocialTomador>{{ rps.tomador.razao_social }}
-			</RazaoSocialTomador>
-			<TipoLogradouroTomador>{{ rps.tomador.tipo_logradouro }}
-			</TipoLogradouroTomador>
+			<RazaoSocialTomador>{{ rps.tomador.razao_social }}</RazaoSocialTomador>
+			<TipoLogradouroTomador>{{ rps.tomador.tipo_logradouro }}</TipoLogradouroTomador>
 			<LogradouroTomador>{{ rps.tomador.logradouro }}</LogradouroTomador>
-			<NumeroEnderecoTomador>{{ rps.tomador.numero }}
-			</NumeroEnderecoTomador>
+			<NumeroEnderecoTomador>{{ rps.tomador.numero }}</NumeroEnderecoTomador>
 			<TipoBairroTomador>{{ rps.tomador.tipo_bairro }}</TipoBairroTomador>
 			<BairroTomador>{{ rps.tomador.bairro }}</BairroTomador>
 			<CidadeTomador>{{ rps.tomador.cidade }}</CidadeTomador>
-			<CidadeTomadorDescricao>{{ rps.tomador.cidade_descricao }}
-			</CidadeTomadorDescricao>
+			<CidadeTomadorDescricao>{{ rps.tomador.cidade_descricao }}</CidadeTomadorDescricao>
 			<CEPTomador>{{ rps.tomador.cep }}</CEPTomador>
 			<EmailTomador>{{ rps.tomador.email }}</EmailTomador>
 			<CodigoAtividade>{{ rps.codigo_atividade }}</CodigoAtividade>
 			<AliquotaAtividade>{{ rps.aliquota_atividade }}</AliquotaAtividade>
 			<TipoRecolhimento>{{ rps.tipo_recolhimento }}</TipoRecolhimento>
-			<MunicipioPrestacao>{{ rps.municipio_prestacao }}
-			</MunicipioPrestacao>
-			<MunicipioPrestacaoDescricao>{{ rps.municipio_descricao_prestacao }}
-			</MunicipioPrestacaoDescricao>
+			<MunicipioPrestacao>{{ rps.municipio_prestacao }}</MunicipioPrestacao>
+			<MunicipioPrestacaoDescricao>{{ rps.municipio_prestacao_descricao }}</MunicipioPrestacaoDescricao>
 			<Operacao>{{ rps.operacao }}</Operacao>
 			<Tributacao>{{ rps.tributacao }}</Tributacao>
 			<ValorPIS>{{ rps.valor_pis }}</ValorPIS>

@@ -20,8 +20,7 @@ def _render(certificado, method, **kwargs):
 
     if type(xml_send) != str:
         xml_send = etree.tostring(xml_send)
-
-    return xml_send
+    return xml_send.decode()
 
 
 def _get_url(**kwargs):
@@ -33,17 +32,18 @@ def _get_url(**kwargs):
 
     urls = {
         # Belém - PA
-        '2715': 'http://www.issdigitalbel.com.br/WsNFe2/LoteRps.jws',
+        '2715': 'http://www.issdigitalbel.com.br/WsNFe2/LoteRps.jws?wsdl',
         # Sorocaba - SP
-        '7145': 'http://issdigital.sorocaba.sp.gov.br/WsNFe2/LoteRps.jws',
+        '7145': 'http://issdigital.sorocaba.sp.gov.br/WsNFe2/LoteRps.jws?wsdl',
         # Teresina - PI
-        '1219': 'http://www.issdigitalthe.com.br/WsNFe2/LoteRps.jws',
+        '1219': 'http://www.issdigitalthe.com.br/WsNFe2/LoteRps.jws?wsdl',
         # Campinas - SP
         '6291': 'http://issdigital.campinas.sp.gov.br/WsNFe2/LoteRps.jws?wsdl',
         # Uberlandia - MG
-        '5403': 'http://udigital.uberlandia.mg.gov.br/WsNFe2/LoteRps.jws',
+        '5403': 'http://udigital.uberlandia.mg.gov.br/WsNFe2/LoteRps.jws?wsdl',
         # São Luis - MA
-        '0921': 'https://stm.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps?wsdl',
+        '0921':
+        'http://sistemas.semfaz.saoluis.ma.gov.br/WsNFe2/LoteRps.jws?wsdl',
         # Campo Grande - MS
         '2729': 'http://issdigital.pmcg.ms.gov.br/WsNFe2/LoteRps.jws?wsdl',
     }
