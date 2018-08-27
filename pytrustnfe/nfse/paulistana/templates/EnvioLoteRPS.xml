@@ -1,60 +1,63 @@
-<PedidoEnvioLoteRPS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.prefeitura.sp.gov.br/nfe">
-  <Cabecalho Versao="1" xmlns="">
-    <CPFCNPJRemetente>
-      <CNPJ>{{ nfse.cpf_cnpj }}</CNPJ>
-    </CPFCNPJRemetente>
-    <transacao>false</transacao>
-    <dtInicio>{{ nfse.data_inicio }}</dtInicio>
-    <dtFim>{{ nfse.data_fim }}</dtFim>
-    <QtdRPS>1</QtdRPS>
-    <ValorTotalServicos>{{ nfse.total_servicos }}</ValorTotalServicos>
-    <ValorTotalDeducoes>{{ nfse.total_deducoes }}</ValorTotalDeducoes>
-  </Cabecalho>
-  {% for rps in nfse.lista_rps -%}
-  <RPS xmlns="">
-    <Assinatura>{{ rps.assinatura }}</Assinatura>
-    <ChaveRPS>
-      <InscricaoPrestador>{{ rps.prestador.inscricao_municipal }}</InscricaoPrestador>
-      <SerieRPS>{{ rps.serie }}</SerieRPS>
-      <NumeroRPS>{{ rps.numero }}</NumeroRPS>
-    </ChaveRPS>
-    <TipoRPS>{{ rps.tipo_rps | default('RPS') }}</TipoRPS>
-    <DataEmissao>{{ rps.data_emissao }}</DataEmissao>
-    <StatusRPS>N</StatusRPS>
-    <TributacaoRPS>{{ rps.tributacao_rps | default('T') }}</TributacaoRPS>
-    <ValorServicos>{{ rps.valor_servico }}</ValorServicos>
-    <ValorDeducoes>{{ rps.valor_deducao }}</ValorDeducoes>
-    <ValorPIS>{{ rps.valor_pis | default('0.00') }}</ValorPIS>
-    <ValorCOFINS>{{ rps.valor_cofins | default('0.00') }}</ValorCOFINS>
-    <ValorINSS>{{ rps.valor_inss | default('0.00') }}</ValorINSS>
-    <ValorIR>{{ rps.valor_ir | default('0.00') }}</ValorIR>
-    <ValorCSLL>{{ rps.valor_csll | default('0.00') }}</ValorCSLL>
-    <CodigoServico>{{ rps.codigo_atividade }}</CodigoServico>
-    <AliquotaServicos>{{ rps.aliquota_atividade }}</AliquotaServicos>
-    <ISSRetido>{{ rps.iss_retido | default('false') }}</ISSRetido>
-    <CPFCNPJTomador>
-        {% if rps.tomador.tipo_cpfcnpj == 1 -%}
-           <CPF>{{ rps.tomador.cpf_cnpj }}</CPF>
+<PedidoEnvioLoteRPS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                    xmlns="http://www.prefeitura.sp.gov.br/nfe">
+    <Cabecalho Versao="1" xmlns="">
+        <CPFCNPJRemetente>
+            <CNPJ>{{ nfse.cpf_cnpj }}</CNPJ>
+        </CPFCNPJRemetente>
+        <transacao>false</transacao>
+        <dtInicio>{{ nfse.data_inicio }}</dtInicio>
+        <dtFim>{{ nfse.data_fim }}</dtFim>
+        <QtdRPS>1</QtdRPS>
+        <ValorTotalServicos>{{ nfse.total_servicos }}</ValorTotalServicos>
+        <ValorTotalDeducoes>{{ nfse.total_deducoes }}</ValorTotalDeducoes>
+    </Cabecalho>
+    {% for rps in nfse.lista_rps -%}
+    <RPS xmlns="">
+        <Assinatura>{{ rps.assinatura }}</Assinatura>
+        <ChaveRPS>
+            <InscricaoPrestador>{{ rps.prestador.inscricao_municipal }}</InscricaoPrestador>
+            <SerieRPS>{{ rps.serie }}</SerieRPS>
+            <NumeroRPS>{{ rps.numero }}</NumeroRPS>
+        </ChaveRPS>
+        <TipoRPS>{{ rps.tipo_rps | default('RPS') }}</TipoRPS>
+        <DataEmissao>{{ rps.data_emissao }}</DataEmissao>
+        <StatusRPS>N</StatusRPS>
+        <TributacaoRPS>{{ rps.tributacao_rps | default('T') }}</TributacaoRPS>
+        <ValorServicos>{{ rps.valor_servico }}</ValorServicos>
+        <ValorDeducoes>{{ rps.valor_deducao }}</ValorDeducoes>
+        <ValorPIS>{{ rps.valor_pis | default('0.00') }}</ValorPIS>
+        <ValorCOFINS>{{ rps.valor_cofins | default('0.00') }}</ValorCOFINS>
+        <ValorINSS>{{ rps.valor_inss | default('0.00') }}</ValorINSS>
+        <ValorIR>{{ rps.valor_ir | default('0.00') }}</ValorIR>
+        <ValorCSLL>{{ rps.valor_csll | default('0.00') }}</ValorCSLL>
+        <CodigoServico>{{ rps.codigo_atividade }}</CodigoServico>
+        <AliquotaServicos>{{ rps.aliquota_atividade }}</AliquotaServicos>
+        <ISSRetido>{{ rps.iss_retido | default('false') }}</ISSRetido>
+        <CPFCNPJTomador>
+            {% if rps.tomador.tipo_cpfcnpj == 1 -%}
+            <CPF>{{ rps.tomador.cpf_cnpj }}</CPF>
+            {% endif %}
+            {% if rps.tomador.tipo_cpfcnpj == 2 -%}
+            <CNPJ>{{ rps.tomador.cpf_cnpj }}</CNPJ>
+            {% endif %}
+        </CPFCNPJTomador>
+        {% if rps.tomador.inscricao_municipal -%}
+        <InscricaoMunicipalTomador>{{ rps.tomador.inscricao_municipal }}</InscricaoMunicipalTomador>
         {% endif %}
-        {% if rps.tomador.tipo_cpfcnpj == 2 -%}
-           <CNPJ>{{ rps.tomador.cpf_cnpj }}</CNPJ>
-        {% endif %}
-    </CPFCNPJTomador>
-    {% if rps.tomador.inscricao_municipal -%}
-    <InscricaoMunicipalTomador>{{ rps.tomador.inscricao_municipal }}</InscricaoMunicipalTomador>
-    {% endif %}
-    <RazaoSocialTomador>{{ rps.tomador.razao_social|normalize|escape }}</RazaoSocialTomador>
-    <EnderecoTomador>
-      <TipoLogradouro>{{ rps.tomador.tipo_logradouro }}</TipoLogradouro>
-      <Logradouro>{{ rps.tomador.logradouro|normalize|escape }}</Logradouro>
-      <NumeroEndereco>{{ rps.tomador.numero }}</NumeroEndereco>
-      <ComplementoEndereco>{{ rps.tomador.complemento|normalize|escape }}</ComplementoEndereco>
-      <Bairro>{{ rps.tomador.bairro }}</Bairro>
-      <Cidade>{{ rps.tomador.cidade }}</Cidade>
-      <UF>{{ rps.tomador.uf }}</UF>
-      <CEP>{{ rps.tomador.cep }}</CEP>
-    </EnderecoTomador>
-    <Discriminacao>{{ rps.descricao|normalize|escape }}</Discriminacao>
-  </RPS>
-  {% endfor %}
+        <RazaoSocialTomador>{{ rps.tomador.razao_social|normalize|escape }}</RazaoSocialTomador>
+        <EnderecoTomador>
+            <TipoLogradouro>{{ rps.tomador.tipo_logradouro }}</TipoLogradouro>
+            <Logradouro>{{ rps.tomador.logradouro|normalize|escape }}</Logradouro>
+            <NumeroEndereco>{{ rps.tomador.numero }}</NumeroEndereco>
+            <ComplementoEndereco>{{ rps.tomador.complemento|normalize|escape }}</ComplementoEndereco>
+            <Bairro>{{ rps.tomador.bairro }}</Bairro>
+            <Cidade>{{ rps.tomador.cidade }}</Cidade>
+            <UF>{{ rps.tomador.uf }}</UF>
+            <CEP>{{ rps.tomador.cep }}</CEP>
+        </EnderecoTomador>
+        <Discriminacao>{{ rps.descricao|normalize|escape }}</Discriminacao>
+        <PercentualCargaTributaria>{{ rps.percentual_carga_tributaria}}</PercentualCargaTributaria>
+        <FonteCargaTributaria>{{ rps.fonte_carga_tributaria}}</FonteCargaTributaria>
+    </RPS>
+    {% endfor %}
 </PedidoEnvioLoteRPS>
