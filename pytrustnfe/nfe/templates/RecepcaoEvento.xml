@@ -8,13 +8,15 @@
       <CNPJ>{{ evento.CNPJ }}</CNPJ>
       <chNFe>{{ evento.chNFe }}</chNFe>
       <dhEvento>{{ evento.dhEvento }}</dhEvento>
-      <tpEvento>110111</tpEvento>
+      <tpEvento>{{ evento.tpEvento }}</tpEvento>
       <nSeqEvento>{{ evento.nSeqEvento }}</nSeqEvento>
       <verEvento>1.00</verEvento>
       <detEvento versao="1.00">
-        <descEvento>Cancelamento</descEvento>
+        <descEvento>{{ evento.descEvento }}</descEvento>
         <nProt>{{ evento.nProt }}</nProt>
         <xJust>{{ evento.xJust|normalize|escape }}</xJust>
+        <xCorrecao>{{ evento.xCorrecao|normalize|escape }}</xCorrecao>
+        <xCondUso>{{ evento.xCondUso }}</xCondUso>
       </detEvento>
     </infEvento>
   </evento>
