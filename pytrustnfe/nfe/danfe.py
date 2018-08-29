@@ -6,6 +6,7 @@
 import os
 from io import BytesIO
 from textwrap import wrap
+import math
 
 from reportlab.lib import utils
 from reportlab.pdfgen import canvas
@@ -40,7 +41,6 @@ def format_cnpj_cpf(value):
 
 
 def getdateByTimezone(cDateUTC, timezone=None):
-
     '''
     Esse método trata a data recebida de acordo com o timezone do
     usuário. O seu retorno é dividido em duas partes:
@@ -153,16 +153,15 @@ class danfe(object):
             self.NrPages = 1
             self.Page = 1
 
-            # Calculando total linhas usadas para descrições dos itens
-            # Com bloco fatura, apenas 25 linhas para itens na primeira folha
-            nNr_Lin_Pg_1 = 30 if oXML_cobr is None else 26
-            # [ rec_ini , rec_fim , lines , limit_lines ]
-            oPaginator = [[0, 0, 0, nNr_Lin_Pg_1]]
             el_det = oXML.findall(".//{http://www.portalfiscal.inf.br/nfe}det")
+
+            # Declaring variable to prevent future errors
+            nId = 0
+
             if el_det is not None:
                 list_desc = []
                 list_cod_prod = []
-                nPg = 0
+
                 for nId, item in enumerate(el_det):
                     el_prod = item.find(
                         ".//{http://www.portalfiscal.inf.br/nfe}prod")
@@ -177,21 +176,9 @@ class danfe(object):
                     list_cProd = wrap(tagtext(oNode=el_prod, cTag='cProd'), 14)
                     list_cod_prod.append(list_cProd)
 
-                    # Nr linhas necessárias p/ descrição item
-                    nLin_Itens = len(list_)
-
-                    if (oPaginator[nPg][2] + nLin_Itens) >= oPaginator[nPg][3]:
-                        oPaginator.append([0, 0, 0, 77])
-                        nPg += 1
-                        oPaginator[nPg][0] = nId
-                        oPaginator[nPg][1] = nId + 1
-                        oPaginator[nPg][2] = nLin_Itens
-                    else:
-                        # adiciona-se 1 pelo funcionamento de xrange
-                        oPaginator[nPg][1] = nId + 1
-                        oPaginator[nPg][2] += nLin_Itens
-
-                self.NrPages = len(oPaginator)   # Calculando nr. páginas
+                # Calculando nr. aprox. de páginas
+                if nId > 25:
+                    self.NrPages += math.ceil((nId - 25) / 70)
 
             if recibo:
                 self.recibo_entrega(oXML=oXML, timezone=timezone)
@@ -204,18 +191,21 @@ class danfe(object):
 
             self.impostos(oXML=oXML)
             self.transportes(oXML=oXML)
-            self.produtos(oXML=oXML, el_det=el_det, oPaginator=oPaginator[0],
-                          list_desc=list_desc, list_cod_prod=list_cod_prod)
+            index = self.produtos(
+                oXML=oXML, el_det=el_det, max_index=nId,
+                list_desc=list_desc, list_cod_prod=list_cod_prod)
 
             self.adicionais(oXML=oXML)
 
             # Gera o restante das páginas do XML
-            for oPag in oPaginator[1:]:
+            while index < nId:
                 self.newpage()
                 self.ide_emit(oXML=oXML, timezone=timezone)
-                self.produtos(oXML=oXML, el_det=el_det, oPaginator=oPag,
-                              list_desc=list_desc, nHeight=77,
-                              list_cod_prod=list_cod_prod)
+                index = self.produtos(
+                    oXML=oXML, el_det=el_det, index=index,
+                    max_index=nId,
+                    list_desc=list_desc, nHeight=77,
+                    list_cod_prod=list_cod_prod)
 
             self.newpage()
         if cce_xml:
@@ -326,7 +316,7 @@ class danfe(object):
         P = Paragraph(tagtext(oNode=elem_emit, cTag='xNome'), styleN)
         w, h = P.wrap(55 * mm, 40 * mm)
         P.drawOn(self.canvas, (self.nLeft + 30) * mm,
-                 (self.height - self.nlin - ((4.3*h + 12)/12)) * mm)
+                 (self.height - self.nlin - ((4.3 * h + 12) / 12)) * mm)
 
         if self.logo:
             img = get_image(self.logo, width=2 * cm)
@@ -667,7 +657,7 @@ obsCont[@xCampo='NomeVendedor']")
 
         self.nlin += 23
 
-    def produtos(self, oXML=None, el_det=None, oPaginator=None,
+    def produtos(self, oXML=None, el_det=None, index=0, max_index=0,
                  list_desc=None, list_cod_prod=None, nHeight=29):
 
         nMr = self.width - self.nRight
@@ -721,7 +711,11 @@ obsCont[@xCampo='NomeVendedor']")
         self.canvas.setFont('NimbusSanL-Regu', 5)
         nLin = self.nlin + 10.5
 
-        for id in range(oPaginator[0], oPaginator[1]):
+        for id in range(index, max_index + 1):
+
+            if nLin > 242:
+                break
+
             item = el_det[id]
             el_prod = item.find(".//{http://www.portalfiscal.inf.br/nfe}prod")
             el_imp = item.find(
@@ -781,6 +775,7 @@ obsCont[@xCampo='NomeVendedor']")
             self.canvas.setStrokeColor(black)
 
         self.nlin += nH + 3
+        return id
 
     def adicionais(self, oXML=None):
         el_infAdic = oXML.find(
@@ -989,3 +984,4 @@ obsCont[@xCampo='NomeVendedor']")
         paragraph = Paragraph(ptext, style=style)
         w, h = paragraph.wrapOn(self.canvas, x, y)
         return w, h, paragraph
+
