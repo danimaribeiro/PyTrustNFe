@@ -55,18 +55,35 @@
             <UF>{{ rps.tomador.uf }}</UF>
             <CEP>{{ rps.tomador.cep }}</CEP>
         </EnderecoTomador>
+
         <Discriminacao>{{ rps.descricao|normalize|escape }}</Discriminacao>
+
         {% if rps.valor_carga_tributaria -%}
         <ValorCargaTributaria>{{ rps.valor_carga_tributaria }}</ValorCargaTributaria>
         {% endif %}
+
         {% if rps.percentual_carga_tributaria -%}
         <PercentualCargaTributaria>{{ rps.percentual_carga_tributaria }}</PercentualCargaTributaria>
         {% endif %}
+
         {% if rps.fonte_carga_tributaria -%}
         <FonteCargaTributaria>{{ rps.fonte_carga_tributaria }}</FonteCargaTributaria>
         {% endif %}
+
+        {% if rps.codigo_cei -%}
+        <CodigoCEI>{{ rps.codigo_cei }}</CodigoCEI>
+        {% endif %}
+
+        {% if rps.matricula_obra -%}
+        <MatriculaObra>{{ rps.matricula_obra }}</MatriculaObra>
+        {% endif %}
+
         {% if rps.municipio_prestacao -%}
         <MunicipioPrestacao>{{ rps.municipio_prestacao }}</MunicipioPrestacao>
+        {% endif %}
+
+        {% if rps.num_encapsulamento -%}
+        <NumeroEncapsulamento>{{ rps.num_encapsulamento }}</NumeroEncapsulamento>
         {% endif %}
     </RPS>
     {% endfor %}
