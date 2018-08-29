@@ -158,7 +158,7 @@ class danfe(object):
             # Declaring variable to prevent future errors
             nId = 0
 
-            if el_det:
+            if el_det is not None:
                 list_desc = []
                 list_cod_prod = []
 
@@ -169,7 +169,7 @@ class danfe(object):
                         ".//{http://www.portalfiscal.inf.br/nfe}infAdProd")
 
                     list_ = wrap(tagtext(oNode=el_prod, cTag='xProd'), 56)
-                    if infAdProd:
+                    if infAdProd is not None:
                         list_.extend(wrap(infAdProd.text, 56))
                     list_desc.append(list_)
 
