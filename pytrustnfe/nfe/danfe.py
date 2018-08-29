@@ -713,7 +713,7 @@ obsCont[@xCampo='NomeVendedor']")
 
         for id in range(index, max_index + 1):
 
-            if nLin > 240:
+            if nLin > 242:
                 break
 
             item = el_det[id]
