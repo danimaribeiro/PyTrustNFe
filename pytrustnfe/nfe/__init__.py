@@ -134,7 +134,7 @@ def _send(certificado, method, **kwargs):
 
     port = next(iter(client.wsdl.port_types))
     first_operation = [x for x in iter(
-        client.wsdl.port_types[port].operations) if "Zip" not in x][0]
+        client.wsdl.port_types[port].operations) if "zip" not in x.lower()][0]
 
     namespaceNFe = xml.find(".//{http://www.portalfiscal.inf.br/nfe}NFe")
     if namespaceNFe is not None:
