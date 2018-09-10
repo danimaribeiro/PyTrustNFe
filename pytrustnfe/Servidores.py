@@ -437,7 +437,7 @@ UFPR = {
         WS_NFE_SITUACAO: 'nfe/NFeStatusServico4?wsdl',
         WS_NFE_RECEPCAO_EVENTO: 'nfe/NFeRecepcaoEvento4?wsdl',
         WS_NFE_AUTORIZACAO: 'nfe/NFeAutorizacao4?wsdl',
-        WS_NFE_RET_AUTORIZACAO: 'nfe/NFeRetAutorizacao4?wsdl ',
+        WS_NFE_RET_AUTORIZACAO: 'nfe/NFeRetAutorizacao4?wsdl',
         WS_NFE_CADASTRO: 'nfe/CadConsultaCadastro4?wsdl',
     },
     AMBIENTE_HOMOLOGACAO: {

@@ -13,3 +13,4 @@ docs/_build
 .vscode/tags
 .cache
 .pytest_cache
+.vscode/
