@@ -783,7 +783,8 @@ obsCont[@xCampo='NomeVendedor']")
         self.canvas.setFont('NimbusSanL-Regu', 5)
         self.string(self.nLeft + 1, self.nlin + 4,
                     'INFORMAÇÕES COMPLEMENTARES')
-        self.string(((self.width / 3)*2) + 1, self.nlin + 4, 'RESERVADO AO FISCO')
+        self.string(
+            ((self.width / 3)*2) + 1, self.nlin + 4, 'RESERVADO AO FISCO')
         self.rect(self.nLeft, self.nlin + 2,
                   self.width - self.nLeft - self.nRight, 42)
         self.vline((self.width / 3)*2, self.nlin + 2, 42)
