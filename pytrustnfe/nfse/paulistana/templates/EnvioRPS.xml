@@ -46,6 +46,8 @@
         <CEP>{{ rps.tomador.cep }}</CEP>
     </EnderecoTomador>
     <Discriminacao>{{ rps.descricao }}</Discriminacao>
+    <ValorCargaTributaria>{{ rps.valor_carga_tributaria }}</ValorCargaTributaria>
+    <FonteCargaTributaria>{{ rps.fonte_carga_tributaria }}</FonteCargaTributaria>
   {% endfor %}
   </RPS>
 </PedidoEnvioRPS>

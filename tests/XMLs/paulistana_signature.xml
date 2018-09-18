@@ -1,4 +1,4 @@
-<PedidoEnvioLoteRPS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.prefeitura.sp.gov.br/nfe"><Cabecalho xmlns="" Versao="1"><CPFCNPJRemetente><CNPJ>12345678901234</CNPJ></CPFCNPJRemetente><transacao>false</transacao><dtInicio>2016-08-29</dtInicio><dtFim>2016-08-29</dtFim><QtdRPS>1</QtdRPS><ValorTotalServicos/><ValorTotalDeducoes/></Cabecalho><RPS xmlns=""><Assinatura>E4fpHYkQa7Naxn6IKGb7NwwZu5tPk/KXJ9hCwtZgq0xvKS450aQqqBL+7Iv46lTgqrSMu7+gLrl+LC1qs/8aT2mbHE8uaVFSbzwZ+sF/BkcT6nsFHLMswEiTAEs95Jb7hN1cC91xqQGRH4buw0TzxHKmhuLJ22WwtG/scxyKtjM=</Assinatura><ChaveRPS><InscricaoPrestador>123456</InscricaoPrestador><SerieRPS>1</SerieRPS><NumeroRPS>1</NumeroRPS></ChaveRPS><TipoRPS>RPS</TipoRPS><DataEmissao>2016-08-29</DataEmissao><StatusRPS>N</StatusRPS><TributacaoRPS>T</TributacaoRPS><ValorServicos/><ValorDeducoes/><ValorPIS>0.00</ValorPIS><ValorCOFINS>0.00</ValorCOFINS><ValorINSS>0.00</ValorINSS><ValorIR>0.00</ValorIR><ValorCSLL>0.00</ValorCSLL><CodigoServico>07498</CodigoServico><AliquotaServicos>5.00</AliquotaServicos><ISSRetido>false</ISSRetido><CPFCNPJTomador/><InscricaoMunicipalTomador>123456</InscricaoMunicipalTomador><RazaoSocialTomador>Trustcode</RazaoSocialTomador><EnderecoTomador><TipoLogradouro>1</TipoLogradouro><Logradouro>Vinicius de Moraes, 42</Logradouro><NumeroEndereco>42</NumeroEndereco><ComplementoEndereco/><Bairro>Corrego</Bairro><Cidade>Floripa</Cidade><UF>SC</UF><CEP>88037240</CEP></EnderecoTomador><Discriminacao>Venda de servico</Discriminacao></RPS><Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+<PedidoEnvioLoteRPS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.prefeitura.sp.gov.br/nfe"><Cabecalho xmlns="" Versao="1"><CPFCNPJRemetente><CNPJ>12345678901234</CNPJ></CPFCNPJRemetente><transacao>false</transacao><dtInicio>2016-08-29</dtInicio><dtFim>2016-08-29</dtFim><QtdRPS>1</QtdRPS><ValorTotalServicos/><ValorTotalDeducoes/></Cabecalho><RPS xmlns=""><Assinatura>E4fpHYkQa7Naxn6IKGb7NwwZu5tPk/KXJ9hCwtZgq0xvKS450aQqqBL+7Iv46lTgqrSMu7+gLrl+LC1qs/8aT2mbHE8uaVFSbzwZ+sF/BkcT6nsFHLMswEiTAEs95Jb7hN1cC91xqQGRH4buw0TzxHKmhuLJ22WwtG/scxyKtjM=</Assinatura><ChaveRPS><InscricaoPrestador>123456</InscricaoPrestador><SerieRPS>1</SerieRPS><NumeroRPS>1</NumeroRPS></ChaveRPS><TipoRPS>RPS</TipoRPS><DataEmissao>2016-08-29</DataEmissao><StatusRPS>N</StatusRPS><TributacaoRPS>T</TributacaoRPS><ValorServicos/><ValorDeducoes/><ValorPIS>0.00</ValorPIS><ValorCOFINS>0.00</ValorCOFINS><ValorINSS>0.00</ValorINSS><ValorIR>0.00</ValorIR><ValorCSLL>0.00</ValorCSLL><CodigoServico>07498</CodigoServico><AliquotaServicos>5.00</AliquotaServicos><ISSRetido>false</ISSRetido><CPFCNPJTomador/><InscricaoMunicipalTomador>123456</InscricaoMunicipalTomador><RazaoSocialTomador>Trustcode</RazaoSocialTomador><EnderecoTomador><TipoLogradouro>1</TipoLogradouro><Logradouro>Vinicius de Moraes, 42</Logradouro><NumeroEndereco>42</NumeroEndereco><ComplementoEndereco/><Bairro>Corrego</Bairro><Cidade>Floripa</Cidade><UF>SC</UF><CEP>88037240</CEP></EnderecoTomador><Discriminacao>Venda de servico</Discriminacao><ValorCargaTributaria/><FonteCargaTributaria/></RPS><Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
 <SignedInfo>
 <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
 <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
@@ -8,12 +8,12 @@
 <Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
 </Transforms>
 <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
-<DigestValue>ePJnD6hyDvlJo08PFX8h2TXk0ZM=</DigestValue>
+<DigestValue>IAh8GGlbp/Tnqma+2RZ7UrGZhTc=</DigestValue>
 </Reference>
 </SignedInfo>
-<SignatureValue>GbaQaTEtxuKdRRaadginWPFH5K65ywqEikkwChWO3xX5Kglq8RPm4+LjnpJmuTcE
-9I2BVon3GJFh+c/6RKzJPose6FXog2xnCpTOgwA/rks/gKsUAaRlXCPsLcKMKaOj
-3eH21RHEyrxBAbdpEUdlEgQWaWzmGq009EiQ544sD6c=</SignatureValue>
+<SignatureValue>gjkMTCq0uuaX8tkRBlLjgybn8a2O4Axl6HHq1MN8nnEMliERcziU3pa3r1jbghlE
+EUyIO8bTZ0V7c05pQvHQgVUHcSo6vHld4ZQNk7JfMfmpez4uxrUeuSrSqSLCwT9W
+NmTY9EJ16GyrQNELw+SkYuEFOvqZTU3qjDZkLddQ8bc=</SignatureValue>
 <KeyInfo>
 <X509Data>
 <X509Certificate>MIICMTCCAZqgAwIBAgIQfYOsIEVuAJ1FwwcTrY0t1DANBgkqhkiG9w0BAQUFADBX
