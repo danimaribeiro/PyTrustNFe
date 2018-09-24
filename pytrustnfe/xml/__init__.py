@@ -27,7 +27,7 @@ def render_xml(path, template_name, remove_empty, **nfe):
     env.filters["comma"] = filters.format_with_comma
 
     template = env.get_template(template_name)
-    xml = template.render(**nfe)
+    xml = template.render(**nfe).replace('\n', '')
     parser = etree.XMLParser(remove_blank_text=True, remove_comments=True,
                              strip_cdata=False)
     root = etree.fromstring(xml, parser=parser)
