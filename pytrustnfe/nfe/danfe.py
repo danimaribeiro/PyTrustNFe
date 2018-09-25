@@ -80,6 +80,8 @@ def getdateByTimezone(cDateUTC, timezone=None):
 
 def format_number(cNumber):
     if cNumber:
+	# Vírgula para a separação de milhar e 2f para 2 casas decimais
+        value = "{:,.2f}".format(float(cNumber))
         return cNumber.replace(",", "X").replace(".", ",").replace("X", ".")
     return ""
 
@@ -746,8 +748,8 @@ obsCont[@xCampo='NomeVendedor']")
                 tagtext(oNode=el_prod, cTag='qCom')))
             self.stringRight(nMr - 64.5, nLin, format_number(
                 tagtext(oNode=el_prod, cTag='vUnCom')))
-            self.stringRight(nMr - 50.5, nLin,
-                             tagtext(oNode=el_prod, cTag='vProd'))
+            self.stringRight(nMr - 50.5, nLin, format_number(
+                             tagtext(oNode=el_prod, cTag='vProd')))
             self.stringRight(nMr - 38.5, nLin, format_number(vBC))
             self.stringRight(nMr - 26.5, nLin, format_number(vICMS))
             self.stringRight(nMr - 7.5, nLin, format_number(pICMS))
