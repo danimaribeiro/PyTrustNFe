@@ -872,6 +872,10 @@
             </compra>
             {% endif %}
         </infNFe>
+        <infNFeSupl>
+          <qrCode>{{ NFe.infNFe.qrCode }}</qrCode>
+          <urlChave>{{ NFe.infNFe.urlChave }}</urlChave>
+        </infNFeSupl>
     </NFe>
     {% endfor %}
 </enviNFe>
