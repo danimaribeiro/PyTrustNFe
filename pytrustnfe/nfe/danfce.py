@@ -72,7 +72,7 @@ def format_telefone(telefone):
 
 class danfce(object):
 
-    def __init__(self, list_xml, logo=None):
+    def __init__(self, list_xml, logo=None, timezone=None):
 
         self.current_font_size = 7
         self.current_font_name = 'NimbusSanL-Regu'
@@ -188,14 +188,14 @@ class danfce(object):
         # Impostos
         el_total = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}total")
 
-        total_tributo = format_number(tagtext(oNode=el_total, cTag='vTotTrib'),
-                                      precision=2)
-        valor_total = format_number(tagtext(oNode=el_total, cTag='vProd'),
-                                    precision=2)
-        desconto = format_number(tagtext(oNode=el_total, cTag='vDesc'),
-                                 precision=2)
-        valor_a_pagar = format_number(tagtext(oNode=el_total, cTag='vNF'),
-                                      precision=2)
+        total_tributo = format_number(
+            tagtext(oNode=el_total, cTag='vTotTrib'), precision=2)
+        valor_total = format_number(
+            tagtext(oNode=el_total, cTag='vProd'), precision=2)
+        desconto = format_number(
+            tagtext(oNode=el_total, cTag='vDesc'), precision=2)
+        valor_a_pagar = format_number(
+            tagtext(oNode=el_total, cTag='vNF'), precision=2)
         el_pag = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}pag")
         troco = format_number(tagtext(oNode=el_pag, cTag="vTroco"))
 
@@ -216,26 +216,26 @@ class danfce(object):
             ".//{http://www.portalfiscal.inf.br/nfe}det"))
 
         payment_methods = []
-
         for pagId, item in enumerate(el_pag):
-            if 'tPag' not in item.tag:
-                continue
-
             payment = []
-            method = payment_method_list[item.text]
+            tipo_pagamento = tagtext(oNode=item, cTag="tPag")
+            val = format_number(tagtext(oNode=item, cTag="vPag"), precision=2)
+
+            method = payment_method_list[tipo_pagamento]
 
             payment.append(method)
-            payment.append(format_number(item.getnext().text, precision=2))
+            payment.append(val)
             payment_methods.append(payment)
 
-        values = {'quantidade_itens': quant_produtos,
-                  'total_tributo': total_tributo,
-                  'valor_total': valor_total,
-                  'desconto': desconto,
-                  'valor_a_pagar': valor_a_pagar,
-                  'formas_de_pagamento': payment_methods,
-                  'troco': troco,
-                  }
+        values = {
+            'quantidade_itens': quant_produtos,
+            'total_tributo': total_tributo,
+            'valor_total': valor_total,
+            'desconto': desconto,
+            'valor_a_pagar': valor_a_pagar,
+            'formas_de_pagamento': payment_methods,
+            'troco': troco,
+        }
 
         self.draw_totals_table(values)
 
