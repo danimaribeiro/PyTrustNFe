@@ -196,9 +196,7 @@ def xml_consulta_distribuicao_nfe(certificado, **kwargs):  # Assinar
     return _render(certificado, 'NFeDistribuicaoDFe', False, **kwargs)
 
 
-def consulta_distribuicao_nfe(certificado, **kwargs):
-    if "xml" not in kwargs:
-        kwargs['xml'] = xml_consulta_distribuicao_nfe(certificado, **kwargs)
+def _send_v310(certificado, **kwargs):
     xml_send = kwargs["xml"]
     base_url = localizar_url(
         'NFeDistribuicaoDFe',  kwargs['estado'], kwargs['modelo'],
@@ -229,6 +227,12 @@ def consulta_distribuicao_nfe(certificado, **kwargs):
         }
 
 
+def consulta_distribuicao_nfe(certificado, **kwargs):
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_consulta_distribuicao_nfe(certificado, **kwargs)
+    return _send_v310(certificado, **kwargs)
+
+
 def xml_download_nfe(certificado, **kwargs):  # Assinar
     return _render(certificado, 'NFeDistribuicaoDFe', False, **kwargs)
 
@@ -236,4 +240,4 @@ def xml_download_nfe(certificado, **kwargs):  # Assinar
 def download_nfe(certificado, **kwargs):
     if "xml" not in kwargs:
         kwargs['xml'] = xml_download_nfe(certificado, **kwargs)
-    return _send(certificado, 'NFeDistribuicaoDFe', **kwargs)
+    return _send_v310(certificado, **kwargs)
