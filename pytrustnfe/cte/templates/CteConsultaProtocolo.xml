@@ -1,0 +1,15 @@
+<Consulta>
+    <ModeloDocumento>CTe</ModeloDocumento>
+    <Versao>3.00</Versao>
+    <tpAmb>2</tpAmb>
+    <CnpjEmpresa>99999999999999</CnpjEmpresa>
+    <CnpjEmissor>99999999999999</CnpjEmissor>
+    <NumeroInicial>1</NumeroInicial>
+    <NumeroFinal>10</NumeroFinal>
+    <Serie>1</Serie>
+    <ChaveAcesso/>
+    <DataEmissaoInicial/>
+    <DataEmissaoFinal/>
+    <dhUF/>
+    <EmitidoRecebido/>
+</Consulta>

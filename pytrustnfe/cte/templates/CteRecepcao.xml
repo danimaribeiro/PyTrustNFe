@@ -1,0 +1,305 @@
+<Envio>
+    <ModeloDocumento>CTe</ModeloDocumento>
+    <Versao>3.00</Versao>
+    <ide>
+        <cCT>17281638</cCT>
+        <cUF>43</cUF>
+        <natOp>Frete de mercadorias</natOp>
+        <CFOP>5352</CFOP>
+        <mod>57</mod>
+        <serie>50</serie>
+        <nCT>14</nCT>
+        <dhEmi>2017-06-06T15:00:01</dhEmi>
+        <fusoHorario>-03:00</fusoHorario>
+        <tpImp>1</tpImp>
+        <tpEmis>1</tpEmis>
+        <tpAmb>2</tpAmb>
+        <tpCTe>0</tpCTe>
+        <procEmi>0</procEmi>
+        <cMunEnv>4310405</cMunEnv>
+        <xMunEnv>Independencia</xMunEnv>
+        <UFEnv>RS</UFEnv>
+        <modal>01</modal>
+        <tpServ>0</tpServ>
+        <cMunIni>4310405</cMunIni>
+        <xMunIni>Independencia</xMunIni>
+        <UFIni>RS</UFIni>
+        <cMunFim>4302204</cMunFim>
+        <xMunFim>Boa Vista do Burica</xMunFim>
+        <UFFim>RS</UFFim>
+        <retira>0</retira>
+        <xDetRetira>Retirar o pacote no local de entrega indicado</xDetRetira>
+        <indIEToma>9</indIEToma>
+        <tomador>
+            <toma>4</toma>
+            <CNPJ_toma/>
+            <CPF_toma>99999999999</CPF_toma>
+            <IE_toma/>
+            <xNome_toma>Ricardo</xNome_toma>
+            <xFant_toma/>
+            <fone_toma>5597207426</fone_toma>
+            <enderTomador>
+                <xLgr_toma>Rua Senador Salgado Filho</xLgr_toma>
+                <nro_toma>463</nro_toma>
+                <xCpl_toma>Complemento nao informado</xCpl_toma>
+                <xBairro_toma>Centro</xBairro_toma>
+                <cMun_toma>4310405</cMun_toma>
+                <xMun_toma>Independencia</xMun_toma>
+                <CEP_toma>98915000</CEP_toma>
+                <UF_toma>RS</UF_toma>
+                <cPais_toma>1046</cPais_toma>
+                <xPais_toma>Brasil</xPais_toma>
+            </enderTomador>
+            <email_toma>email@gmail.com.br</email_toma>
+        </tomador>
+    </ide>
+    <compl>
+        <xCaracAd>Encomenda</xCaracAd>
+        <xCaracSer>Transporte</xCaracSer>
+        <xEmi>Jose Campos</xEmi>
+        <xObs>Pagar em qualquer lugar</xObs>
+        <fluxo>
+            <xOrig>Angra dos Reis</xOrig>
+            <xDest>Maria da Silva</xDest>
+            <xRota>129386</xRota>
+            <passagem>
+                <passItem>
+                    <xPass>LHR</xPass>
+                </passItem>
+                <passItem>
+                    <xPass>CGH</xPass>
+                </passItem>
+                <passItem>
+                    <xPass>POA</xPass>
+                </passItem>
+            </passagem>
+        </fluxo>
+        <Entrega>
+            <tpPer>1</tpPer>
+            <dProg>2014-07-03</dProg>
+            <dIni>2014-07-03</dIni>
+            <dFim>2014-07-03</dFim>
+            <tpHor>1</tpHor>
+            <hProg>10:30:22</hProg>
+            <hIni>10:30:22</hIni>
+            <hFim>10:30:22</hFim>
+        </Entrega>
+    </compl>
+    <emit>
+        <CNPJ_emit>99999999999999</CNPJ_emit>
+        <IE>9999999999</IE>
+        <IEST>999999999</IEST>
+        <xNome>CT-E EMITIDO EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL</xNome>
+        <xFant>EMPRESA 1</xFant>
+        <enderEmit>
+            <xLgr>Endereco</xLgr>
+            <nro>1234</nro>
+            <xCpl>Complemento</xCpl>
+            <xBairro>Centro</xBairro>
+            <cMun>4310405</cMun>
+            <xMun>Independencia</xMun>
+            <CEP>98910000</CEP>
+            <UF>RS</UF>
+            <fone>35354560</fone>
+        </enderEmit>
+    </emit>
+    <rem>
+        <CNPJ_rem/>
+        <CPF_rem>99999999999</CPF_rem>
+        <IE_rem/>
+        <xNome_rem>CT-E EMITIDO EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL</xNome_rem>
+        <xFant_rem>Migrate Company</xFant_rem>
+        <fone_rem>55118822773343</fone_rem>
+        <email_rem>email@gmail.com.br</email_rem>
+        <enderRem>
+            <xLgr_rem>Rua Angra dos Reis</xLgr_rem>
+            <nro_rem>666</nro_rem>
+            <xCpl_rem/>
+            <xBairro_rem>Centro</xBairro_rem>
+            <cMun_rem>4310405</cMun_rem>
+            <xMun_rem>Independencia</xMun_rem>
+            <CEP_rem>98917666</CEP_rem>
+            <UF_rem>RS</UF_rem>
+            <cPais_rem>1046</cPais_rem>
+            <xPais_rem>Brasil</xPais_rem>
+        </enderRem>
+    </rem>
+    <exped>
+        <CNPJ_exp>99999999999999</CNPJ_exp>
+        <IE_exp>9999999999</IE_exp>
+        <xNome_exp>CT-E EMITIDO EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL</xNome_exp>
+        <fone_exp>5535358668</fone_exp>
+        <email_exp>email@email.com.br</email_exp>
+        <enderExped>
+            <xLgr_exp>Rua das Palmeiras</xLgr_exp>
+            <nro_exp>115</nro_exp>
+            <xCpl_exp>Próximo ao bar do Zé</xCpl_exp>
+            <xBairro_exp>Centro</xBairro_exp>
+            <cMun_exp>4310405</cMun_exp>
+            <xMun_exp>Independencia</xMun_exp>
+            <CEP_exp>98915000</CEP_exp>
+            <UF_exp>RS</UF_exp>
+            <cPais_exp>1046</cPais_exp>
+            <xPais_exp>Brasil</xPais_exp>
+        </enderExped>
+    </exped>
+    <receb>
+        <CNPJ_rec/>
+        <CPF_rec>99999999999</CPF_rec>
+        <IE_rec/>
+        <xNome_rec>CT-E EMITIDO EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL</xNome_rec>
+        <fone_rec>5597207496</fone_rec>
+        <email_rec>email@gmail.com.br</email_rec>
+        <enderReceb>
+            <xLgr_rec>Rua Senador Salgado Filho</xLgr_rec>
+            <nro_rec>463</nro_rec>
+            <xCpl_rec/>
+            <xBairro_rec>Centro</xBairro_rec>
+            <cMun_rec>4310405</cMun_rec>
+            <xMun_rec>Independencia</xMun_rec>
+            <CEP_rec>98915000</CEP_rec>
+            <UF_rec>RS</UF_rec>
+            <cPais_rec>1046</cPais_rec>
+            <xPais_rec>Brasil</xPais_rec>
+        </enderReceb>
+    </receb>
+    <dest>
+        <CPF_dest>99999999999</CPF_dest>
+        <IE_dest />
+        <xNome_dest>CT-E EMITIDO EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL</xNome_dest>
+        <fone_dest>5599733466</fone_dest>
+        <email_dest>email@gmail.com.br</email_dest>
+        <enderDest>
+            <xLgr_dest>Rua Travessa</xLgr_dest>
+            <nro_dest>280</nro_dest>
+            <xCpl_dest>Próximo ao hospital</xCpl_dest>
+            <xBairro_dest>Rita</xBairro_dest>
+            <cMun_dest>4310405</cMun_dest>
+            <xMun_dest>Independencia</xMun_dest>
+            <CEP_dest>98910000</CEP_dest>
+            <UF_dest>RS</UF_dest>
+            <cPais_dest>1046</cPais_dest>
+            <xPais_dest>Brasil</xPais_dest>
+        </enderDest>
+    </dest>
+    <vPrest>
+        <vTPrest>32321.23</vTPrest>
+        <vRec>12312.23</vRec>
+        <Comp>
+            <compItem>
+                <xNome_comp>Componente 1</xNome_comp>
+                <vComp>812.44</vComp>
+            </compItem>
+            <compItem>
+                <xNome_comp>Componente 2</xNome_comp>
+                <vComp>1612.44</vComp>
+            </compItem>
+        </Comp>
+    </vPrest>
+    <imp>
+        <vTotImp>59.90</vTotImp>
+        <infAdFisco>Informacoes de interesse do fisco estarão escritas aqui</infAdFisco>
+        <ICMS>
+            <CST>00</CST>
+            <vBC>12</vBC>
+            <pICMS>13</pICMS>
+            <vICMS>1.56</vICMS>
+            <indSN>1</indSN>
+        </ICMS>
+    </imp>
+    <infCTeNorm>
+        <infCarga>
+            <vMerc>599.65</vMerc>
+            <proPred>Pepitas de ouro</proPred>
+            <xOutCat>Que valem mais do que dinheiro</xOutCat>
+            <infQ>
+                <infQItem>
+                    <cUnid>01</cUnid>
+                    <tpMed>PESO BASE DE CÁLCULO</tpMed>
+                    <qCarga>899</qCarga>
+                </infQItem>
+                <infQItem>
+                    <cUnid>01</cUnid>
+                    <tpMed>PESO BRUTO</tpMed>
+                    <qCarga>500</qCarga>
+                </infQItem>
+                <infQItem>
+                    <cUnid>00</cUnid>
+                    <tpMed>M3</tpMed>
+                    <qCarga>600</qCarga>
+                </infQItem>
+                <infQItem>
+                    <cUnid>03</cUnid>
+                    <tpMed>UNIDADE</tpMed>
+                    <qCarga>520</qCarga>
+                </infQItem>
+                <infQItem>
+                    <cUnid>05</cUnid>
+                    <tpMed>PESO AFERIDO</tpMed>
+                    <qCarga>332</qCarga>
+                </infQItem>
+            </infQ>
+            <vCargaAverb>200.00</vCargaAverb>
+        </infCarga>
+        <infDoc>
+            <infDocItem>
+                <tipoDocumento>1</tipoDocumento>
+                <mod_nf>01</mod_nf>
+                <serie_nf>445</serie_nf>
+                <nDoc_nf>887</nDoc_nf>
+                <dEmi_nf>2014-09-03</dEmi_nf>
+                <vBC_nf>99.01</vBC_nf>
+                <vICMS_nf>99.02</vICMS_nf>
+                <vBCST_nf>99.03</vBCST_nf>
+                <vST_nf>99.04</vST_nf>
+                <vProd_nf>99.05</vProd_nf>
+                <vNF_nf>99.06</vNF_nf>
+                <CFOP_nf>5352</CFOP_nf>
+                <UnidadesTransp>
+                    <UnidadesTranspItem>
+                        <tipoUnidTransporte>5</tipoUnidTransporte>
+                        <idUnidTransporte>BCIASUDX988</idUnidTransporte>
+                        <qtdRateada>999</qtdRateada>
+                        <LacresUnidTransp>
+                            <LacresUnidTranspItem>
+                                <nLacreUnidTransp>999</nLacreUnidTransp>
+                            </LacresUnidTranspItem>
+                        </LacresUnidTransp>
+                        <UnidadesCargaTran>
+                            <UnidadesCargaTranItem>
+                                <tipoUnidCargaTran>2</tipoUnidCargaTran>
+                                <idUnidCargaTran>22</idUnidCargaTran>
+                                <qtdRateadaCargaTran>10</qtdRateadaCargaTran>
+                                <LacresUnidCargaTran>
+                                    <LacresUnidCargaTranItem>
+                                        <nLacreUnidCargaTran>100</nLacreUnidCargaTran>
+                                    </LacresUnidCargaTranItem>
+                                </LacresUnidCargaTran>
+                            </UnidadesCargaTranItem>
+                        </UnidadesCargaTran>
+                    </UnidadesTranspItem>
+                </UnidadesTransp>
+            </infDocItem>
+        </infDoc>
+        <infModal>
+            <versaoModal>3.00</versaoModal>
+            <rodo>
+                <RNTRC>89173646</RNTRC>
+                <dPrev_rodo>2017-05-19</dPrev_rodo>
+                <occ>
+                    <occItem>
+                        <serie_occ>123</serie_occ>
+                        <nOcc>123456</nOcc>
+                        <dEmi_occ>2017-05-19</dEmi_occ>
+                        <emiOcc>
+                            <CNPJ_occ>99999999999999</CNPJ_occ>
+                            <cInt_occ>123</cInt_occ>
+                            <IE_occ>9999999999</IE_occ>
+                            <UF_occ>RS</UF_occ>
+                        </emiOcc>
+                    </occItem>
+                </occ>
+            </rodo>
+        </infModal>
+    </infCTeNorm>
+</Envio>

@@ -1,0 +1,10 @@
+<Inutilizacao>
+    <ModeloDocumento>CTe</ModeloDocumento>
+    <Versao>3.00</Versao>
+    <CnpjEmissor>99999999999999</CnpjEmissor>
+    <tpAmb>2</tpAmb>
+    <NumeroInicial>1</NumeroInicial>
+    <NumeroFinal>1</NumeroFinal>
+    <Serie>50</Serie>
+    <Justificativa>Inutilizacao por motivos de pulo de numeracao</Justificativa>
+</Inutilizacao>
