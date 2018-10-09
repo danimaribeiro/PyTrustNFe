@@ -19,7 +19,6 @@ def render_xml(path, template_name, remove_empty, **nfe):
     nfe = recursively_normalize(nfe)
     env = Environment(
         loader=FileSystemLoader(path), extensions=['jinja2.ext.with_'])
-
     env.filters["normalize"] = filters.strip_line_feed
     env.filters["normalize_str"] = filters.normalize_str
     env.filters["format_percent"] = filters.format_percent
@@ -28,10 +27,13 @@ def render_xml(path, template_name, remove_empty, **nfe):
     env.filters["comma"] = filters.format_with_comma
 
     template = env.get_template(template_name)
-    xml = template.render(**nfe)
+    xml = template.render(**nfe).replace('\n', '')
     parser = etree.XMLParser(remove_blank_text=True, remove_comments=True,
                              strip_cdata=False)
     root = etree.fromstring(xml, parser=parser)
+    for element in root.iter("*"):  # remove espaços em branco
+        if element.text is not None and not element.text.strip():
+            element.text = None
     if remove_empty:
         context = etree.iterwalk(root)
         for dummy, elem in context:
@@ -39,9 +41,6 @@ def render_xml(path, template_name, remove_empty, **nfe):
             if recursively_empty(elem):
                 parent.remove(elem)
         return root
-    for element in root.iter("*"):  # remove espaços em branco
-        if element.text is not None and not element.text.strip():
-            element.text = None
     return etree.tostring(root, encoding=str)
 
 

@@ -4,13 +4,11 @@
 
 
 import os
-import hashlib
-import binascii
 from lxml import etree
 from .assinatura import Assinatura
 from pytrustnfe.xml import render_xml, sanitize_response
 from pytrustnfe.utils import gerar_chave, ChaveNFe
-from pytrustnfe.Servidores import localizar_url, localizar_qrcode
+from pytrustnfe.Servidores import localizar_url
 from pytrustnfe.certificado import extract_cert_and_key_from_pfx, save_cert_key
 
 # Zeep
@@ -38,54 +36,6 @@ def _generate_nfe_id(**kwargs):
         item['infNFe']['ide']['cDV'] = chave_nfe[len(chave_nfe) - 1:]
 
 
-def _add_qrCode(xml, **kwargs):
-    xml = etree.fromstring(xml)
-    inf_nfe = kwargs['NFes'][0]['infNFe']
-    nfe = xml.find(".//{http://www.portalfiscal.inf.br/nfe}NFe")
-    infnfesupl = etree.Element('infNFeSupl')
-    qrcode = etree.Element('qrCode')
-    chave_nfe = inf_nfe['Id'][3:]
-    dh_emissao = binascii.hexlify(inf_nfe['ide']['dhEmi'].encode()).decode()
-    versao = '100'
-    ambiente = kwargs['ambiente']
-    valor_total = inf_nfe['total']['vNF']
-    dest_cpf = 'Inexistente'
-    dest = nfe.find(".//{http://www.portalfiscal.inf.br/nfe}dest")
-
-    if inf_nfe.get('dest', False):
-        if inf_nfe['dest'].get('CPF', False):
-            dest_cpf = inf_nfe['dest']['CPF']
-            dest = etree.Element('dest')
-            cpf = etree.Element('CPF')
-            cpf.text = dest_cpf
-            dest.append(cpf)
-
-    icms_total = inf_nfe['total']['vICMS']
-    dig_val = binascii.hexlify(xml.find(
-        ".//{http://www.w3.org/2000/09/xmldsig#}DigestValue").text.encode()).decode()
-    cid_token = kwargs['NFes'][0]['infNFe']['codigo_seguranca']['cid_token']
-    csc = kwargs['NFes'][0]['infNFe']['codigo_seguranca']['csc']
-
-    c_hash_QR_code = "chNFe={0}&nVersao={1}&tpAmb={2}&cDest={3}&dhEmi={4}&vNF\
-={5}&vICMS={6}&digVal={7}&cIdToken={8}{9}".\
-        format(chave_nfe, versao, ambiente, dest_cpf, dh_emissao,
-               valor_total, icms_total, dig_val, cid_token, csc)
-    c_hash_QR_code = hashlib.sha1(c_hash_QR_code.encode()).hexdigest()
-
-    QR_code_url = "?chNFe={0}&nVersao={1}&tpAmb={2}&{3}dhEmi={4}&vNF={5}&vICMS\
-={6}&digVal={7}&cIdToken={8}&cHashQRCode={9}".\
-        format(chave_nfe, versao, ambiente,
-               'cDest={}&'.format(dest_cpf) if dest_cpf != 'Inexistente'
-               else '', dh_emissao, valor_total, icms_total, dig_val,
-               cid_token, c_hash_QR_code)
-    qr_code_server = localizar_qrcode(kwargs['estado'], ambiente)
-    qrcode_text = qr_code_server + QR_code_url
-    qrcode.text = etree.CDATA(qrcode_text)
-    infnfesupl.append(qrcode)
-    nfe.insert(1, infnfesupl)
-    return etree.tostring(xml, encoding=str)
-
-
 def _render(certificado, method, sign, **kwargs):
     path = os.path.join(os.path.dirname(__file__), 'templates')
     xmlElem_send = render_xml(path, '%s.xml' % method, True, **kwargs)
@@ -107,9 +57,6 @@ def _render(certificado, method, sign, **kwargs):
             xml_send = signer.assina_xml(
                 xmlElem_send, kwargs['manifesto']['identificador'])
 
-        if modelo == '65':
-            xml_send = _add_qrCode(xml_send, **kwargs)
-
     else:
         xml_send = etree.tostring(xmlElem_send, encoding=str)
     return xml_send
@@ -129,7 +76,9 @@ def _send(certificado, method, **kwargs):
     session.verify = False
     transport = Transport(session=session)
 
-    xml = etree.fromstring(xml_send)
+    parser = etree.XMLParser(strip_cdata=False)
+    xml = etree.fromstring(xml_send, parser=parser)
+
     client = Client(base_url, transport=transport)
 
     port = next(iter(client.wsdl.port_types))
@@ -247,9 +196,7 @@ def xml_consulta_distribuicao_nfe(certificado, **kwargs):  # Assinar
     return _render(certificado, 'NFeDistribuicaoDFe', False, **kwargs)
 
 
-def consulta_distribuicao_nfe(certificado, **kwargs):
-    if "xml" not in kwargs:
-        kwargs['xml'] = xml_consulta_distribuicao_nfe(certificado, **kwargs)
+def _send_v310(certificado, **kwargs):
     xml_send = kwargs["xml"]
     base_url = localizar_url(
         'NFeDistribuicaoDFe',  kwargs['estado'], kwargs['modelo'],
@@ -280,6 +227,12 @@ def consulta_distribuicao_nfe(certificado, **kwargs):
         }
 
 
+def consulta_distribuicao_nfe(certificado, **kwargs):
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_consulta_distribuicao_nfe(certificado, **kwargs)
+    return _send_v310(certificado, **kwargs)
+
+
 def xml_download_nfe(certificado, **kwargs):  # Assinar
     return _render(certificado, 'NFeDistribuicaoDFe', False, **kwargs)
 
@@ -287,4 +240,4 @@ def xml_download_nfe(certificado, **kwargs):  # Assinar
 def download_nfe(certificado, **kwargs):
     if "xml" not in kwargs:
         kwargs['xml'] = xml_download_nfe(certificado, **kwargs)
-    return _send(certificado, 'NFeDistribuicaoDFe', **kwargs)
+    return _send_v310(certificado, **kwargs)

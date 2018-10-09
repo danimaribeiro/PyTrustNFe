@@ -55,6 +55,8 @@
       <CEP>{{ rps.tomador.cep }}</CEP>
     </EnderecoTomador>
     <Discriminacao>{{ rps.descricao|normalize|escape }}</Discriminacao>
+    <ValorCargaTributaria>{{ rps.valor_carga_tributaria }}</ValorCargaTributaria>
+    <FonteCargaTributaria>{{ rps.fonte_carga_tributaria }}</FonteCargaTributaria>
   </RPS>
   {% endfor %}
 </PedidoEnvioLoteRPS>

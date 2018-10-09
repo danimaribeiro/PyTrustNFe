@@ -79,6 +79,8 @@ def localizar_url(servico, estado, mod='55', ambiente=2):
     if sigla in ('AC', 'RN', 'PB', 'SC', 'RJ') and \
        servico == WS_NFE_CADASTRO:
         dominio = 'cad.svrs.rs.gov.br'
+    if sigla == 'AN' and servico == WS_NFE_RECEPCAO_EVENTO:
+        dominio = 'www.nfe.fazenda.gov.br'
 
     return "https://%s/%s" % (dominio, complemento)
 
@@ -152,7 +154,7 @@ SVRS = {
             WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento4.asmx?wsdl',
             WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao4.asmx?wsdl',
             WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao4.asmx?wsdl',  # noqa
-            WS_NFCE_QR_CODE: 'http://dec.fazenda.df.gov.br/ConsultarNFCe.aspx',
+            WS_NFCE_QR_CODE: 'http://dec.fazenda.df.gov.br/ConsultarNFCe.aspx?',
         },
         AMBIENTE_HOMOLOGACAO: {
             'servidor': 'nfce-homologacao.svrs.rs.gov.br',
@@ -162,7 +164,7 @@ SVRS = {
             WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento4.asmx?wsdl',
             WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao4.asmx?wsdl',
             WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao4.asmx?wsdl',  # noqa
-            WS_NFCE_QR_CODE: 'http://dec.fazenda.df.gov.br/ConsultarNFCe.aspx',
+            WS_NFCE_QR_CODE: 'http://dec.fazenda.df.gov.br/ConsultarNFCe.aspx?',
         }
     }
 }

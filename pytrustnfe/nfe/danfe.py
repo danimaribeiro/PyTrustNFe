@@ -80,6 +80,8 @@ def getdateByTimezone(cDateUTC, timezone=None):
 
 def format_number(cNumber):
     if cNumber:
+        # Vírgula para a separação de milhar e 2f para 2 casas decimais
+        cNumber = "{:,.2f}".format(float(cNumber))
         return cNumber.replace(",", "X").replace(".", ",").replace("X", ".")
     return ""
 
@@ -195,7 +197,8 @@ class danfe(object):
                 oXML=oXML, el_det=el_det, max_index=nId,
                 list_desc=list_desc, list_cod_prod=list_cod_prod)
 
-            self.adicionais(oXML=oXML)
+            tamanho_ocupado = self.calculo_issqn(oXML=oXML)
+            self.adicionais(oXML=oXML, tamanho_diminuir=tamanho_ocupado)
 
             # Gera o restante das páginas do XML
             while index < nId:
@@ -746,8 +749,8 @@ obsCont[@xCampo='NomeVendedor']")
                 tagtext(oNode=el_prod, cTag='qCom')))
             self.stringRight(nMr - 64.5, nLin, format_number(
                 tagtext(oNode=el_prod, cTag='vUnCom')))
-            self.stringRight(nMr - 50.5, nLin,
-                             tagtext(oNode=el_prod, cTag='vProd'))
+            self.stringRight(nMr - 50.5, nLin, format_number(
+                             tagtext(oNode=el_prod, cTag='vProd')))
             self.stringRight(nMr - 38.5, nLin, format_number(vBC))
             self.stringRight(nMr - 26.5, nLin, format_number(vICMS))
             self.stringRight(nMr - 7.5, nLin, format_number(pICMS))
@@ -777,7 +780,49 @@ obsCont[@xCampo='NomeVendedor']")
         self.nlin += nH + 3
         return id
 
-    def adicionais(self, oXML=None):
+    def calculo_issqn(self, oXML=None):
+        elem_emit = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}emit")
+        el_total = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}total")
+        issqn_total = el_total.find(
+            ".//{http://www.portalfiscal.inf.br/nfe}ISSQNtot")
+        if not issqn_total:
+            return 0
+
+        self.nlin += 1
+        nMr = self.width - self.nRight
+        self.canvas.setFont('NimbusSanL-Bold', 7)
+        self.string(self.nLeft + 1, self.nlin + 1, 'CÁLCULO DO ISSQN')
+        self.rect(self.nLeft, self.nlin + 2,
+                  self.width - self.nLeft - self.nRight, 5.5)
+        self.vline(nMr - 47.5, self.nlin + 2, 5.5)
+        self.vline(nMr - 95, self.nlin + 2, 5.5)
+        self.vline(nMr - 142.5, self.nlin + 2, 5.5)
+        self.vline(nMr - 190, self.nlin + 2, 5.5)
+        # Labels
+        self.canvas.setFont('NimbusSanL-Regu', 5)
+        self.string(self.nLeft + 1, self.nlin + 3.8, 'INSCRIÇÃO MUNICIPAL')
+        self.string(nMr - 141.5, self.nlin + 3.8, 'VALOR TOTAL DOS SERVIÇOS')
+        self.string(nMr - 94, self.nlin + 3.8, 'BASE DE CÁLCULO DO ISSQN')
+        self.string(nMr - 46.5, self.nlin + 3.8, 'VALOR DO ISSQN')
+        # Conteúdo campos
+        self.canvas.setFont('NimbusSanL-Regu', 8)
+        self.string(
+            self.nLeft + 1, self.nlin + 6.7,
+            tagtext(oNode=elem_emit, cTag='IM'))
+        self.stringRight(
+            self.nLeft + 94, self.nlin + 6.7,
+            format_number(tagtext(oNode=issqn_total, cTag='vServ')))
+        self.stringRight(
+            self.nLeft + 141.5, self.nlin + 6.7,
+            format_number(tagtext(oNode=issqn_total, cTag='vBC')))
+        self.stringRight(
+            self.nLeft + 189, self.nlin + 6.7,
+            format_number(tagtext(oNode=issqn_total, cTag='vISS')))
+
+        self.nlin += 8   # Nr linhas ocupadas pelo bloco
+        return 8
+
+    def adicionais(self, oXML=None, tamanho_diminuir=0):
         el_infAdic = oXML.find(
             ".//{http://www.portalfiscal.inf.br/nfe}infAdic")
 
@@ -789,8 +834,8 @@ obsCont[@xCampo='NomeVendedor']")
                     'INFORMAÇÕES COMPLEMENTARES')
         self.string((self.width / 2) + 1, self.nlin + 4, 'RESERVADO AO FISCO')
         self.rect(self.nLeft, self.nlin + 2,
-                  self.width - self.nLeft - self.nRight, 42)
-        self.vline(self.width / 2, self.nlin + 2, 42)
+                  self.width - self.nLeft - self.nRight, 42 - tamanho_diminuir)
+        self.vline(self.width / 2, self.nlin + 2, 42 - tamanho_diminuir)
         # Conteúdo campos
         styles = getSampleStyleSheet()
         styleN = styles['Normal']
@@ -984,4 +1029,3 @@ obsCont[@xCampo='NomeVendedor']")
         paragraph = Paragraph(ptext, style=style)
         w, h = paragraph.wrapOn(self.canvas, x, y)
         return w, h, paragraph
-
