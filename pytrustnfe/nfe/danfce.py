@@ -197,7 +197,7 @@ class danfce(object):
         valor_a_pagar = format_number(
             tagtext(oNode=el_total, cTag='vNF'), precision=2)
         el_pag = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}pag")
-        troco = format_number(tagtext(oNode=el_pag, cTag="vTroco"))
+        troco = tagtext(oNode=el_pag, cTag="vTroco")
 
         payment_method_list = {'01': 'Dinheiro',
                                '02': 'Cheque',
@@ -221,7 +221,7 @@ class danfce(object):
             tipo_pagamento = tagtext(oNode=item, cTag="tPag")
             val = format_number(tagtext(oNode=item, cTag="vPag"), precision=2)
 
-            method = payment_method_list[tipo_pagamento]
+            method = payment_method_list.get(tipo_pagamento)
 
             payment.append(method)
             payment.append(val)
@@ -242,13 +242,14 @@ class danfce(object):
         self.drawLine()
 
     def draw_totals_table(self, values):
-        rowHeights = [7, 7, 7, 7, 10]
-        data = [['QTD.TOTAL DE ITENS', values['quantidade_itens']],
+        rowHeights = [7, 7, 7, 7, 7]
+        data = [
+                ['QTD.TOTAL DE ITENS', values['quantidade_itens']],
                 ['VALOR TOTAL R$', values['valor_total']],
                 ['DESCONTO R$', values['desconto']],
                 ['VALOR A PAGAR R$', values['valor_a_pagar']],
                 ['FORMA DE PAGAMENTO', 'VALOR PAGO R$'],
-                ]
+               ]
 
         for item in values['formas_de_pagamento']:
             data.append([item[0], item[1]])

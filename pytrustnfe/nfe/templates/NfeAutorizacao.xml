@@ -832,8 +832,8 @@
                         <cAut>{{ pag.card.cAut }}</cAut>
                     </card>
                     {% endif %}
-                    <vTroco>{{ pag.vTroco }}</vTroco>
                 </detPag>
+                <vTroco>{{ pag.vTroco }}</vTroco>
                 {% endfor %}
             </pag>
             {% endif %}
