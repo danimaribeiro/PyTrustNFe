@@ -47,7 +47,7 @@ def _send(certificado, method, **kwargs):
     client = Client(base_url, transport=transport)
     response = client.service[method](xml_send)
 
-    response, obj = sanitize_response(response.encode('utf-8'))
+    response, obj = sanitize_response(response)
     return {
         'sent_xml': str(xml_send),
         'received_xml': str(response),

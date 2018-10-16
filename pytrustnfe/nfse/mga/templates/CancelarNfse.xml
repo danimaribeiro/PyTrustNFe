@@ -1,6 +1,6 @@
-<CancelarNfseEnvio xmlns="http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd">
+<CancelarNfseEnvio xmlns="http://www.abrasf.org.br/nfse.xsd">
     <Pedido>
-        <InfPedidoCancelamento Id="pedidoCancelamento_{{ cancelamento.numero_nfse }}">
+        <InfPedidoCancelamento Id="Cancelamento_NF{{ cancelamento.numero_nfse }}">
             <IdentificacaoNfse>
                 <Numero>{{ cancelamento.numero_nfse }}</Numero>
                 <CpfCnpj>
