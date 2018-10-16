@@ -193,6 +193,7 @@ class danfe(object):
 
             self.impostos(oXML=oXML)
             self.transportes(oXML=oXML)
+
             index = self.produtos(
                 oXML=oXML, el_det=el_det, max_index=nId,
                 list_desc=list_desc, list_cod_prod=list_cod_prod)
@@ -667,6 +668,9 @@ obsCont[@xCampo='NomeVendedor']")
         nStep = 2.5  # Passo entre linhas
         nH = 7.5 + (nHeight * nStep)  # cabeçalho 7.5
         self.nlin += 1
+        # nH é o altura da linha vertical, utilizar como referência
+        # somar a ele a altura atual que é nlin
+        maxHeight = self.nlin + nH
 
         self.canvas.setFont('NimbusSanL-Bold', 7)
         self.string(self.nLeft + 1, self.nlin + 1, 'DADOS DO PRODUTO/SERVIÇO')
@@ -712,11 +716,13 @@ obsCont[@xCampo='NomeVendedor']")
 
         # Conteúdo campos
         self.canvas.setFont('NimbusSanL-Regu', 5)
-        nLin = self.nlin + 10.5
+        nLin = self.nlin + 10.0
 
         for id in range(index, max_index + 1):
 
-            if nLin > 237:
+            line_height = max(len(list_cod_prod[id]), len(list_desc[id]))
+            line_height *= nStep
+            if nLin + line_height > maxHeight:
                 break
 
             item = el_det[id]
@@ -832,10 +838,10 @@ obsCont[@xCampo='NomeVendedor']")
         self.canvas.setFont('NimbusSanL-Regu', 5)
         self.string(self.nLeft + 1, self.nlin + 4,
                     'INFORMAÇÕES COMPLEMENTARES')
-        self.string((self.width / 2) + 1, self.nlin + 4, 'RESERVADO AO FISCO')
+        self.string(((self.width / 3) * 2) + 1, self.nlin + 4, 'RESERVADO AO FISCO')
         self.rect(self.nLeft, self.nlin + 2,
                   self.width - self.nLeft - self.nRight, 42 - tamanho_diminuir)
-        self.vline(self.width / 2, self.nlin + 2, 42 - tamanho_diminuir)
+        self.vline((self.width / 3) * 2, self.nlin + 2, 42 - tamanho_diminuir)
         # Conteúdo campos
         styles = getSampleStyleSheet()
         styleN = styles['Normal']
@@ -847,7 +853,7 @@ obsCont[@xCampo='NomeVendedor']")
         if fisco:
             observacoes = fisco + ' ' + observacoes
         P = Paragraph(observacoes, styles['Normal'])
-        w, h = P.wrap(92 * mm, 32 * mm)
+        w, h = P.wrap(128 * mm, 32 * mm)
         altura = (self.height - self.nlin - 5) * mm
         P.drawOn(self.canvas, (self.nLeft + 1) * mm, altura - h)
         self.nlin += 36
