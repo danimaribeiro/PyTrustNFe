@@ -6,6 +6,7 @@
 import os
 from io import BytesIO
 from textwrap import wrap
+import math
 
 from reportlab.lib import utils
 from reportlab.pdfgen import canvas
@@ -40,7 +41,6 @@ def format_cnpj_cpf(value):
 
 
 def getdateByTimezone(cDateUTC, timezone=None):
-
     '''
     Esse método trata a data recebida de acordo com o timezone do
     usuário. O seu retorno é dividido em duas partes:
@@ -80,6 +80,8 @@ def getdateByTimezone(cDateUTC, timezone=None):
 
 def format_number(cNumber):
     if cNumber:
+        # Vírgula para a separação de milhar e 2f para 2 casas decimais
+        cNumber = "{:,.2f}".format(float(cNumber))
         return cNumber.replace(",", "X").replace(".", ",").replace("X", ".")
     return ""
 
@@ -128,10 +130,13 @@ class danfe(object):
         self.nBottom = 8
         self.nlin = self.nTop
         self.logo = logo
-        self.oFrete = {'0': '0 - Emitente',
-                       '1': '1 - Destinatário',
-                       '2': '2 - Terceiros',
-                       '9': '9 - Sem Frete'}
+        self.oFrete = {
+            '0': '0 - Contratação por conta do Remetente (CIF)',
+            '1': '1 - Contratação por conta do Destinatário (FOB)',
+            '2': '2 - Contratação por conta de Terceiros',
+            '3': '3 - Transporte Próprio por conta do Remetente',
+            '4': '4 - Transporte Próprio por conta do Destinatário',
+            '9': '9 - Sem Ocorrência de Transporte'}
 
         self.oPDF_IO = BytesIO()
         if orientation == 'landscape':
@@ -150,16 +155,15 @@ class danfe(object):
             self.NrPages = 1
             self.Page = 1
 
-            # Calculando total linhas usadas para descrições dos itens
-            # Com bloco fatura, apenas 25 linhas para itens na primeira folha
-            nNr_Lin_Pg_1 = 30 if oXML_cobr is None else 26
-            # [ rec_ini , rec_fim , lines , limit_lines ]
-            oPaginator = [[0, 0, 0, nNr_Lin_Pg_1]]
             el_det = oXML.findall(".//{http://www.portalfiscal.inf.br/nfe}det")
+
+            # Declaring variable to prevent future errors
+            nId = 0
+
             if el_det is not None:
                 list_desc = []
                 list_cod_prod = []
-                nPg = 0
+
                 for nId, item in enumerate(el_det):
                     el_prod = item.find(
                         ".//{http://www.portalfiscal.inf.br/nfe}prod")
@@ -174,21 +178,9 @@ class danfe(object):
                     list_cProd = wrap(tagtext(oNode=el_prod, cTag='cProd'), 14)
                     list_cod_prod.append(list_cProd)
 
-                    # Nr linhas necessárias p/ descrição item
-                    nLin_Itens = len(list_)
-
-                    if (oPaginator[nPg][2] + nLin_Itens) >= oPaginator[nPg][3]:
-                        oPaginator.append([0, 0, 0, 77])
-                        nPg += 1
-                        oPaginator[nPg][0] = nId
-                        oPaginator[nPg][1] = nId + 1
-                        oPaginator[nPg][2] = nLin_Itens
-                    else:
-                        # adiciona-se 1 pelo funcionamento de xrange
-                        oPaginator[nPg][1] = nId + 1
-                        oPaginator[nPg][2] += nLin_Itens
-
-                self.NrPages = len(oPaginator)   # Calculando nr. páginas
+                # Calculando nr. aprox. de páginas
+                if nId > 25:
+                    self.NrPages += math.ceil((nId - 25) / 70)
 
             if recibo:
                 self.recibo_entrega(oXML=oXML, timezone=timezone)
@@ -201,18 +193,23 @@ class danfe(object):
 
             self.impostos(oXML=oXML)
             self.transportes(oXML=oXML)
-            self.produtos(oXML=oXML, el_det=el_det, oPaginator=oPaginator[0],
-                          list_desc=list_desc, list_cod_prod=list_cod_prod)
 
-            self.adicionais(oXML=oXML)
+            index = self.produtos(
+                oXML=oXML, el_det=el_det, max_index=nId,
+                list_desc=list_desc, list_cod_prod=list_cod_prod)
+
+            tamanho_ocupado = self.calculo_issqn(oXML=oXML)
+            self.adicionais(oXML=oXML, tamanho_diminuir=tamanho_ocupado)
 
             # Gera o restante das páginas do XML
-            for oPag in oPaginator[1:]:
+            while index < nId:
                 self.newpage()
                 self.ide_emit(oXML=oXML, timezone=timezone)
-                self.produtos(oXML=oXML, el_det=el_det, oPaginator=oPag,
-                              list_desc=list_desc, nHeight=77,
-                              list_cod_prod=list_cod_prod)
+                index = self.produtos(
+                    oXML=oXML, el_det=el_det, index=index,
+                    max_index=nId,
+                    list_desc=list_desc, nHeight=77,
+                    list_cod_prod=list_cod_prod)
 
             self.newpage()
         if cce_xml:
@@ -323,7 +320,7 @@ class danfe(object):
         P = Paragraph(tagtext(oNode=elem_emit, cTag='xNome'), styleN)
         w, h = P.wrap(55 * mm, 40 * mm)
         P.drawOn(self.canvas, (self.nLeft + 30) * mm,
-                 (self.height - self.nlin - ((4.3*h + 12)/12)) * mm)
+                 (self.height - self.nlin - ((4.3 * h + 12) / 12)) * mm)
 
         if self.logo:
             img = get_image(self.logo, width=2 * cm)
@@ -596,25 +593,26 @@ obsCont[@xCampo='NomeVendedor']")
                   self.width - self.nLeft - self.nRight, 20)
         self.hline(self.nLeft, self.nlin + 8.6, self.width - self.nLeft)
         self.hline(self.nLeft, self.nlin + 15.2, self.width - self.nLeft)
-        self.vline(nMr - 40, self.nlin + 2, 13.2)
-        self.vline(nMr - 49, self.nlin + 2, 20)
-        self.vline(nMr - 92, self.nlin + 2, 6.6)
-        self.vline(nMr - 120, self.nlin + 2, 6.6)
-        self.vline(nMr - 75, self.nlin + 2, 6.6)
+        self.vline(nMr - 26, self.nlin + 2, 13.2)
+        self.vline(nMr - 33, self.nlin + 2, 13.2)
+        self.vline(nMr - 67, self.nlin + 2, 6.6)
+        self.vline(nMr - 123, self.nlin + 2, 6.6)
+        self.vline(nMr - 53, self.nlin + 2, 6.6)
         self.vline(nMr - 26, self.nlin + 15.2, 6.6)
+        self.vline(nMr - 49, self.nlin + 15.2, 6.6)
         self.vline(nMr - 102, self.nlin + 8.6, 6.6)
         self.vline(nMr - 85, self.nlin + 15.2, 6.6)
         self.vline(nMr - 121, self.nlin + 15.2, 6.6)
         self.vline(nMr - 160, self.nlin + 15.2, 6.6)
         # Labels/Fields
-        self.string(nMr - 39, self.nlin + 3.8, 'CNPJ/CPF')
-        self.string(nMr - 74, self.nlin + 3.8, 'PLACA DO VEÍCULO')
-        self.string(nMr - 91, self.nlin + 3.8, 'CÓDIGO ANTT')
-        self.string(nMr - 119, self.nlin + 3.8, 'FRETE POR CONTA')
+        self.string(nMr - 25, self.nlin + 3.8, 'CNPJ/CPF')
+        self.string(nMr - 52, self.nlin + 3.8, 'PLACA DO VEÍCULO')
+        self.string(nMr - 66, self.nlin + 3.8, 'CÓDIGO ANTT')
+        self.string(nMr - 122, self.nlin + 3.8, 'FRETE POR CONTA')
         self.string(self.nLeft + 1, self.nlin + 3.8, 'RAZÃO SOCIAL')
-        self.string(nMr - 48, self.nlin + 3.8, 'UF')
-        self.string(nMr - 39, self.nlin + 10.3, 'INSCRIÇÃO ESTADUAL')
-        self.string(nMr - 48, self.nlin + 10.3, 'UF')
+        self.string(nMr - 32, self.nlin + 3.8, 'UF')
+        self.string(nMr - 25, self.nlin + 10.3, 'INSCRIÇÃO ESTADUAL')
+        self.string(nMr - 32, self.nlin + 10.3, 'UF')
         self.string(nMr - 101, self.nlin + 10.3, 'MUNICÍPIO')
         self.string(self.nLeft + 1, self.nlin + 10.3, 'ENDEREÇO')
         self.string(nMr - 48, self.nlin + 17, 'PESO BRUTO')
@@ -624,26 +622,27 @@ obsCont[@xCampo='NomeVendedor']")
         self.string(nMr - 159, self.nlin + 17, 'ESPÉCIE')
         self.string(self.nLeft + 1, self.nlin + 17, 'QUANTIDADE')
         # Conteúdo campos
-        self.canvas.setFont('NimbusSanL-Regu', 8)
+        self.canvas.setFont('NimbusSanL-Regu', 7)
         self.string(self.nLeft + 1, self.nlin + 7.7,
-                    tagtext(oNode=el_transp, cTag='xNome')[:40])
-        self.string(self.nLeft + 71, self.nlin + 7.7,
+                    tagtext(oNode=el_transp, cTag='xNome')[:42])
+        self.string(self.nLeft + 68, self.nlin + 7.7,
                     self.oFrete[tagtext(oNode=el_transp, cTag='modFrete')])
-        self.string(self.nLeft + 99, self.nlin + 7.7,
+        self.string(self.nLeft + 122, self.nlin + 7.7,
                     tagtext(oNode=el_transp, cTag='RNTC'))
-        self.string(self.nLeft + 116, self.nlin + 7.7,
+        self.string(self.nLeft + 136, self.nlin + 7.7,
                     tagtext(oNode=el_transp, cTag='placa'))
-        self.string(self.nLeft + 142, self.nlin + 7.7,
+        self.string(self.nLeft + 157, self.nlin + 7.7,
                     tagtext(oNode=veic_transp, cTag='UF'))
-        self.string(nMr - 39, self.nlin + 7.7,
+        self.string(nMr - 25, self.nlin + 7.7,
                     format_cnpj_cpf(tagtext(oNode=el_transp, cTag='CNPJ')))
+        self.canvas.setFont('NimbusSanL-Regu', 8)
         self.string(self.nLeft + 1, self.nlin + 14.2,
                     tagtext(oNode=el_transp, cTag='xEnder')[:45])
         self.string(self.nLeft + 89, self.nlin + 14.2,
                     tagtext(oNode=el_transp, cTag='xMun'))
-        self.string(nMr - 48, self.nlin + 14.2,
+        self.string(nMr - 32, self.nlin + 14.2,
                     tagtext(oNode=el_transp, cTag='UF'))
-        self.string(nMr - 39, self.nlin + 14.2,
+        self.string(nMr - 25, self.nlin + 14.2,
                     tagtext(oNode=el_transp, cTag='IE'))
         self.string(self.nLeft + 1, self.nlin + 21.2,
                     tagtext(oNode=el_transp, cTag='qVol'))
@@ -662,13 +661,16 @@ obsCont[@xCampo='NomeVendedor']")
 
         self.nlin += 23
 
-    def produtos(self, oXML=None, el_det=None, oPaginator=None,
+    def produtos(self, oXML=None, el_det=None, index=0, max_index=0,
                  list_desc=None, list_cod_prod=None, nHeight=29):
 
         nMr = self.width - self.nRight
         nStep = 2.5  # Passo entre linhas
         nH = 7.5 + (nHeight * nStep)  # cabeçalho 7.5
         self.nlin += 1
+        # nH é o altura da linha vertical, utilizar como referência
+        # somar a ele a altura atual que é nlin
+        maxHeight = self.nlin + nH
 
         self.canvas.setFont('NimbusSanL-Bold', 7)
         self.string(self.nLeft + 1, self.nlin + 1, 'DADOS DO PRODUTO/SERVIÇO')
@@ -714,9 +716,15 @@ obsCont[@xCampo='NomeVendedor']")
 
         # Conteúdo campos
         self.canvas.setFont('NimbusSanL-Regu', 5)
-        nLin = self.nlin + 10.5
+        nLin = self.nlin + 10.0
 
-        for id in range(oPaginator[0], oPaginator[1]):
+        for id in range(index, max_index + 1):
+
+            line_height = max(len(list_cod_prod[id]), len(list_desc[id]))
+            line_height *= nStep
+            if nLin + line_height > maxHeight:
+                break
+
             item = el_det[id]
             el_prod = item.find(".//{http://www.portalfiscal.inf.br/nfe}prod")
             el_imp = item.find(
@@ -747,8 +755,8 @@ obsCont[@xCampo='NomeVendedor']")
                 tagtext(oNode=el_prod, cTag='qCom')))
             self.stringRight(nMr - 64.5, nLin, format_number(
                 tagtext(oNode=el_prod, cTag='vUnCom')))
-            self.stringRight(nMr - 50.5, nLin,
-                             tagtext(oNode=el_prod, cTag='vProd'))
+            self.stringRight(nMr - 50.5, nLin, format_number(
+                             tagtext(oNode=el_prod, cTag='vProd')))
             self.stringRight(nMr - 38.5, nLin, format_number(vBC))
             self.stringRight(nMr - 26.5, nLin, format_number(vICMS))
             self.stringRight(nMr - 7.5, nLin, format_number(pICMS))
@@ -776,8 +784,51 @@ obsCont[@xCampo='NomeVendedor']")
             self.canvas.setStrokeColor(black)
 
         self.nlin += nH + 3
+        return id
 
-    def adicionais(self, oXML=None):
+    def calculo_issqn(self, oXML=None):
+        elem_emit = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}emit")
+        el_total = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}total")
+        issqn_total = el_total.find(
+            ".//{http://www.portalfiscal.inf.br/nfe}ISSQNtot")
+        if not issqn_total:
+            return 0
+
+        self.nlin += 1
+        nMr = self.width - self.nRight
+        self.canvas.setFont('NimbusSanL-Bold', 7)
+        self.string(self.nLeft + 1, self.nlin + 1, 'CÁLCULO DO ISSQN')
+        self.rect(self.nLeft, self.nlin + 2,
+                  self.width - self.nLeft - self.nRight, 5.5)
+        self.vline(nMr - 47.5, self.nlin + 2, 5.5)
+        self.vline(nMr - 95, self.nlin + 2, 5.5)
+        self.vline(nMr - 142.5, self.nlin + 2, 5.5)
+        self.vline(nMr - 190, self.nlin + 2, 5.5)
+        # Labels
+        self.canvas.setFont('NimbusSanL-Regu', 5)
+        self.string(self.nLeft + 1, self.nlin + 3.8, 'INSCRIÇÃO MUNICIPAL')
+        self.string(nMr - 141.5, self.nlin + 3.8, 'VALOR TOTAL DOS SERVIÇOS')
+        self.string(nMr - 94, self.nlin + 3.8, 'BASE DE CÁLCULO DO ISSQN')
+        self.string(nMr - 46.5, self.nlin + 3.8, 'VALOR DO ISSQN')
+        # Conteúdo campos
+        self.canvas.setFont('NimbusSanL-Regu', 8)
+        self.string(
+            self.nLeft + 1, self.nlin + 6.7,
+            tagtext(oNode=elem_emit, cTag='IM'))
+        self.stringRight(
+            self.nLeft + 94, self.nlin + 6.7,
+            format_number(tagtext(oNode=issqn_total, cTag='vServ')))
+        self.stringRight(
+            self.nLeft + 141.5, self.nlin + 6.7,
+            format_number(tagtext(oNode=issqn_total, cTag='vBC')))
+        self.stringRight(
+            self.nLeft + 189, self.nlin + 6.7,
+            format_number(tagtext(oNode=issqn_total, cTag='vISS')))
+
+        self.nlin += 8   # Nr linhas ocupadas pelo bloco
+        return 8
+
+    def adicionais(self, oXML=None, tamanho_diminuir=0):
         el_infAdic = oXML.find(
             ".//{http://www.portalfiscal.inf.br/nfe}infAdic")
 
@@ -787,10 +838,10 @@ obsCont[@xCampo='NomeVendedor']")
         self.canvas.setFont('NimbusSanL-Regu', 5)
         self.string(self.nLeft + 1, self.nlin + 4,
                     'INFORMAÇÕES COMPLEMENTARES')
-        self.string((self.width / 2) + 1, self.nlin + 4, 'RESERVADO AO FISCO')
+        self.string(((self.width / 3) * 2) + 1, self.nlin + 4, 'RESERVADO AO FISCO')
         self.rect(self.nLeft, self.nlin + 2,
-                  self.width - self.nLeft - self.nRight, 42)
-        self.vline(self.width / 2, self.nlin + 2, 42)
+                  self.width - self.nLeft - self.nRight, 42 - tamanho_diminuir)
+        self.vline((self.width / 3) * 2, self.nlin + 2, 42 - tamanho_diminuir)
         # Conteúdo campos
         styles = getSampleStyleSheet()
         styleN = styles['Normal']
@@ -802,7 +853,7 @@ obsCont[@xCampo='NomeVendedor']")
         if fisco:
             observacoes = fisco + ' ' + observacoes
         P = Paragraph(observacoes, styles['Normal'])
-        w, h = P.wrap(92 * mm, 32 * mm)
+        w, h = P.wrap(128 * mm, 32 * mm)
         altura = (self.height - self.nlin - 5) * mm
         P.drawOn(self.canvas, (self.nLeft + 1) * mm, altura - h)
         self.nlin += 36
