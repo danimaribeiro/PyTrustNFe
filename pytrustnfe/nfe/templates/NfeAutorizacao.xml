@@ -101,7 +101,7 @@
                 <CRT>{{ emit.CRT }}</CRT>
                 {% endwith %}
             </emit>
-            {% if NFe.infNFe.dest is defined and NFe.infNFe.dest %}
+            {% if NFe.infNFe.dest is defined %}
             <dest>
                 {% with dest = NFe.infNFe.dest %}
                 {% if NFe.infNFe.ide.idDest == '3' %}
@@ -116,6 +116,7 @@
                     {% endif %}
                 {% endif %}
                 <xNome>{{ dest.xNome|normalize|escape }}</xNome>
+                {% if dest.enderDest is defined %}
                 <enderDest>
                     <xLgr>{{ dest.enderDest.xLgr|normalize|escape }}</xLgr>
                     <nro>{{ dest.enderDest.nro }}</nro>
@@ -129,6 +130,7 @@
                     <xPais>{{ dest.enderDest.xPais }}</xPais>
                     <fone>{{ dest.enderDest.fone }}</fone>
                 </enderDest>
+                {% endif %}
                 <indIEDest>{{ dest.indIEDest }}</indIEDest>
                 {% if dest.IE != '' -%}<IE>{{ dest.IE }}</IE>{% endif %}
                 <ISUF>{{ dest.ISUF }}</ISUF>
