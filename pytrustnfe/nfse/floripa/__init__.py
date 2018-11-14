@@ -112,7 +112,6 @@ def consultar_nota(certificado, **kwargs):
     headers = {"Accept": "application/json",
                "Authorization": "Bearer %s" % kwargs['access_token']}
     r = requests.get(url, headers=headers)
-    print(r.status_code)
     if r.status_code == 200:
         return r.text
     else:
