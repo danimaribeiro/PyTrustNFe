@@ -54,10 +54,10 @@ def _send(certificado, method, **kwargs):
 
     response = client.service[method](xml_cabecalho, xml_send)
 
-    response, obj = sanitize_response(response.encode('utf-8'))
+    response, obj = sanitize_response(response)
     return {
         'sent_xml': xml_send,
-        'received_xml': response.decode('utf-8'),
+        'received_xml': response,
         'object': obj
     }
 
