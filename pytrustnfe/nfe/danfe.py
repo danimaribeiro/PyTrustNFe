@@ -761,10 +761,8 @@ obsCont[@xCampo='NomeVendedor']")
             self.stringRight(nMr - 26.5, nLin, format_number(vICMS))
             self.stringRight(nMr - 7.5, nLin, format_number(pICMS))
 
-            if vIPI:
-                self.stringRight(nMr - 14.5, nLin, format_number(vIPI))
-            if pIPI:
-                self.stringRight(nMr - 0.5, nLin, format_number(pIPI))
+            self.stringRight(nMr - 14.5, nLin, format_number(vIPI or '0.00'))
+            self.stringRight(nMr - 0.5, nLin, format_number(pIPI or '0.00'))
 
             # Código Item
             line_cod = nLin
