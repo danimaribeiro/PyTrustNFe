@@ -4,12 +4,15 @@
 
 
 import os
+import requests
 from lxml import etree
 from .assinatura import Assinatura
 from pytrustnfe.xml import render_xml, sanitize_response
 from pytrustnfe.utils import gerar_chave, ChaveNFe
 from pytrustnfe.Servidores import localizar_url
 from pytrustnfe.certificado import extract_cert_and_key_from_pfx, save_cert_key
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+
 
 # Zeep
 from requests import Session
@@ -89,6 +92,7 @@ def _send(certificado, method, **kwargs):
     if namespaceNFe is not None:
         namespaceNFe.set('xmlns', 'http://www.portalfiscal.inf.br/nfe')
 
+    requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
     with client.settings(raw_response=True):
         response = client.service[first_operation](xml)
         response, obj = sanitize_response(response.text)
