@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 
-VERSION = "1.0.25"
+VERSION = "1.0.26"
 
 
 setup(
@@ -12,7 +12,7 @@ setup(
     author_email='danimaribeiro@gmail.com',
     keywords=['nfe', 'mdf-e'],
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Plugins',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU Lesser General Public License v2 or \
