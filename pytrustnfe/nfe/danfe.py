@@ -329,6 +329,7 @@ class danfe(object):
 
         cEnd = tagtext(oNode=elem_emit, cTag='xLgr') + ', ' + tagtext(
             oNode=elem_emit, cTag='nro') + ' - '
+        cEnd += tagtext(oNode=elem_emit, cTag='xCpl') + ' - '
         cEnd += tagtext(oNode=elem_emit, cTag='xBairro') + '<br />' + tagtext(
             oNode=elem_emit, cTag='xMun') + ' - '
         cEnd += 'Fone: ' + tagtext(oNode=elem_emit, cTag='fone') + '<br />'
@@ -416,8 +417,9 @@ class danfe(object):
         cDt, cHr = getdateByTimezone(
             tagtext(oNode=elem_ide, cTag='dhSaiEnt'), timezone)
         self.string(nMr - 24, self.nlin + 14.3, cDt + ' ' + cHr)  # Dt saída
-        cEnd = tagtext(oNode=elem_dest, cTag='xLgr') + ', ' + tagtext(
-            oNode=elem_dest, cTag='nro')
+        cEnd = '%s, %s %s' % (tagtext(oNode=elem_dest, cTag='xLgr'),
+                              tagtext(oNode=elem_dest, cTag='nro'),
+                              tagtext(oNode=elem_dest, cTag='xCpl'))
         self.string(self.nLeft + 1, self.nlin + 14.3, cEnd)
         self.string(nMr - 98, self.nlin + 14.3,
                     tagtext(oNode=elem_dest, cTag='xBairro'))
@@ -895,6 +897,7 @@ obsCont[@xCampo='NomeVendedor']")
         cEnd = tagtext(oNode=el_dest, cTag='xNome') + ' - '
         cEnd += tagtext(oNode=el_dest, cTag='xLgr') + ', ' + tagtext(
             oNode=el_dest, cTag='nro') + ', '
+        cEnd += tagtext(oNode=el_dest, cTag='xCpl') + ' '
         cEnd += tagtext(oNode=el_dest, cTag='xBairro') + ', ' + tagtext(
             oNode=el_dest, cTag='xMun') + ' - '
         cEnd += tagtext(oNode=el_dest, cTag='UF')
