@@ -1,4 +1,4 @@
-<CancelarNfseEnvio xmlns="http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd">
+<CancelarNfseEnvio xmlns="http://www.abrasf.org.br/nfse.xsd">
     <Pedido xmlns="http://www.abrasf.org.br/nfse.xsd">
         <InfPedidoCancelamento Id="pedidoCancelamento_{{ cancelamento.numero_nfse }}">
             <IdentificacaoNfse>
@@ -7,7 +7,7 @@
                 <InscricaoMunicipal>{{ cancelamento.inscricao_municipal }}</InscricaoMunicipal>
                 <CodigoMunicipio>{{ cancelamento.cidade }}</CodigoMunicipio>
             </IdentificacaoNfse>
-            <CodigoCancelamento>1</CodigoCancelamento>
+            <CodigoCancelamento>2</CodigoCancelamento>
         </InfPedidoCancelamento>
     </Pedido>
 </CancelarNfseEnvio>
