@@ -17,15 +17,17 @@ def _render(certificado, method, **kwargs):
     xml_send = render_xml(path, '%s.xml' % method, True, **kwargs)
 
     reference = ''
+    ref_lote = ''
     if method == 'GerarNfse':
         reference = 'rps:%s' % kwargs['rps']['numero']
         ref_lote = 'lote%s' % kwargs['rps']['numero_lote']
     elif method == 'CancelarNfse':
-        reference = 'Cancelamento_NF%s' % kwargs['cancelamento']['numero_nfse']
+        reference = 'pedidoCancelamento_%s' % kwargs['cancelamento']['numero_nfse']
 
     signer = Assinatura(certificado.pfx, certificado.password)
     xml_send = signer.assina_xml(xml_send, reference)
-    xml_send = signer.assina_xml(etree.fromstring(xml_send), ref_lote)
+    if ref_lote:
+        xml_send = signer.assina_xml(etree.fromstring(xml_send), ref_lote)
     return xml_send.encode('utf-8')
 
 
