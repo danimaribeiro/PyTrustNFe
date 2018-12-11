@@ -82,6 +82,7 @@ def _send(certificado, method, **kwargs):
     parser = etree.XMLParser(strip_cdata=False)
     xml = etree.fromstring(xml_send, parser=parser)
 
+    requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
     client = Client(base_url, transport=transport)
 
     port = next(iter(client.wsdl.port_types))
@@ -92,7 +93,6 @@ def _send(certificado, method, **kwargs):
     if namespaceNFe is not None:
         namespaceNFe.set('xmlns', 'http://www.portalfiscal.inf.br/nfe')
 
-    requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
     with client.settings(raw_response=True):
         response = client.service[first_operation](xml)
         response, obj = sanitize_response(response.text)
