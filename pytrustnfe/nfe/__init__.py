@@ -6,7 +6,7 @@
 import os
 import requests
 from lxml import etree
-from .patch import nfeInutilizacaoCE, has_patch
+from .patch import has_patch
 from .assinatura import Assinatura
 from pytrustnfe.xml import render_xml, sanitize_response
 from pytrustnfe.utils import gerar_chave, ChaveNFe
@@ -90,8 +90,9 @@ def _send(certificado, method, **kwargs):
     base_url = localizar_url(
         method,  kwargs['estado'], kwargs['modelo'], kwargs['ambiente'])
     session = _get_session(certificado)
-    if has_patch:
-        return nfeInutilizacaoCE(session, xml_send)
+    patch = has_patch(kwargs['estado'], method)
+    if patch:
+        return patch(session, xml_send)
     transport = Transport(session=session)
     first_op, client = _get_client(base_url, transport)
     return _send_zeep(first_op, client, xml_send)

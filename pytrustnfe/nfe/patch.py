@@ -1,15 +1,6 @@
 from ..Servidores import SIGLA_ESTADO
 from pytrustnfe.xml import sanitize_response
 
-methods = [
-    'nfeInutilizacaoCE']
-
-
-def has_patch(cod_estado, metodo):
-    uf = SIGLA_ESTADO[cod_estado]
-    method = metodo+uf
-    return method in methods
-
 
 def nfeInutilizacaoCE(session, xml_send):
     soap = '<Envelope xmlns="http://www.w3.org/2003/05/soap-envelope"><Body>\
@@ -28,3 +19,16 @@ def nfeInutilizacaoCE(session, xml_send):
         'received_xml': response,
         'object': obj.Body.getchildren()[0]
     }
+
+
+methods = {
+    'NfeInutilizacaoCE': nfeInutilizacaoCE
+}
+
+
+def has_patch(cod_estado, metodo):
+    uf = SIGLA_ESTADO[cod_estado]
+    method = metodo+uf
+    if method in methods:
+        return methods[method]
+    return None
