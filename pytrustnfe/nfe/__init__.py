@@ -92,10 +92,9 @@ def _send(certificado, method, **kwargs):
     session = _get_session(certificado)
     if has_patch:
         return nfeInutilizacaoCE(session, xml_send)
-    else:
-        transport = Transport(session=session)
-        first_op, client = _get_client(base_url, transport)
-        return _send_zeep(first_op, client, xml_send)
+    transport = Transport(session=session)
+    first_op, client = _get_client(base_url, transport)
+    return _send_zeep(first_op, client, xml_send)
 
 
 def _send_zeep(first_operation, client, xml_send):
