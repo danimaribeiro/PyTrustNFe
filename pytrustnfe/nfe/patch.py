@@ -1,3 +1,14 @@
+from ..Servidores import SIGLA_ESTADO
+from pytrustnfe.xml import sanitize_response
+
+methods = [
+    'nfeInutilizacaoCE']
+
+
+def has_patch(cod_estado, metodo):
+    uf = SIGLA_ESTADO[cod_estado]
+    method = metodo+uf
+    return method in methods
 
 
 def nfeInutilizacaoCE(session, xml_send):
@@ -11,4 +22,9 @@ def nfeInutilizacaoCE(session, xml_send):
     response = session.post(
         'https://nfeh.sefaz.ce.gov.br/nfe4/services/NFeInutilizacao4',
         data=soap, headers=headers)
-    return response
+    response, obj = sanitize_response(response.text)
+    return {
+        'sent_xml': xml_send,
+        'received_xml': response,
+        'object': obj.Body.getchildren()[0]
+    }

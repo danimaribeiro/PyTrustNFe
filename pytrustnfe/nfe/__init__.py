@@ -6,7 +6,7 @@
 import os
 import requests
 from lxml import etree
-from .patch import nfeInutilizacaoCE
+from .patch import nfeInutilizacaoCE, has_patch
 from .assinatura import Assinatura
 from pytrustnfe.xml import render_xml, sanitize_response
 from pytrustnfe.utils import gerar_chave, ChaveNFe
@@ -66,11 +66,7 @@ def _render(certificado, method, sign, **kwargs):
     return xml_send
 
 
-def _send(certificado, method, **kwargs):
-    xml_send = kwargs["xml"]
-    base_url = localizar_url(
-        method,  kwargs['estado'], kwargs['modelo'], kwargs['ambiente'])
-
+def _get_session(certificado):
     cert, key = extract_cert_and_key_from_pfx(
         certificado.pfx, certificado.password)
     cert, key = save_cert_key(cert, key)
@@ -78,16 +74,33 @@ def _send(certificado, method, **kwargs):
     session = Session()
     session.cert = (cert, key)
     session.verify = False
-    transport = Transport(session=session)
+    return session
 
-    parser = etree.XMLParser(strip_cdata=False)
-    xml = etree.fromstring(xml_send, parser=parser)
 
+def _get_client(base_url, transport):
     client = Client(base_url, transport=transport)
-
     port = next(iter(client.wsdl.port_types))
     first_operation = [x for x in iter(
         client.wsdl.port_types[port].operations) if "zip" not in x.lower()][0]
+    return first_operation, client
+
+
+def _send(certificado, method, **kwargs):
+    xml_send = kwargs["xml"]
+    base_url = localizar_url(
+        method,  kwargs['estado'], kwargs['modelo'], kwargs['ambiente'])
+    session = _get_session(certificado)
+    if has_patch:
+        return nfeInutilizacaoCE(session, xml_send)
+    else:
+        transport = Transport(session=session)
+        first_op, client = _get_client(base_url, transport)
+        return _send_zeep(first_op, client, xml_send)
+
+
+def _send_zeep(first_operation, client, xml_send):
+    parser = etree.XMLParser(strip_cdata=False)
+    xml = etree.fromstring(xml_send, parser=parser)
 
     namespaceNFe = xml.find(".//{http://www.portalfiscal.inf.br/nfe}NFe")
     if namespaceNFe is not None:
@@ -95,14 +108,11 @@ def _send(certificado, method, **kwargs):
 
     requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
     with client.settings(raw_response=True):
-        if kwargs["estado"] == '23':
-            response = nfeInutilizacaoCE(session, xml_send)
-        else:
-            response = client.service[first_operation](nfeDadosMsg=xml)
-        response_other, obj = sanitize_response(response.text)
+        response = client.service[first_operation](xml)
+        response, obj = sanitize_response(response.text)
         return {
-            'sent_xml': xml_send,  # response.request.body.decode('utf-8'),
-            'received_xml': response_other,
+            'sent_xml': xml_send,
+            'received_xml': response,
             'object': obj.Body.getchildren()[0]
         }
 
