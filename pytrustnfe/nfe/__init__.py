@@ -6,6 +6,7 @@
 import os
 import requests
 from lxml import etree
+from .patch import nfeInutilizacaoCE
 from .assinatura import Assinatura
 from pytrustnfe.xml import render_xml, sanitize_response
 from pytrustnfe.utils import gerar_chave, ChaveNFe
@@ -94,11 +95,14 @@ def _send(certificado, method, **kwargs):
 
     requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
     with client.settings(raw_response=True):
-        response = client.service[first_operation](xml)
-        response, obj = sanitize_response(response.text)
+        if kwargs["estado"] == '23':
+            response = nfeInutilizacaoCE(session, xml_send)
+        else:
+            response = client.service[first_operation](nfeDadosMsg=xml)
+        response_other, obj = sanitize_response(response.text)
         return {
-            'sent_xml': xml_send,
-            'received_xml': response,
+            'sent_xml': xml_send,  # response.request.body.decode('utf-8'),
+            'received_xml': response_other,
             'object': obj.Body.getchildren()[0]
         }
 
