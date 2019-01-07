@@ -32,4 +32,3 @@ def has_patch(cod_estado, metodo):
     if method in methods:
         return methods[method]
     return None
-
