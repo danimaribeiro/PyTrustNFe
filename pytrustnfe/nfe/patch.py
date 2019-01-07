@@ -11,7 +11,7 @@ def nfeInutilizacaoCE(session, xml_send):
         'Content-Type': 'application/soap+xml; charset="utf-8"'
     }
     response = session.post(
-        'https://nfeh.sefaz.ce.gov.br/nfe4/services/NFeInutilizacao4',
+        'https://nfe.sefaz.ce.gov.br/nfe4/services/NFeInutilizacao4',
         data=soap, headers=headers)
     response, obj = sanitize_response(response.text)
     return {
@@ -32,3 +32,4 @@ def has_patch(cod_estado, metodo):
     if method in methods:
         return methods[method]
     return None
+
