@@ -35,7 +35,7 @@ URLS = {
         AL: 'http://nfce.sefaz.al.gov.br/QRCode/consultarNFCe.jsp?',
         AM: 'http://sistemas.sefaz.am.gov.br/nfceweb/consultarNFCe.jsp?',
         AP: 'https://www.sefaz.ap.gov.br/nfce/nfcep.php?',
-        BA: 'http://nfe.sefaz.ba.gov.br/servicos/nfce/modulos/geral/NFCEC_consulta_chave_acesso.aspx?p=',
+        BA: 'http://nfe.sefaz.ba.gov.br/servicos/nfce/modulos/geral/NFCEC_consulta_chave_acesso.aspx?',
         DF: 'http://www.fazenda.df.gov.br/nfce/qrcode?',
         GO: 'http://nfe.sefaz.go.gov.br/nfeweb/sites/nfce/danfeNFCe?',
         MA: 'http://nfce.sefaz.ma.gov.br/portal/consultarNFCe.jsp?',
