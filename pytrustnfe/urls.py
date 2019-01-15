@@ -60,7 +60,7 @@ URLS = {
         AL: 'http://nfce.sefaz.al.gov.br/QRCode/consultarNFCe.jsp?',
         AM: 'http://homnfce.sefaz.am.gov.br/nfceweb/consultarNFCe.jsp?',
         AP: 'https://www.sefaz.ap.gov.br/nfcehml/nfce.php?',
-        BA: 'http://nfe.sefaz.ba.gov.br/servicos/nfce/qrcode.aspx?',
+        BA: 'http://hnfe.sefaz.ba.gov.br/servicos/nfce/qrcode.aspx?',
         DF: 'http://www.fazenda.df.gov.br/nfce/qrcode?',
         GO: 'http://homolog.sefaz.go.gov.br/nfeweb/sites/nfce/danfeNFCe?',
         MA: 'http://homologacao.sefaz.ma.gov.br/portal/consultarNFCe.jsp?',
@@ -82,6 +82,69 @@ URLS = {
     }
 }
 
+URLS_EXIBICAO = {
+    PRODUCAO: {
+        AC: 'www.sefaznet.ac.gov.br/nfce/consulta',
+        AL: 'www.sefaz.al.gov.br/nfce/consulta',
+        AM: 'www.sefaz.am.gov.br/nfce/consulta',
+        AP: 'www.sefaz.ap.gov.br/nfce/consulta',
+        BA: 'http://www.sefaz.ba.gov.br/nfce/consulta',
+        CE: 'www.sefaz.ce.gov.br/nfce/consulta',
+        DF: 'www.fazenda.df.gov.br/nfce/consulta',
+        ES: 'www.sefaz.es.gov.br/nfce/consulta',
+        GO: 'www.sefaz.go.gov.br/nfce/consulta',
+        MA: 'www.sefaz.ma.gov.br/nfce/consulta',
+        MS: 'www.dfe.ms.gov.br/nfce/consulta',
+        MT: 'www.sefaz.mt.gov.br/nfce/consulta',
+        MG: 'www.fazenda.mg.gov.br/nfce/consulta',
+        PA: 'www.sefa.pa.gov.br/nfce/consulta',
+        PB: 'www.receita.pb.gov.br/nfce/consulta',
+        PE: 'nfce.sefaz.pe.gov.br/nfce/consulta',
+        PI: 'www.sefaz.pi.gov.br/nfce/consulta',
+        PR: 'www.fazenda.pr.gov.br/nfce/consulta',
+        RJ: 'www.fazenda.rj.gov.br/nfce/consulta',
+        RN: 'www.set.rn.gov.br/nfce/consulta',
+        RO: 'www.sefin.ro.gov.br/nfce/consulta',
+        RR: 'www.sefaz.rr.gov.br/nfce/consulta',
+        RS: 'www.sefaz.rs.gov.br/nfce/consulta',
+        SE: 'http://www.nfce.se.gov.br/nfce/consulta',
+        SP: 'https://www.nfce.fazenda.sp.gov.br/consulta',
+        TO: 'www.sefaz.to.gov.br/nfce/consulta',
+    },
+    HOMOLOGACAO: {
+        AC: 'www.sefaznet.ac.gov.br/nfce/consulta',
+        AL: 'www.sefaz.al.gov.br/nfce/consulta',
+        AM: 'www.sefaz.am.gov.br/nfce/consulta',
+        AP: 'www.sefaz.ap.gov.br/nfce/consulta',
+        BA: 'http://hinternet.sefaz.ba.gov.br/nfce/consulta',
+        CE: 'www.sefaz.ce.gov.br/nfce/consulta',
+        DF: 'www.fazenda.df.gov.br/nfce/consulta',
+        ES: 'www.sefaz.es.gov.br/nfce/consulta',
+        GO: 'www.sefaz.go.gov.br/nfce/consulta',
+        MA: 'www.sefaz.ma.gov.br/nfce/consulta',
+        MS: 'www.dfe.ms.gov.br/nfce/consulta',
+        MT: 'www.sefaz.mt.gov.br/nfce/consulta',
+        MG: 'www.fazenda.mg.gov.br/nfce/consulta',
+        PA: 'www.sefa.pa.gov.br/nfce/consulta',
+        PB: 'www.receita.pb.gov.br/nfcehom',
+        PE: 'nfce.sefaz.pe.gov.br/nfce/consulta',
+        PI: 'www.sefaz.pi.gov.br/nfce/consulta',
+        PR: 'www.fazenda.pr.gov.br/nfce/consulta',
+        RJ: 'www.fazenda.rj.gov.br/nfce/consulta',
+        RN: 'www.set.rn.gov.br/nfce/consulta',
+        RO: 'www.sefin.ro.gov.br/nfce/consulta',
+        RR: 'www.sefaz.rr.gov.br/nfce/consulta',
+        RS: 'www.sefaz.rs.gov.br/nfce/consulta',
+        SE: 'http://www.hom.nfe.se.gov.br/nfce/consulta',
+        SP: 'https://www.homologacao.nfce.fazenda.sp.gov.br/consulta',
+        TO: 'www.sefaz.to.gov.br/nfce/consulta',
+    }
+}
+
 
 def url_qrcode(estado, ambiente):
     return URLS[ambiente][estado]
+
+
+def url_qrcode_exibicao(estado, ambiente):
+    return URLS_EXIBICAO[ambiente][estado]
