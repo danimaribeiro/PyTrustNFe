@@ -92,7 +92,7 @@ def _send(certificado, method, **kwargs):
     session = _get_session(certificado)
     patch = has_patch(kwargs['estado'], method)
     if patch:
-        return patch(session, xml_send)
+        return patch(session, xml_send, kwargs['ambiente'])
     transport = Transport(session=session)
     first_op, client = _get_client(base_url, transport)
     return _send_zeep(first_op, client, xml_send)
