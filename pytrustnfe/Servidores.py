@@ -76,7 +76,7 @@ def localizar_url(servico, estado, mod='55', ambiente=2):
 
     if sigla == 'RS' and servico == WS_NFE_CADASTRO:
         dominio = 'cad.sefazrs.rs.gov.br'
-    if sigla in ('AC', 'RN', 'PB', 'SC', 'RJ') and \
+    if sigla in ('AC', 'RN', 'PB', 'SC') and \
        servico == WS_NFE_CADASTRO:
         dominio = 'cad.svrs.rs.gov.br'
     if sigla == 'AN' and servico == WS_NFE_RECEPCAO_EVENTO:
@@ -132,7 +132,7 @@ SVRS = {
             WS_NFE_RECEPCAO_EVENTO: 'ws/recepcaoevento/recepcaoevento4.asmx?wsdl',  # noqa
             WS_NFE_AUTORIZACAO: 'ws/NfeAutorizacao/NFeAutorizacao4.asmx?wsdl',
             WS_NFE_RET_AUTORIZACAO: 'ws/NfeRetAutorizacao/NFeRetAutorizacao4.asmx?wsdl',  # noqa
-            WS_NFE_CADASTRO: 'ws/cadconsultacadastro/cadconsultacadastro2.asmx?wsdl',  # noqa
+            WS_NFE_CADASTRO: 'ws/cadconsultacadastro/cadconsultacadastro4.asmx?wsdl',  # noqa
         },
         AMBIENTE_HOMOLOGACAO: {
             'servidor': 'nfe-homologacao.svrs.rs.gov.br',
