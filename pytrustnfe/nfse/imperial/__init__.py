@@ -25,10 +25,10 @@ def _send(certificado, method, **kwargs):
     soap = render_xml(path, 'SoapRequest.xml', False, soap_body=xml_send.decode())
     client = HttpClient(base_url)
     response = client.post_soap(soap, 'NFeaction/AWS_NFE.%s' % method)
-    response, obj = sanitize_response(response.encode('utf-8'))
+    response, obj = sanitize_response(response)
     return {
         'sent_xml': xml_send.decode(),
-        'received_xml': response.decode(),
+        'received_xml': response,
         'object': obj
     }
 
@@ -71,3 +71,4 @@ def cancelar_nfse(certificado, **kwargs):
     if "xml" not in kwargs:
         kwargs['xml'] = xml_cancelar_nfse(certificado, **kwargs)
     return _send(certificado, 'CANCELANOTAELETRONICA', **kwargs)
+
