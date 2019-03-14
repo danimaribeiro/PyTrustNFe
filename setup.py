@@ -1,7 +1,7 @@
 # coding=utf-8
 from setuptools import setup, find_packages
 
-VERSION = "0.1.45.post3"
+VERSION = "1.0.1.post1"
 
 setup(
     name="pytrustnfe",
@@ -40,7 +40,9 @@ later (LGPLv2+)',
         'lxml >= 3.5.0, < 4',
         'suds >= 0.4',
         'suds_requests >= 0.3',
-        'reportlab'
+        'reportlab',
+        'pytz',
+        'zeep'
     ],
     test_suite='nose.collector',
     tests_require=[
