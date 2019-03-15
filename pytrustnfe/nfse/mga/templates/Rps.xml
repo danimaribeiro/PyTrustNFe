@@ -1,0 +1,81 @@
+<Rps>
+    <InfDeclaracaoPrestacaoServico>
+        <Rps Id="rps:{{ rps.numero }}">
+            <IdentificacaoRps>
+                <Numero>{{ rps.numero }}</Numero>
+                <Serie>{{ rps.serie }}</Serie>
+                <Tipo>{{ rps.tipo_rps }}</Tipo>
+            </IdentificacaoRps>
+            <DataEmissao>{{ rps.data_emissao }}</DataEmissao>
+            <Status>{{ rps.status }}</Status>
+        </Rps>
+        <Competencia>{{ rps.data_emissao }}</Competencia>
+        <Servico>
+            <Valores>
+                <ValorServicos>{{ rps.valor_servico }}</ValorServicos>
+                <ValorDeducoes>{{ rps.valor_deducao }}</ValorDeducoes>
+                <ValorPis>{{ rps.valor_pis }}</ValorPis>
+                <ValorCofins>{{ rps.valor_cofins }}</ValorCofins>
+                <ValorInss>{{ rps.valor_inss }}</ValorInss>
+                <ValorIr>{{ rps.valor_ir }}</ValorIr>
+                <ValorCsll>{{ rps.valor_csll }}</ValorCsll>
+                <OutrasRetencoes>{{ rps.outras_retencoes }}</OutrasRetencoes>
+                <ValorIss>{{ rps.valor_iss }}</ValorIss>
+                <Aliquota>{{ rps.aliquota_issqn }}</Aliquota>
+                <DescontoIncondicionado>{{ rps.desconto_incondicionado }}</DescontoIncondicionado>
+                <DescontoCondicionado>{{ rps.desconto_condicionado }}</DescontoCondicionado>
+            </Valores>
+            <IssRetido>{{ rps.iss_retido }}</IssRetido>
+            <ItemListaServico>{{ rps.codigo_servico }}</ItemListaServico>
+            <CodigoCnae>{{ rps.cnae_servico }}</CodigoCnae>
+            <CodigoTributacaoMunicipio>{{ rps.codigo_tributacao_municipio }}</CodigoTributacaoMunicipio>
+            <Discriminacao>{{ rps.descricao }}</Discriminacao>
+            <CodigoMunicipio>{{ rps.codigo_municipio }}</CodigoMunicipio>
+            <CodigoPais>{{ rps.codigo_pais }}</CodigoPais>
+            <ExigibilidadeISS>{{ rps.exigibilidade_iss}}</ExigibilidadeISS>
+        </Servico>
+        <Prestador>
+            <CpfCnpj>
+                <Cnpj>{{ rps.prestador.cnpj }}</Cnpj>
+            </CpfCnpj>
+            <InscricaoMunicipal>{{ rps.prestador.inscricao_municipal }}</InscricaoMunicipal>
+        </Prestador>
+        <Tomador>
+            <IdentificacaoTomador>
+                <CpfCnpj>
+                    {% if rps.tomador.cnpj_cpf|length == 14  %}
+                    <Cnpj>{{ rps.tomador.cnpj_cpf }}</Cnpj>
+                    {% endif %}
+                    {% if rps.tomador.cnpj_cpf|length == 11  %}
+                    <Cpf>{{ rps.tomador.cnpj_cpf }}</Cpf>
+                    {% endif %}
+                </CpfCnpj>
+                <InscricaoMunicipal>{{ rps.tomador.inscricao_municipal }}</InscricaoMunicipal>
+            </IdentificacaoTomador>
+            <RazaoSocial>{{ rps.tomador.razao_social }}</RazaoSocial>
+            <Endereco>
+                <Endereco>{{ rps.tomador.logradouro }}</Endereco>
+                <Numero>{{ rps.tomador.numero }}</Numero>
+                <Complemento>{{ rps.tomador.complemento }}</Complemento>
+                <Bairro>{{ rps.tomador.bairro }}</Bairro>
+                <CodigoMunicipio>{{ rps.tomador.cidade }}</CodigoMunicipio>
+                <Uf>{{ rps.tomador.uf }}</Uf>
+                <CodigoPais>{{ rps.tomador.codigo_pais }}</CodigoPais>
+                <Cep>{{ rps.tomador.cep }}</Cep>
+            </Endereco>
+            <Contato>
+                <Telefone>{{ rps.tomador.telefone }}</Telefone>
+                <Email>{{ rps.tomador.email }}</Email>
+            </Contato>
+        </Tomador>
+        {% if rps.construcao_civil is defined -%}
+        <ContrucaoCivil>
+            <CodigoObra>{{ rps.construcao_civil.codigo_obra }}</CodigoObra>
+            <Art>{{ rps.construcao_civil.art }}</Art>
+        </ContrucaoCivil>
+        {% endif %}
+        <RegimeEspecialTributacao>{{ rps.regime_tributacao }}</RegimeEspecialTributacao>
+        <OptanteSimplesNacional>{{ rps.optante_simples }}</OptanteSimplesNacional>
+        <IncentivoFiscal>{{ rps.incentivador_cultural }}</IncentivoFiscal>
+    </InfDeclaracaoPrestacaoServico>
+</Rps>

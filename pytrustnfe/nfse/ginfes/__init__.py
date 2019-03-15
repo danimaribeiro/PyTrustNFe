@@ -3,9 +3,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import os
-import suds
+from requests import Session
+from zeep import Client
+from zeep.transports import Transport
+from requests.packages.urllib3 import disable_warnings
+
 from pytrustnfe.xml import render_xml, sanitize_response
-from pytrustnfe.client import get_authenticated_client
 from pytrustnfe.certificado import extract_cert_and_key_from_pfx, save_cert_key
 from pytrustnfe.nfe.assinatura import Assinatura
 
@@ -33,17 +36,19 @@ def _send(certificado, method, **kwargs):
     cert, key = extract_cert_and_key_from_pfx(
         certificado.pfx, certificado.password)
     cert, key = save_cert_key(cert, key)
-    client = get_authenticated_client(base_url, cert, key)
-    try:
-        xml_send = kwargs['xml']
-        header = '<ns2:cabecalho xmlns:ns2="http://www.ginfes.com.br/cabecalho_v03.xsd" versao="3"><versaoDados>3</versaoDados></ns2:cabecalho>' #noqa
-        response = getattr(client.service, method)(header, xml_send)
-    except suds.WebFault as e:
-        return {
-            'sent_xml': xml_send,
-            'received_xml': e.fault.faultstring,
-            'object': None
-        }
+
+    header = '<ns2:cabecalho xmlns:ns2="http://www.ginfes.com.br/cabecalho_v03.xsd" versao="3"><versaoDados>3</versaoDados></ns2:cabecalho>' #noqa
+
+    disable_warnings()
+    session = Session()
+    session.cert = (cert, key)
+    session.verify = False
+    transport = Transport(session=session)
+
+    client = Client(base_url, transport=transport)
+
+    xml_send = kwargs['xml']
+    response = client.service[method](header, xml_send)
 
     response, obj = sanitize_response(response)
     return {

@@ -74,10 +74,10 @@ def _send(certificado, method, **kwargs):
                "Authorization": "Bearer %s" % kwargs['access_token']}
     r = requests.post(url, headers=headers, data=xml_send)
 
-    response, obj = sanitize_response(r.text.strip().encode('utf-8'))
+    response, obj = sanitize_response(r.text.strip())
     return {
         'sent_xml': xml_send,
-        'received_xml': response,
+        'received_xml': response.encode('utf-8'),
         'object': obj,
         'status_code': r.status_code,
     }
@@ -112,7 +112,6 @@ def consultar_nota(certificado, **kwargs):
     headers = {"Accept": "application/json",
                "Authorization": "Bearer %s" % kwargs['access_token']}
     r = requests.get(url, headers=headers)
-    print(r.status_code)
     if r.status_code == 200:
         return r.text
     else:

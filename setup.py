@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 
-VERSION = "0.9.18.post2"
+VERSION = "1.0.33.post1"
 
 
 setup(
@@ -12,7 +12,7 @@ setup(
     author_email='danimaribeiro@gmail.com',
     keywords=['nfe', 'mdf-e'],
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Plugins',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU Lesser General Public License v2 or \
@@ -37,6 +37,8 @@ later (LGPLv2+)',
         'nfse/imperial/templates/*xml',
         'nfse/floripa/templates/*xml',
         'nfse/carioca/templates/*xml',
+        'nfse/bh/templates/*xml',
+        'nfse/mga/templates/*xml',
         'xml/schemas/*xsd',
     ]},
     url='https://github.com/danimaribeiro/PyTrustNFe',
@@ -52,7 +54,9 @@ later (LGPLv2+)',
         'lxml >= 3.5.0, < 5',
         'suds-jurko >= 0.6',
         'suds-jurko-requests >= 1.2',
-        'reportlab'
+        'reportlab',
+        'pytz',
+        'zeep',
     ],
     tests_require=[
         'pytest',
