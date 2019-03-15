@@ -12,4 +12,5 @@ dist/
 docs/_build
 .vscode/tags
 .cache/
+.idea/
 .pytest_cache/
