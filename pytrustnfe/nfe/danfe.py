@@ -118,10 +118,13 @@ class danfe(object):
         self.nBottom = 8
         self.nlin = self.nTop
         self.logo = logo
-        self.oFrete = {'0': '0 - Emitente',
-                       '1': '1 - Destinatário',
-                       '2': '2 - Terceiros',
-                       '9': '9 - Sem Frete'}
+        self.oFrete = {
+            '0': '0 - Contratação por conta do Remetente (CIF)',
+            '1': '1 - Contratação por conta do Destinatário (FOB)',
+            '2': '2 - Contratação por conta de Terceiros',
+            '3': '3 - Transporte Próprio por conta do Remetente',
+            '4': '4 - Transporte Próprio por conta do Destinatário',
+            '9': '9 - Sem Ocorrência de Transporte'}
 
         self.oPDF_IO = IO()
         if orientation == 'landscape':
@@ -141,8 +144,8 @@ class danfe(object):
             self.Page = 1
 
             # Calculando total linhas usadas para descrições dos itens
-            # Com bloco fatura, apenas 29 linhas para itens na primeira folha
-            nNr_Lin_Pg_1 = 34 if oXML_cobr is None else 30
+            # Com bloco fatura, apenas 25 linhas para itens na primeira folha
+            nNr_Lin_Pg_1 = 30 if oXML_cobr is None else 26
             # [ rec_ini , rec_fim , lines , limit_lines ]
             oPaginator = [[0, 0, 0, nNr_Lin_Pg_1]]
             el_det = oXML.findall(".//{http://www.portalfiscal.inf.br/nfe}det")
@@ -156,9 +159,9 @@ class danfe(object):
                     infAdProd = item.find(
                         ".//{http://www.portalfiscal.inf.br/nfe}infAdProd")
 
-                    list_ = wrap(tagtext(oNode=el_prod, cTag='xProd'), 56)
+                    list_ = wrap(tagtext(oNode=el_prod, cTag='xProd'), 50)
                     if infAdProd is not None:
-                        list_.extend(wrap(infAdProd.text, 56))
+                        list_.extend(wrap(infAdProd.text, 50))
                     list_desc.append(list_)
 
                     list_cProd = wrap(tagtext(oNode=el_prod, cTag='cProd'), 14)
@@ -311,9 +314,9 @@ class danfe(object):
 
         # Razão Social emitente
         P = Paragraph(tagtext(oNode=elem_emit, cTag='xNome'), styleN)
-        w, h = P.wrap(55 * mm, 50 * mm)
+        w, h = P.wrap(55 * mm, 40 * mm)
         P.drawOn(self.canvas, (self.nLeft + 30) * mm,
-                 (self.height - self.nlin - 12) * mm)
+                 (self.height - self.nlin - ((5*h + 12)/12)) * mm)
 
         if self.logo:
             img = get_image(self.logo, width=2 * cm)
@@ -575,6 +578,8 @@ obsCont[@xCampo='NomeVendedor']")
 
     def transportes(self, oXML=None):
         el_transp = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}transp")
+        veic_transp = oXML.find(
+            ".//{http://www.portalfiscal.inf.br/nfe}veicTransp")
         nMr = self.width - self.nRight
 
         self.canvas.setFont('NimbusSanL-Bold', 7)
@@ -585,25 +590,26 @@ obsCont[@xCampo='NomeVendedor']")
                   self.width - self.nLeft - self.nRight, 20)
         self.hline(self.nLeft, self.nlin + 8.6, self.width - self.nLeft)
         self.hline(self.nLeft, self.nlin + 15.2, self.width - self.nLeft)
-        self.vline(nMr - 40, self.nlin + 2, 13.2)
-        self.vline(nMr - 49, self.nlin + 2, 20)
-        self.vline(nMr - 92, self.nlin + 2, 6.6)
-        self.vline(nMr - 120, self.nlin + 2, 6.6)
-        self.vline(nMr - 75, self.nlin + 2, 6.6)
+        self.vline(nMr - 26, self.nlin + 2, 13.2)
+        self.vline(nMr - 33, self.nlin + 2, 13.2)
+        self.vline(nMr - 67, self.nlin + 2, 6.6)
+        self.vline(nMr - 123, self.nlin + 2, 6.6)
+        self.vline(nMr - 53, self.nlin + 2, 6.6)
         self.vline(nMr - 26, self.nlin + 15.2, 6.6)
+        self.vline(nMr - 49, self.nlin + 15.2, 6.6)
         self.vline(nMr - 102, self.nlin + 8.6, 6.6)
         self.vline(nMr - 85, self.nlin + 15.2, 6.6)
         self.vline(nMr - 121, self.nlin + 15.2, 6.6)
         self.vline(nMr - 160, self.nlin + 15.2, 6.6)
         # Labels/Fields
-        self.string(nMr - 39, self.nlin + 3.8, 'CNPJ/CPF')
-        self.string(nMr - 74, self.nlin + 3.8, 'PLACA DO VEÍCULO')
-        self.string(nMr - 91, self.nlin + 3.8, 'CÓDIGO ANTT')
-        self.string(nMr - 119, self.nlin + 3.8, 'FRETE POR CONTA')
+        self.string(nMr - 25, self.nlin + 3.8, 'CNPJ/CPF')
+        self.string(nMr - 52, self.nlin + 3.8, 'PLACA DO VEÍCULO')
+        self.string(nMr - 66, self.nlin + 3.8, 'CÓDIGO ANTT')
+        self.string(nMr - 122, self.nlin + 3.8, 'FRETE POR CONTA')
         self.string(self.nLeft + 1, self.nlin + 3.8, 'RAZÃO SOCIAL')
-        self.string(nMr - 48, self.nlin + 3.8, 'UF')
-        self.string(nMr - 39, self.nlin + 10.3, 'INSCRIÇÃO ESTADUAL')
-        self.string(nMr - 48, self.nlin + 10.3, 'UF')
+        self.string(nMr - 32, self.nlin + 3.8, 'UF')
+        self.string(nMr - 25, self.nlin + 10.3, 'INSCRIÇÃO ESTADUAL')
+        self.string(nMr - 32, self.nlin + 10.3, 'UF')
         self.string(nMr - 101, self.nlin + 10.3, 'MUNICÍPIO')
         self.string(self.nLeft + 1, self.nlin + 10.3, 'ENDEREÇO')
         self.string(nMr - 48, self.nlin + 17, 'PESO BRUTO')
@@ -613,20 +619,27 @@ obsCont[@xCampo='NomeVendedor']")
         self.string(nMr - 159, self.nlin + 17, 'ESPÉCIE')
         self.string(self.nLeft + 1, self.nlin + 17, 'QUANTIDADE')
         # Conteúdo campos
-        self.canvas.setFont('NimbusSanL-Regu', 8)
+        self.canvas.setFont('NimbusSanL-Regu', 7)
         self.string(self.nLeft + 1, self.nlin + 7.7,
-                    tagtext(oNode=el_transp, cTag='xNome')[:40])
-        self.string(self.nLeft + 71, self.nlin + 7.7,
+                    tagtext(oNode=el_transp, cTag='xNome')[:42])
+        self.string(self.nLeft + 68, self.nlin + 7.7,
                     self.oFrete[tagtext(oNode=el_transp, cTag='modFrete')])
-        self.string(nMr - 39, self.nlin + 7.7,
+        self.string(self.nLeft + 122, self.nlin + 7.7,
+                    tagtext(oNode=el_transp, cTag='RNTC'))
+        self.string(self.nLeft + 136, self.nlin + 7.7,
+                    tagtext(oNode=el_transp, cTag='placa'))
+        self.string(self.nLeft + 157, self.nlin + 7.7,
+                    tagtext(oNode=veic_transp, cTag='UF'))
+        self.string(nMr - 25, self.nlin + 7.7,
                     format_cnpj_cpf(tagtext(oNode=el_transp, cTag='CNPJ')))
+        self.canvas.setFont('NimbusSanL-Regu', 8)
         self.string(self.nLeft + 1, self.nlin + 14.2,
                     tagtext(oNode=el_transp, cTag='xEnder')[:45])
         self.string(self.nLeft + 89, self.nlin + 14.2,
                     tagtext(oNode=el_transp, cTag='xMun'))
-        self.string(nMr - 48, self.nlin + 14.2,
+        self.string(nMr - 32, self.nlin + 14.2,
                     tagtext(oNode=el_transp, cTag='UF'))
-        self.string(nMr - 39, self.nlin + 14.2,
+        self.string(nMr - 25, self.nlin + 14.2,
                     tagtext(oNode=el_transp, cTag='IE'))
         self.string(self.nLeft + 1, self.nlin + 21.2,
                     tagtext(oNode=el_transp, cTag='qVol'))
@@ -770,10 +783,11 @@ obsCont[@xCampo='NomeVendedor']")
         self.canvas.setFont('NimbusSanL-Regu', 5)
         self.string(self.nLeft + 1, self.nlin + 4,
                     'INFORMAÇÕES COMPLEMENTARES')
-        self.string((self.width / 2) + 1, self.nlin + 4, 'RESERVADO AO FISCO')
+        self.string(
+            ((self.width / 3)*2) + 1, self.nlin + 4, 'RESERVADO AO FISCO')
         self.rect(self.nLeft, self.nlin + 2,
                   self.width - self.nLeft - self.nRight, 42)
-        self.vline(self.width / 2, self.nlin + 2, 42)
+        self.vline((self.width / 3)*2, self.nlin + 2, 42)
         # Conteúdo campos
         styles = getSampleStyleSheet()
         styleN = styles['Normal']
@@ -785,7 +799,7 @@ obsCont[@xCampo='NomeVendedor']")
         if fisco:
             observacoes = fisco + ' ' + observacoes
         P = Paragraph(observacoes, styles['Normal'])
-        w, h = P.wrap(92 * mm, 32 * mm)
+        w, h = P.wrap(128 * mm, 32 * mm)
         altura = (self.height - self.nlin - 5) * mm
         P.drawOn(self.canvas, (self.nLeft + 1) * mm, altura - h)
         self.nlin += 36
