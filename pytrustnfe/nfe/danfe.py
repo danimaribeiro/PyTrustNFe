@@ -202,7 +202,9 @@ class danfe(object):
             self.adicionais(oXML=oXML, tamanho_diminuir=tamanho_ocupado)
 
             # Gera o restante das páginas do XML
-            while index <= nId:
+            while index < nId:
+                if index < 0:
+                    index = index * -1
                 self.newpage()
                 self.ide_emit(oXML=oXML, timezone=timezone)
                 index = self.produtos(
@@ -725,6 +727,7 @@ obsCont[@xCampo='NomeVendedor']")
             line_height = max(len(list_cod_prod[id]), len(list_desc[id]))
             line_height *= nStep
             if nLin + line_height > maxHeight:
+                id = id * -1
                 break
 
             item = el_det[id]
@@ -784,8 +787,6 @@ obsCont[@xCampo='NomeVendedor']")
             self.canvas.setStrokeColor(black)
 
         self.nlin += nH + 3
-        if (index == max_index):
-            id += 1
         return id
 
     def calculo_issqn(self, oXML=None):
