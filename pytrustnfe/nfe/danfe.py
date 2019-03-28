@@ -170,9 +170,9 @@ class danfe(object):
                     infAdProd = item.find(
                         ".//{http://www.portalfiscal.inf.br/nfe}infAdProd")
 
-                    list_ = wrap(tagtext(oNode=el_prod, cTag='xProd'), 56)
+                    list_ = wrap(tagtext(oNode=el_prod, cTag='xProd'), 50)
                     if infAdProd is not None:
-                        list_.extend(wrap(infAdProd.text, 56))
+                        list_.extend(wrap(infAdProd.text, 50))
                     list_desc.append(list_)
 
                     list_cProd = wrap(tagtext(oNode=el_prod, cTag='cProd'), 14)
