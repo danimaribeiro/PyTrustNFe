@@ -1,0 +1,43 @@
+<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+    <Body>
+        <GerarNota xmlns="urn:sigiss_ws">
+            <DescricaoRps>
+                <ccm>{{ nfse.ccm }}</ccm>
+                <cnpj>{{ nfse.cnpj }}</cnpj>
+                <senha>{{ nfse.senha }}</senha>
+                <crc>{{ nfse.crc }}</crc>
+                <crc_estado>{{ nfse.crc_estado }}</crc_estado>
+                <aliquota_simples>{{ nfse.aliquota_simples }}</aliquota_simples>
+                <id_sis_legado>{{ nfse.id_sis_legado }}</id_sis_legado>
+                <servico>{{ nfse.servico }}</servico>
+                <situacao>{{ nfse.situacao }}</situacao>
+                <valor>{{ nfse.valor }}</valor>
+                <base>{{ nfse.base }}</base>
+                <descricaoNF>{{ nfse.descricaoNF }}</descricaoNF>
+                <tomador_tipo>{{ nfse.tomador_tipo }}</tomador_tipo>
+                <tomador_cnpj>{{ nfse.tomador_cnpj }}</tomador_cnpj>
+                <tomador_email>{{ nfse.tomador_email }}</tomador_email>
+                <tomador_ie>{{ nfse.tomador_ie }}</tomador_ie>
+                <tomador_razao>{{ nfse.tomador_razao }}</tomador_razao>
+                <tomador_fantasia>{{ nfse.tomador_fantasia }}</tomador_fantasia>
+                <tomador_endereco>{{ nfse.tomador_endereco }}</tomador_endereco>
+                <tomador_numero>{{ nfse.tomador_endereco }}</tomador_numero>
+                <tomador_complemento>{{ nfse.tomador_complemento }}</tomador_complemento>
+                <tomador_bairro>{{ nfse.tomador_bairro }}</tomador_bairro>
+                <tomador_CEP>{{ nfse.tomador_CEP }}</tomador_CEP>
+                <tomador_cod_cidade>{{ nfse.tomador_cod_cidade }}</tomador_cod_cidade>
+                <tomador_fone>{{ nfse.tomador_fone }}</tomador_fone>
+                <tomador_ramal>{{ nfse.tomador_ramal }}</tomador_ramal>
+                <tomador_fax>{{ nfse.tomador_fax }}</tomador_fax>
+                <outro_municipio>{{ nfse.outro_municipio }}</outro_municipio>
+                <cod_outro_municipio>{{ nfse.cod_outro_municipio }}</cod_outro_municipio>
+                <retencao_iss>{{ nfse.retencao_iss }}</retencao_iss>
+                <pis>{{ nfse.pis }}</pis>
+                <cofins>{{ nfse.cofins }}</cofins>
+                <inss>{{ nfse.inss }}</inss>
+                <irrf>{{ nfse.irrf }}</irrf>
+                <csll>{{ nfse.csll }}</csll>
+            </DescricaoRps>
+        </GerarNota>
+    </Body>
+</Envelope>
