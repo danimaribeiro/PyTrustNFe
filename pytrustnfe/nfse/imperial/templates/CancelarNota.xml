@@ -1,0 +1,14 @@
+<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+    <Body>
+        <CancelarNota xmlns="urn:sigiss_ws">
+            <DadosCancelaNota>
+                <ccm>{{ cancelamento.ccm }}</ccm>
+                <cnpj>{{ cancelamento.cnpj }}</cnpj>
+                <senha>{{ cancelamento.senha }}</senha>
+                <nota>{{ cancelamento.nota }}</nota>
+                <motivo>{{ cancelamento.motivo }}</motivo>
+                <email>{{ cancelamento.email }}</email>
+            </DadosCancelaNota>
+        </CancelarNota>
+    </Body>
+</Envelope>
