@@ -45,6 +45,7 @@ later (LGPLv2+)',
     license='LGPL-v2.1+',
     description='PyTrustNFe é uma biblioteca para envio de NF-e',
     long_description=open('README.md', 'r').read(),
+    long_description_content_type='text/markdown',
     install_requires=[
         'Jinja2 >= 2.8',
         'pyOpenSSL >= 16.0.0, < 18',
