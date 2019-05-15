@@ -17,7 +17,7 @@ Dependências:
 
 
 NFSe - Cidades atendidas
---------------
+-----------------------------
 * **Paulistana** - São Paulo/SP
 * **Nota Carioca** - Rio de Janeiro/RJ
 * **Imperial** - Petrópolis/RH
@@ -39,7 +39,7 @@ Implementar novos provedores de NFSe
 
 
 Exemplos de uso da NFe
----------------
+-----------------------------
 
 Consulta Cadastro por CNPJ:
 

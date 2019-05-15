@@ -259,7 +259,7 @@
                     </detExport>
                     {% endfor %}
                     {% endif %}
-                    <xPed>{{ prod.xPed }}</xPed>
+                    <xPed>{{ NFe.infNFe.compra.xPed }}</xPed>
                     <nItemPed>{{ prod.nItemPed }}</nItemPed>
                     <nFCI>{{ prod.nFCI }}</nFCI>
                     {% for rastro in prod.rastro %}
