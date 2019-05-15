@@ -259,7 +259,9 @@
                     </detExport>
                     {% endfor %}
                     {% endif %}
+                    {% if NFe.infNFe.compra is defined %}
                     <xPed>{{ NFe.infNFe.compra.xPed }}</xPed>
+                    {% endif %}
                     <nItemPed>{{ prod.nItemPed }}</nItemPed>
                     <nFCI>{{ prod.nFCI }}</nFCI>
                     {% for rastro in prod.rastro %}
