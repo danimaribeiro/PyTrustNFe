@@ -7,30 +7,13 @@ import os
 from lxml import etree
 
 PATH = os.path.dirname(os.path.abspath(__file__))
+SCHEMA = os.path.join(PATH, 'schemas/enviNFe_v4.00.xsd')
+SCHEMA_DFE = os.path.join(PATH, 'schemas/enviNFe_v4.00.xsd')
 
 
-def valida_nfe(xml):
-    xsd = 'enviNFe_v4.00.xsd'
-    erros = valida_esquema(xml, xsd)
-    if len(erros) > 0:
-        return {'ErrosEsquemas': "\n".join(erros)}
-    else:
-        return False
-
-
-def valida_distribuicao(xml):
-    xsd = 'distDFeInt_v1.01.xsd'
-    erros = valida_esquema(xml, xsd)
-    if len(erros) >0:
-        return {'ErrosEsquemas': "\n".join(erros)}
-    else:
-        return False
-
-
-def valida_esquema(xml, xsd_name):
-    xsd = os.path.join(PATH, 'schemas/', xsd_name)
-    xml_etree = etree.fromstring(xml)
-    esquema = etree.XMLSchema(etree.parse(xsd))
-    esquema.validate(xml_etree)
+def valida_nfe(xml_nfe, schema=SCHEMA):
+    nfe = etree.fromstring(xml_nfe)
+    esquema = etree.XMLSchema(etree.parse(schema))
+    esquema.validate(nfe)
     erros = [x.message for x in esquema.error_log]
-    return erros
+    return "\n".join(erros)

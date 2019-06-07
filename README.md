@@ -52,7 +52,102 @@ certificado = Certificado(certificado, 'senha_pfx')
 obj = {'cnpj': '12345678901234', 'estado': '42'}
 resposta = consulta_cadastro(certificado, obj=obj, ambiente=1, estado='42')
 ```
+Consulta Distribuição NF-e sem Validação de Esquema:
+```python
+from pytrustnfe.certificado import Certificado
+from pytrustnfe.nfe import consulta_distribuicao_nfe, xml_consulta_distribuicao_nfe
 
+certificado = open("/path/certificado.pfx", "r").read()
+certificado = Certificado(certificado, 'senha_pfx')
+
+# Gerando xml e enviado consulta por Ultimo NSU
+response1 = consulta_distribuicao_nfe(
+    certificado,
+    ambiente=1,
+    estado='42',
+    modelo='55',
+    cnpj_cpf='12345678901234',
+    ultimo_nsu='123456789101213'
+)
+
+# Gerando xml e enviado consulta por Chave
+response2 = consulta_distribuicao_nfe(
+    certificado,
+    ambiente=1,
+    estado='42',
+    modelo='55',
+    cnpj_cpf='12345678901234',
+    chave_nfe='012345678901234567890123456789012345678912'
+)
+
+# Gerando xml e enviado consulta por NSU
+response3 = consulta_distribuicao_nfe(
+    certificado,
+    ambiente=1,
+    estado='42',
+    modelo='55',
+    cnpj_cpf='12345678901234',
+    nsu='123456789101213'
+)
+```
+
+Consulta Distribuição NF-e com Validação de Esquema:
+```python
+from pytrustnfe.certificado import Certificado
+from pytrustnfe.nfe import consulta_distribuicao_nfe, xml_consulta_distribuicao_nfe
+from pytrustnfe.xml.validate import valida_nfe, SCHEMA_DFE
+
+certificado = open("/path/certificado.pfx", "r").read()
+certificado = Certificado(certificado, 'senha_pfx')
+
+# Gerando XML para Consulta por Ultimo NSU
+xml1 = xml_consulta_distribuicao_nfe(
+    certificado,
+    ambiente=1,
+    estado='42',
+    cnpj_cpf='12345678901234',
+    ultimo_nsu='123456789101213'
+)
+
+# Validando o XML com Esquema
+if valida_nfe(xml1, SCHEMA_DFE):
+    Warning("Erro na validação do esquema")
+    
+# Gerando XML para Consulta por Chave
+xml2 = xml_consulta_distribuicao_nfe(
+    certificado,
+    ambiente=1,
+    estado='42',
+    cnpj_cpf='12345678901234',
+    chave_nfe='012345678901234567890123456789012345678912'
+)
+
+# Validando o XML com Esquema
+if valida_nfe(xml2, SCHEMA_DFE):
+    Warning("Erro na validação do esquema")
+    
+# Gerando XML para Consulta por NSU
+xml3 = xml_consulta_distribuicao_nfe(
+    certificado,
+    ambiente=1,
+    estado='42',
+    cnpj_cpf='12345678901234',
+    nsu='123456789101213'
+)
+
+# Validando o XML com Esquema
+if valida_nfe(xml3, SCHEMA_DFE):
+    Warning("Erro na validação do esquema")
+
+# Enviando xml de consulta para sefaz
+response = consulta_distribuicao_nfe(
+    certificado,
+    ambiente=1,
+    estado='42',
+    modelo='55',
+    xml=xml1
+)
+```
 
 Exemplo de uso da NFSe Paulistana
 ---------------------------------
