@@ -9,7 +9,6 @@ from lxml import etree
 from .patch import has_patch
 from .assinatura import Assinatura
 from pytrustnfe.xml import render_xml, sanitize_response
-from pytrustnfe.xml.validate import ValidarXml
 from pytrustnfe.utils import gerar_chave, ChaveNFe
 from pytrustnfe.Servidores import localizar_url
 from pytrustnfe.certificado import extract_cert_and_key_from_pfx, save_cert_key
@@ -20,9 +19,6 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from requests import Session
 from zeep import Client
 from zeep.transports import Transport
-
-# Xml schema validation class
-validar_xml = ValidarXml()
 
 
 def _generate_nfe_id(**kwargs):
@@ -129,11 +125,7 @@ def xml_autorizar_nfe(certificado, **kwargs):
 def autorizar_nfe(certificado, **kwargs):  # Assinar
     if "xml" not in kwargs:
         kwargs['xml'] = xml_autorizar_nfe(certificado, **kwargs)
-    erros_esquemas = validar_xml.valida_nfe(kwargs['xml'])
-    if erros_esquemas is not False:
-        return erros_esquemas
-    else:
-        return _send(certificado, 'NfeAutorizacao', **kwargs)
+    return _send(certificado, 'NfeAutorizacao', **kwargs)
 
 
 def xml_retorno_autorizar_nfe(certificado, **kwargs):
@@ -225,11 +217,7 @@ def xml_consulta_distribuicao_nfe(certificado, **kwargs):  # Assinar
 def consulta_distribuicao_nfe(certificado, **kwargs):
     if "xml" not in kwargs:
         kwargs['xml'] = xml_consulta_distribuicao_nfe(certificado, **kwargs)
-    erros_esquemas = validar_xml.valida_distribuicao(kwargs['xml'])
-    if erros_esquemas is not False:
-        return erros_esquemas
-    else:
-        return _send_v310(certificado, **kwargs)
+    return _send_v310(certificado, **kwargs)
 
 
 def _send_v310(certificado, **kwargs):
