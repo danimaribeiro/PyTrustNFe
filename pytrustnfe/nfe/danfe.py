@@ -783,10 +783,11 @@ obsCont[@xCampo='NomeVendedor']")
         self.canvas.setFont('NimbusSanL-Regu', 5)
         self.string(self.nLeft + 1, self.nlin + 4,
                     'INFORMAÇÕES COMPLEMENTARES')
-        self.string((self.width / 2) + 1, self.nlin + 4, 'RESERVADO AO FISCO')
+        self.string(
+            ((self.width / 3)*2) + 1, self.nlin + 4, 'RESERVADO AO FISCO')
         self.rect(self.nLeft, self.nlin + 2,
                   self.width - self.nLeft - self.nRight, 42)
-        self.vline(self.width / 2, self.nlin + 2, 42)
+        self.vline((self.width / 3)*2, self.nlin + 2, 42)
         # Conteúdo campos
         styles = getSampleStyleSheet()
         styleN = styles['Normal']
@@ -798,7 +799,7 @@ obsCont[@xCampo='NomeVendedor']")
         if fisco:
             observacoes = fisco + ' ' + observacoes
         P = Paragraph(observacoes, styles['Normal'])
-        w, h = P.wrap(92 * mm, 32 * mm)
+        w, h = P.wrap(128 * mm, 32 * mm)
         altura = (self.height - self.nlin - 5) * mm
         P.drawOn(self.canvas, (self.nLeft + 1) * mm, altura - h)
         self.nlin += 36
