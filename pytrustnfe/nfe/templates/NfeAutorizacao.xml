@@ -500,6 +500,7 @@
                             <CSOSN>{{ imposto.ICMS.CST }}</CSOSN>
                             <vBCSTRet>{{ imposto.ICMS.vBCSTRet }}</vBCSTRet>
                             <pST>{{ imposto.ICMS.pST }}</pST>
+                            <vICMSSubstituto>{{imposto.ICMS.vICMSSubstituto}}</vICMSSubstituto>
                             <vICMSSTRet>{{ imposto.ICMS.vICMSSTRet }}</vICMSSTRet>
                             <vBCFCPSTRet>{{ imposto.ICMS.vBCFCPSTRet }}</vBCFCPSTRet>
                             <pFCPSTRet>{{ imposto.ICMS.pFCPSTRet }}</pFCPSTRet>
