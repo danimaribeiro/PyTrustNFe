@@ -2,7 +2,6 @@
 Biblioteca Python que tem por objetivo enviar NFe, NFCe e NFSe no Brasil
 
 [![Coverage Status](https://coveralls.io/repos/danimaribeiro/PyTrustNFe/badge.svg?branch=master)](https://coveralls.io/r/danimaribeiro/PyTrustNFe?branch=master)
-[![Code Health](https://landscape.io/github/danimaribeiro/PyTrustNFe/master/landscape.svg?style=flat)](https://landscape.io/github/danimaribeiro/PyTrustNFe/master)
 [![Build Status](https://travis-ci.org/danimaribeiro/PyTrustNFe.svg?branch=master)](https://travis-ci.org/danimaribeiro/PyTrustNFe)
 [![PyPI version](https://badge.fury.io/py/PyTrustNFe.svg)](https://badge.fury.io/py/PyTrustNFe)
 
@@ -10,28 +9,28 @@ Dependências:
 * PyXmlSec
 * lxml
 * signxml
-* suds
-* suds_requests
+* suds-jurko
+* suds-jurko-requests
 * reportlab
 * Jinja2
 
-NFSe - Cidades atendidas
---------------
-* [Ariss](cidades/ariss.md) - 4 cidades atendidas
-* [Simpliss](cidades/simpliss.md) - 18 cidade atendidas
 
+NFSe - Cidades atendidas
+-----------------------------
+* **Paulistana** - São Paulo/SP
+* **Nota Carioca** - Rio de Janeiro/RJ
+* **Imperial** - Petrópolis/RH
+* [Susesu](cidades/susesu.md) - 3 cidades atendidas
+* [Simpliss](cidades/simpliss.md) - 18 cidade atendidas
+* [GINFES](cidaes/ginfes.md) - 79 cidades atendidas
+* [DSF](cidades/dsf.md) - 7 cidades atendidas
 
 Roadmap
 --------------
 Teste unitários
 
-Emissão de NFCe
-
-Compatibilidade [python 2 e 3](https://github.com/danimaribeiro/PyTrustNFe/pull/6)
-
 Implementar novos provedores de NFSe
 * [Betha](cidades/betha.md) - 81 cidades atendidas  WIP
-* [GINFES](cidades/ginfes.md) - 79 cidades atendidas
 * [WebISS](cidades/webiss.md) - 51 cidades atendidas
 * [ISSIntel](cidades/issintel.md) - 32 cidades atendidas
 * [ISSNET](cidades/issnet.md) - 32 cidades atendidas
@@ -39,7 +38,7 @@ Implementar novos provedores de NFSe
 
 
 Exemplos de uso da NFe
----------------
+-----------------------------
 
 Consulta Cadastro por CNPJ:
 
@@ -52,7 +51,102 @@ certificado = Certificado(certificado, 'senha_pfx')
 obj = {'cnpj': '12345678901234', 'estado': '42'}
 resposta = consulta_cadastro(certificado, obj=obj, ambiente=1, estado='42')
 ```
+Consulta Distribuição NF-e sem Validação de Esquema:
+```python
+from pytrustnfe.certificado import Certificado
+from pytrustnfe.nfe import consulta_distribuicao_nfe, xml_consulta_distribuicao_nfe
 
+certificado = open("/path/certificado.pfx", "r").read()
+certificado = Certificado(certificado, 'senha_pfx')
+
+# Gerando xml e enviado consulta por Ultimo NSU
+response1 = consulta_distribuicao_nfe(
+    certificado,
+    ambiente=1,
+    estado='42',
+    modelo='55',
+    cnpj_cpf='12345678901234',
+    ultimo_nsu='123456789101213'
+)
+
+# Gerando xml e enviado consulta por Chave
+response2 = consulta_distribuicao_nfe(
+    certificado,
+    ambiente=1,
+    estado='42',
+    modelo='55',
+    cnpj_cpf='12345678901234',
+    chave_nfe='012345678901234567890123456789012345678912'
+)
+
+# Gerando xml e enviado consulta por NSU
+response3 = consulta_distribuicao_nfe(
+    certificado,
+    ambiente=1,
+    estado='42',
+    modelo='55',
+    cnpj_cpf='12345678901234',
+    nsu='123456789101213'
+)
+```
+
+Consulta Distribuição NF-e com Validação de Esquema:
+```python
+from pytrustnfe.certificado import Certificado
+from pytrustnfe.nfe import consulta_distribuicao_nfe, xml_consulta_distribuicao_nfe
+from pytrustnfe.xml.validate import valida_nfe, SCHEMA_DFE
+
+certificado = open("/path/certificado.pfx", "r").read()
+certificado = Certificado(certificado, 'senha_pfx')
+
+# Gerando XML para Consulta por Ultimo NSU
+xml1 = xml_consulta_distribuicao_nfe(
+    certificado,
+    ambiente=1,
+    estado='42',
+    cnpj_cpf='12345678901234',
+    ultimo_nsu='123456789101213'
+)
+
+# Validando o XML com Esquema
+if valida_nfe(xml1, SCHEMA_DFE):
+    Warning("Erro na validação do esquema")
+
+# Gerando XML para Consulta por Chave
+xml2 = xml_consulta_distribuicao_nfe(
+    certificado,
+    ambiente=1,
+    estado='42',
+    cnpj_cpf='12345678901234',
+    chave_nfe='012345678901234567890123456789012345678912'
+)
+
+# Validando o XML com Esquema
+if valida_nfe(xml2, SCHEMA_DFE):
+    Warning("Erro na validação do esquema")
+
+# Gerando XML para Consulta por NSU
+xml3 = xml_consulta_distribuicao_nfe(
+    certificado,
+    ambiente=1,
+    estado='42',
+    cnpj_cpf='12345678901234',
+    nsu='123456789101213'
+)
+
+# Validando o XML com Esquema
+if valida_nfe(xml3, SCHEMA_DFE):
+    Warning("Erro na validação do esquema")
+
+# Enviando xml de consulta para sefaz
+response = consulta_distribuicao_nfe(
+    certificado,
+    ambiente=1,
+    estado='42',
+    modelo='55',
+    xml=xml1
+)
+```
 
 Exemplo de uso da NFSe Paulistana
 ---------------------------------
