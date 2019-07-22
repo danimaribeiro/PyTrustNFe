@@ -15,3 +15,4 @@ pyOpenSSL >= 16.0.0, < 17
 certifi >= 2015.11.20.1
 reportlab
 pytz
+zeep
