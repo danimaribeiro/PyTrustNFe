@@ -1,5 +1,5 @@
 lxml >= 3.5.0, < 4
-zeep
+zeep >= 3.0, < 3.3
 nose
 mock
 coveralls
