@@ -1,5 +1,4 @@
-lxml
-zeep
+lxml >= 3.5.0, < 4
 nose
 mock
 coveralls
