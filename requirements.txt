@@ -11,7 +11,7 @@ suds_requests >= 0.3
 defusedxml >= 0.4.1, < 0.6
 eight >= 0.3.0, < 0.5
 cryptography >= 1.8, < 3
-pyOpenSSL
+pyOpenSSL < 19, >= 17.5.0
 certifi >= 2015.11.20.1
 reportlab
 pytz
