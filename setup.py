@@ -1,7 +1,7 @@
 # coding=utf-8
 from setuptools import setup, find_packages
 
-VERSION = "1.0.1"
+VERSION = "1.0.2"
 
 
 setup(
@@ -38,10 +38,10 @@ later (LGPLv2+)',
     install_requires=[
         'Jinja2 >= 2.8',
         'signxml >= 2.4.0',
-        'lxml >= 3.5.0, < 4',
         'suds >= 0.4',
         'suds_requests >= 0.3',
         'reportlab',
+        'lxml',
         'pytz',
         'zeep'
     ],
