@@ -43,7 +43,7 @@ later (LGPLv2+)',
         'suds_requests >= 0.3',
         'reportlab',
         'pytz',
-        'zeep <= 3.3'
+        'zeep < 3.3'
     ],
     test_suite='nose.collector',
     tests_require=[
