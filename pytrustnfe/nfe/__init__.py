@@ -40,10 +40,12 @@ def _generate_nfe_id(**kwargs):
 
 def _render(certificado, method, sign, **kwargs):
     path = os.path.join(os.path.dirname(__file__), 'templates')
-    if sign and kwargs['ide']['mod'] == '65':
-        kwargs['qrCode'] = 1 if 'qrCode' not in kwargs else kwargs['qrCode']
-        kwargs['urlChave'] = 1 \
-            if 'urlChave' not in kwargs else kwargs['urlChave']
+    if sign and kwargs['NFes'][0]['ide']['mod'] == '65':
+        kwargs['NFes'][0]['qrCode'] = 1 if 'qrCode' not in kwargs else \
+            kwargs['NFes'][0]['qrCode']
+        kwargs['NFes'][0]['urlChave'] = 1 \
+            if 'urlChave' not in kwargs['NFes'][0] else \
+            kwargs['NFes'][0]['urlChave']
     xmlElem_send = render_xml(path, '%s.xml' % method, True, **kwargs)
 
     modelo = xmlElem_send.find(".//{http://www.portalfiscal.inf.br/nfe}mod")
@@ -56,45 +58,47 @@ def _render(certificado, method, sign, **kwargs):
         if method == 'NfeAutorizacao':
             xml_send = signer.assina_xml(
                 xmlElem_send, kwargs['NFes'][0]['infNFe']['Id'], True)
-            if modelo == '65' and 'urlChave' not in kwargs and 'qrCode' not in\
-                    kwargs:
-                if kwargs['ide']['tpEmis'] != 1:
+            if modelo == '65' and 'urlChave' not in kwargs['NFes'][0] and \
+                    'qrCode' not in kwargs['NFes'][0]:
+                if kwargs['NFes'][0]['ide']['tpEmis'] != 1:
                     digest_value = xmlElem_send.find(
                         ".//{http://www.w3.org/2000/09/xmldsig#}DigestValue")
                     c_hash_qr_code = \
                         "{ch_acesso}|{versao}|{tp_amb}|{dh_emi}|" \
                         "{v_nf}|{dig_val}|{id_csc}|{csc}".format(
-                            ch_acesso=kwargs['NFe']['infNFe']['Id'].replace('NFe', ''),
+                            ch_acesso=kwargs['NFes'][0]['NFe']['infNFe']['Id'].
+                            replace('NFe', ''),
                             versao=2,
-                            tp_amb=kwargs['ide']['tpAmb'],
-                            dh_emi=kwargs['ide']['dhEmi'].split("-")[2].split("T")[0],
-                            v_nf=kwargs['total']['vNF'],
+                            tp_amb=kwargs['NFes'][0]['ide']['tpAmb'],
+                            dh_emi=kwargs['NFes'][0]['ide']['dhEmi'].split("-")[2].
+                            split("T")[0],
+                            v_nf=kwargs['NFes'][0]['total']['vNF'],
                             dig_val=digest_value.text,
-                            id_csc=int(kwargs['id_csc']),
-                            csc=kwargs['csc']
+                            id_csc=int(kwargs['NFes'][0]['id_csc']),
+                            csc=kwargs['NFes'][0]['csc']
                         )
                     c_hash_qr_code = hashlib.sha1(c_hash_qr_code.encode()). \
                         hexdigest()
                     qr_code_url = 'p={ch_acesso}|{versao}|{tp_amb}|{dh_emi}|" \
                         "{v_nf}|{dig_val}|{id_csc}|{hash}'.format(
-                        ch_acesso=kwargs['NFe']['infNFe']['Id'].
+                        ch_acesso=kwargs['NFes'][0]['NFe']['infNFe']['Id'].
                         replace('NFe', ''),
                         versao=2,
-                        tp_amb=kwargs['ide']['tpAmb'],
-                        dh_emi=kwargs['ide']['dhEmi'].split("-")[2].
+                        tp_amb=kwargs['NFes'][0]['ide']['tpAmb'],
+                        dh_emi=kwargs['NFes'][0]['ide']['dhEmi'].split("-")[2].
                         split("T")[0],
-                        v_nf=kwargs['total']['vNF'],
+                        v_nf=kwargs['NFes'][0]['total']['vNF'],
                         dig_val=digest_value.text,
-                        id_csc=int(kwargs['id_csc']),
+                        id_csc=int(kwargs['NFes'][0]['id_csc']),
                         hash=c_hash_qr_code
                     )
                     qrcode = url_qrcode(
-                        kwargs['emit']['enderEmit']['UF'],
-                        str(kwargs['ide']['tpAmb'])
+                        kwargs['NFes'][0]['emit']['enderEmit']['UF'],
+                        str(kwargs['NFes'][0]['ide']['tpAmb'])
                     ) + qr_code_url
                     url_consulta = url_qrcode_exibicao(
-                        kwargs['emit']['enderEmit']['UF'],
-                        str(kwargs['ide']['tpAmb'])
+                        kwargs['NFes'][0]['emit']['enderEmit']['UF'],
+                        str(kwargs['NFes'][0]['ide']['tpAmb'])
                     )
                 else:
                     c_hash_qr_code = \
