@@ -859,14 +859,12 @@
                 {% endfor %}
                 {% endif %}
             </infAdic>
-            {% if NFe.infNFe.infRespTec is defined %}
             <infRespTec>
                 <CNPJ>{{ NFe.infNFe.infRespTec.CNPJ }}</CNPJ>
                 <xContato>{{ NFe.infNFe.infRespTec.xContato|normalize|escape }}</xContato>
                 <email>{{ NFe.infNFe.infRespTec.email }}</email>
                 <fone>{{ NFe.infNFe.infRespTec.fone }}</fone>
             </infRespTec>
-            {% endif %}
             {% if NFe.infNFe.exporta is defined %}
             <exporta>
                 <UFSaidaPais>{{ NFe.infNFe.exporta.UFSaidaPais }}</UFSaidaPais>
