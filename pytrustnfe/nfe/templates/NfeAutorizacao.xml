@@ -873,15 +873,15 @@
                 <xCont>{{ NFe.infNFe.compra.xCont }}</xCont>
             </compra>
             {% endif %}
+            {% if NFe.infNFe.infRespTec is defined %}
+            <infRespTec>
+                <CNPJ>{{ NFe.infNFe.infRespTec.CNPJ }}</CNPJ>
+                <xContato>{{ NFe.infNFe.infRespTec.xContato|normalize|escape }}</xContato>
+                <email>{{ NFe.infNFe.infRespTec.email }}</email>
+                <fone>{{ NFe.infNFe.infRespTec.fone }}</fone>
+            </infRespTec>
+            {% endif %}
         </infNFe>
-        {% if NFe.infNFe.infRespTec is defined %}
-        <infRespTec>
-            <CNPJ>{{ NFe.infNFe.infRespTec.CNPJ }}</CNPJ>
-            <xContato>{{ NFe.infNFe.infRespTec.xContato|normalize|escape }}</xContato>
-            <email>{{ NFe.infNFe.infRespTec.email }}</email>
-            <fone>{{ NFe.infNFe.infRespTec.fone }}</fone>
-        </infRespTec>
-        {% endif %}
         <infNFeSupl>
             <qrCode>{{ NFe.infNFe.qrCode }}</qrCode>
             <urlChave>{{ NFe.infNFe.urlChave }}</urlChave>
