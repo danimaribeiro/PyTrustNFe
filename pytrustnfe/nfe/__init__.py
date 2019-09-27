@@ -4,12 +4,16 @@
 
 
 import os
+import requests
 from lxml import etree
+from .patch import has_patch
 from .assinatura import Assinatura
 from pytrustnfe.xml import render_xml, sanitize_response
 from pytrustnfe.utils import gerar_chave, ChaveNFe
 from pytrustnfe.Servidores import localizar_url
 from pytrustnfe.certificado import extract_cert_and_key_from_pfx, save_cert_key
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+
 
 # Zeep
 from requests import Session
@@ -62,11 +66,7 @@ def _render(certificado, method, sign, **kwargs):
     return xml_send
 
 
-def _send(certificado, method, **kwargs):
-    xml_send = kwargs["xml"]
-    base_url = localizar_url(
-        method,  kwargs['estado'], kwargs['modelo'], kwargs['ambiente'])
-
+def _get_session(certificado):
     cert, key = extract_cert_and_key_from_pfx(
         certificado.pfx, certificado.password)
     cert, key = save_cert_key(cert, key)
@@ -76,21 +76,39 @@ def _send(certificado, method, **kwargs):
     session = Session()
     session.cert = (cert, key)
     session.verify = False
-    transport = Transport(session=session)
+    return session
 
-    parser = etree.XMLParser(strip_cdata=False)
-    xml = etree.fromstring(xml_send, parser=parser)
 
+def _get_client(base_url, transport):
     client = Client(base_url, transport=transport)
-
     port = next(iter(client.wsdl.port_types))
     first_operation = [x for x in iter(
         client.wsdl.port_types[port].operations) if "zip" not in x.lower()][0]
+    return first_operation, client
+
+
+def _send(certificado, method, **kwargs):
+    xml_send = kwargs["xml"]
+    base_url = localizar_url(
+        method,  kwargs['estado'], kwargs['modelo'], kwargs['ambiente'])
+    session = _get_session(certificado)
+    patch = has_patch(kwargs['estado'], method)
+    if patch:
+        return patch(session, xml_send, kwargs['ambiente'])
+    transport = Transport(session=session)
+    first_op, client = _get_client(base_url, transport)
+    return _send_zeep(first_op, client, xml_send)
+
+
+def _send_zeep(first_operation, client, xml_send):
+    parser = etree.XMLParser(strip_cdata=False)
+    xml = etree.fromstring(xml_send, parser=parser)
 
     namespaceNFe = xml.find(".//{http://www.portalfiscal.inf.br/nfe}NFe")
     if namespaceNFe is not None:
         namespaceNFe.set('xmlns', 'http://www.portalfiscal.inf.br/nfe')
 
+    requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
     with client.settings(raw_response=True):
         response = client.service[first_operation](xml)
         response, obj = sanitize_response(response.text)
@@ -198,6 +216,25 @@ def xml_consulta_distribuicao_nfe(certificado, **kwargs):  # Assinar
     return _render(certificado, 'NFeDistribuicaoDFe', False, **kwargs)
 
 
+<<<<<<< HEAD
+=======
+def consulta_distribuicao_nfe(certificado, **kwargs):
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_consulta_distribuicao_nfe(certificado, **kwargs)
+    return _send_v310(certificado, **kwargs)
+
+
+def xml_download_nfe(certificado, **kwargs):  # Assinar
+    return _render(certificado, 'NFeDistribuicaoDFe', False, **kwargs)
+
+
+def download_nfe(certificado, **kwargs):
+    if "xml" not in kwargs:
+        kwargs['xml'] = xml_download_nfe(certificado, **kwargs)
+    return _send_v310(certificado, **kwargs)
+
+
+>>>>>>> danimar/master3
 def _send_v310(certificado, **kwargs):
     xml_send = kwargs["xml"]
     base_url = localizar_url(
@@ -227,6 +264,7 @@ def _send_v310(certificado, **kwargs):
             'received_xml': response,
             'object': obj.Body.nfeDistDFeInteresseResponse.nfeDistDFeInteresseResult
         }
+<<<<<<< HEAD
 
 
 def consulta_distribuicao_nfe(certificado, **kwargs):
@@ -243,3 +281,5 @@ def download_nfe(certificado, **kwargs):
     if "xml" not in kwargs:
         kwargs['xml'] = xml_download_nfe(certificado, **kwargs)
     return _send_v310(certificado, **kwargs)
+=======
+>>>>>>> danimar/master3

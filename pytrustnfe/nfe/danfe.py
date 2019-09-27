@@ -170,9 +170,9 @@ class danfe(object):
                     infAdProd = item.find(
                         ".//{http://www.portalfiscal.inf.br/nfe}infAdProd")
 
-                    list_ = wrap(tagtext(oNode=el_prod, cTag='xProd'), 56)
+                    list_ = wrap(tagtext(oNode=el_prod, cTag='xProd'), 50)
                     if infAdProd is not None:
-                        list_.extend(wrap(infAdProd.text, 56))
+                        list_.extend(wrap(infAdProd.text, 50))
                     list_desc.append(list_)
 
                     list_cProd = wrap(tagtext(oNode=el_prod, cTag='cProd'), 14)
@@ -203,6 +203,8 @@ class danfe(object):
 
             # Gera o restante das páginas do XML
             while index < nId:
+                if index < 0:
+                    index = index * -1
                 self.newpage()
                 self.ide_emit(oXML=oXML, timezone=timezone)
                 index = self.produtos(
@@ -329,6 +331,7 @@ class danfe(object):
 
         cEnd = tagtext(oNode=elem_emit, cTag='xLgr') + ', ' + tagtext(
             oNode=elem_emit, cTag='nro') + ' - '
+        cEnd += tagtext(oNode=elem_emit, cTag='xCpl') + ' - '
         cEnd += tagtext(oNode=elem_emit, cTag='xBairro') + '<br />' + tagtext(
             oNode=elem_emit, cTag='xMun') + ' - '
         cEnd += 'Fone: ' + tagtext(oNode=elem_emit, cTag='fone') + '<br />'
@@ -356,7 +359,7 @@ class danfe(object):
             self.canvas.restoreState()
 
         # Cancelado
-        if tagtext(oNode=elem_evento, cTag='cStat') == '135':
+        if tagtext(oNode=elem_evento, cTag='cStat') in ('135', '155'):
             self.canvas.saveState()
             self.canvas.rotate(45)
             self.canvas.setFont('NimbusSanL-Bold', 60)
@@ -416,8 +419,9 @@ class danfe(object):
         cDt, cHr = getdateByTimezone(
             tagtext(oNode=elem_ide, cTag='dhSaiEnt'), timezone)
         self.string(nMr - 24, self.nlin + 14.3, cDt + ' ' + cHr)  # Dt saída
-        cEnd = tagtext(oNode=elem_dest, cTag='xLgr') + ', ' + tagtext(
-            oNode=elem_dest, cTag='nro')
+        cEnd = '%s, %s %s' % (tagtext(oNode=elem_dest, cTag='xLgr'),
+                              tagtext(oNode=elem_dest, cTag='nro'),
+                              tagtext(oNode=elem_dest, cTag='xCpl'))
         self.string(self.nLeft + 1, self.nlin + 14.3, cEnd)
         self.string(nMr - 98, self.nlin + 14.3,
                     tagtext(oNode=elem_dest, cTag='xBairro'))
@@ -723,6 +727,7 @@ obsCont[@xCampo='NomeVendedor']")
             line_height = max(len(list_cod_prod[id]), len(list_desc[id]))
             line_height *= nStep
             if nLin + line_height > maxHeight:
+                id = id * -1
                 break
 
             item = el_det[id]
@@ -761,10 +766,8 @@ obsCont[@xCampo='NomeVendedor']")
             self.stringRight(nMr - 26.5, nLin, format_number(vICMS))
             self.stringRight(nMr - 7.5, nLin, format_number(pICMS))
 
-            if vIPI:
-                self.stringRight(nMr - 14.5, nLin, format_number(vIPI))
-            if pIPI:
-                self.stringRight(nMr - 0.5, nLin, format_number(pIPI))
+            self.stringRight(nMr - 14.5, nLin, format_number(vIPI or '0.00'))
+            self.stringRight(nMr - 0.5, nLin, format_number(pIPI or '0.00'))
 
             # Código Item
             line_cod = nLin
@@ -897,6 +900,7 @@ obsCont[@xCampo='NomeVendedor']")
         cEnd = tagtext(oNode=el_dest, cTag='xNome') + ' - '
         cEnd += tagtext(oNode=el_dest, cTag='xLgr') + ', ' + tagtext(
             oNode=el_dest, cTag='nro') + ', '
+        cEnd += tagtext(oNode=el_dest, cTag='xCpl') + ' '
         cEnd += tagtext(oNode=el_dest, cTag='xBairro') + ', ' + tagtext(
             oNode=el_dest, cTag='xMun') + ' - '
         cEnd += tagtext(oNode=el_dest, cTag='UF')

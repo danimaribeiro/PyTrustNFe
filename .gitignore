@@ -11,6 +11,7 @@ dist/
 *egg*/
 docs/_build
 .vscode/tags
+.vscode/
 .cache
 .idea/
 venv/

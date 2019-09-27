@@ -8,4 +8,7 @@
     <consChNFe>
         <chNFe>{{ chave_nfe }}</chNFe>
     </consChNFe>
+    <consNSU>
+        <NSU>{{ nsu }}</NSU>
+    </consNSU>
 </distDFeInt>

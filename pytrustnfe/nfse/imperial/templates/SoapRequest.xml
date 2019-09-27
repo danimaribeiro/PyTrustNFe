@@ -1,5 +1,0 @@
-<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
-    <Body>
-      {{ soap_body }}
-  </Body>
-</Envelope>
