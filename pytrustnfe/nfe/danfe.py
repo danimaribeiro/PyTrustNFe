@@ -359,7 +359,7 @@ class danfe(object):
             self.canvas.restoreState()
 
         # Cancelado
-        if tagtext(oNode=elem_evento, cTag='cStat') == '135':
+        if tagtext(oNode=elem_evento, cTag='cStat') in ('135', '155'):
             self.canvas.saveState()
             self.canvas.rotate(45)
             self.canvas.setFont('NimbusSanL-Bold', 60)

@@ -27,7 +27,7 @@
                 <indFinal>{{ ide.indFinal }}</indFinal>
                 <indPres>{{ ide.indPres }}</indPres>
                 <procEmi>{{ ide.procEmi }}</procEmi>
-                <verProc>Odoo Brasil 10</verProc>
+                <verProc>{{ ide.verProc }}</verProc>
                 {% if ide.tpEmis != 1 %}
                 <dhCont>{{ ide.dhCont }}</dhCont>
                 <xJust>{{ ide.xJust }}</xJust>
@@ -263,9 +263,7 @@
                     </detExport>
                     {% endfor %}
                     {% endif %}
-                    {% if NFe.infNFe.compra is defined %}
-                    <xPed>{{ NFe.infNFe.compra.xPed }}</xPed>
-                    {% endif %}
+                    <xPed>{{ prod.xPed }}</xPed>
                     <nItemPed>{{ prod.nItemPed }}</nItemPed>
                     <nFCI>{{ prod.nFCI }}</nFCI>
                     {% for rastro in prod.rastro %}
