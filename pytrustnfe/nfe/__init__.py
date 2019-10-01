@@ -216,8 +216,6 @@ def xml_consulta_distribuicao_nfe(certificado, **kwargs):  # Assinar
     return _render(certificado, 'NFeDistribuicaoDFe', False, **kwargs)
 
 
-<<<<<<< HEAD
-=======
 def consulta_distribuicao_nfe(certificado, **kwargs):
     if "xml" not in kwargs:
         kwargs['xml'] = xml_consulta_distribuicao_nfe(certificado, **kwargs)
@@ -234,7 +232,6 @@ def download_nfe(certificado, **kwargs):
     return _send_v310(certificado, **kwargs)
 
 
->>>>>>> danimar/master3
 def _send_v310(certificado, **kwargs):
     xml_send = kwargs["xml"]
     base_url = localizar_url(
@@ -264,22 +261,3 @@ def _send_v310(certificado, **kwargs):
             'received_xml': response,
             'object': obj.Body.nfeDistDFeInteresseResponse.nfeDistDFeInteresseResult
         }
-<<<<<<< HEAD
-
-
-def consulta_distribuicao_nfe(certificado, **kwargs):
-    if "xml" not in kwargs:
-        kwargs['xml'] = xml_consulta_distribuicao_nfe(certificado, **kwargs)
-    return _send_v310(certificado, **kwargs)
-
-
-def xml_download_nfe(certificado, **kwargs):  # Assinar
-    return _render(certificado, 'NFeDistribuicaoDFe', False, **kwargs)
-
-
-def download_nfe(certificado, **kwargs):
-    if "xml" not in kwargs:
-        kwargs['xml'] = xml_download_nfe(certificado, **kwargs)
-    return _send_v310(certificado, **kwargs)
-=======
->>>>>>> danimar/master3

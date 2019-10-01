@@ -385,27 +385,6 @@ UFGO = {
 
 
 UFMT = {
-<<<<<<< HEAD
-    AMBIENTE_PRODUCAO: {
-        'servidor': 'nfe.sefaz.mt.gov.br',
-        WS_NFE_INUTILIZACAO: 'nfews/v2/services/NfeInutilizacao4?wsdl',
-        WS_NFE_CONSULTA: 'nfews/v2/services/NfeConsulta4?wsdl',
-        WS_NFE_SITUACAO: 'nfews/v2/services/NfeStatusServico4?wsdl',
-        WS_NFE_RECEPCAO_EVENTO: 'nfews/v2/services/RecepcaoEvento4?wsdl',
-        WS_NFE_AUTORIZACAO: 'nfews/v2/services/NfeAutorizacao4?wsdl',
-        WS_NFE_RET_AUTORIZACAO: 'nfews/v2/services/NfeRetAutorizacao4?wsdl',
-        WS_NFE_CADASTRO: 'nfews/v2/services/CadConsultaCadastro4?wsdl',
-    },
-    AMBIENTE_HOMOLOGACAO: {
-        'servidor': 'homologacao.sefaz.mt.gov.br',
-        WS_NFE_INUTILIZACAO: 'nfews/v2/services/NfeInutilizacao4?wsdl',
-        WS_NFE_CONSULTA: 'nfews/v2/services/NfeConsulta4?wsdl',
-        WS_NFE_SITUACAO: 'nfews/v2/services/NfeStatusServico4?wsdl',
-        WS_NFE_RECEPCAO_EVENTO: 'nfews/v2/services/RecepcaoEvento4?wsdl',
-        WS_NFE_AUTORIZACAO: 'nfews/v2/services/NfeAutorizacao4?wsdl',
-        WS_NFE_RET_AUTORIZACAO: 'nfews/v2/services/NfeRetAutorizacao4?wsdl',
-        WS_NFE_CADASTRO: 'nfews/v2/services/CadConsultaCadastro4?wsdl',
-=======
     NFE_MODELO: {
         AMBIENTE_PRODUCAO: {
             'servidor': 'nfe.sefaz.mt.gov.br',
@@ -449,32 +428,10 @@ UFMT = {
             WS_NFE_SITUACAO: 'nfcews/services/NfeStatusServico4',
             WS_NFCE_QR_CODE: 'http://www.sefaz.mt.gov.br/nfce/consultanfce',
         }
->>>>>>> danimar/master3
     }
 }
 
 UFMS = {
-<<<<<<< HEAD
-    AMBIENTE_PRODUCAO: {
-        'servidor': 'nfe.sefaz.ms.gov.br',
-        WS_NFE_INUTILIZACAO: 'ws/NFeInutilizacao4?wsdl',
-        WS_NFE_CONSULTA: 'ws/NFeConsultaProtocolo4?wsdl',
-        WS_NFE_SITUACAO: 'ws/NFeStatusServico4?wsdl',
-        WS_NFE_RECEPCAO_EVENTO: 'ws/NFeRecepcaoEvento4?wsdl',
-        WS_NFE_AUTORIZACAO: 'ws/NFeAutorizacao4?wsdl',
-        WS_NFE_RET_AUTORIZACAO: 'ws/NFeRetAutorizacao4?wsdl',
-        WS_NFE_CADASTRO: 'ws/CadConsultaCadastro4?wsdl',
-    },
-    AMBIENTE_HOMOLOGACAO: {
-        'servidor': 'hom.nfe.sefaz.ms.gov.br',
-        WS_NFE_INUTILIZACAO: 'ws/NFeInutilizacao4?wsdl',
-        WS_NFE_CONSULTA: 'ws/NFeConsultaProtocolo4?wsdl',
-        WS_NFE_SITUACAO: 'ws/NFeStatusServico4?wsdl',
-        WS_NFE_RECEPCAO_EVENTO: 'ws/NFeRecepcaoEvento4?wsdl',
-        WS_NFE_AUTORIZACAO: 'ws/NFeAutorizacao4?wsdl',
-        WS_NFE_RET_AUTORIZACAO: 'ws/NFeRetAutorizacao4?wsdl',
-        WS_NFE_CADASTRO: 'ws/CadConsultaCadastro4?wsdl',
-=======
     NFE_MODELO: {
         AMBIENTE_PRODUCAO: {
             'servidor': 'nfe.sefaz.ms.gov.br',
@@ -520,7 +477,6 @@ UFMS = {
             WS_NFE_SITUACAO: 'ws/NFeStatusServico4',
             WS_NFCE_QR_CODE: 'www.dfe.ms.gov.br/nfce/qrcode?'
         }
->>>>>>> danimar/master3
     }
 }
 
@@ -549,27 +505,6 @@ UFMG = {
 }
 
 UFPR = {
-<<<<<<< HEAD
-    AMBIENTE_PRODUCAO: {
-        'servidor': 'nfe.sefa.pr.gov.br',
-        WS_NFE_INUTILIZACAO: 'nfe/NFeInutilizacao4?wsdl',
-        WS_NFE_CONSULTA: 'nfe/NFeConsultaProtocolo4?wsdl',
-        WS_NFE_SITUACAO: 'nfe/NFeStatusServico4?wsdl',
-        WS_NFE_RECEPCAO_EVENTO: 'nfe/NFeRecepcaoEvento4?wsdl',
-        WS_NFE_AUTORIZACAO: 'nfe/NFeAutorizacao4?wsdl',
-        WS_NFE_RET_AUTORIZACAO: 'nfe/NFeRetAutorizacao4?wsdl',
-        WS_NFE_CADASTRO: 'nfe/CadConsultaCadastro4?wsdl',
-    },
-    AMBIENTE_HOMOLOGACAO: {
-        'servidor': 'homologacao.nfe.sefa.pr.gov.br',
-        WS_NFE_INUTILIZACAO: 'nfe/NFeInutilizacao4?wsdl',
-        WS_NFE_CONSULTA: 'nfe/NFeConsultaProtocolo4?wsdl',
-        WS_NFE_SITUACAO: 'nfe/NFeStatusServico4?wsdl',
-        WS_NFE_RECEPCAO_EVENTO: 'nfe/NFeRecepcaoEvento4?wsdl',
-        WS_NFE_AUTORIZACAO: 'nfe/NFeAutorizacao4?wsdl',
-        WS_NFE_RET_AUTORIZACAO: 'nfe/NFeRetAutorizacao4?wsdl',
-        WS_NFE_CADASTRO: 'nfe/CadConsultaCadastro4?wsdl',
-=======
     NFE_MODELO: {
         AMBIENTE_PRODUCAO: {
             'servidor': 'nfe.sefa.pr.gov.br',
@@ -615,7 +550,6 @@ UFPR = {
             WS_NFE_SITUACAO: 'nfce/NFeStatusServico4?wsdl',
             WS_NFCE_QR_CODE: 'www.fazenda.pr.gov.br/nfce/qrcode?'
         }
->>>>>>> danimar/master3
     }
 }
 
