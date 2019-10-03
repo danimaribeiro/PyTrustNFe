@@ -762,9 +762,9 @@ obsCont[@xCampo='NomeVendedor']")
                 tagtext(oNode=el_prod, cTag='vUnCom')))
             self.stringRight(nMr - 50.5, nLin, format_number(
                              tagtext(oNode=el_prod, cTag='vProd')))
-            self.stringRight(nMr - 38.5, nLin, format_number(vBC))
-            self.stringRight(nMr - 26.5, nLin, format_number(vICMS))
-            self.stringRight(nMr - 7.5, nLin, format_number(pICMS))
+            self.stringRight(nMr - 38.5, nLin, format_number(vBC or '0.00'))
+            self.stringRight(nMr - 26.5, nLin, format_number(vICMS or '0.00'))
+            self.stringRight(nMr - 7.5, nLin, format_number(pICMS or '0.00'))
 
             self.stringRight(nMr - 14.5, nLin, format_number(vIPI or '0.00'))
             self.stringRight(nMr - 0.5, nLin, format_number(pIPI or '0.00'))
