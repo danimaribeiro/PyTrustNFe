@@ -2,10 +2,12 @@
 # © 2017 Johny Chen Jy, Trustcode
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import os
 import re
 from textwrap import wrap
 from io import BytesIO
-
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib import utils
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import cm, mm
@@ -73,7 +75,15 @@ def format_telefone(telefone):
 class danfce(object):
 
     def __init__(self, list_xml, logo=None, timezone=None):
-
+        dir_fonts = os.path.dirname(os.path.realpath(__file__))
+        pdfmetrics.registerFont(
+            TTFont(
+                'NimbusSanL-Bold',
+                os.path.join(dir_fonts,'fonts/NimbusSanL Bold.ttf')))
+        pdfmetrics.registerFont(
+            TTFont(
+                'NimbusSanL-Regu',
+                os.path.join(dir_fonts, 'fonts/NimbusSanL Regular.ttf')))
         self.current_font_size = 7
         self.current_font_name = 'NimbusSanL-Regu'
 
@@ -125,20 +135,18 @@ class danfce(object):
     def danfce_information(self, oXML=None):
         el_ide = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}ide")
         tipo_emissao = tagtext(oNode=el_ide, cTag='tpEmis')
+        self.drawTitle(
+            "DANFE NFC-e - Documento Auxiliar da Nota Fiscal de",
+            7, 'NimbusSanL-Bold')
+
+        self.drawTitle("Consumidor Eletrônica", 7, 'NimbusSanL-Bold')
+
+        self.drawString(
+            "NFC-e não permite aproveitamento de crédito de ICMS", True)
         if tipo_emissao in ('5', '9'):
             self.current_height -= 5
             self.drawTitle("EMITIDA EM CONTINGÊNCIA",9, 'NimbusSanL-Bold')
             self.drawTitle("Pendente de autorização", 7, 'NimbusSanL-Bold')
-            self.drawLine()
-        else:
-            self.drawTitle(
-                "DANFE NFC-e - Documento Auxiliar da Nota Fiscal de",
-                7, 'NimbusSanL-Bold')
-
-            self.drawTitle("Consumidor Eletrônica", 7, 'NimbusSanL-Bold')
-
-            self.drawString(
-                "NFC-e não permite aproveitamento de crédito de ICMS", True)
             self.drawLine()
 
     def produtos(self, oXML=None, el_det=None, oPaginator=None,
