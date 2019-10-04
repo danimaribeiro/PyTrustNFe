@@ -1,7 +1,6 @@
 # coding=utf-8
 from setuptools import setup, find_packages
 
-
 VERSION = "1.0.44"
 
 
