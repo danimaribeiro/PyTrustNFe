@@ -3,8 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import hashlib
 import os
-from datetime import date
-
 import requests
 from lxml import etree
 from .patch import has_patch
