@@ -914,10 +914,20 @@
             </compra>
             {% endif %}
         </infNFe>
+        {% if ide.mod == '65' %}
         <infNFeSupl>
+          {% if NFe.infNFe.qrCode is defined %}
           <qrCode>{{ NFe.infNFe.qrCode }}</qrCode>
+          {% else %}
+          <qrCode>.</qrCode>
+          {% endif %}
+          {% if NFe.infNFe.urlChave is defined %}
           <urlChave>{{ NFe.infNFe.urlChave }}</urlChave>
+          {% else %}
+          <urlChave>.</urlChave>
+          {% endif %}
         </infNFeSupl>
+        {% endif %}
     </NFe>
     {% endfor %}
 </enviNFe>

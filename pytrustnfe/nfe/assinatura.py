@@ -14,7 +14,7 @@ class Assinatura(object):
         self.arquivo = arquivo
         self.senha = senha
 
-    def assina_xml(self, xml_element, reference, return_element_etree=False):
+    def assina_xml(self, xml_element, reference):
         cert, key = extract_cert_and_key_from_pfx(self.arquivo, self.senha)
 
         for element in xml_element.iter("*"):
@@ -42,6 +42,4 @@ class Assinatura(object):
             if element_signed is not None and signature is not None:
                 parent = element_signed.getparent()
                 parent.append(signature)
-        if return_element_etree is True:
-            return signed_root
         return etree.tostring(signed_root, encoding=str)

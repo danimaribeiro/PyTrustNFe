@@ -3,6 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import hashlib
 import os
+from datetime import date
+
 import requests
 from lxml import etree
 from .patch import has_patch
@@ -57,84 +59,7 @@ def _render(certificado, method, sign, **kwargs):
             xml_send = signer.assina_xml(xmlElem_send, kwargs['obj']['id'])
         if method == 'NfeAutorizacao':
             xml_send = signer.assina_xml(
-                xmlElem_send, kwargs['NFes'][0]['infNFe']['Id'], True)
-            if modelo == '65' and 'urlChave' not in kwargs['NFes'][0] and \
-                    'qrCode' not in kwargs['NFes'][0]:
-                if kwargs['NFes'][0]['ide']['tpEmis'] != 1:
-                    digest_value = xmlElem_send.find(
-                        ".//{http://www.w3.org/2000/09/xmldsig#}DigestValue")
-                    c_hash_qr_code = \
-                        "{ch_acesso}|{versao}|{tp_amb}|{dh_emi}|" \
-                        "{v_nf}|{dig_val}|{id_csc}|{csc}".format(
-                            ch_acesso=kwargs['NFes'][0]['NFe']['infNFe']['Id'].
-                            replace('NFe', ''),
-                            versao=2,
-                            tp_amb=kwargs['NFes'][0]['ide']['tpAmb'],
-                            dh_emi=kwargs['NFes'][0]['ide']['dhEmi'].split("-")[2].
-                            split("T")[0],
-                            v_nf=kwargs['NFes'][0]['total']['vNF'],
-                            dig_val=digest_value.text,
-                            id_csc=int(kwargs['NFes'][0]['id_csc']),
-                            csc=kwargs['NFes'][0]['csc']
-                        )
-                    c_hash_qr_code = hashlib.sha1(c_hash_qr_code.encode()). \
-                        hexdigest()
-                    qr_code_url = 'p={ch_acesso}|{versao}|{tp_amb}|{dh_emi}|" \
-                        "{v_nf}|{dig_val}|{id_csc}|{hash}'.format(
-                        ch_acesso=kwargs['NFes'][0]['NFe']['infNFe']['Id'].
-                        replace('NFe', ''),
-                        versao=2,
-                        tp_amb=kwargs['NFes'][0]['ide']['tpAmb'],
-                        dh_emi=kwargs['NFes'][0]['ide']['dhEmi'].split("-")[2].
-                        split("T")[0],
-                        v_nf=kwargs['NFes'][0]['total']['vNF'],
-                        dig_val=digest_value.text,
-                        id_csc=int(kwargs['NFes'][0]['id_csc']),
-                        hash=c_hash_qr_code
-                    )
-                    qrcode = url_qrcode(
-                        kwargs['NFes'][0]['emit']['enderEmit']['UF'],
-                        str(kwargs['NFes'][0]['ide']['tpAmb'])
-                    ) + qr_code_url
-                    url_consulta = url_qrcode_exibicao(
-                        kwargs['NFes'][0]['emit']['enderEmit']['UF'],
-                        str(kwargs['NFes'][0]['ide']['tpAmb'])
-                    )
-                else:
-                    c_hash_qr_code = \
-                        "{ch_acesso}|{versao}|{tp_amb}|{id_csc}|{csc}".format(
-                            ch_acesso=kwargs['NFe']['infNFe']['Id'].
-                            replace('NFe', ''),
-                            versao=2,
-                            tp_amb=kwargs['ide']['tpAmb'],
-                            id_csc=int(kwargs['id_csc']),
-                            csc=kwargs['csc']
-                        )
-                    c_hash_qr_code = hashlib.sha1(
-                        c_hash_qr_code.encode()).hexdigest()
-                    qr_code_url = "p={ch_acesso}|{versao}|{tp_amb}|{id_csc}|" \
-                                  "{hash}".format(
-                                    ch_acesso=kwargs['NFe']['infNFe']['Id']
-                                    .replace('NFe', ''),
-                                    versao=2,
-                                    tp_amb=kwargs['ide']['tpAmb'],
-                                    id_csc=int(kwargs['id_csc']),
-                                    hash=c_hash_qr_code
-                                    )
-                    qrcode = url_qrcode(
-                        kwargs['emit']['enderEmit']['UF'],
-                        str(kwargs['ide']['tpAmb'])
-                    ) + qr_code_url
-                    url_consulta = url_qrcode_exibicao(
-                        kwargs['emit']['enderEmit']['UF'],
-                        str(kwargs['ide']['tpAmb'])
-                    )
-                qrCode = xml_send.find(
-                    './/{http://www.portalfiscal.inf.br/nfe}qrCode').text = \
-                    qrcode
-                urlChave = xml_send.find(
-                    './/{http://www.portalfiscal.inf.br/nfe}urlChave').text = \
-                    url_consulta
+                xmlElem_send, kwargs['NFes'][0]['infNFe']['Id'])
             xml_send = etree.tostring(xmlElem_send, encoding=str)
         elif method == 'RecepcaoEvento':
             xml_send = signer.assina_xml(
@@ -147,6 +72,116 @@ def _render(certificado, method, sign, **kwargs):
         xml_send = etree.tostring(xmlElem_send, encoding=str)
     return xml_send
 
+
+def gerar_qrcode(id_csc: int, csc: str, xml_send: str, cert = False) -> str:
+    xml = etree.fromstring(xml_send)
+    signature = xml.find(
+        ".//{http://www.w3.org/2000/09/xmldsig#}Signature")
+    id = xml.find(
+        ".//{http://www.portalfiscal.inf.br/nfe}infNFe").get('Id')
+    if id is None:
+        raise Exception("XML Invalido - Sem o ID")
+
+    chave = id.replace('NFe', '')
+    emit_uf = chave[:2]
+
+    tp_amb = xml.find(".//{http://www.portalfiscal.inf.br/nfe}tpAmb")
+    if tp_amb is None:
+        raise Exception("XML Invalido - Sem o tipo de ambiente")
+
+    dh_emi = xml.find(".//{http://www.portalfiscal.inf.br/nfe}dhEmi")
+    if dh_emi is None:
+        raise Exception("XML Invalido - Sem data de Emissao")
+    dh_emi = dh_emi.text.split("-")[2].split("T")[0]
+
+    tp_emis = xml.find(".//{http://www.portalfiscal.inf.br/nfe}tpEmis")
+    if tp_emis is None:
+        raise Exception("XML Invalido - Sem tipo de emissao")
+
+    v_nf = xml.find(".//{http://www.portalfiscal.inf.br/nfe}vNF")
+    if v_nf is None:
+        raise Exception("XML Invalido - Sem o valor da NFe")
+
+    url_qrcode_str = url_qrcode(
+        estado=emit_uf,
+        ambiente=tp_amb.text)
+    url_qrcode_exibicao_str = url_qrcode_exibicao(
+        estado=emit_uf,
+        ambiente=tp_amb.text)
+
+    if tp_emis != 1:
+        if signature is None:
+            if cert is not False:
+                signer = Assinatura(certificado.pfx, certificado.password)
+                xml_send = signer.assina_xml(xmlElem_send, id)
+            else:
+                raise Exception("XML Invalido - Sem assinatura e não "
+                                "foi enviado o certificado nos parametros")
+        digest_value = xml.find(
+            ".//{http://www.w3.org/2000/09/xmldsig#}DigestValue")
+        c_hash_qr_code = \
+            "{ch_acesso}|{versao}|{tp_amb}|{dh_emi}|" \
+            "{v_nf}|{dig_val}|{id_csc}|{csc}".format(
+                ch_acesso=chave,
+                versao=2,
+                tp_amb=tp_amb.text,
+                dh_emi=dh_emi,
+                v_nf=float(v_nf.text),
+                dig_val=digest_value.text,
+                id_csc=int(id_csc),
+                csc=csc
+            )
+        c_hash_qr_code = hashlib.sha1(c_hash_qr_code.encode()). \
+            hexdigest()
+        qr_code_url = 'p={ch_acesso}|{versao}|{tp_amb}|{dh_emi}|" \
+                                "{v_nf}|{dig_val}|{id_csc}|{hash}'.format(
+            ch_acesso=chave,
+            versao=2,
+            tp_amb=tp_amb.text,
+            dh_emi=dh_emi,
+            v_nf=float(v_nf.text),
+            dig_val=digest_value.text,
+            id_csc=int(id_csc),
+            hash=c_hash_qr_code
+        )
+        qrcode = url_qrcode_str + qr_code_url
+        url_consulta = url_qrcode_exibicao_str
+
+        qrCode = xml.find(
+            './/{http://www.portalfiscal.inf.br/nfe}qrCode').text = \
+            qrcode
+        urlChave = xml.find(
+            './/{http://www.portalfiscal.inf.br/nfe}urlChave').text = \
+            url_consulta
+    else:
+        c_hash_qr_code = \
+        "{ch_acesso}|{versao}|{tp_amb}|{id_csc}|{csc}".format(
+            ch_acesso=chave,
+            versao=2,
+            tp_amb=tp_amb.text,
+            id_csc=int(id_csc),
+            csc=csc
+        )
+        c_hash_qr_code = hashlib.sha1(c_hash_qr_code.encode()).hexdigest()
+
+        qr_code_url = "p={ch_acesso}|{versao}|{tp_amb}|{id_csc}|" \
+                      "{hash}".\
+            format(
+                ch_acesso=chave,
+                versao=2,
+                tp_amb=tp_amb.text,
+                id_csc=int(id_csc),
+                hash=c_hash_qr_code
+            )
+        qrcode = url_qrcode_str + qr_code_url
+        url_consulta = url_qrcode_exibicao_str
+        qrCode = xml.find(
+            './/{http://www.portalfiscal.inf.br/nfe}qrCode').text = \
+            qrcode
+        urlChave = xml.find(
+            './/{http://www.portalfiscal.inf.br/nfe}urlChave').text = \
+            url_consulta
+    return etree.tostring(xml)
 
 def _get_session(certificado):
     cert, key = extract_cert_and_key_from_pfx(
