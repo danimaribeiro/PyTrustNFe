@@ -40,12 +40,6 @@ def _generate_nfe_id(**kwargs):
 
 def _render(certificado, method, sign, **kwargs):
     path = os.path.join(os.path.dirname(__file__), 'templates')
-    if sign and kwargs['NFes'][0]['ide']['mod'] == '65':
-        kwargs['NFes'][0]['qrCode'] = 1 if 'qrCode' not in kwargs else \
-            kwargs['NFes'][0]['qrCode']
-        kwargs['NFes'][0]['urlChave'] = 1 \
-            if 'urlChave' not in kwargs['NFes'][0] else \
-            kwargs['NFes'][0]['urlChave']
     xmlElem_send = render_xml(path, '%s.xml' % method, True, **kwargs)
 
     modelo = xmlElem_send.find(".//{http://www.portalfiscal.inf.br/nfe}mod")
@@ -58,7 +52,6 @@ def _render(certificado, method, sign, **kwargs):
         if method == 'NfeAutorizacao':
             xml_send = signer.assina_xml(
                 xmlElem_send, kwargs['NFes'][0]['infNFe']['Id'])
-            xml_send = etree.tostring(xmlElem_send, encoding=str)
         elif method == 'RecepcaoEvento':
             xml_send = signer.assina_xml(
                 xmlElem_send, kwargs['eventos'][0]['Id'])
