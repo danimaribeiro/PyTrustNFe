@@ -63,6 +63,7 @@ def _render(certificado, method, sign, **kwargs):
 
     else:
         xml_send = etree.tostring(xmlElem_send, encoding=str)
+    
     return xml_send
 
 
@@ -71,7 +72,7 @@ def _get_session(certificado):
         certificado.pfx, certificado.password)
     cert, key = save_cert_key(cert, key)
 
-    print('\nEntrei aqui no send do pytrust!!!\n\n\n\n')
+    # print('\nEntrei aqui no send do pytrust!!!\n\n\n\n')
 
     session = Session()
     session.cert = (cert, key)
