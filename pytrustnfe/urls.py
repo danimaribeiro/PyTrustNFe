@@ -54,6 +54,7 @@ URLS = {
         SE: 'http://www.nfce.se.gov.br/nfce/qrcode?',
         SP: 'https://www.nfce.fazenda.sp.gov.br/qrcode?',
         TO: 'http://www.sefaz.to.gov.br/nfce/qrcode?',
+        CE: 'http://nfce.sefaz.ce.gov.br/pages/ShowNFCe.html?',
     },
     HOMOLOGACAO: {
         AC: 'http://www.hml.sefaznet.ac.gov.br/nfce/qrcode?',
@@ -79,6 +80,7 @@ URLS = {
         SE: 'http://www.hom.nfe.se.gov.br/nfce/qrcode?',
         SP: 'https://www.homologacao.nfce.fazenda.sp.gov.br/qrcode?',
         TO: 'http://homologacao.sefaz.to.gov.br/nfce/qrcode?',
+        CE: 'http://nfceh.sefaz.ce.gov.br/pages/ShowNFCe.html?'
     }
 }
 
