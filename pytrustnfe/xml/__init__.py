@@ -7,7 +7,10 @@ from lxml import etree
 from lxml import objectify
 from jinja2 import Environment, FileSystemLoader
 from . import filters
-import re
+
+# Constant for inclusion of the tag idEstrangeiro when we have to export product
+# and the id/cpf/cnpj for the company or person is not filled
+ID_ESTRANG = '{http://www.portalfiscal.inf.br/nfe}idEstrangeiro'
 
 def recursively_empty(e):
     if e.text:
@@ -38,7 +41,7 @@ def render_xml(path, template_name, remove_empty, **nfe):
         context = etree.iterwalk(root)
         for dummy, elem in context:
             parent = elem.getparent()
-            if recursively_empty(elem):
+            if recursively_empty(elem) and elem.tag != ID_ESTRANG:
                 parent.remove(elem)
         return root
     return etree.tostring(root, encoding=str)
@@ -69,3 +72,4 @@ def recursively_normalize(vals):
             for a in vals[item]:
                 recursively_normalize(a)
     return vals
+

@@ -17,7 +17,7 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 # Zeep
 from requests import Session
-from zeep import Client, Settings
+from zeep import Client
 from zeep.transports import Transport
 
 
@@ -63,7 +63,6 @@ def _render(certificado, method, sign, **kwargs):
 
     else:
         xml_send = etree.tostring(xmlElem_send, encoding=str)
-    
     return xml_send
 
 
@@ -71,8 +70,6 @@ def _get_session(certificado):
     cert, key = extract_cert_and_key_from_pfx(
         certificado.pfx, certificado.password)
     cert, key = save_cert_key(cert, key)
-
-    # print('\nEntrei aqui no send do pytrust!!!\n\n\n\n')
 
     session = Session()
     session.cert = (cert, key)
