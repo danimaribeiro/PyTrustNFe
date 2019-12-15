@@ -602,7 +602,7 @@
                         <vOutro>{{ imposto.ISSQN.vOutro }}</vOutro>
                         <vDescIncond>{{ imposto.ISSQN.vDescIncond }}</vDescIncond>
                         <vDescCond>{{ imposto.ISSQN.vDescCond }}</vDescCond>
-                        <vISSRet>{{ imposto.ISSQN.vDeducao }}</vISSRet>
+                        <vISSRet>{{ imposto.ISSQN.vISSRet }}</vISSRet>
                         <indISS>{{ imposto.ISSQN.indISS }}</indISS>
                         <cServico>{{ imposto.ISSQN.cServico }}</cServico>
                         <cMun>{{ imposto.ISSQN.cMun }}</cMun>
