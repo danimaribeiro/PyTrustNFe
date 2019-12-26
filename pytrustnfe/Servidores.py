@@ -489,8 +489,7 @@ UFMG = {
         WS_NFE_RECEPCAO_EVENTO: 'nfe2/services/NFeRecepcaoEvento4?wsdl',
         WS_NFE_AUTORIZACAO: 'nfe2/services/NFeAutorizacao4?wsdl',
         WS_NFE_RET_AUTORIZACAO: 'nfe2/services/NFeRetAutorizacao4?wsdl',
-        WS_NFE_CADASTRO: 'nfe2/services/cadconsultacadastro2?wsdl',
-
+        WS_NFE_CADASTRO: 'nfe2/services/CadConsultaCadastro4?wsdl',
     },
     AMBIENTE_HOMOLOGACAO: {
         'servidor': 'hnfe.fazenda.mg.gov.br',
@@ -500,7 +499,7 @@ UFMG = {
         WS_NFE_RECEPCAO_EVENTO: 'nfe2/services/NFeRecepcaoEvento4?wsdl',
         WS_NFE_AUTORIZACAO: 'nfe2/services/NFeAutorizacao4?wsdl',
         WS_NFE_RET_AUTORIZACAO: 'nfe2/services/NFeRetAutorizacao4?wsdl',
-        WS_NFE_CADASTRO: 'nfe2/services/cadconsultacadastro2?wsdl',
+        WS_NFE_CADASTRO: 'nfe2/services/CadConsultaCadastro4?wsdl',
     }
 }
 
