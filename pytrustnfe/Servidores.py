@@ -481,27 +481,51 @@ UFMS = {
 }
 
 UFMG = {
-    AMBIENTE_PRODUCAO: {
-        'servidor': 'nfe.fazenda.mg.gov.br',
-        WS_NFE_INUTILIZACAO: 'nfe2/services/NFeInutilizacao4?wsdl',
-        WS_NFE_CONSULTA: 'nfe2/services/NFeConsultaProtocolo4?wsdl',
-        WS_NFE_SITUACAO: 'nfe2/services/NFeStatusServico4?wsdl',
-        WS_NFE_RECEPCAO_EVENTO: 'nfe2/services/NFeRecepcaoEvento4?wsdl',
-        WS_NFE_AUTORIZACAO: 'nfe2/services/NFeAutorizacao4?wsdl',
-        WS_NFE_RET_AUTORIZACAO: 'nfe2/services/NFeRetAutorizacao4?wsdl',
-        WS_NFE_CADASTRO: 'nfe2/services/cadconsultacadastro2?wsdl',
+    NFE_MODELO: {
+        AMBIENTE_PRODUCAO: {
+            'servidor': 'nfe.fazenda.mg.gov.br',
+            WS_NFE_INUTILIZACAO: 'nfe2/services/NFeInutilizacao4?wsdl',
+            WS_NFE_CONSULTA: 'nfe2/services/NFeConsultaProtocolo4?wsdl',
+            WS_NFE_SITUACAO: 'nfe2/services/NFeStatusServico4?wsdl',
+            WS_NFE_RECEPCAO_EVENTO: 'nfe2/services/NFeRecepcaoEvento4?wsdl',
+            WS_NFE_AUTORIZACAO: 'nfe2/services/NFeAutorizacao4?wsdl',
+            WS_NFE_RET_AUTORIZACAO: 'nfe2/services/NFeRetAutorizacao4?wsdl',
+            WS_NFE_CADASTRO: 'nfe2/services/CadConsultaCadastro4?wsdl',
 
+        },
+        AMBIENTE_HOMOLOGACAO: {
+            'servidor': 'hnfe.fazenda.mg.gov.br',
+            WS_NFE_INUTILIZACAO: 'nfe2/services/NFeInutilizacao4?wsdl',
+            WS_NFE_CONSULTA: 'nfe2/services/NFeConsultaProtocolo4?wsdl',
+            WS_NFE_SITUACAO: 'nfe2/services/NFeStatusServico4?wsdl',
+            WS_NFE_RECEPCAO_EVENTO: 'nfe2/services/NFeRecepcaoEvento4?wsdl',
+            WS_NFE_AUTORIZACAO: 'nfe2/services/NFeAutorizacao4?wsdl',
+            WS_NFE_RET_AUTORIZACAO: 'nfe2/services/NFeRetAutorizacao4?wsdl',
+            WS_NFE_CADASTRO: 'nfe2/services/CadConsultaCadastro4?wsdl',
+        },
     },
-    AMBIENTE_HOMOLOGACAO: {
-        'servidor': 'hnfe.fazenda.mg.gov.br',
-        WS_NFE_INUTILIZACAO: 'nfe2/services/NFeInutilizacao4?wsdl',
-        WS_NFE_CONSULTA: 'nfe2/services/NFeConsultaProtocolo4?wsdl',
-        WS_NFE_SITUACAO: 'nfe2/services/NFeStatusServico4?wsdl',
-        WS_NFE_RECEPCAO_EVENTO: 'nfe2/services/NFeRecepcaoEvento4?wsdl',
-        WS_NFE_AUTORIZACAO: 'nfe2/services/NFeAutorizacao4?wsdl',
-        WS_NFE_RET_AUTORIZACAO: 'nfe2/services/NFeRetAutorizacao4?wsdl',
-        WS_NFE_CADASTRO: 'nfe2/services/cadconsultacadastro2?wsdl',
-    }
+    NFCE_MODELO: {
+        AMBIENTE_PRODUCAO: {
+            'servidor': 'nfce.fazenda.mg.gov.br',
+            WS_NFE_INUTILIZACAO: 'nfce/services/NFeInutilizacao4?wsdl',
+            WS_NFE_CONSULTA: 'nfce/services/NFeConsultaProtocolo4?wsdl',
+            WS_NFE_SITUACAO: 'nfce/services/NFeStatusServico4?wsdl',
+            WS_NFE_RECEPCAO_EVENTO: 'nfce/services/NFeRecepcaoEvento4?wsdl',
+            WS_NFE_AUTORIZACAO: 'nfce/services/NFeAutorizacao4?wsdl',
+            WS_NFE_RET_AUTORIZACAO: 'nfce/services/NFeRetAutorizacao4?wsdl',
+            WS_NFCE_QR_CODE: 'nfce.fazenda.mg.gov.br/portalnfce/sistema/qrcode.xhtml?'
+        },
+        AMBIENTE_HOMOLOGACAO: {
+            'servidor': 'hnfce.fazenda.mg.gov.br',
+            WS_NFE_INUTILIZACAO: 'nfce/services/NFeInutilizacao4?wsdl',
+            WS_NFE_CONSULTA: 'nfce/services/NFeConsultaProtocolo4?wsdl',
+            WS_NFE_SITUACAO: 'nfce/services/NFeStatusServico4?wsdl',
+            WS_NFE_RECEPCAO_EVENTO: 'nfce/services/NFeRecepcaoEvento4?wsdl',
+            WS_NFE_AUTORIZACAO: 'nfce/services/NFeAutorizacao4?wsdl',
+            WS_NFE_RET_AUTORIZACAO: 'nfce/services/NFeRetAutorizacao4?wsdl',
+            WS_NFCE_QR_CODE: 'nfce.fazenda.mg.gov.br/portalnfce/sistema/qrcode.xhtml?'
+        },
+    },
 }
 
 UFPR = {
