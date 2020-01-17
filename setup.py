@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 
-VERSION = "1.0.33.post1"
+VERSION = "1.0.33.post2"
 
 
 setup(
