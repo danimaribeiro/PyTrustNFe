@@ -1,7 +1,7 @@
 # coding=utf-8
 from setuptools import setup, find_packages
 
-VERSION = "1.0.1.post1"
+VERSION = "1.0.1.post2"
 
 setup(
     name="pytrustnfe",

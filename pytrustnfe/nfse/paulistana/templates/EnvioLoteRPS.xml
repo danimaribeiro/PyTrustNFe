@@ -6,7 +6,7 @@
     <transacao>false</transacao>
     <dtInicio>{{ nfse.data_inicio }}</dtInicio>
     <dtFim>{{ nfse.data_fim }}</dtFim>
-    <QtdRPS>1</QtdRPS>
+    <QtdRPS>{{ nfse.lista_rps|lenght }}</QtdRPS>
     <ValorTotalServicos>{{ nfse.total_servicos }}</ValorTotalServicos>
     <ValorTotalDeducoes>{{ nfse.total_deducoes }}</ValorTotalDeducoes>
   </Cabecalho>
