@@ -53,6 +53,7 @@ def xml_recepcionar_lote_rps(certificado, **kwargs):
 def recepcionar_lote_rps(certificado, **kwargs):
     if "xml" not in kwargs:
         kwargs["xml"] = xml_recepcionar_lote_rps(certificado, **kwargs)
+        print(kwargs["xml"])
     return {"sent_xml": kwargs["xml"]}
     # return _send(certificado, 'recepcionarLoteRps', **kwargs)
 
