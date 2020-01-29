@@ -13,12 +13,11 @@ class test_nfse_ginfes(unittest.TestCase):
 
     @unittest.skip
     def test_consulta_situacao_lote(self):
-        pfx_source = open('/home/danimar/Downloads/machado.pfx', 'rb').read()
-        pfx = Certificado(pfx_source, '123456789')
+        pfx_source = open("/home/danimar/Downloads/machado.pfx", "rb").read()
+        pfx = Certificado(pfx_source, "123456789")
 
-        dados = {'ambiente': 'homologacao'}
-        retorno = consultar_situacao_lote(
-            pfx, consulta=dados, ambiente='homologacao')
+        dados = {"ambiente": "homologacao"}
+        retorno = consultar_situacao_lote(pfx, consulta=dados, ambiente="homologacao")
 
-        self.assertNotEqual(retorno['received_xml'], '')
-        self.assertEqual(retorno['object'].Cabecalho.Sucesso, True)
+        self.assertNotEqual(retorno["received_xml"], "")
+        self.assertEqual(retorno["object"].Cabecalho.Sucesso, True)

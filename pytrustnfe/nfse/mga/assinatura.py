@@ -9,7 +9,6 @@ from signxml import XMLSigner
 
 
 class Assinatura(object):
-
     def __init__(self, arquivo, senha):
         self.arquivo = arquivo
         self.senha = senha
@@ -22,22 +21,26 @@ class Assinatura(object):
                 element.text = None
 
         signer = XMLSigner(
-            method=signxml.methods.enveloped, signature_algorithm=u"rsa-sha1",
-            digest_algorithm=u'sha1',
-            c14n_algorithm=u'http://www.w3.org/TR/2001/REC-xml-c14n-20010315')
+            method=signxml.methods.enveloped,
+            signature_algorithm=u"rsa-sha1",
+            digest_algorithm=u"sha1",
+            c14n_algorithm=u"http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+        )
 
         ns = {}
-        ns[None] = signer.namespaces['ds']
+        ns[None] = signer.namespaces["ds"]
         signer.namespaces = ns
         element_to_be_signed = xml_element.getchildren()[0].getchildren()[0]
 
         signed_root = signer.sign(
-            element_to_be_signed, key=key.encode(), cert=cert.encode())
+            element_to_be_signed, key=key.encode(), cert=cert.encode()
+        )
         if reference:
             element_signed = xml_element.find(".//*[@Id='%s']" % reference)
 
             signature = signed_root.find(
-                ".//{http://www.w3.org/2000/09/xmldsig#}Signature")
+                ".//{http://www.w3.org/2000/09/xmldsig#}Signature"
+            )
 
             if element_signed is not None and signature is not None:
                 parent = xml_element.getchildren()[0]

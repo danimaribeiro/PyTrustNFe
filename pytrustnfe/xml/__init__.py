@@ -17,8 +17,7 @@ def recursively_empty(e):
 
 def render_xml(path, template_name, remove_empty, **nfe):
     nfe = recursively_normalize(nfe)
-    env = Environment(
-        loader=FileSystemLoader(path), extensions=['jinja2.ext.with_'])
+    env = Environment(loader=FileSystemLoader(path), extensions=["jinja2.ext.with_"])
     env.filters["normalize"] = filters.strip_line_feed
     env.filters["normalize_str"] = filters.normalize_str
     env.filters["format_percent"] = filters.format_percent
@@ -27,9 +26,10 @@ def render_xml(path, template_name, remove_empty, **nfe):
     env.filters["comma"] = filters.format_with_comma
 
     template = env.get_template(template_name)
-    xml = template.render(**nfe).replace('\n', '')
-    parser = etree.XMLParser(remove_blank_text=True, remove_comments=True,
-                             strip_cdata=False)
+    xml = template.render(**nfe).replace("\n", "")
+    parser = etree.XMLParser(
+        remove_blank_text=True, remove_comments=True, strip_cdata=False
+    )
     root = etree.fromstring(xml, parser=parser)
     for element in root.iter("*"):  # remove espaços em branco
         if element.text is not None and not element.text.strip():
@@ -45,15 +45,15 @@ def render_xml(path, template_name, remove_empty, **nfe):
 
 
 def sanitize_response(response):
-    parser = etree.XMLParser(encoding='utf-8')
-    tree = etree.fromstring(response.encode('UTF-8'), parser=parser)
+    parser = etree.XMLParser(encoding="utf-8")
+    tree = etree.fromstring(response.encode("UTF-8"), parser=parser)
     # Remove namespaces inuteis na resposta
     for elem in tree.getiterator():
-        if not hasattr(elem.tag, 'find'):
+        if not hasattr(elem.tag, "find"):
             continue
-        i = elem.tag.find('}')
+        i = elem.tag.find("}")
         if i >= 0:
-            elem.tag = elem.tag[i + 1:]
+            elem.tag = elem.tag[i + 1 :]
     objectify.deannotate(tree, cleanup_namespaces=True)
     return response, objectify.fromstring(etree.tostring(tree))
 
