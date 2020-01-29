@@ -6,8 +6,6 @@ import unittest
 from pytrustnfe.certificado import Certificado
 from pytrustnfe.nfse.paulistana import envio_lote_rps
 from pytrustnfe.nfse.paulistana import cancelamento_nfe
-from pytrustnfe.nfse.assinatura import Assinatura
-from pytrustnfe.nfse.paulistana import sign_tag
 
 
 class test_nfse_paulistana(unittest.TestCase):
@@ -57,7 +55,8 @@ class test_nfse_paulistana(unittest.TestCase):
 
         nfse = self._get_nfse()
         path = os.path.join(os.path.dirname(__file__), "XMLs")
-        xml_return = open(os.path.join(path, "paulistana_resultado.xml"), "r").read()
+        xml_return = open(os.path.join(
+            path, "paulistana_resultado.xml"), "r").read()
 
         with mock.patch(
             "pytrustnfe.nfse.paulistana.get_authenticated_client"
@@ -70,8 +69,10 @@ class test_nfse_paulistana(unittest.TestCase):
 
             self.assertEqual(retorno["received_xml"], xml_return)
             self.assertEqual(retorno["object"].Cabecalho.Sucesso, True)
-            self.assertEqual(retorno["object"].ChaveNFeRPS.ChaveNFe.NumeroNFe, 446)
-            self.assertEqual(retorno["object"].ChaveNFeRPS.ChaveRPS.NumeroRPS, 6)
+            self.assertEqual(
+                retorno["object"].ChaveNFeRPS.ChaveNFe.NumeroNFe, 446)
+            self.assertEqual(
+                retorno["object"].ChaveNFeRPS.ChaveRPS.NumeroRPS, 6)
 
     def test_nfse_signature(self):
         pfx_source = open(os.path.join(self.caminho, "teste.pfx"), "rb").read()
@@ -79,7 +80,8 @@ class test_nfse_paulistana(unittest.TestCase):
 
         nfse = self._get_nfse()
         path = os.path.join(os.path.dirname(__file__), "XMLs")
-        xml_sent = open(os.path.join(path, "paulistana_signature.xml"), "r").read()
+        xml_sent = open(os.path.join(
+            path, "paulistana_signature.xml"), "r").read()
 
         with mock.patch(
             "pytrustnfe.nfse.paulistana.get_authenticated_client"
@@ -106,7 +108,8 @@ class test_nfse_paulistana(unittest.TestCase):
         cancelamento = self._get_cancelamento()
 
         path = os.path.join(os.path.dirname(__file__), "XMLs")
-        xml_return = open(os.path.join(path, "paulistana_canc_ok.xml"), "r").read()
+        xml_return = open(os.path.join(
+            path, "paulistana_canc_ok.xml"), "r").read()
 
         with mock.patch(
             "pytrustnfe.nfse.paulistana.get_authenticated_client"
@@ -126,7 +129,8 @@ class test_nfse_paulistana(unittest.TestCase):
         cancelamento = self._get_cancelamento()
 
         path = os.path.join(os.path.dirname(__file__), "XMLs")
-        xml_return = open(os.path.join(path, "paulistana_canc_errado.xml"), "r").read()
+        xml_return = open(os.path.join(
+            path, "paulistana_canc_errado.xml"), "r").read()
 
         with mock.patch(
             "pytrustnfe.nfse.paulistana.get_authenticated_client"

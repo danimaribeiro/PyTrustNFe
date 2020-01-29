@@ -1,9 +1,7 @@
 import xml.dom.minidom
 import os
-import mock
 from pytrustnfe.nfse.natal import recepcionar_lote_rps
 from pytrustnfe.certificado import Certificado
-from pytrustnfe.nfse.assinatura import Assinatura
 
 
 rps_list = [

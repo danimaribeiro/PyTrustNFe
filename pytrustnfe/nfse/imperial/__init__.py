@@ -5,9 +5,7 @@
 import os
 import requests
 from lxml import etree
-from requests import Session
 from zeep import Client
-from zeep.transports import Transport
 from pytrustnfe.xml import render_xml, sanitize_response
 
 
