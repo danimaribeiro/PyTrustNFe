@@ -26,7 +26,7 @@ class Assinatura(object):
             digest_algorithm="sha1",
             c14n_algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments",
         )
-        
+
         ns = {}
         ns[None] = signer.namespaces["ds"]
         signer.namespaces = ns
@@ -37,7 +37,7 @@ class Assinatura(object):
         )
         if reference:
             element_signed = signed_root.find(".//*[@Id='%s']" % reference)
-            signature = signed_root.findall(
+            signature = signed_root.find(
                 ".//{http://www.w3.org/2000/09/xmldsig#}Signature"
             )
 
