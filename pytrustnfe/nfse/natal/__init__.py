@@ -48,10 +48,11 @@ def _render(certificado, method, **kwargs):
 def _send(certificado, method, **kwargs):
     base_url = ""
     if kwargs["ambiente"] == "producao":
-        base_url = ""  # https://wsnfsev1.natal.rn.gov.br:8444"
+        base_url = "https://wsnfsev1.natal.rn.gov.br:8444"
     else:
         base_url = "https://wsnfsev1homologacao.natal.rn.gov.br:8443/axis2/services/NfseWSServiceV1?wsdl"
 
+    base_url = "https://wsnfsev1homologacao.natal.rn.gov.br:8443/axis2/services/NfseWSServiceV1?wsdl"
     cert, key = extract_cert_and_key_from_pfx(
         certificado.pfx, certificado.password)
     cert, key = save_cert_key(cert, key)
