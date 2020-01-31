@@ -42,7 +42,7 @@ def render_xml(path, template_name, remove_empty, **nfe):
             if recursively_empty(elem):
                 parent.remove(elem)
         return root
-    return root
+    return etree.tostring(root, encoding=str)
 
 
 def sanitize_response(response):

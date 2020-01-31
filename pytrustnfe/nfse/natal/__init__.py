@@ -13,6 +13,7 @@ from requests.packages.urllib3 import disable_warnings
 from pytrustnfe.xml import render_xml, sanitize_response
 from pytrustnfe.certificado import extract_cert_and_key_from_pfx, save_cert_key
 from pytrustnfe.nfe.assinatura import Assinatura
+from lxml import etree
 
 
 def sign_rps(path, certificado, **kwargs):
@@ -24,7 +25,7 @@ def sign_rps(path, certificado, **kwargs):
 
             signer = Assinatura(certificado.pfx, certificado.password)
             lote += signer.assina_xml(
-                xml_rps, f"rps:{item.get('numero')}{item.get('serie')}"
+                xml_rps, f"rps:{item.get('numero')}{item.get('serie')}", getchildren=True
             )
         return lote
     return ""
@@ -32,6 +33,10 @@ def sign_rps(path, certificado, **kwargs):
 
 def _render(certificado, method, **kwargs):
     path = os.path.join(os.path.dirname(__file__), "templates")
+    parser = etree.XMLParser(
+        remove_blank_text=True, remove_comments=True, strip_cdata=False
+    )
+
     lote = ""
     if method == "RecepcionarLoteRps":
         lote = sign_rps(path, certificado, **kwargs)
@@ -41,7 +46,8 @@ def _render(certificado, method, **kwargs):
 
     signer = Assinatura(certificado.pfx, certificado.password)
     referencia = "lote"
-    xml_send = signer.assina_xml(xml_send, f"{referencia}")
+    xml_send = signer.assina_xml(etree.fromstring(
+        xml_send, parser=parser), f"{referencia}", getchildren=True)
     return xml_send
 
 
