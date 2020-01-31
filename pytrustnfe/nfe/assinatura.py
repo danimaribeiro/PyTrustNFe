@@ -24,9 +24,10 @@ class Assinatura(object):
             method=signxml.methods.enveloped,
             signature_algorithm="rsa-sha1",
             digest_algorithm="sha1",
-            c14n_algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
+            c14n_algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments",
         )
-
+        #import ipdb
+        #ipdb.set_trace()
         ns = {}
         ns[None] = signer.namespaces["ds"]
         signer.namespaces = ns
@@ -37,11 +38,11 @@ class Assinatura(object):
         )
         if reference:
             element_signed = signed_root.find(".//*[@Id='%s']" % reference)
-            signature = signed_root.find(
+            signature = signed_root.findall(
                 ".//{http://www.w3.org/2000/09/xmldsig#}Signature"
             )
-
+            
             if element_signed is not None and signature is not None:
-                parent = element_signed.getparent()
-                parent.append(signature)
+                element_intern = element_signed.getchildren()
+                element_intern.append(signature)
         return etree.tostring(signed_root, encoding=str)

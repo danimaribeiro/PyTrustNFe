@@ -17,7 +17,8 @@ def recursively_empty(e):
 
 def render_xml(path, template_name, remove_empty, **nfe):
     nfe = recursively_normalize(nfe)
-    env = Environment(loader=FileSystemLoader(path), extensions=["jinja2.ext.with_"])
+    env = Environment(loader=FileSystemLoader(
+        path), extensions=["jinja2.ext.with_"])
     env.filters["normalize"] = filters.strip_line_feed
     env.filters["normalize_str"] = filters.normalize_str
     env.filters["format_percent"] = filters.format_percent
@@ -41,7 +42,7 @@ def render_xml(path, template_name, remove_empty, **nfe):
             if recursively_empty(elem):
                 parent.remove(elem)
         return root
-    return etree.tostring(root, encoding=str)
+    return root
 
 
 def sanitize_response(response):
@@ -53,7 +54,7 @@ def sanitize_response(response):
             continue
         i = elem.tag.find("}")
         if i >= 0:
-            elem.tag = elem.tag[i + 1 :]
+            elem.tag = elem.tag[i + 1:]
     objectify.deannotate(tree, cleanup_namespaces=True)
     return response, objectify.fromstring(etree.tostring(tree))
 

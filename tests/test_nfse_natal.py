@@ -70,7 +70,7 @@ class test_nfse_natal(unittest.TestCase):
 
     def test_recepcionar_lote_rps(self):
         pfx_source = open(os.path.join(self.caminho, "teste.pfx"), "rb").read()
-        pfx = Certificado(pfx_source, "123456")
+        pfx = Certificado(pfx_source, "123456", ambiente="homologacao")
 
         nfse = self._get_nfse()
         path = os.path.join(os.path.dirname(__file__), "XMLs")
