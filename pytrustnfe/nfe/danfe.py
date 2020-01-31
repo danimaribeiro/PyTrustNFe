@@ -307,6 +307,8 @@ class danfe(object):
         self.canvas.setFont('NimbusSanL-Regu', 8)
         self.string(self.nLeft + 1, self.nlin + 38.7,
                     tagtext(oNode=elem_ide, cTag='natOp'))
+        self.string(self.nLeft + 61, self.nlin + 46,
+                    tagtext(oNode=elem_emit, cTag='IEST'))
         self.string(self.nLeft + 1, self.nlin + 46,
                     tagtext(oNode=elem_emit, cTag='IE'))
         self.string(self.nLeft + 101, self.nlin + 46,
