@@ -38,14 +38,16 @@ def _render(certificado, method, **kwargs):
     )
 
     lote = ""
+    referencia = ""
     if method == "RecepcionarLoteRps":
+        referencia = "lote"
         lote = sign_rps(path, certificado, **kwargs)
 
     kwargs["lote"] = lote
     xml_send = render_xml(path, "%s.xml" % method, False, **kwargs)
 
     signer = Assinatura(certificado.pfx, certificado.password)
-    referencia = "lote"
+
     xml_send = signer.assina_xml(etree.fromstring(
         xml_send, parser=parser), f"{referencia}", getchildren=True)
     return xml_send
@@ -95,13 +97,13 @@ def recepcionar_lote_rps(certificado, **kwargs):
 
 
 def xml_consultar_lote_rps(certificado, **kwargs):
-    return _render(certificado, "consultarLoteRps", **kwargs)
+    return _render(certificado, "ConsultarLoteRps", **kwargs)
 
 
 def consultar_lote_rps(certificado, **kwargs):
     if "xml" not in kwargs:
         kwargs["xml"] = xml_consultar_lote_rps(certificado, **kwargs)
-    return _send(certificado, "consultarLoteRps", **kwargs)
+    return _send(certificado, "ConsultarLoteRps", **kwargs)
 
 
 def xml_cancelar_nfse(certificado, **kwargs):
