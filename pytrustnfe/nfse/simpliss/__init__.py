@@ -40,7 +40,7 @@ def _send(method, **kwargs):
         base_url = 'http://wshomologacao.simplissweb.com.br/nfseservice.svc'  # noqa
 
     base_url = 'http://wshomologacao.simplissweb.com.br/nfseservice.svc'
-    xml_send = kwargs["xml"].replace('<?xml version="1.0"?>', '')
+    xml_send = kwargs["xml"]
     path = os.path.join(os.path.dirname(__file__), 'templates')
     soap = render_xml(path, 'SoapRequest.xml', False, soap_body=xml_send)
 

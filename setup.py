@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 
-VERSION = "1.0.33.post3"
+VERSION = "1.0.45"
 
 
 setup(
@@ -39,12 +39,14 @@ later (LGPLv2+)',
         'nfse/carioca/templates/*xml',
         'nfse/bh/templates/*xml',
         'nfse/mga/templates/*xml',
+        'nfse/aparecida/templates/*xml',
         'xml/schemas/*xsd',
     ]},
     url='https://github.com/danimaribeiro/PyTrustNFe',
     license='LGPL-v2.1+',
     description='PyTrustNFe é uma biblioteca para envio de NF-e',
     long_description=open('README.md', 'r').read(),
+    long_description_content_type='text/markdown',
     install_requires=[
         'urllib3',
         'xmlsec==1.3.3',  # apt update;apt install libxmlsec1-dev pkg-config -y

@@ -39,6 +39,7 @@ URLS = {
         DF: 'http://www.fazenda.df.gov.br/nfce/qrcode?',
         GO: 'http://nfe.sefaz.go.gov.br/nfeweb/sites/nfce/danfeNFCe?',
         MA: 'http://nfce.sefaz.ma.gov.br/portal/consultarNFCe.jsp?',
+        MG: 'https://nfce.fazenda.mg.gov.br/portalnfce/sistema/qrcode.xhtml?',
         MS: 'http://www.dfe.ms.gov.br/nfce/qrcode?',
         MT: 'http://www.sefaz.mt.gov.br/nfce/consultanfce?',
         PA: 'https://appnfc.sefa.pa.gov.br/portal/view/consultas/nfce/nfceForm.seam?',  # noqa
@@ -65,6 +66,7 @@ URLS = {
         GO: 'http://homolog.sefaz.go.gov.br/nfeweb/sites/nfce/danfeNFCe?',
         MA: 'http://homologacao.sefaz.ma.gov.br/portal/consultarNFCe.jsp?',
         MS: 'http://www.dfe.ms.gov.br/nfce/qrcode?',
+        MG: 'https://nfce.fazenda.mg.gov.br/portalnfce/sistema/qrcode.xhtml?',
         MT: 'http://homologacao.sefaz.mt.gov.br/nfce/consultanfce?',
         PA: 'https://appnfc.sefa.pa.gov.br/portal-homologacao/view/consultas/nfce/nfceForm.seam?',  # noqa
         PB: 'http://www.receita.pb.gov.br/nfcehom?',
@@ -96,7 +98,7 @@ URLS_EXIBICAO = {
         MA: 'www.sefaz.ma.gov.br/nfce/consulta',
         MS: 'www.dfe.ms.gov.br/nfce/consulta',
         MT: 'www.sefaz.mt.gov.br/nfce/consulta',
-        MG: 'www.fazenda.mg.gov.br/nfce/consulta',
+        MG: 'http://nfce.fazenda.mg.gov.br/portalnfce',
         PA: 'www.sefa.pa.gov.br/nfce/consulta',
         PB: 'www.receita.pb.gov.br/nfce/consulta',
         PE: 'nfce.sefaz.pe.gov.br/nfce/consulta',
@@ -124,7 +126,7 @@ URLS_EXIBICAO = {
         MA: 'www.sefaz.ma.gov.br/nfce/consulta',
         MS: 'www.dfe.ms.gov.br/nfce/consulta',
         MT: 'www.sefaz.mt.gov.br/nfce/consulta',
-        MG: 'www.fazenda.mg.gov.br/nfce/consulta',
+        MG: 'http://hnfce.fazenda.mg.gov.br/portalnfce',
         PA: 'www.sefa.pa.gov.br/nfce/consulta',
         PB: 'www.receita.pb.gov.br/nfcehom',
         PE: 'nfce.sefaz.pe.gov.br/nfce/consulta',

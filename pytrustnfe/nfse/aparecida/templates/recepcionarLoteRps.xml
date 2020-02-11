@@ -1,0 +1,13 @@
+<EnviarLoteRpsEnvio>
+    <LoteRps Id="lote{{ nfse.numero_lote }}">
+        <NumeroLote>{{ nfse.numero_lote }}</NumeroLote>
+        <Cnpj>{{ nfse.cnpj_prestador }}</Cnpj>
+        <InscricaoMunicipal>{{ nfse.inscricao_municipal }}</InscricaoMunicipal>
+        <QuantidadeRps>{{ nfse.lista_rps|length }}</QuantidadeRps>
+        <ListaRps>
+            {% for rps in nfse.lista_rps -%}
+            {% include 'Rps.xml' %}
+            {% endfor %}
+        </ListaRps>
+    </LoteRps>
+</EnviarLoteRpsEnvio>

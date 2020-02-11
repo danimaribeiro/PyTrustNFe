@@ -21,7 +21,7 @@ url_rs = 'https://nfe.sefazrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao4.asmx?w
 url_cad_rs = 'https://cad.sefazrs.rs.gov.br/ws/cadconsultacadastro/cadconsultacadastro4.asmx?wsdl'
 
 url_cad_sc = 'https://cad.svrs.rs.gov.br/ws/cadconsultacadastro/cadconsulta\
-cadastro2.asmx?wsdl'
+cadastro4.asmx?wsdl'
 
 
 class test_servidores(unittest.TestCase):

@@ -170,9 +170,9 @@ class danfe(object):
                     infAdProd = item.find(
                         ".//{http://www.portalfiscal.inf.br/nfe}infAdProd")
 
-                    list_ = wrap(tagtext(oNode=el_prod, cTag='xProd'), 56)
+                    list_ = wrap(tagtext(oNode=el_prod, cTag='xProd'), 50)
                     if infAdProd is not None:
-                        list_.extend(wrap(infAdProd.text, 56))
+                        list_.extend(wrap(infAdProd.text, 50))
                     list_desc.append(list_)
 
                     list_cProd = wrap(tagtext(oNode=el_prod, cTag='cProd'), 14)
@@ -202,7 +202,9 @@ class danfe(object):
             self.adicionais(oXML=oXML, tamanho_diminuir=tamanho_ocupado)
 
             # Gera o restante das páginas do XML
-            while index <= nId:
+            while index < nId:
+                if index < 0:
+                    index = index * -1
                 self.newpage()
                 self.ide_emit(oXML=oXML, timezone=timezone)
                 index = self.produtos(
@@ -357,7 +359,7 @@ class danfe(object):
             self.canvas.restoreState()
 
         # Cancelado
-        if tagtext(oNode=elem_evento, cTag='cStat') == '135':
+        if tagtext(oNode=elem_evento, cTag='cStat') in ('135', '155'):
             self.canvas.saveState()
             self.canvas.rotate(45)
             self.canvas.setFont('NimbusSanL-Bold', 60)
@@ -725,6 +727,7 @@ obsCont[@xCampo='NomeVendedor']")
             line_height = max(len(list_cod_prod[id]), len(list_desc[id]))
             line_height *= nStep
             if nLin + line_height > maxHeight:
+                id = id * -1
                 break
 
             item = el_det[id]
@@ -759,9 +762,9 @@ obsCont[@xCampo='NomeVendedor']")
                 tagtext(oNode=el_prod, cTag='vUnCom')))
             self.stringRight(nMr - 50.5, nLin, format_number(
                              tagtext(oNode=el_prod, cTag='vProd')))
-            self.stringRight(nMr - 38.5, nLin, format_number(vBC))
-            self.stringRight(nMr - 26.5, nLin, format_number(vICMS))
-            self.stringRight(nMr - 7.5, nLin, format_number(pICMS))
+            self.stringRight(nMr - 38.5, nLin, format_number(vBC or '0.00'))
+            self.stringRight(nMr - 26.5, nLin, format_number(vICMS or '0.00'))
+            self.stringRight(nMr - 7.5, nLin, format_number(pICMS or '0.00'))
 
             self.stringRight(nMr - 14.5, nLin, format_number(vIPI or '0.00'))
             self.stringRight(nMr - 0.5, nLin, format_number(pIPI or '0.00'))
@@ -784,8 +787,6 @@ obsCont[@xCampo='NomeVendedor']")
             self.canvas.setStrokeColor(black)
 
         self.nlin += nH + 3
-        if (index == max_index):
-            id += 1
         return id
 
     def calculo_issqn(self, oXML=None):
