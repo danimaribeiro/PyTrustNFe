@@ -15,6 +15,7 @@ def _get_nfse():
 class test_nfse_paulistana_para_lote(unittest.TestCase):
     xml_path = os.path.join(os.path.dirname(__file__), 'XMLs')
     template_path = 'pytrustnfe/nfse/paulistana/templates'
+    BATCH_SIZE = len(LOTE_RPS)
 
     def test_envio_nfse(self):
         nfse = _get_nfse()
@@ -24,5 +25,5 @@ class test_nfse_paulistana_para_lote(unittest.TestCase):
 
         _, obj = sanitize_response(xml_send)
 
-        self.assertEqual(obj.Cabecalho.QtdRPS, 5)
+        self.assertEqual(obj.Cabecalho.QtdRPS, self.BATCH_SIZE)
         self.assertEqual(xml_send, expected_xml)
