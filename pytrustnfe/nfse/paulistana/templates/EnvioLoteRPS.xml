@@ -6,7 +6,7 @@
     <transacao>false</transacao>
     <dtInicio>{{ nfse.data_inicio }}</dtInicio>
     <dtFim>{{ nfse.data_fim }}</dtFim>
-    <QtdRPS>1</QtdRPS>
+    <QtdRPS>{{ nfse.lista_rps|length }}</QtdRPS>
     <ValorTotalServicos>{{ nfse.total_servicos }}</ValorTotalServicos>
     <ValorTotalDeducoes>{{ nfse.total_deducoes }}</ValorTotalDeducoes>
   </Cabecalho>
@@ -32,6 +32,7 @@
     <CodigoServico>{{ rps.codigo_atividade }}</CodigoServico>
     <AliquotaServicos>{{ rps.aliquota_atividade }}</AliquotaServicos>
     <ISSRetido>{{ rps.iss_retido | default('false') }}</ISSRetido>
+    {% if rps.tomador.tipo_cpfcnpj != 3 %}
     <CPFCNPJTomador>
         {% if rps.tomador.tipo_cpfcnpj == 1 -%}
            <CPF>{{ rps.tomador.cpf_cnpj }}</CPF>
@@ -40,20 +41,34 @@
            <CNPJ>{{ rps.tomador.cpf_cnpj }}</CNPJ>
         {% endif %}
     </CPFCNPJTomador>
+    {% endif %}
     {% if rps.tomador.inscricao_municipal -%}
     <InscricaoMunicipalTomador>{{ rps.tomador.inscricao_municipal }}</InscricaoMunicipalTomador>
     {% endif %}
     <RazaoSocialTomador>{{ rps.tomador.razao_social|normalize|escape }}</RazaoSocialTomador>
+    {% if rps.tomador.cidade %}
     <EnderecoTomador>
+      {% if rps.tomador.tipo_logradouro %}
       <TipoLogradouro>{{ rps.tomador.tipo_logradouro }}</TipoLogradouro>
+      {% endif %}
+      {% if rps.tomador.logradouro %}
       <Logradouro>{{ rps.tomador.logradouro|normalize|escape }}</Logradouro>
+      {% endif %}
+      {% if rps.tomador.numero %}
       <NumeroEndereco>{{ rps.tomador.numero }}</NumeroEndereco>
+      {% endif %}
+      {% if rps.tomador.complemento %}
       <ComplementoEndereco>{{ rps.tomador.complemento|normalize|escape }}</ComplementoEndereco>
+      {% endif %}
+      {% if rps.tomador.bairro %}
       <Bairro>{{ rps.tomador.bairro }}</Bairro>
+      {% endif %}
       <Cidade>{{ rps.tomador.cidade }}</Cidade>
       <UF>{{ rps.tomador.uf }}</UF>
-      <CEP>{{ rps.tomador.cep }}</CEP>
+      {% if rps.tomador.cep %}<CEP>{{ rps.tomador.cep }}</CEP>{% endif %}
     </EnderecoTomador>
+    {% endif %}
+    {% if rps.tomador.email %}<EmailTomador>{{ rps.tomador.email }}</EmailTomador>{% endif %}
     <Discriminacao>{{ rps.descricao|normalize|escape }}</Discriminacao>
     <ValorCargaTributaria>{{ rps.valor_carga_tributaria }}</ValorCargaTributaria>
     <FonteCargaTributaria>{{ rps.fonte_carga_tributaria }}</FonteCargaTributaria>
