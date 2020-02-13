@@ -2,10 +2,12 @@
 # © 2017 Johny Chen Jy, Trustcode
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import os
 import re
 from textwrap import wrap
 from io import BytesIO
-
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib import utils
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import cm, mm
@@ -77,7 +79,15 @@ def format_telefone(telefone):
 
 class danfce(object):
     def __init__(self, list_xml, logo=None, timezone=None):
-
+        dir_fonts = os.path.dirname(os.path.realpath(__file__))
+        pdfmetrics.registerFont(
+            TTFont(
+                'NimbusSanL-Bold',
+                os.path.join(dir_fonts,'fonts/NimbusSanL Bold.ttf')))
+        pdfmetrics.registerFont(
+            TTFont(
+                'NimbusSanL-Regu',
+                os.path.join(dir_fonts, 'fonts/NimbusSanL Regular.ttf')))
         self.current_font_size = 7
         self.current_font_name = "NimbusSanL-Regu"
 

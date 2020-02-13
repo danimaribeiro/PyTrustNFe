@@ -28,6 +28,10 @@
                 <indPres>{{ ide.indPres }}</indPres>
                 <procEmi>{{ ide.procEmi }}</procEmi>
                 <verProc>{{ ide.verProc }}</verProc>
+                {% if ide.tpEmis != 1 %}
+                <dhCont>{{ ide.dhCont }}</dhCont>
+                <xJust>{{ ide.xJust }}</xJust>
+                {% endif %}
                 {% if ide.NFref is defined -%}
                 {% for ref in ide.NFref %}
                 <NFref>
@@ -910,10 +914,20 @@
             </compra>
             {% endif %}
         </infNFe>
+        {% if ide.mod == '65' %}
         <infNFeSupl>
+          {% if NFe.infNFe.qrCode is defined %}
           <qrCode>{{ NFe.infNFe.qrCode }}</qrCode>
+          {% else %}
+          <qrCode>.</qrCode>
+          {% endif %}
+          {% if NFe.infNFe.urlChave is defined %}
           <urlChave>{{ NFe.infNFe.urlChave }}</urlChave>
+          {% else %}
+          <urlChave>.</urlChave>
+          {% endif %}
         </infNFeSupl>
+        {% endif %}
     </NFe>
     {% endfor %}
 </enviNFe>
