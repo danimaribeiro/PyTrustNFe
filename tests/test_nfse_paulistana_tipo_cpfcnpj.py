@@ -5,7 +5,7 @@ import unittest
 from pytrustnfe.xml import render_xml, sanitize_response
 from tests.const import DEFAULT_RPS, NFSE
 
-template_path = 'pytrustnfe/nfse/paulistana/templates'
+template_path = os.path.join(os.path.dirname(__file__), '..', 'pytrustnfe', 'nfse', 'paulistana', 'templates')
 
 
 def _get_nfse(tipo_cpfcnpj):

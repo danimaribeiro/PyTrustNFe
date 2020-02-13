@@ -1,10 +1,11 @@
 # coding=utf-8
 
 import unittest
+import os.path
 from pytrustnfe.xml import render_xml, sanitize_response
 from tests.const import NFSE, DEFAULT_RPS
 
-template_path = 'pytrustnfe/nfse/paulistana/templates'
+template_path = os.path.join(os.path.dirname(__file__), '..', 'pytrustnfe', 'nfse', 'paulistana', 'templates')
 
 
 def _get_nfse(lista_rps):
