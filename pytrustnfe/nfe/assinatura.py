@@ -24,7 +24,7 @@ class Assinatura(object):
             method=signxml.methods.enveloped,
             signature_algorithm="rsa-sha1",
             digest_algorithm="sha1",
-            c14n_algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments",
+            c14n_algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
         )
 
         ns = {}
@@ -42,9 +42,9 @@ class Assinatura(object):
             )
 
             if getchildren and element_signed is not None and signature is not None:
-                element_intern = element_signed.getchildren()
-                element_intern.append(signature)
+                child = element_signed.getchildren()
+                child.append(signature)
             elif element_signed is not None and signature is not None:
-                element_extern = element_signed.getparent()
-                element_extern.append(signature)
+                parent = element_signed.getparent()
+                parent.append(signature)
         return etree.tostring(signed_root, encoding=str)
