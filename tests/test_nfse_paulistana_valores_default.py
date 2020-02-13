@@ -25,8 +25,7 @@ def _get_nfse():
 
 
 class test_nfse_paulistana_valores_default(unittest.TestCase):
-    template_path = 'pytrustnfe/nfse/paulistana/templates'
-    xml_path = os.path.join(os.path.dirname(__file__), 'XMLs')
+    template_path = os.path.join(os.path.dirname(__file__), '..', 'pytrustnfe', 'nfse', 'paulistana', 'templates')
     nfse = _get_nfse()
 
     def test_rps_sem_valores(self):
