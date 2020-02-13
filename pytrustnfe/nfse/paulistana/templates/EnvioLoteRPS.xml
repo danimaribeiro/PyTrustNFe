@@ -34,12 +34,12 @@
     <ISSRetido>{{ rps.iss_retido | default('false') }}</ISSRetido>
     {% if rps.tomador.tipo_cpfcnpj != 3 %}
     <CPFCNPJTomador>
-      {% if rps.tomador.tipo_cpfcnpj == 1 -%}
-      <CPF>{{ rps.tomador.cpf_cnpj }}</CPF>
-      {% endif %}
-      {% if rps.tomador.tipo_cpfcnpj == 2 -%}
-      <CNPJ>{{ rps.tomador.cpf_cnpj }}</CNPJ>
-      {% endif %}
+        {% if rps.tomador.tipo_cpfcnpj == 1 -%}
+           <CPF>{{ rps.tomador.cpf_cnpj }}</CPF>
+        {% endif %}
+        {% if rps.tomador.tipo_cpfcnpj == 2 -%}
+           <CNPJ>{{ rps.tomador.cpf_cnpj }}</CNPJ>
+        {% endif %}
     </CPFCNPJTomador>
     {% endif %}
     {% if rps.tomador.inscricao_municipal -%}
