@@ -14,7 +14,7 @@ def _get_nfse():
 
 class test_nfse_paulistana_para_lote(unittest.TestCase):
     xml_path = os.path.join(os.path.dirname(__file__), 'XMLs')
-    template_path = '../nfse/paulistana/templates'
+    template_path = os.path.join(os.path.dirname(__file__), '..', 'nfse', 'paulistana', 'templates')
     BATCH_SIZE = len(LOTE_RPS)
 
     def test_envio_nfse(self):
