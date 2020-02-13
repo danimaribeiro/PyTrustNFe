@@ -1,0 +1,7 @@
+<ConsultarLoteRpsEnvio xmlns="http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd">
+    <Prestador>
+        <Cnpj>{{ consulta.cnpj_prestador }}</Cnpj>
+        <InscricaoMunicipal>{{ consulta.inscricao_municipal }}</InscricaoMunicipal>
+    </Prestador>
+    <Protocolo>{{ consulta.protocolo }}</Protocolo>
+</ConsultarLoteRpsEnvio>
