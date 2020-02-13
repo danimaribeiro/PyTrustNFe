@@ -1,0 +1,154 @@
+<?xml version="1.0" ?>
+<EnviarLoteRpsEnvio xmlns="http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd">
+	<LoteRps Id="lote">
+		<NumeroLote>1</NumeroLote>
+		<Cnpj>24533572000102</Cnpj>
+		<InscricaoMunicipal>2143992</InscricaoMunicipal>
+		<QuantidadeRps>1</QuantidadeRps>
+		<ListaRps>
+			<Rps>
+				<InfRps Id="rps:1UNICA">
+					<IdentificacaoRps>
+						<Numero>1</Numero>
+						<Serie>UNICA</Serie>
+						<Tipo>1</Tipo>
+					</IdentificacaoRps>
+					<DataEmissao>2010-06-16T21:00:00</DataEmissao>
+					<NaturezaOperacao>1</NaturezaOperacao>
+					<RegimeEspecialTributacao>1</RegimeEspecialTributacao>
+					<OptanteSimplesNacional>1</OptanteSimplesNacional>
+					<IncentivadorCultural>2</IncentivadorCultural>
+					<Status>1</Status>
+					<Servico>
+						<Valores>
+							<ValorServicos>1.00</ValorServicos>
+							<ValorPis>0</ValorPis>
+							<ValorCofins>0</ValorCofins>
+							<ValorInss>0</ValorInss>
+							<ValorIr>0</ValorIr>
+							<ValorCsll>0</ValorCsll>
+							<IssRetido>2</IssRetido>
+							<ValorIss>2</ValorIss>
+							<OutrasRetencoes>2</OutrasRetencoes>
+							<BaseCalculo>0.00</BaseCalculo>
+							<Aliquota>2</Aliquota>
+						</Valores>
+						<ItemListaServico>01.07</ItemListaServico>
+						<CodigoCnae>6209100</CodigoCnae>
+						<Discriminacao>Sistema NFSe</Discriminacao>
+						<CodigoMunicipio>2408102</CodigoMunicipio>
+					</Servico>
+					<Prestador>
+						<Cnpj>24533572000102</Cnpj>
+						<InscricaoMunicipal>2143992</InscricaoMunicipal>
+					</Prestador>
+					<Tomador>
+						<IdentificacaoTomador>
+							<CpfCnpj>
+								<Cnpj>01812418000166</Cnpj>
+							</CpfCnpj>
+							<InscricaoMunicipal>2143992</InscricaoMunicipal>
+						</IdentificacaoTomador>
+						<RazaoSocial>MARIO</RazaoSocial>
+						<Endereco>
+							<Endereco>RUA GROBEIRO</Endereco>
+							<Numero>128</Numero>
+							<Complemento>ANDAR 14</Complemento>
+							<Bairro>Lagoa Nova</Bairro>
+							<CodigoMunicipio>3159506</CodigoMunicipio>
+							<Uf>BH</Uf>
+							<Cep>30160010</Cep>
+						</Endereco>
+						<Contato>
+							<Email>mario@email.com.br</Email>
+						</Contato>
+					</Tomador>
+				</InfRps>
+				<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+					<SignedInfo>
+						<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
+						<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+						<Reference URI="#rps:1UNICA">
+							<Transforms>
+								<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+								<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
+							</Transforms>
+							<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+							<DigestValue>CqxPWMfRKwecg6TEoFNA82URG5I=</DigestValue>
+						</Reference>
+					</SignedInfo>
+					<SignatureValue>DIzLfhkM5HaOEMqHZcOXgAnHahgLuvtRF/ArPPyYKT/Dg0sg+ia/MjNchc2pH/eTOiqgj5s5UkxXgYBYHKVSuIvMfDqE+IYEanTYxzDqUhVwBlq4Vv9b8hNuE41D/qWCiC8zJswuOS8bPm+jHntFM/Fr7b6LAZV2Zuc5ITaCrkmRvKZ7HHhsffPk6gkb/NdzwdsYf8nSEbiFhujTXUswqkDWzQYxnwvp0ElU1Ev2SjqDG/oU0EG7vWMhuOP3wyDqVxF75cnEKW9RY1joiTxeiSBsYnivYC8t44MuHk9LAKaB17edlIEta+4MC9bAAmj2mkKxdJJJXjYHJLfw4WCJmg==</SignatureValue>
+					<KeyInfo>
+						<X509Data>
+							<X509Certificate>MIIIMTCCBhmgAwIBAgIIDBYcAk2MYI0wDQYJKoZIhvcNAQELBQAwcjELMAkGA1UEBhMCQlIxEzARBgNVBAoTCklDUC1CcmFzaWwxNjA0BgNVBAsTLVNlY3JldGFyaWEgZGEgUmVjZWl0YSBGZWRlcmFsIGRvIEJyYXNpbCAtIFJGQjEWMBQGA1UEAxMNQUMgT05MSU5FIFJGQjAeFw0xOTA5MTgwMDAwMjZaFw0yMDA5MTcwMDAwMjZaMIIBADELMAkGA1UEBhMCQlIxCzAJBgNVBAgMAlJOMQ4wDAYDVQQHDAVOQVRBTDETMBEGA1UECgwKSUNQLUJyYXNpbDE2MDQGA1UECwwtU2VjcmV0YXJpYSBkYSBSZWNlaXRhIEZlZGVyYWwgZG8gQnJhc2lsIC0gUkZCMRYwFAYDVQQLDA1SRkIgZS1DTlBKIEExMSIwIAYDVQQLDBlBUiBTT0xJTU9FUyBDRVJUSUZJQ0FET1JBMRcwFQYDVQQLDA4yMjc1OTUzMTAwMDEwMzEyMDAGA1UEAwwpVFNNWCBTRVJWSUNPUyBERSBUSSBFSVJFTEk6MjM4MDkwNzAwMDAxOTAwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDJ9LXn3SvQ02Gx9+aGiQh3cJ9A7J7w2eOWRVcjYo147tTsVNbpbJM56D5rvQ4uYLYTGEg9gnWRs/xkg/WwKmbC/ax3j/tJG62Boj8DF1QoGkiVfSOQbCYXnO9nDZ7fKRwUKXkLnpjNGnsZr/FIt6U3nNv/HJ5uwfmHRi3NPeMIkyQR+HogOUWChu8ZJz2quQu4tpNePV3GhW4h0o0Ggoq2YTIRhAidobjq7FWCu2jYkTEZ08h5fLn2bMLhaUgO1iBoJjzE1nD1C5wat4arxtzIz25q8lytp21q1kFD/Lkyh+RMjbngqeS8IBBrnMi0zeartgxtOKSdQD7PXzHFcuzzAgMBAAGjggM5MIIDNTCBoQYIKwYBBQUHAQEEgZQwgZEwXAYIKwYBBQUHMAKGUGh0dHA6Ly9pY3AtYnJhc2lsLnZwa2kudmFsaWRjZXJ0aWZpY2Fkb3JhLmNvbS5ici9hYy1vbmxpbmVyZmIvYWMtb25saW5lcmZidjIucDdiMDEGCCsGAQUFBzABhiVodHRwOi8vb2NzcC52YWxpZGNlcnRpZmljYWRvcmEuY29tLmJyMAkGA1UdEwQCMAAwHwYDVR0jBBgwFoAUkZp2jCuokxiYmHoD5MvstbAZJ/8wdQYDVR0gBG4wbDBqBgZgTAECATcwYDBeBggrBgEFBQcCARZSaHR0cDovL2ljcC1icmFzaWwudnBraS52YWxpZGNlcnRpZmljYWRvcmEuY29tLmJyL2FjLW9ubGluZXJmYi9kcGMtYWMtb25saW5lcmZiLnBkZjCCAQYGA1UdHwSB/jCB+zBVoFOgUYZPaHR0cDovL2ljcC1icmFzaWwudmFsaWRjZXJ0aWZpY2Fkb3JhLmNvbS5ici9hYy1vbmxpbmVyZmIvbGNyLWFjLW9ubGluZXJmYnYyLmNybDBWoFSgUoZQaHR0cDovL2ljcC1icmFzaWwyLnZhbGlkY2VydGlmaWNhZG9yYS5jb20uYnIvYWMtb25saW5lcmZiL2xjci1hYy1vbmxpbmVyZmJ2Mi5jcmwwSqBIoEaGRGh0dHA6Ly9yZXBvc2l0b3Jpby5pY3BicmFzaWwuZ292LmJyL2xjci9WQUxJRC9sY3ItYWMtb25saW5lcmZidjIuY3JsMA4GA1UdDwEB/wQEAwIF4DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwgbIGA1UdEQSBqjCBp4ERdGhpYWdvQHNncC5uZXQuYnKgOAYFYEwBAwSgLwQtMDMwNjE5ODQwNTQ5NzkyODQ4MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwoCQGBWBMAQMCoBsEGVRISUFHTyBTQU1QQUlPIE1PTlRFTkVHUk+gGQYFYEwBAwOgEAQOMjM4MDkwNzAwMDAxOTCgFwYFYEwBAwegDgQMMDAwMDAwMDAwMDAwMA0GCSqGSIb3DQEBCwUAA4ICAQC+cp3UMxJPgs5JYHJmCJrCAw4qq4BMH7JWDUufvhiYKkWfWfhLMRidqRcPez+6u0EML5riw7uH3NoF/Byw5v8RY5/8diI7d5TB/SsM8wl9De3BiL5n9cC2oK5yF+OfvTFdMYPx7VnlGpVjeEEDAcflrX2zM6u6D/Me2xu0g0YnbLhYKcjjXBlmkm2fZrn0fo8te4OanvYMDbCiP1MROQUk95hxzn5/dZ8OdLuZ2Q+GwLGADKV4p6CEy6U8U/1Hi2Dt+py2hphRbGHdP/QB59dxayQSYEq38HSsdbgNnWrRe0L8W2xkoAkq2a0U0rW3sKae5dlrHs9hIsXrgDXHFl58snjTatz5g17IJ704ztshroRiWCiyJOsP12yvc8ildHN/u9li2YBxBr/9F3O3k2MKHYdVe10VNZMtmlhBcUlrC/bECbrJF/uIfGk5UMC9Tx8ROYsI8Rsfs1fS8KnjlOPav6ikoZUnHsZiU75Dp/9i9wxf5txPzjCEqG7UwjXEATC2ldlF+F1ZUbmREydeLcAHZu5eMBoRiNvl41E5LHbAfs42cnpI7QXbiqN30EcNkCVtYlcy04q00fJ4CnI1WANuslfa6srLnaiWVUSCeYiDBK3FS+mwa8ixT7MjhKs/6BOBoYlaDzZm242gbvh1eG8/XcDjT4BAGr5aA/cHnjEiXw==</X509Certificate>
+						</X509Data>
+					</KeyInfo>
+				</Signature>
+			</Rps>
+		</ListaRps>
+	</LoteRps>
+	<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+		<SignedInfo>
+			<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
+			<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+			<Reference URI="#lote">
+				<Transforms>
+					<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+					<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
+				</Transforms>
+				<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+				<DigestValue>3OyPtYPIjU7Vm5azBnCaQVBCBxM=</DigestValue>
+			</Reference>
+		</SignedInfo>
+		<SignatureValue>psdrJW0dE9bnGbK5UJchL/h4vRm5HUWPzkkX4LbCLJopsOAdR0l0M787njoX7b4tWwrPysgdNWfhGngNoiD6iVqXyNhbuHZftUJIlDUudAHIxjhrMJdiNVXQDz8lBYzOta8HMMGQqHzzEg6DCVSZ1zeF5D2Nu2I7UL12P3jTDPtrapLC0YHxcRamGcG48I5tMo1qCKPxtkePkwx13PahkET+aExnb+5sexl+nhzfFJIKC0mfIRtoLyLEidNxalzzfMLbDxwe6WGgJS66+VKOeYNL89Gn2yp17uMZdnS08a6tUKy8t7sZt9W3ktrrjCofRlkwK8dq8jsh/GIw8hXLkg==</SignatureValue>
+		<KeyInfo>
+			<X509Data>
+				<X509Certificate>MIIIMTCCBhmgAwIBAgIIDBYcAk2MYI0wDQYJKoZIhvcNAQELBQAwcjELMAkGA1UE
+BhMCQlIxEzARBgNVBAoTCklDUC1CcmFzaWwxNjA0BgNVBAsTLVNlY3JldGFyaWEg
+ZGEgUmVjZWl0YSBGZWRlcmFsIGRvIEJyYXNpbCAtIFJGQjEWMBQGA1UEAxMNQUMg
+T05MSU5FIFJGQjAeFw0xOTA5MTgwMDAwMjZaFw0yMDA5MTcwMDAwMjZaMIIBADEL
+MAkGA1UEBhMCQlIxCzAJBgNVBAgMAlJOMQ4wDAYDVQQHDAVOQVRBTDETMBEGA1UE
+CgwKSUNQLUJyYXNpbDE2MDQGA1UECwwtU2VjcmV0YXJpYSBkYSBSZWNlaXRhIEZl
+ZGVyYWwgZG8gQnJhc2lsIC0gUkZCMRYwFAYDVQQLDA1SRkIgZS1DTlBKIEExMSIw
+IAYDVQQLDBlBUiBTT0xJTU9FUyBDRVJUSUZJQ0FET1JBMRcwFQYDVQQLDA4yMjc1
+OTUzMTAwMDEwMzEyMDAGA1UEAwwpVFNNWCBTRVJWSUNPUyBERSBUSSBFSVJFTEk6
+MjM4MDkwNzAwMDAxOTAwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDJ
+9LXn3SvQ02Gx9+aGiQh3cJ9A7J7w2eOWRVcjYo147tTsVNbpbJM56D5rvQ4uYLYT
+GEg9gnWRs/xkg/WwKmbC/ax3j/tJG62Boj8DF1QoGkiVfSOQbCYXnO9nDZ7fKRwU
+KXkLnpjNGnsZr/FIt6U3nNv/HJ5uwfmHRi3NPeMIkyQR+HogOUWChu8ZJz2quQu4
+tpNePV3GhW4h0o0Ggoq2YTIRhAidobjq7FWCu2jYkTEZ08h5fLn2bMLhaUgO1iBo
+JjzE1nD1C5wat4arxtzIz25q8lytp21q1kFD/Lkyh+RMjbngqeS8IBBrnMi0zear
+tgxtOKSdQD7PXzHFcuzzAgMBAAGjggM5MIIDNTCBoQYIKwYBBQUHAQEEgZQwgZEw
+XAYIKwYBBQUHMAKGUGh0dHA6Ly9pY3AtYnJhc2lsLnZwa2kudmFsaWRjZXJ0aWZp
+Y2Fkb3JhLmNvbS5ici9hYy1vbmxpbmVyZmIvYWMtb25saW5lcmZidjIucDdiMDEG
+CCsGAQUFBzABhiVodHRwOi8vb2NzcC52YWxpZGNlcnRpZmljYWRvcmEuY29tLmJy
+MAkGA1UdEwQCMAAwHwYDVR0jBBgwFoAUkZp2jCuokxiYmHoD5MvstbAZJ/8wdQYD
+VR0gBG4wbDBqBgZgTAECATcwYDBeBggrBgEFBQcCARZSaHR0cDovL2ljcC1icmFz
+aWwudnBraS52YWxpZGNlcnRpZmljYWRvcmEuY29tLmJyL2FjLW9ubGluZXJmYi9k
+cGMtYWMtb25saW5lcmZiLnBkZjCCAQYGA1UdHwSB/jCB+zBVoFOgUYZPaHR0cDov
+L2ljcC1icmFzaWwudmFsaWRjZXJ0aWZpY2Fkb3JhLmNvbS5ici9hYy1vbmxpbmVy
+ZmIvbGNyLWFjLW9ubGluZXJmYnYyLmNybDBWoFSgUoZQaHR0cDovL2ljcC1icmFz
+aWwyLnZhbGlkY2VydGlmaWNhZG9yYS5jb20uYnIvYWMtb25saW5lcmZiL2xjci1h
+Yy1vbmxpbmVyZmJ2Mi5jcmwwSqBIoEaGRGh0dHA6Ly9yZXBvc2l0b3Jpby5pY3Bi
+cmFzaWwuZ292LmJyL2xjci9WQUxJRC9sY3ItYWMtb25saW5lcmZidjIuY3JsMA4G
+A1UdDwEB/wQEAwIF4DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwgbIG
+A1UdEQSBqjCBp4ERdGhpYWdvQHNncC5uZXQuYnKgOAYFYEwBAwSgLwQtMDMwNjE5
+ODQwNTQ5NzkyODQ4MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwoCQGBWBMAQMC
+oBsEGVRISUFHTyBTQU1QQUlPIE1PTlRFTkVHUk+gGQYFYEwBAwOgEAQOMjM4MDkw
+NzAwMDAxOTCgFwYFYEwBAwegDgQMMDAwMDAwMDAwMDAwMA0GCSqGSIb3DQEBCwUA
+A4ICAQC+cp3UMxJPgs5JYHJmCJrCAw4qq4BMH7JWDUufvhiYKkWfWfhLMRidqRcP
+ez+6u0EML5riw7uH3NoF/Byw5v8RY5/8diI7d5TB/SsM8wl9De3BiL5n9cC2oK5y
+F+OfvTFdMYPx7VnlGpVjeEEDAcflrX2zM6u6D/Me2xu0g0YnbLhYKcjjXBlmkm2f
+Zrn0fo8te4OanvYMDbCiP1MROQUk95hxzn5/dZ8OdLuZ2Q+GwLGADKV4p6CEy6U8
+U/1Hi2Dt+py2hphRbGHdP/QB59dxayQSYEq38HSsdbgNnWrRe0L8W2xkoAkq2a0U
+0rW3sKae5dlrHs9hIsXrgDXHFl58snjTatz5g17IJ704ztshroRiWCiyJOsP12yv
+c8ildHN/u9li2YBxBr/9F3O3k2MKHYdVe10VNZMtmlhBcUlrC/bECbrJF/uIfGk5
+UMC9Tx8ROYsI8Rsfs1fS8KnjlOPav6ikoZUnHsZiU75Dp/9i9wxf5txPzjCEqG7U
+wjXEATC2ldlF+F1ZUbmREydeLcAHZu5eMBoRiNvl41E5LHbAfs42cnpI7QXbiqN3
+0EcNkCVtYlcy04q00fJ4CnI1WANuslfa6srLnaiWVUSCeYiDBK3FS+mwa8ixT7Mj
+hKs/6BOBoYlaDzZm242gbvh1eG8/XcDjT4BAGr5aA/cHnjEiXw==
+</X509Certificate>
+			</X509Data>
+		</KeyInfo>
+	</Signature>
+</EnviarLoteRpsEnvio>

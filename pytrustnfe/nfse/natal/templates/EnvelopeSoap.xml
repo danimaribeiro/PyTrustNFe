@@ -1,0 +1,8 @@
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+      <RecepcionarLoteRpsRequest xmlns="http://nfse.abrasf.org.br"> 
+          <nfseCabecMsg><![CDATA[{% include 'cabecalho.xml' %}]]></nfseCabecMsg>
+          <nfseDadosMsg><![CDATA[{% include 'RecepcionarLoteRps.xml' %}]]></nfseDadosMsg>
+      </RecepcionarLoteRpsRequest>
+    </soap:Body>
+</soap:Envelope> 

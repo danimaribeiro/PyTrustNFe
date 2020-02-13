@@ -14,23 +14,24 @@ def normalize_str(string):
     """
     if string:
         if not isinstance(string, str):
-            string = str(string, 'utf-8', 'replace')
+            string = str(string, "utf-8", "replace")
 
-        string = string.encode('utf-8')
-        return normalize(
-            'NFKD', string.decode('utf-8')).encode('ASCII', 'ignore').decode()
-    return ''
+        string = string.encode("utf-8")
+        return (
+            normalize("NFKD", string.decode("utf-8")).encode("ASCII", "ignore").decode()
+        )
+    return ""
 
 
 def strip_line_feed(string):
     if string:
         if not isinstance(string, str):
-            string = str(string, 'utf-8', 'replace')
+            string = str(string, "utf-8", "replace")
         remap = {
-            ord('\t'): ' ',
-            ord('\n'): ' ',
-            ord('\f'): ' ',
-            ord('\r'): None,      # Delete
+            ord("\t"): " ",
+            ord("\n"): " ",
+            ord("\f"): " ",
+            ord("\r"): None,  # Delete
         }
         return string.translate(remap).strip()
     return string
@@ -45,7 +46,7 @@ def format_datetime(value):
     """
     Format datetime
     """
-    dt_format = '%Y-%m-%dT%H:%M:%I'
+    dt_format = "%Y-%m-%dT%H:%M:%I"
     if isinstance(value, datetime):
         return value.strftime(dt_format)
     return value
@@ -55,7 +56,7 @@ def format_date(value):
     """
     Format date
     """
-    dt_format = '%Y-%m-%d'
+    dt_format = "%Y-%m-%d"
     if isinstance(value, date):
         return value.strftime(dt_format)
     return value
@@ -63,5 +64,5 @@ def format_date(value):
 
 def format_with_comma(value):
     if isinstance(value, float):
-        return ('%.2f' % value).replace('.', ',')
+        return ("%.2f" % value).replace(".", ",")
     return value
