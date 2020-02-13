@@ -1,8 +1,6 @@
 language: python
 python:
 - "3.6"
-virtual_env:
-  system_site_packages: true
 install:
 - pip install --upgrade pip
 - pip install -r requirements.txt

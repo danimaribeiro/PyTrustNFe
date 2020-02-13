@@ -2,11 +2,11 @@
 from setuptools import setup, find_packages
 
 
-VERSION = "1.0.45"
+VERSION = "1.0.46"
 
 
 setup(
-    name="PyTrustNFe3",
+    name="pytrustnfe3",
     version=VERSION,
     author="Danimar Ribeiro",
     author_email="danimaribeiro@gmail.com",
@@ -50,15 +50,19 @@ later (LGPLv2+)",
     long_description=open("README.md", "r").read(),
     long_description_content_type="text/markdown",
     install_requires=[
-        "Jinja2 >= 2.8",
-        "pyOpenSSL >= 16.0.0, < 18",
-        "signxml >= 2.4.0",
-        "lxml >= 3.5.0, < 5",
-        "suds-jurko >= 0.6",
-        "suds-jurko-requests >= 1.2",
-        "reportlab",
-        "pytz",
-        "zeep",
+        'urllib3',
+        'xmlsec==1.3.3',  # apt update;apt install libxmlsec1-dev pkg-config -y
+        'Jinja2 >= 2.8',
+        'pyOpenSSL >= 16.0.0, < 18',
+        'signxml >= 2.4.0',
+        'lxml >= 3.5.0, < 5',
+        'suds-jurko >= 0.6',
+        'suds-jurko-requests >= 1.2',
+        'reportlab',
+        'pytz',
+        'zeep',
     ],
-    tests_require=["pytest",],
+    tests_require=[
+        'pytest',
+    ],
 )
