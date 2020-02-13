@@ -14,3 +14,7 @@ docs/_build
 .cache
 .pytest_cache
 .vscode/
+*.pfx
+sent_xml.xml
+received_xml.xml
+nfse-exemplo.py

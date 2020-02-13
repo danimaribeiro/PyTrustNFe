@@ -6,16 +6,14 @@ import requests
 
 
 class HttpClient(object):
-
     def __init__(self, url):
         self.url = url
 
     def _headers(self, action):
         return {
-            'Content-type':
-            'text/xml; charset=utf-8;',
-            'Accept': 'application/soap+xml; charset=utf-8',
-            'SOAPAction': action
+            "Content-type": "text/xml; charset=utf-8;",
+            "Accept": "application/soap+xml; charset=utf-8",
+            "SOAPAction": action,
         }
 
     def post_soap(self, xml_soap, action):
