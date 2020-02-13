@@ -313,14 +313,19 @@ class danfce(object):
 
         cnpj = tagtext(oNode=el_dest, cTag='CNPJ')
         cpf = tagtext(oNode=el_dest, cTag='CPF')
+        pnome = tagtext(oNode=el_dest, cTag='xNome')
         if cnpj:
             cnpj_cpf = format_cnpj_cpf(cnpj)
             cnpj_cpf = "CONSUMIDOR CNPJ: %s" % (cnpj)
+            pnome = (pnome[:10] + '..') if len(pnome) > 10 else pnome
         elif cpf:
             cnpj_cpf = format_cnpj_cpf(cpf)
             cnpj_cpf = "CONSUMIDOR CPF: %s" % (cpf)
+            pnome = (pnome[:13] + '..') if len(pnome) > 13 else pnome
         else:
             cnpj_cpf = u"CONSUMIDOR NÃO IDENTIFICADO"
+        
+        
 
         nNFC = tagtext(oNode=el_ide, cTag="nNF")
         serie = tagtext(oNode=el_ide, cTag='serie')
@@ -328,9 +333,9 @@ class danfce(object):
         dataSolicitacao = getdateUTC(tagtext(oNode=el_ide, cTag="dhEmi"))
         dataSolicitacao = dataSolicitacao[0] + "  " + dataSolicitacao[1]
 
-        text = u"%s <br />%s <br />NFC-e nº%s  Série %s  %s<br />" % (
-            frase_chave_acesso, cnpj_cpf, nNFC, serie, dataSolicitacao)
-
+        text = u"%s <br />NFC-e nº%s  Série %s  %s<br />" % (
+            frase_chave_acesso, nNFC, serie, dataSolicitacao)
+        
         self._drawCenteredParagraph(text)
 
         tipo_emissao = tagtext(oNode=el_ide, cTag='tpEmis')
@@ -348,6 +353,18 @@ class danfce(object):
             text = "Protocolo de autorização: %s<br />Data de autorização %s<br />" % (
                 numProtocolo, dataAutorizacao)
             self._drawCenteredParagraph(text)
+        
+        consumi_text = u"%s %s <br />" %(cnpj_cpf, pnome)
+        
+        self._drawCenteredParagraph(consumi_text)
+        pEnd = tagtext(oNode=el_dest, cTag='xLgr') + ', ' + tagtext(
+            oNode=el_dest, cTag='nro') + ' - '
+        pEnd += tagtext(oNode=el_dest, cTag='xBairro') + '<br />' + tagtext(
+            oNode=el_dest, cTag='xMun') + ' - '
+        pEnd += tagtext(oNode=el_dest, cTag='UF') + ' - ' + tagtext(
+            oNode=el_dest, cTag='CEP') + '<br />'
+
+        self._drawCenteredParagraph(pEnd)
 
         self.draw_qr_code(qrcode)
 
