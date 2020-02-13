@@ -116,6 +116,7 @@
                     {% endif %}
                 {% endif %}
                 <xNome>{{ dest.xNome|normalize|escape }}</xNome>
+                {% if dest.enderDest is defined %}
                 <enderDest>
                     <xLgr>{{ dest.enderDest.xLgr|normalize|escape }}</xLgr>
                     <nro>{{ dest.enderDest.nro }}</nro>
@@ -129,6 +130,7 @@
                     <xPais>{{ dest.enderDest.xPais }}</xPais>
                     <fone>{{ dest.enderDest.fone }}</fone>
                 </enderDest>
+                {% endif %}
                 <indIEDest>{{ dest.indIEDest }}</indIEDest>
                 {% if dest.IE != '' -%}<IE>{{ dest.IE }}</IE>{% endif %}
                 <ISUF>{{ dest.ISUF }}</ISUF>
@@ -141,6 +143,7 @@
             <retirada>
                 <CNPJ>{{ NFe.infNFe.retirada.CNPJ }}</CNPJ>
                 <CPF>{{ NFe.infNFe.retirada.CPF }}</CPF>
+                <xNome>{{ NFe.infNFe.retirada.xNome|normalize|escape }}</xNome>
                 <xLgr>{{ NFe.infNFe.retirada.xLgr|normalize|escape }}</xLgr>
                 <nro>{{ NFe.infNFe.retirada.nro }}</nro>
                 <xCpl>{{ NFe.infNFe.retirada.xCpl|normalize|escape }}</xCpl>
@@ -148,12 +151,19 @@
                 <cMun>{{ NFe.infNFe.retirada.cMun }}</cMun>
                 <xMun>{{ NFe.infNFe.retirada.xMun|normalize }}</xMun>
                 <UF>{{ NFe.infNFe.retirada.UF }}</UF>
+                <CEP>{{ NFe.infNFe.retirada.CEP }}</CEP>
+                <cPais>{{ NFe.infNFe.retirada.cPais }}</cPais>
+                <xPais>{{ NFe.infNFe.retirada.xPais|normalize|escape }}</xPais>
+                <fone>{{ NFe.infNFe.retirada.fone }}</fone>
+                <email>{{ NFe.infNFe.retirada.email }}</email>
+                <IE>{{ NFe.infNFe.retirada.IE }}</IE>
             </retirada>
             {% endif %}
             {% if NFe.infNFe.entrega is defined %}
             <entrega>
                 <CNPJ>{{ NFe.infNFe.entrega.CNPJ }}</CNPJ>
                 <CPF>{{ NFe.infNFe.entrega.CPF }}</CPF>
+                <xNome>{{ NFe.infNFe.entrega.xNome|normalize|escape }}</xNome>
                 <xLgr>{{ NFe.infNFe.entrega.xLgr|normalize|escape }}</xLgr>
                 <nro>{{ NFe.infNFe.entrega.nro }}</nro>
                 <xCpl>{{ NFe.infNFe.entrega.xCpl|normalize|escape }}</xCpl>
@@ -161,6 +171,12 @@
                 <cMun>{{ NFe.infNFe.entrega.cMun }}</cMun>
                 <xMun>{{ NFe.infNFe.entrega.xMun }}</xMun>
                 <UF>{{ NFe.infNFe.entrega.UF }}</UF>
+                <CEP>{{ NFe.infNFe.entrega.CEP }}</CEP>
+                <cPais>{{ NFe.infNFe.entrega.cPais }}</cPais>
+                <xPais>{{ NFe.infNFe.entrega.xPais|normalize|escape }}</xPais>
+                <fone>{{ NFe.infNFe.entrega.fone }}</fone>
+                <email>{{ NFe.infNFe.entrega.email }}</email>
+                <IE>{{ NFe.infNFe.entrega.IE }}</IE>
             </entrega>
             {% endif %}
             {% if NFe.infNFe.autXML %}
@@ -243,7 +259,9 @@
                     </detExport>
                     {% endfor %}
                     {% endif %}
-                    <xPed>{{ prod.xPed }}</xPed>
+                    {% if NFe.infNFe.compra is defined %}
+                    <xPed>{{ NFe.infNFe.compra.xPed }}</xPed>
+                    {% endif %}
                     <nItemPed>{{ prod.nItemPed }}</nItemPed>
                     <nFCI>{{ prod.nFCI }}</nFCI>
                     {% for rastro in prod.rastro %}
@@ -258,6 +276,7 @@
                     {% for med in prod.med %}
                     <med>
                         <cProdANVISA>{{ med.cProdANVISA }}</cProdANVISA>
+                        <xMotivoIsencao>{{ med.xMotivoIsencao }}</xMotivoIsencao>
                         <vPMC>{{ med.vPMC }}</vPMC>
                     </med>
                     {% endfor %}
@@ -266,6 +285,7 @@
                 <imposto>
                     {% with imposto = det.imposto %}
                     <vTotTrib>{{ imposto.vTotTrib }}</vTotTrib>
+                    {% if imposto.ICMS is defined %}
                     <ICMS>
                         {% if imposto.ICMS.CST == '00' -%}
                         <ICMS00>
@@ -365,6 +385,7 @@
                             <CST>{{ imposto.ICMS.CST }}</CST>
                             <vBCSTRet>{{ imposto.ICMS.vBCSTRet }}</vBCSTRet>
                             <pST>{{ imposto.ICMS.pST }}</pST>
+                            <vICMSSubstituto>{{ imposto.ICMS.vICMSSubstituto }}</vICMSSubstituto>
                             <vICMSSTRet>{{ imposto.ICMS.vICMSSTRet }}</vICMSSTRet>
                             <vBCFCPSTRet>{{ imposto.ICMS.vBCFCPSTRet }}</vBCFCPSTRet>
                             <pFCPSTRet>{{ imposto.ICMS.pFCPSTRet }}</pFCPSTRet>
@@ -443,9 +464,18 @@
                             <orig>{{ imposto.ICMSST.orig }}</orig>
                             <CST>{{ imposto.ICMSST.CST }}</CST>
                             <vBCSTRet>{{ imposto.ICMSST.vBCSTRet }}</vBCSTRet>
+                            <pST>{{ imposto.ICMSST.pST }}</pST>
+                            <vICMSSubstituto>{{ imposto.ICMSST.vICMSSubstituto }}</vICMSSubstituto>
                             <vICMSSTRet>{{ imposto.ICMSST.vICMSSTRet }}</vICMSSTRet>
+                            <vBCFCPSTRet>{{ imposto.ICMSST.vBCFCPSTRet }}</vBCFCPSTRet>
+                            <pFCPSTRet>{{ imposto.ICMSST.pFCPSTRet }}</pFCPSTRet>
+                            <vFCPSTRet>{{ imposto.ICMSST.vFCPSTRet }}</vFCPSTRet>
                             <vBCSTDest>{{ imposto.ICMSST.vBCSTDest }}</vBCSTDest>
                             <vICMSSTDest>{{ imposto.ICMSST.vICMSSTDest }}</vICMSSTDest>
+                            <pRedBCEfet>{{ imposto.ICMSST.pRedBCEfet }}</pRedBCEfet>
+                            <vBCEfet>{{ imposto.ICMSST.vBCEfet }}</vBCEfet>
+                            <pICMSEfet>{{ imposto.ICMSST.pICMSEfet }}</pICMSEfet>
+                            <vICMSEfet>{{ imposto.ICMSST.vICMSEfet }}</vICMSEfet>
                         </ICMSST>
                         {% endif %}
                         {% if imposto.ICMS.CST == '101' -%}
@@ -500,6 +530,7 @@
                             <CSOSN>{{ imposto.ICMS.CST }}</CSOSN>
                             <vBCSTRet>{{ imposto.ICMS.vBCSTRet }}</vBCSTRet>
                             <pST>{{ imposto.ICMS.pST }}</pST>
+                            <vICMSSubstituto>{{ imposto.ICMS.vICMSSubstituto }}</vICMSSubstituto>
                             <vICMSSTRet>{{ imposto.ICMS.vICMSSTRet }}</vICMSSTRet>
                             <vBCFCPSTRet>{{ imposto.ICMS.vBCFCPSTRet }}</vBCFCPSTRet>
                             <pFCPSTRet>{{ imposto.ICMS.pFCPSTRet }}</pFCPSTRet>
@@ -529,37 +560,58 @@
                         </ICMSSN900>
                         {% endif %}
                     </ICMS>
-                    {% if NFe.infNFe.ide.mod != '65' %}
-                    <IPI>
-                        <clEnq>{{ imposto.IPI.clEnq }}</clEnq>
-                        <CNPJProd>{{ imposto.IPI.CNPJProd }}</CNPJProd>
-                        <cSelo>{{ imposto.IPI.cSelo }}</cSelo>
-                        <qSelo>{{ imposto.IPI.qSelo }}</qSelo>
-                        <cEnq>{{ imposto.IPI.cEnq }}</cEnq>
-                        {% if imposto.IPI.CST in ('00', '49', '50', '99') %}
-                        <IPITrib>
-                            <CST>{{ imposto.IPI.CST }}</CST>
-                            <vBC>{{ imposto.IPI.vBC }}</vBC>
-                            <pIPI>{{ imposto.IPI.pIPI }}</pIPI>
-                            <qUnid>{{ imposto.IPI.qUnid }}</qUnid>
-                            <vUnid>{{ imposto.IPI.vUnid }}</vUnid>
-                            <vIPI>{{ imposto.IPI.vIPI }}</vIPI>
-                        </IPITrib>
-                        {% endif %}
-                        {% if imposto.IPI.CST in ('01', '02', '03', '04', '51', '52', '53', '54', '55') %}
-                        <IPINT>
-                            <CST>{{ imposto.IPI.CST }}</CST>
-                        </IPINT>
-                        {% endif %}
-                    </IPI>
-                    {% if imposto.II is defined %}
-                    <II>
-                        <vBC>{{ imposto.II.vBC }}</vBC>
-                        <vDespAdu>{{ imposto.II.vDespAdu }}</vDespAdu>
-                        <vII>{{ imposto.II.vII }}</vII>
-                        <vIOF>{{ imposto.II.vIOF }}</vIOF>
-                    </II>
                     {% endif %}
+                    {% if NFe.infNFe.ide.mod != '65' and imposto.IPI is defined %}
+                      <IPI>
+                          <clEnq>{{ imposto.IPI.clEnq }}</clEnq>
+                          <CNPJProd>{{ imposto.IPI.CNPJProd }}</CNPJProd>
+                          <cSelo>{{ imposto.IPI.cSelo }}</cSelo>
+                          <qSelo>{{ imposto.IPI.qSelo }}</qSelo>
+                          <cEnq>{{ imposto.IPI.cEnq }}</cEnq>
+                          {% if imposto.IPI.CST in ('00', '49', '50', '99') %}
+                          <IPITrib>
+                              <CST>{{ imposto.IPI.CST }}</CST>
+                              <vBC>{{ imposto.IPI.vBC }}</vBC>
+                              <pIPI>{{ imposto.IPI.pIPI }}</pIPI>
+                              <qUnid>{{ imposto.IPI.qUnid }}</qUnid>
+                              <vUnid>{{ imposto.IPI.vUnid }}</vUnid>
+                              <vIPI>{{ imposto.IPI.vIPI }}</vIPI>
+                          </IPITrib>
+                          {% endif %}
+                          {% if imposto.IPI.CST in ('01', '02', '03', '04', '51', '52', '53', '54', '55') %}
+                          <IPINT>
+                              <CST>{{ imposto.IPI.CST }}</CST>
+                          </IPINT>
+                          {% endif %}
+                      </IPI>
+                      {% if imposto.II is defined %}
+                      <II>
+                          <vBC>{{ imposto.II.vBC }}</vBC>
+                          <vDespAdu>{{ imposto.II.vDespAdu }}</vDespAdu>
+                          <vII>{{ imposto.II.vII }}</vII>
+                          <vIOF>{{ imposto.II.vIOF }}</vIOF>
+                      </II>
+                      {% endif %}
+                    {% endif %}
+                    {% if imposto.ISSQN is defined %}
+                    <ISSQN>
+                        <vBC>{{ imposto.ISSQN.vBC }}</vBC>
+                        <vAliq>{{ imposto.ISSQN.vAliq }}</vAliq>
+                        <vISSQN>{{ imposto.ISSQN.vISSQN }}</vISSQN>
+                        <cMunFG>{{ imposto.ISSQN.cMunFG }}</cMunFG>
+                        <cListServ>{{ imposto.ISSQN.cListServ }}</cListServ>
+                        <vDeducao>{{ imposto.ISSQN.vDeducao }}</vDeducao>
+                        <vOutro>{{ imposto.ISSQN.vOutro }}</vOutro>
+                        <vDescIncond>{{ imposto.ISSQN.vDescIncond }}</vDescIncond>
+                        <vDescCond>{{ imposto.ISSQN.vDescCond }}</vDescCond>
+                        <vISSRet>{{ imposto.ISSQN.vDeducao }}</vISSRet>
+                        <indISS>{{ imposto.ISSQN.indISS }}</indISS>
+                        <cServico>{{ imposto.ISSQN.cServico }}</cServico>
+                        <cMun>{{ imposto.ISSQN.cMun }}</cMun>
+                        <cPais>{{ imposto.ISSQN.cPais }}</cPais>
+                        <nProcesso>{{ imposto.ISSQN.nProcesso }}</nProcesso>
+                        <indIncentivo>{{ imposto.ISSQN.indIncentivo }}</indIncentivo>
+                    </ISSQN>
                     {% endif %}
                     <PIS>
                         {% if imposto.PIS.CST in ('01', '02') %}
@@ -637,33 +689,13 @@
                         {% endif %}
                     </COFINS>
                     {% if imposto.COFINSST is defined %}
-                    <PISST>
+                    <COFINSST>
                         <vBC>{{ imposto.COFINSST.vBC }}</vBC>
                         <pCOFINS>{{ imposto.COFINSST.pCOFINS }}</pCOFINS>
                         <qBCProd>{{ imposto.COFINSST.qBCProd }}</qBCProd>
                         <vAliqProd>{{ imposto.COFINSST.vAliqProd }}</vAliqProd>
                         <vCOFINS>{{ imposto.COFINSST.vCOFINS }}</vCOFINS>
-                    </PISST>
-                    {% endif %}
-                    {% if imposto.ISSQN is defined %}
-                    <ISSQN>
-                        <vBC>{{ imposto.ISSQN.vBC }}</vBC>
-                        <vAliq>{{ imposto.ISSQN.vAliq }}</vAliq>
-                        <vISSQN>{{ imposto.ISSQN.vISSQN }}</vISSQN>
-                        <cMunFG>{{ imposto.ISSQN.cMunFG }}</cMunFG>
-                        <cListServ>{{ imposto.ISSQN.cListServ }}</cListServ>
-                        <vDeducao>{{ imposto.ISSQN.vDeducao }}</vDeducao>
-                        <vOutro>{{ imposto.ISSQN.vOutro }}</vOutro>
-                        <vDescIncond>{{ imposto.ISSQN.vDescIncond }}</vDescIncond>
-                        <vDescCond>{{ imposto.ISSQN.vDescCond }}</vDescCond>
-                        <vISSRet>{{ imposto.ISSQN.vDeducao }}</vISSRet>
-                        <indISS>{{ imposto.ISSQN.indISS }}</indISS>
-                        <cServico>{{ imposto.ISSQN.cServico }}</cServico>
-                        <cMun>{{ imposto.ISSQN.cMun }}</cMun>
-                        <cPais>{{ imposto.ISSQN.cPais }}</cPais>
-                        <nProcesso>{{ imposto.ISSQN.nProcesso }}</nProcesso>
-                        <indIncentivo>{{ imposto.ISSQN.vDeducao }}</indIncentivo>
-                    </ISSQN>
+                    </COFINSST>
                     {% endif %}
                     {% if imposto.ICMSUFDest is defined %}
                     <ICMSUFDest>
@@ -830,8 +862,8 @@
                         <cAut>{{ pag.card.cAut }}</cAut>
                     </card>
                     {% endif %}
-                    <vTroco>{{ pag.vTroco }}</vTroco>
                 </detPag>
+                <vTroco>{{ pag.vTroco }}</vTroco>
                 {% endfor %}
             </pag>
             {% endif %}
@@ -855,6 +887,16 @@
                 {% endfor %}
                 {% endif %}
             </infAdic>
+            {% if NFe.infNFe.infRespTec is defined %}
+            <infRespTec>
+                <CNPJ>{{ NFe.infNFe.infRespTec.CNPJ }}</CNPJ>
+                <xContato>{{ NFe.infNFe.infRespTec.xContato }}</xContato>
+                <email>{{ NFe.infNFe.infRespTec.email }}</email>
+                <fone>{{ NFe.infNFe.infRespTec.fone }}</fone>
+                <idCSRT>{{ NFe.infNFe.infRespTec.idCSRT }}</idCSRT>
+                <hashCSRT>{{ NFe.infNFe.infRespTec.hashCSRT }}</hashCSRT>
+            </infRespTec>
+            {% endif %}
             {% if NFe.infNFe.exporta is defined %}
             <exporta>
                 <UFSaidaPais>{{ NFe.infNFe.exporta.UFSaidaPais }}</UFSaidaPais>
@@ -870,6 +912,10 @@
             </compra>
             {% endif %}
         </infNFe>
+        <infNFeSupl>
+          <qrCode>{{ NFe.infNFe.qrCode }}</qrCode>
+          <urlChave>{{ NFe.infNFe.urlChave }}</urlChave>
+        </infNFeSupl>
     </NFe>
     {% endfor %}
 </enviNFe>
