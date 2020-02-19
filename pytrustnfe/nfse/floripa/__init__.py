@@ -67,7 +67,7 @@ def _send(certificado, method, **kwargs):
     token = _get_oauth_token(**kwargs)
     if "access_token" not in token:
         raise Exception(
-            "%s - %s: %s" % (token["status"], token["error"], token["message"])
+            "%s: %s" % (token["error"], token["error_description"])
         )
     kwargs.update({"numero": 1, "access_token": token["access_token"]})
 
