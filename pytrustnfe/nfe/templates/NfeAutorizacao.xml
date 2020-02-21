@@ -392,6 +392,10 @@
                             <vBCFCPSTRet>{{ imposto.ICMS.vBCFCPSTRet }}</vBCFCPSTRet>
                             <pFCPSTRet>{{ imposto.ICMS.pFCPSTRet }}</pFCPSTRet>
                             <vFCPSTRet>{{ imposto.ICMS.vFCPSTRet }}</vFCPSTRet>
+                            <pRedBCEfet>{{ imposto.ICMS.pRedBCEfet }}</pRedBCEfet>
+                            <vBCEfet>{{ imposto.ICMS.vBCEfet }}</vBCEfet>
+                            <pICMSEfet>{{ imposto.ICMS.pICMSEfet }}</pICMSEfet>
+                            <vICMSEfet>{{ imposto.ICMS.vICMSEfet }}</vICMSEfet>
                         </ICMS60>
                         {% endif %}
                         {% if imposto.ICMS.CST == '70' -%}
@@ -537,6 +541,10 @@
                             <vBCFCPSTRet>{{ imposto.ICMS.vBCFCPSTRet }}</vBCFCPSTRet>
                             <pFCPSTRet>{{ imposto.ICMS.pFCPSTRet }}</pFCPSTRet>
                             <pFCPSTRet>{{ imposto.ICMS.pFCPSTRet }}</pFCPSTRet>
+                            <pRedBCEfet>{{ imposto.ICMS.pRedBCEfet }}</pRedBCEfet>
+                            <vBCEfet>{{ imposto.ICMS.vBCEfet }}</vBCEfet>
+                            <pICMSEfet>{{ imposto.ICMS.pICMSEfet }}</pICMSEfet>
+                            <vICMSEfet>{{ imposto.ICMS.vICMSEfet }}</vICMSEfet>
                         </ICMSSN500>
                         {% endif %}
                         {% if imposto.ICMS.CST == '900' -%}
