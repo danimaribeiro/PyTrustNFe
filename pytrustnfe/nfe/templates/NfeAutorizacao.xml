@@ -914,7 +914,7 @@
             </compra>
             {% endif %}
         </infNFe>
-        {% if ide.mod == '65' %}
+        {% if NFe.infNFe.ide.mod == '65' %}
         <infNFeSupl>
           {% if NFe.infNFe.qrCode is defined %}
           <qrCode>{{ NFe.infNFe.qrCode }}</qrCode>
