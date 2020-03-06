@@ -70,8 +70,12 @@
     {% endif %}
     {% if rps.tomador.email %}<EmailTomador>{{ rps.tomador.email }}</EmailTomador>{% endif %}
     <Discriminacao>{{ rps.descricao|normalize|escape }}</Discriminacao>
+    {% if rps.valor_carga_tributaria %}
     <ValorCargaTributaria>{{ rps.valor_carga_tributaria }}</ValorCargaTributaria>
+    {% endif %}
+    {% if rps.fonte_carga_tributaria %}
     <FonteCargaTributaria>{{ rps.fonte_carga_tributaria }}</FonteCargaTributaria>
+    {% endif %}
   </RPS>
   {% endfor %}
 </PedidoEnvioLoteRPS>
