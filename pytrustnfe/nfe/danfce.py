@@ -357,14 +357,20 @@ class danfce(object):
         consumi_text = u"%s %s <br />" %(cnpj_cpf, pnome)
         
         self._drawCenteredParagraph(consumi_text)
-        pEnd = tagtext(oNode=el_dest, cTag='xLgr') + ', ' + tagtext(
-            oNode=el_dest, cTag='nro') + ' - '
-        pEnd += tagtext(oNode=el_dest, cTag='xBairro') + '<br />' + tagtext(
-            oNode=el_dest, cTag='xMun') + ' - '
-        pEnd += tagtext(oNode=el_dest, cTag='UF') + ' - ' + tagtext(
-            oNode=el_dest, cTag='CEP') + '<br />'
 
-        self._drawCenteredParagraph(pEnd)
+        pstreet = tagtext(oNode=el_dest, cTag='xLgr')
+        pnro = tagtext(oNode=el_dest, cTag='nro')
+        pbairro = tagtext(oNode=el_dest, cTag='xBairro')
+        pmun = tagtext(oNode=el_dest, cTag='xMun')
+        puf = tagtext(oNode=el_dest, cTag='UF')
+        pcep = tagtext(oNode=el_dest, cTag='CEP')
+
+        if (pstreet and pnro and pbairro and pmun and puf and pcep 
+            and('False' not in [pstreet,pnro,pbairro,pmun,puf,pcep])):
+            pEnd =( pstreet + ', ' + pnro + ' - ' + pbairro + '<br />' + pmun
+                 + ' - ' + puf + ' - ' + pcep + '<br />'
+            )
+            self._drawCenteredParagraph(pEnd)
 
         self.draw_qr_code(qrcode)
 
