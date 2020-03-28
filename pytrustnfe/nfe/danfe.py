@@ -125,6 +125,7 @@ class danfe(object):
         timezone=None,
     ):
 
+        tamanho_ocupado = 0
         path = os.path.join(os.path.dirname(__file__), "fonts")
         pdfmetrics.registerFont(
             TTFont("NimbusSanL-Regu", os.path.join(path, "NimbusSanL Regular.ttf"))
@@ -197,6 +198,8 @@ class danfe(object):
 
             self.ide_emit(oXML=oXML, timezone=timezone)
             self.destinatario(oXML=oXML, timezone=timezone)
+            tamanho_ocupado += self.entrega_retirada(
+                    oXML=oXML, timezone=timezone)
 
             if oXML_cobr is not None:
                 self.faturas(oXML=oXML_cobr, timezone=timezone)
@@ -212,7 +215,7 @@ class danfe(object):
                 list_cod_prod=list_cod_prod,
             )
 
-            tamanho_ocupado = self.calculo_issqn(oXML=oXML)
+            tamanho_ocupado += self.calculo_issqn(oXML=oXML)
             self.adicionais(oXML=oXML, tamanho_diminuir=tamanho_ocupado)
 
             # Gera o restante das páginas do XML
@@ -487,6 +490,75 @@ class danfe(object):
         self.string(nMr - 89, self.nlin + 21.1, tagtext(oNode=elem_dest, cTag="IE"))
 
         self.nlin += 24  # Nr linhas ocupadas pelo bloco
+
+    def entrega_retirada(self, oXML=None, timezone=None):
+        elem_entrega = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}entrega")
+        elem_retirada = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}retirada")
+        self.canvas.setFont("NimbusSanL-Bold", 7)
+
+        if elem_entrega:
+            elem = elem_entrega
+            self.string(self.nLeft + 1, self.nlin + 1, "INFORMAÇÕES DO LOCAL DE ENTREGA")
+        elif elem_retirada:
+            elem = elem_retirada
+            self.string(self.nLeft + 1, self.nlin + 1, "INFORMAÇÕES DO LOCAL DE RETIRADA")
+        else:
+            return 0
+
+        nMr = self.width - self.nRight
+
+        self.nlin += 1
+
+        self.rect(self.nLeft, self.nlin + 2, self.width - self.nLeft - self.nRight, 20)
+        self.hline(self.nLeft, self.nlin + 8.66, self.width - self.nLeft)
+        self.hline(self.nLeft, self.nlin + 15.32, self.width - self.nLeft)
+        self.vline(nMr - 25, self.nlin + 2, 6.66)
+        self.vline(nMr - 70, self.nlin + 2, 6.66)
+        self.vline(nMr - 25, self.nlin + 8.66, 6.66)
+        self.vline(nMr - 90, self.nlin + 8.66, 6.66)
+        self.vline(nMr - 25, self.nlin + 15.32, 6.66)
+        self.vline(nMr - 37, self.nlin + 15.32, 6.66)
+        # Labels/Fields
+        self.canvas.setFont("NimbusSanL-Bold", 5)
+        self.string(self.nLeft + 1, self.nlin + 3.7, "NOME/RAZÃO SOCIAL")
+        self.string(nMr - 69, self.nlin + 3.7, "CNPJ/CPF")
+        self.string(nMr - 24, self.nlin + 3.7, "INSCRIÇÃO ESTADUAL")
+        self.string(self.nLeft + 1, self.nlin + 10.3, "ENDEREÇO")
+        self.string(nMr - 89, self.nlin + 10.3, "BAIRRO/DISTRITO")
+        self.string(nMr - 24, self.nlin + 10.3, "CEP")
+        self.string(self.nLeft + 1, self.nlin + 17.1, "MUNICÍPIO")
+        self.string(nMr - 24, self.nlin + 17.1, "FONE/FAX")
+        self.string(nMr - 36, self.nlin + 17.1, "UF")
+        # Conteúdo campos
+        self.canvas.setFont("NimbusSanL-Regu", 8)
+        self.string(
+            self.nLeft + 1, self.nlin + 7.5, tagtext(oNode=elem, cTag="xNome")
+        )
+        cnpj_cpf = tagtext(oNode=elem, cTag="CNPJ")
+        if cnpj_cpf:
+            cnpj_cpf = format_cnpj_cpf(cnpj_cpf)
+        else:
+            cnpj_cpf = format_cnpj_cpf(tagtext(oNode=elem, cTag="CPF"))
+        self.string(nMr - 69, self.nlin + 7.5, cnpj_cpf)
+        self.string(nMr - 24, self.nlin + 7.5, tagtext(oNode=elem, cTag="IE"))
+        cEnd = "%s, %s %s" % (
+            tagtext(oNode=elem, cTag="xLgr"),
+            tagtext(oNode=elem, cTag="nro"),
+            tagtext(oNode=elem, cTag="xCpl"),
+        )
+        self.string(self.nLeft + 1, self.nlin + 14.3, cEnd)
+        self.string(
+            nMr - 89, self.nlin + 14.3, tagtext(oNode=elem, cTag="xBairro")
+        )
+        self.string(nMr - 24, self.nlin + 14.3, tagtext(oNode=elem, cTag="CEP"))
+        self.string(
+            self.nLeft + 1, self.nlin + 21.1, tagtext(oNode=elem, cTag="xMun")
+        )
+        self.string(nMr - 36, self.nlin + 21.1, tagtext(oNode=elem, cTag="UF"))
+        self.string(nMr - 24, self.nlin + 21.1, tagtext(oNode=elem, cTag="fone"))
+
+        self.nlin += 24  # Nr linhas ocupadas pelo bloco
+        return 24
 
     def faturas(self, oXML=None, timezone=None):
 
