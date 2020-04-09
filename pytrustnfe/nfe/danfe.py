@@ -477,7 +477,13 @@ class danfe(object):
             tagtext(oNode=elem_dest, cTag="nro"),
             tagtext(oNode=elem_dest, cTag="xCpl"),
         )
-        self.string(self.nLeft + 1, self.nlin + 14.3, cEnd)
+        if len(cEnd) > 52:
+            self.canvas.setFont("NimbusSanL-Regu", 6)
+            self.string(self.nLeft + 1, self.nlin + 12.4, cEnd[:51])
+            self.string(self.nLeft + 1, self.nlin + 14.4, cEnd[51:])
+            self.canvas.setFont("NimbusSanL-Regu", 8)
+        else:
+            self.string(self.nLeft + 1, self.nlin + 14.3, cEnd)
         self.string(
             nMr - 98, self.nlin + 14.3, tagtext(oNode=elem_dest, cTag="xBairro")
         )
