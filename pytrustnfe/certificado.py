@@ -4,6 +4,7 @@
 
 import tempfile
 from OpenSSL import crypto
+import os
 
 
 class Certificado(object):
@@ -29,15 +30,13 @@ def extract_cert_and_key_from_pfx(pfx, password):
 
 
 def save_cert_key(cert, key):
-    cert_temp = tempfile.mkstemp()[1]
-    key_temp = tempfile.mkstemp()[1]
+    fd_cert, cert_temp = tempfile.mkstemp()
+    fd_key, key_temp = tempfile.mkstemp()
 
-    arq_temp = open(cert_temp, "w")
-    arq_temp.write(cert)
-    arq_temp.close()
+    os.write(fd_cert, cert.encode())
+    os.close(fd_cert)
 
-    arq_temp = open(key_temp, "w")
-    arq_temp.write(key)
-    arq_temp.close()
+    os.write(fd_key, key.encode())
+    os.close(fd_key)
 
     return cert_temp, key_temp
