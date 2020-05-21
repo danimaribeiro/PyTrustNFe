@@ -4,22 +4,24 @@
 
 import tempfile
 from OpenSSL import crypto
-#import datetime
 from datetime import datetime
 
-#temp
-import ssl
 
 class Certificado(object):
     def __init__(self, pfx, password):
         self.pfx = pfx
         self.password = password
+        pfx = crypto.load_pkcs12(pfx, password)
 
-        pfx = crypto.load_pkcs12(pfx, password).get_certificate()
-        cert_date =  int(str(pfx.get_notAfter(),'UTF-8').strip('Z'))
+        cert = pfx.get_certificate()
+        cert_date =  int(str(cert.get_notAfter(),'UTF-8').strip('Z'))
+        sha1_fingerprint = cert.digest("sha1")
         now  = datetime.now()
         date = int(now.strftime("%Y%m%d%H%M%S"))
-        if cert_date < date:
+        '''
+        Exceto certificado de testes
+        '''
+        if cert_date < date or str(sha1_fingerprint,'UTF-8') ==  "DE:08:15:1E:DA:12:B3:5F:76:BF:5D:4E:56:C1:14:12:8A:85:B6:47":
             print("WARNING: Certificado expirado")
 
     def save_pfx(self):
@@ -34,8 +36,7 @@ def extract_cert_and_key_from_pfx(pfx, password):
     try:
         pfx = crypto.load_pkcs12(pfx, password)
     except:
-        print("ERROR: Falha ao ler certiticado. Verifique a senha")
-        exit()
+        print("WARING: Falha ao ler certiticado. Verifique a senha")
     # PEM formatted private key
     key = crypto.dump_privatekey(crypto.FILETYPE_PEM, pfx.get_privatekey())
     # PEM formatted certificate

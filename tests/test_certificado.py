@@ -60,7 +60,7 @@ class test_assinatura(unittest.TestCase):
 
     def test_save_pfx(self):
         pfx_source = open(os.path.join(self.caminho, "teste.pfx"), "rb").read()
-        pfx = Certificado(pfx_source, "123")
+        pfx = Certificado(pfx_source, "123456")
         path = pfx.save_pfx()
         saved = open(path, "rb").read()
         self.assertEqual(
