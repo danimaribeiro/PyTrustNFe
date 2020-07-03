@@ -56,7 +56,6 @@ def getdateByTimezone(cDateUTC, timezone=None):
 
     # Verificamos se a string está completa (data + hora + timezone)
     if timezone and len(cDateUTC) == 25:
-
         # tz irá conter informações da timezone contida em cDateUTC
         tz = cDateUTC[19:25]
         tz = int(tz.split(':')[0])
@@ -81,7 +80,12 @@ def getdateByTimezone(cDateUTC, timezone=None):
 def format_number(cNumber):
     if cNumber:
         # Vírgula para a separação de milhar e 2f para 2 casas decimais
-        cNumber = "{:,.2f}".format(float(cNumber))
+        try:
+            index = cNumber.find('.')
+            places = len(cNumber[index + 1:])
+            cNumber = '{:.{prec}f}'.format(float(cNumber), prec=places)
+        except:
+            cNumber = "{:,.2f}".format(float(cNumber))
         return cNumber.replace(",", "X").replace(".", ",").replace("X", ".")
     return ""
 
@@ -122,7 +126,7 @@ class danfe(object):
         pdfmetrics.registerFont(
             TTFont('NimbusSanL-Bold',
                    os.path.join(path, 'NimbusSanL Bold.ttf')))
-        self.width = 210    # 21 x 29,7cm
+        self.width = 210  # 21 x 29,7cm
         self.height = 297
         self.nLeft = 10
         self.nRight = 10
@@ -583,7 +587,7 @@ obsCont[@xCampo='NomeVendedor']")
             nMr - 1, self.nlin + 14.1,
             format_number(tagtext(oNode=el_total, cTag='vNF')))
 
-        self.nlin += 17   # Nr linhas ocupadas pelo bloco
+        self.nlin += 17  # Nr linhas ocupadas pelo bloco
 
     def transportes(self, oXML=None):
         el_transp = oXML.find(".//{http://www.portalfiscal.inf.br/nfe}transp")
@@ -742,8 +746,8 @@ obsCont[@xCampo='NomeVendedor']")
             el_imp_IPI = el_imp.find(
                 ".//{http://www.portalfiscal.inf.br/nfe}IPI")
             cCST = tagtext(oNode=el_imp_ICMS, cTag='orig') + \
-                (tagtext(oNode=el_imp_ICMS, cTag='CST') or
-                 tagtext(oNode=el_imp_ICMS, cTag='CSOSN'))
+                   (tagtext(oNode=el_imp_ICMS, cTag='CST') or
+                    tagtext(oNode=el_imp_ICMS, cTag='CSOSN'))
             vBC = tagtext(oNode=el_imp_ICMS, cTag='vBC')
             vICMS = tagtext(oNode=el_imp_ICMS, cTag='vICMS')
             pICMS = tagtext(oNode=el_imp_ICMS, cTag='pICMS')
@@ -763,7 +767,7 @@ obsCont[@xCampo='NomeVendedor']")
             self.stringRight(nMr - 64.5, nLin, format_number(
                 tagtext(oNode=el_prod, cTag='vUnCom')))
             self.stringRight(nMr - 50.5, nLin, format_number(
-                             tagtext(oNode=el_prod, cTag='vProd')))
+                tagtext(oNode=el_prod, cTag='vProd')))
             self.stringRight(nMr - 38.5, nLin, format_number(vBC or '0.00'))
             self.stringRight(nMr - 26.5, nLin, format_number(vICMS or '0.00'))
             self.stringRight(nMr - 7.5, nLin, format_number(pICMS or '0.00'))
@@ -830,7 +834,7 @@ obsCont[@xCampo='NomeVendedor']")
             self.nLeft + 189, self.nlin + 6.7,
             format_number(tagtext(oNode=issqn_total, cTag='vISS')))
 
-        self.nlin += 8   # Nr linhas ocupadas pelo bloco
+        self.nlin += 8  # Nr linhas ocupadas pelo bloco
         return 8
 
     def adicionais(self, oXML=None, tamanho_diminuir=0):
