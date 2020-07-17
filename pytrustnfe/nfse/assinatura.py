@@ -2,13 +2,10 @@
 # © 2016 Danimar Ribeiro, Trustcode
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import signxml
+import os
 from lxml import etree
-import xmlsec
-import os.path
-
-consts = xmlsec.constants
-
-NAMESPACE_SIG = "http://www.w3.org/2000/09/xmldsig#"
+from signxml import XMLSigner
 
 
 class Assinatura(object):
@@ -21,36 +18,40 @@ class Assinatura(object):
         if not os.path.isfile(self.private_key):
             raise Exception("Caminho do certificado não existe.")
 
-    def assina_xml(self, xml, reference):
+    def assina_xml(self, xml_element, reference, getchildren=False):
         self._checar_certificado()
-        template = etree.fromstring(xml)
+        cert = self.cert_pem
+        key = self.password
 
-        key = xmlsec.Key.from_file(
-            self.private_key,
-            format=xmlsec.constants.KeyDataFormatPem,
-            password=self.password,
+        for element in xml_element.iter("*"):
+            if element.text is not None and not element.text.strip():
+                element.text = None
+
+        signer = XMLSigner(
+            method=signxml.methods.enveloped,
+            signature_algorithm="rsa-sha1",
+            digest_algorithm="sha1",
+            c14n_algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315",
         )
 
-        signature_node = xmlsec.template.create(
-            template,
-            c14n_method=consts.TransformInclC14N,
-            sign_method=consts.TransformRsaSha1,
+        ns = {}
+        ns[None] = signer.namespaces["ds"]
+        signer.namespaces = ns
+
+        ref_uri = ("#%s" % reference) if reference else None
+        signed_root = signer.sign(
+            xml_element, key=key.encode(), cert=cert.encode(), reference_uri=ref_uri
         )
-        template.append(signature_node)
-        ref = xmlsec.template.add_reference(
-            signature_node, consts.TransformSha1, uri=""
-        )
+        if reference:
+            element_signed = signed_root.find(".//*[@Id='%s']" % reference)
+            signature = signed_root.find(
+                ".//{http://www.w3.org/2000/09/xmldsig#}Signature"
+            )
 
-        xmlsec.template.add_transform(ref, consts.TransformEnveloped)
-        xmlsec.template.add_transform(ref, consts.TransformInclC14N)
-
-        ki = xmlsec.template.ensure_key_info(signature_node)
-        xmlsec.template.add_x509_data(ki)
-
-        ctx = xmlsec.SignatureContext()
-        ctx.key = key
-
-        ctx.key.load_cert_from_file(self.cert_pem, consts.KeyDataFormatPem)
-
-        ctx.sign(signature_node)
-        return etree.tostring(template, encoding=str)
+            if getchildren and element_signed is not None and signature is not None:
+                child = element_signed.getchildren()
+                child.append(signature)
+            elif element_signed is not None and signature is not None:
+                parent = element_signed.getparent()
+                parent.append(signature)
+        return etree.tostring(signed_root, encoding=str)
