@@ -9,20 +9,19 @@ from signxml import XMLSigner
 
 
 class Assinatura(object):
-    def __init__(self, cert_pem, private_key, password):
-        self.cert_pem = cert_pem
-        self.private_key = private_key
-        self.password = password
+    def __init__(self, cert_pem, private_key, password=False):
+        self.arquivo = cert_pem
+        self.senha = private_key
 
     def _checar_certificado(self):
-        if not os.path.isfile(self.private_key):
+        if not os.path.isfile(self.senha):
             raise Exception("Caminho do certificado não existe.")
 
     def assina_xml(self, xml_element, reference, getchildren=False):
-        self._checar_certificado()
-        cert = self.cert_pem
-        key = self.password
+        cert = self.arquivo
+        key = self.senha
 
+        xml_element = etree.fromstring(xml_element)
         for element in xml_element.iter("*"):
             if element.text is not None and not element.text.strip():
                 element.text = None
@@ -37,11 +36,9 @@ class Assinatura(object):
         ns = {}
         ns[None] = signer.namespaces["ds"]
         signer.namespaces = ns
-
         ref_uri = ("#%s" % reference) if reference else None
         signed_root = signer.sign(
-            xml_element, key=key.encode(), cert=cert.encode(), reference_uri=ref_uri
-        )
+            xml_element, key=key.encode(), cert=cert.encode(), reference_uri=ref_uri)
         if reference:
             element_signed = signed_root.find(".//*[@Id='%s']" % reference)
             signature = signed_root.find(

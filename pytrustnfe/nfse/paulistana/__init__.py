@@ -41,9 +41,8 @@ def _send(certificado, method, **kwargs):
     base_url = "https://nfe.prefeitura.sp.gov.br/ws/lotenfe.asmx?wsdl"
 
     cert, key = extract_cert_and_key_from_pfx(certificado.pfx, certificado.password)
-    cert, key = save_cert_key(cert, key)
+    # cert, key = save_cert_key(cert, key)
     client = get_authenticated_client(base_url, cert, key)
-
     signer = Assinatura(cert, key, certificado.password)
     xml_send = signer.assina_xml(xml_send, "")
 
