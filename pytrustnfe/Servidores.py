@@ -619,24 +619,24 @@ UFRS = {
     NFCE_MODELO: {
         AMBIENTE_PRODUCAO: {
             "servidor": "nfce.sefazrs.rs.gov.br",
-            WS_NFE_RECEPCAO_EVENTO: "ws/recepcaoevento/recepcaoevento.asmx",
-            WS_NFE_AUTORIZACAO: "ws/NfeAutorizacao/NFeAutorizacao.asmx",
-            WS_NFE_RET_AUTORIZACAO: "ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx",  # noqa
-            WS_NFE_CADASTRO: "ws/cadconsultacadastro/cadconsultacadastro2.asmx",  # noqa
-            WS_NFE_INUTILIZACAO: "ws/NfeInutilizacao/NfeInutilizacao2.asmx",
-            WS_NFE_CONSULTA: "ws/NfeConsulta/NfeConsulta2.asmx",
-            WS_NFE_SITUACAO: "ws/NfeStatusServico/NfeStatusServico2.asmx",
+            WS_NFE_RECEPCAO_EVENTO: "ws/recepcaoevento/recepcaoevento4.asmx?wsdl",
+            WS_NFE_AUTORIZACAO: "ws/NfeAutorizacao/NFeAutorizacao4.asmx?wsdl",
+            WS_NFE_RET_AUTORIZACAO: "ws/NfeRetAutorizacao/NFeRetAutorizacao4.asmx?wsdl",  # noqa
+            WS_NFE_CADASTRO: "ws/cadconsultacadastro/cadconsultacadastro2.asmx?wsdl",  # noqa
+            WS_NFE_INUTILIZACAO: "ws/nfeinutilizacao/nfeinutilizacao4.asmx?wsdl",
+            WS_NFE_CONSULTA: "ws/NfeConsulta/NfeConsulta4.asmx?wsdl",
+            WS_NFE_SITUACAO: "ws/NfeStatusServico/NfeStatusServico4.asmx?wsdl",
             WS_NFCE_QR_CODE: "https://www.sefaz.rs.gov.br/NFCE/NFCE-COM.aspx",
         },
         AMBIENTE_HOMOLOGACAO: {
             "servidor": "nfce-homologacao.sefazrs.rs.gov.br",
-            WS_NFE_RECEPCAO_EVENTO: "ws/recepcaoevento/recepcaoevento.asmx",
-            WS_NFE_AUTORIZACAO: "ws/NfeAutorizacao/NFeAutorizacao.asmx",
-            WS_NFE_RET_AUTORIZACAO: "ws/NfeRetAutorizacao/NFeRetAutorizacao.asmx",  # noqa
-            WS_NFE_CADASTRO: "ws/cadconsultacadastro/cadconsultacadastro2.asmx",  # noqa
-            WS_NFE_INUTILIZACAO: "ws/NfeInutilizacao/NfeInutilizacao2.asmx",
-            WS_NFE_CONSULTA: "ws/NfeConsulta/NfeConsulta2.asmx",
-            WS_NFE_SITUACAO: "ws/NfeStatusServico/NfeStatusServico2.asmx",
+            WS_NFE_RECEPCAO_EVENTO: "ws/recepcaoevento/recepcaoevento4.asmx?wsdl",
+            WS_NFE_AUTORIZACAO: "ws/NfeAutorizacao/NFeAutorizacao4.asmx?wsdl",
+            WS_NFE_RET_AUTORIZACAO: "ws/NfeRetAutorizacao/NFeRetAutorizacao4.asmx?wsdl",  # noqa
+            WS_NFE_CADASTRO: "ws/cadconsultacadastro/cadconsultacadastro2.asmx?wsdl",  # noqa
+            WS_NFE_INUTILIZACAO: "ws/NfeInutilizacao/NfeInutilizacao4.asmx?wsdl",
+            WS_NFE_CONSULTA: "ws/NfeConsulta/NfeConsulta4.asmx?wsdl",
+            WS_NFE_SITUACAO: "ws/NfeStatusServico/NfeStatusServico4.asmx?wsdl",
             WS_NFCE_QR_CODE: "https://www.sefaz.rs.gov.br/NFCE/NFCE-COM.aspx",
         },
     },
