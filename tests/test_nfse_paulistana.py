@@ -87,6 +87,9 @@ class test_nfse_paulistana(unittest.TestCase):
             retorno.service.EnvioLoteRPS.return_value = "<xml></xml>"
 
             retorno = envio_lote_rps(pfx, nfse=nfse)
+            # f = open(os.path.join(path, "paulistana_signature.xml"), "w")
+            # f.write(retorno["sent_xml"])
+            # f.close()
             self.assertEqual(retorno["sent_xml"], xml_sent)
 
     def _get_cancelamento(self):

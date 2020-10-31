@@ -26,4 +26,7 @@ class test_nfse_paulistana_para_lote(unittest.TestCase):
         _, obj = sanitize_response(xml_send)
 
         self.assertEqual(obj.Cabecalho.QtdRPS, self.BATCH_SIZE)
+        # f = open(os.path.join(self.xml_path, 'xml_send_rps_batch_to_paulistana.xml'), 'w')
+        # f.write(xml_send)
+        # f.close()
         self.assertEqual(xml_send, expected_xml)
