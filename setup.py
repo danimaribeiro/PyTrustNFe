@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 
-VERSION = "1.0.55"
+VERSION = "1.0.56"
 
 
 setup(
@@ -41,6 +41,7 @@ later (LGPLv2+)",
             "nfse/bh/templates/*xml",
             "nfse/mga/templates/*xml",
             "nfse/aparecida/templates/*xml",
+            "nfse/issnet/templates/*xml",
             "xml/schemas/*xsd",
         ]
     },

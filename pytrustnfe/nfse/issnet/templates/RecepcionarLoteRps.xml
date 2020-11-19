@@ -1,0 +1,13 @@
+<EnviarLoteRpsEnvio xmlns="http://www.issnetonline.com.br/webserviceabrasf/vsd/servico_enviar_lote_rps_envio.xsd" xmlns:tipos="http://www.issnetonline.com.br/webserviceabrasf/vsd/tipos_complexos.xsd">
+    <LoteRps Id="lote{{ nfse.numero_lote }}">
+        <tipos:NumeroLote>{{ nfse.numero_lote }}</tipos:NumeroLote>
+        <tipos:CpfCnpj><tipos:Cnpj>{{ nfse.cnpj_prestador }}</tipos:Cnpj></tipos:CpfCnpj>
+        <tipos:InscricaoMunicipal>{{ nfse.inscricao_municipal }}</tipos:InscricaoMunicipal>
+        <tipos:QuantidadeRps>{{ nfse.lista_rps|length }}</tipos:QuantidadeRps>
+        <ListaRps xmlns="http://www.issnetonline.com.br/webserviceabrasf/vsd/tipos_complexos.xsd">
+            {% for rps in nfse.lista_rps -%}
+            {% include 'Rps.xml' %}
+            {% endfor %}
+        </ListaRps>
+    </LoteRps>
+</EnviarLoteRpsEnvio>
