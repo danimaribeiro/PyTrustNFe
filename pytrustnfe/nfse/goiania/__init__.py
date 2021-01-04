@@ -49,12 +49,12 @@ def gerar_nfse(certificado, **kwargs):
     return _send(certificado, "GerarNfse", **kwargs)
 
 
-def strip_result(xml_received: str):
+def split_result(xml_received: str):
     """ Retorna o código e a mensagem de retorno vindo do webservice """
 
     xml = etree.fromstring(xml_received)
 
-    if not xml:
+    if xml is None:
         return None, None
 
     ns = './/{http://nfse.goiania.go.gov.br/xsd/nfse_gyn_v02.xsd}'
@@ -67,7 +67,7 @@ def strip_result(xml_received: str):
 def is_success(xml_received: str):
     """ Retorna se a emissão da NFS-e deu certo """
 
-    code, _ = strip_result(xml_received)
+    code, _ = split_result(xml_received)
 
     # Code L000 significa que a nota foi aprovada
     return code == 'L000'

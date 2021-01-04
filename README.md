@@ -21,6 +21,7 @@ NFSe - Cidades atendidas
 * **Paulistana** - São Paulo/SP
 * **Nota Carioca** - Rio de Janeiro/RJ
 * **Imperial** - Petrópolis/RH
+* **Goiânia** - Goiânia/GO
 * [Susesu](cidades/susesu.md) - 3 cidades atendidas
 * [Simpliss](cidades/simpliss.md) - 18 cidade atendidas
 * [GINFES](cidaes/ginfes.md) - 79 cidades atendidas
