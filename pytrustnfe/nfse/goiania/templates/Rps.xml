@@ -1,0 +1,60 @@
+<Rps>
+    <InfDeclaracaoPrestacaoServico>
+        <Rps>
+            <IdentificacaoRps>
+                <Numero>{{ numero }}</Numero>
+                <Serie>{{ serie }}</Serie>
+                <Tipo>{{ tipo }}</Tipo>
+            </IdentificacaoRps>
+            <DataEmissao>{{ data_emissao }}</DataEmissao>
+            <Status>{{ status }}</Status>
+        </Rps>
+        <Servico>
+            <Valores>
+                <ValorServicos>{{ servico.valor_servicos }}</ValorServicos>
+                <ValorPis>{{ servico.valor_pis }}</ValorPis>
+                <ValorCofins>{{ servico.valor_confins }}</ValorCofins>
+                <ValorInss>{{ servico.valor_inss }}</ValorInss>
+                <ValorCsll>{{ servico.valor_csll }}</ValorCsll>
+            </Valores>
+            <CodigoTributacaoMunicipio>{{ servico.codigo_tributacao_municipio }}</CodigoTributacaoMunicipio>
+            <Discriminacao>{{ servico.discriminacao }}</Discriminacao>
+            <CodigoMunicipio>{{ servico.codigo_municipio }}</CodigoMunicipio>
+        </Servico>
+        <Prestador>
+            <CpfCnpj>
+                {% if prestador.cnpj_cpf|length == 14  %}
+                    <Cnpj>{{ prestador.cnpj_cpf }}</Cnpj>
+                {% endif %}
+                {% if prestador.cnpj_cpf|length == 11  %}
+                    <Cpf>{{ prestador.cnpj_cpf }}</Cpf>
+                {% endif %}
+            </CpfCnpj>
+            <InscricaoMunicipal>{{ prestador.inscricao_municipal }}</InscricaoMunicipal>
+        </Prestador>
+        <Tomador>
+            <IdentificacaoTomador>
+                <CpfCnpj>
+                    {% if tomador.cnpj_cpf|length == 14  %}
+                        <Cnpj>{{ tomador.cnpj_cpf }}</Cnpj>
+                    {% endif %}
+                    {% if prestador.cnpj_cpf|length == 11  %}
+                        <Cpf>{{ prestador.cnpj_cpf }}</Cpf>
+                    {% endif %}
+                </CpfCnpj>
+                {% if tomador.inscricao_municipal %}
+                    <InscricaoMunicipal>{{ tomador.inscricao_municipal }}</InscricaoMunicipal>
+                {% endif %}
+            </IdentificacaoTomador>
+            <RazaoSocial>{{ tomador.razao_social }}</RazaoSocial>
+            <Endereco>
+                <Endereco>{{ tomador.endereco.rua }}</Endereco>
+                <Numero>{{ tomador.endereco.numero }}</Numero>
+                <Complemento>{{ tomador.endereco.complemento }}</Complemento>
+                <Bairro>{{ tomador.endereco.bairro }}</Bairro>
+                <CodigoMunicipio>{{ tomador.endereco.codigo_municipio }}</CodigoMunicipio>
+                <Uf>{{ tomador.endereco.uf }}</Uf>
+            </Endereco>
+        </Tomador>
+    </InfDeclaracaoPrestacaoServico>
+</Rps>
