@@ -10,6 +10,9 @@ from pytrustnfe.xml import render_xml, sanitize_response
 from .assinatura import Assinatura
 
 
+NAMESPACE = './/{http://nfse.goiania.go.gov.br/xsd/nfse_gyn_v02.xsd}'
+
+
 def _render(certificado, method, **kwargs):
     path = os.path.join(os.path.dirname(__file__), "templates")
     xml_send = render_xml(path, f"{method}.xml", False, **kwargs)
@@ -39,14 +42,20 @@ def _send(certificado, method, **kwargs):
     return {"send_xml": str(xml_send), "received_xml": str(response), "object": obj}
 
 
-def xml_gerar_nfse(certificado, **kwargs):
-    return _render(certificado, "GerarNfse", **kwargs)
-
-
 def gerar_nfse(certificado, **kwargs):
+    """" Gera uma NFSe de saída """
+
     if "xml" not in kwargs:
-        kwargs["xml"] = xml_gerar_nfse(certificado, **kwargs)
+        kwargs["xml"] = _render(certificado, "GerarNfse", **kwargs)
     return _send(certificado, "GerarNfse", **kwargs)
+
+
+def consulta_nfse_por_rps(certificado, **kwargs):
+    """ Consulta os dados de um NFSe já emitida """
+
+    if "xml" not in kwargs:
+        kwargs["xml"] = _render(certificado, "ConsultarNfseRps", **kwargs)
+    return _send(certificado, "ConsultarNfseRps", **kwargs)
 
 
 def split_result(xml_received: str):
@@ -57,10 +66,9 @@ def split_result(xml_received: str):
     if xml is None:
         return None, None
 
-    ns = './/{http://nfse.goiania.go.gov.br/xsd/nfse_gyn_v02.xsd}'
-    msg_return = xml.find(f'{ns}MensagemRetorno')
-    code = msg_return.find(f"{ns}Codigo").text
-    msg = msg_return.find(f"{ns}Mensagem").text
+    msg_return = xml.find(f'{NAMESPACE}MensagemRetorno')
+    code = msg_return.find(f"{NAMESPACE}Codigo").text
+    msg = msg_return.find(f"{NAMESPACE}Mensagem").text
     return code, msg
 
 

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ConsultarNfseRpsEnvio xmlns="http://nfse.goiania.go.gov.br/xsd/nfse_gyn_v02.xsd">
+    <IdentificacaoRps>
+        <Numero>{{ numero }}</Numero>
+        <Serie>{{ serie }}</Serie>
+        <Tipo>{{ tipo }}</Tipo>
+    </IdentificacaoRps>
+    <Prestador>
+        <CpfCnpj>
+            {% if cnpj_cpf|length == 14  %}
+                <Cnpj>{{ cnpj_cpf }}</Cnpj>
+            {% endif %}
+            {% if cnpj_cpf|length == 11  %}
+                <Cpf>{{ cnpj_cpf }}</Cpf>
+            {% endif %}
+        </CpfCnpj>
+        <InscricaoMunicipal>{{ inscricao_municipal }}</InscricaoMunicipal>
+    </Prestador>
+</ConsultarNfseRpsEnvio>

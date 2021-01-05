@@ -47,6 +47,7 @@
                 {% endif %}
             </IdentificacaoTomador>
             <RazaoSocial>{{ tomador.razao_social }}</RazaoSocial>
+            {% if tomador.endereco %}
             <Endereco>
                 <Endereco>{{ tomador.endereco.rua }}</Endereco>
                 <Numero>{{ tomador.endereco.numero }}</Numero>
@@ -55,6 +56,7 @@
                 <CodigoMunicipio>{{ tomador.endereco.codigo_municipio }}</CodigoMunicipio>
                 <Uf>{{ tomador.endereco.uf }}</Uf>
             </Endereco>
+            {% endif %}
         </Tomador>
     </InfDeclaracaoPrestacaoServico>
 </Rps>
