@@ -50,12 +50,12 @@
             <RazaoSocial>{{ tomador.razao_social }}</RazaoSocial>
             {% if tomador.endereco %}
             <Endereco>
-                <Endereco>{{ tomador.endereco.rua }}</Endereco>
-                <Numero>{{ tomador.endereco.numero }}</Numero>
-                <Complemento>{{ tomador.endereco.complemento }}</Complemento>
-                <Bairro>{{ tomador.endereco.bairro }}</Bairro>
-                <CodigoMunicipio>{{ tomador.endereco.codigo_municipio }}</CodigoMunicipio>
-                <Uf>{{ tomador.endereco.uf }}</Uf>
+                {% if tomador.endereco.rua %}<Endereco>{{ tomador.endereco.rua }}</Endereco>{%endif %}
+                {% if tomador.endereco.numero %}<Numero>{{ tomador.endereco.numero }}</Numero>{%endif %}
+                {% if tomador.endereco.complemento %}<Complemento>{{ tomador.endereco.complemento }}</Complemento>{%endif %}
+                {% if tomador.endereco.bairro %}<Bairro>{{ tomador.endereco.bairro }}</Bairro>{%endif %}
+                {% if tomador.endereco.codigo_municipio %}<CodigoMunicipio>{{ tomador.endereco.codigo_municipio }}</CodigoMunicipio>{%endif %}
+                {% if tomador.endereco.uf %}<Uf>{{ tomador.endereco.uf }}</Uf>{%endif %}
             </Endereco>
             {% endif %}
         </Tomador>
