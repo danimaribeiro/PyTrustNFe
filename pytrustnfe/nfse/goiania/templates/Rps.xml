@@ -12,10 +12,11 @@
         <Servico>
             <Valores>
                 <ValorServicos>{{ servico.valor_servicos }}</ValorServicos>
-                <ValorPis>{{ servico.valor_pis }}</ValorPis>
-                <ValorCofins>{{ servico.valor_confins }}</ValorCofins>
-                <ValorInss>{{ servico.valor_inss }}</ValorInss>
-                <ValorCsll>{{ servico.valor_csll }}</ValorCsll>
+                {% if servico.valor_pis %}<ValorPis>{{ servico.valor_pis }}</ValorPis>{% endif %}
+                {% if servico.valor_confins %}<ValorCofins>{{ servico.valor_confins }}</ValorCofins>{% endif %}
+                {% if servico.valor_inss %}<ValorInss>{{ servico.valor_inss }}</ValorInss>{% endif %}
+                {% if servico.valor_csll %}<ValorCsll>{{ servico.valor_csll }}</ValorCsll>{% endif %}
+                {% if servico.aliquota %}<Aliquota>{{ servico.aliquota }}</Aliquota>{% endif %}
             </Valores>
             <CodigoTributacaoMunicipio>{{ servico.codigo_tributacao_municipio }}</CodigoTributacaoMunicipio>
             <Discriminacao>{{ servico.discriminacao }}</Discriminacao>
