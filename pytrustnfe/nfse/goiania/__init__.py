@@ -42,11 +42,17 @@ def _send(certificado, method, **kwargs):
     return {"send_xml": str(xml_send), "received_xml": str(response), "object": obj}
 
 
+def xml_gerar_nfse(certificado, **kwargs):
+    """ Retorna o XML montado para ser enviado para o Webservice """
+
+    return _render(certificado, "GerarNfse", **kwargs)
+
+
 def gerar_nfse(certificado, **kwargs):
     """" Gera uma NFSe de saída """
 
     if "xml" not in kwargs:
-        kwargs["xml"] = _render(certificado, "GerarNfse", **kwargs)
+        kwargs["xml"] = xml_gerar_nfse
     return _send(certificado, "GerarNfse", **kwargs)
 
 
