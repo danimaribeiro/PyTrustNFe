@@ -10,9 +10,6 @@ from pytrustnfe.xml import render_xml, sanitize_response
 from .assinatura import Assinatura
 
 
-NAMESPACE = './/{http://nfse.goiania.go.gov.br/xsd/nfse_gyn_v02.xsd}'
-
-
 def _render(certificado, method, **kwargs):
     path = os.path.join(os.path.dirname(__file__), "templates")
     xml_send = render_xml(path, f"{method}.xml", False, **kwargs)
@@ -62,26 +59,3 @@ def consulta_nfse_por_rps(certificado, **kwargs):
     if "xml" not in kwargs:
         kwargs["xml"] = _render(certificado, "ConsultarNfseRps", **kwargs)
     return _send(certificado, "ConsultarNfseRps", **kwargs)
-
-
-def split_result(xml_received: str):
-    """ Retorna o código e a mensagem de retorno vindo do webservice """
-
-    xml = etree.fromstring(xml_received)
-
-    if xml is None:
-        return None, None
-
-    msg_return = xml.find(f'{NAMESPACE}MensagemRetorno')
-    code = msg_return.find(f"{NAMESPACE}Codigo").text
-    msg = msg_return.find(f"{NAMESPACE}Mensagem").text
-    return code, msg
-
-
-def is_success(xml_received: str):
-    """ Retorna se a emissão da NFS-e deu certo """
-
-    code, _ = split_result(xml_received)
-
-    # Code L000 significa que a nota foi aprovada
-    return code == 'L000'
