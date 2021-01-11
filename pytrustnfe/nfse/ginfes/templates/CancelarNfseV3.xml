@@ -1,5 +1,4 @@
-<CancelarNfseEnvio xmlns="http://www.ginfes.com.br/servico_cancelar_nfse_envio_v03.xsd"
-    xmlns="http://www.ginfes.com.br/tipos_v03.xsd">
+<CancelarNfseEnvio xmlns="http://www.ginfes.com.br/servico_cancelar_nfse_envio_v03.xsd" xmlns="http://www.ginfes.com.br/tipos_v03.xsd">
     <Pedido>
         <InfPedidoCancelamento Id="1">
             <IdentificacaoNfse>
