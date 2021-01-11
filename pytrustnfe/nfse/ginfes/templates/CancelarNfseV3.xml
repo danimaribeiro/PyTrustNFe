@@ -1,12 +1,13 @@
-<CancelarNfseEnvio xmlns="http://www.ginfes.com.br/servico_cancelar_nfse_envio_v03.xsd" xmlns="http://www.ginfes.com.br/tipos_v03.xsd">
-    <Pedido>
-        <InfPedidoCancelamento Id="1">
-            <IdentificacaoNfse>
-                <Numero>{{ cancelamento.numero_nfse }}</Numero>
-                <Cnpj>{{ cancelamento.cnpj_prestador }}</Cnpj>
-                <CodigoMunicipio>{{ cancelamento.cidade }}</CodigoMunicipio>
-            </IdentificacaoNfse>
-            <CodigoCancelamento>{{ cancelamento.codigo_cancelamento }}</CodigoCancelamento>
-        </InfPedidoCancelamento>
-    </Pedido>
+<CancelarNfseEnvio xmlns="http://www.ginfes.com.br/servico_cancelar_nfse_envio_v03.xsd"
+    xmlns:ns3="http://www.ginfes.com.br/tipos_v03.xsd">
+    <ns3:Pedido>
+        <ns3:InfPedidoCancelamento Id="1">
+            <ns3:IdentificacaoNfse>
+                <ns3:Numero>{{ cancelamento.numero_nfse }}</ns3:Numero>
+                <ns3:Cnpj>{{ cancelamento.cnpj_prestador }}</ns3:Cnpj>
+                <ns3:CodigoMunicipio>{{ cancelamento.cidade }}</ns3:CodigoMunicipio>
+            </ns3:IdentificacaoNfse>
+            <ns3:CodigoCancelamento>{{ cancelamento.codigo_cancelamento }}</ns3:CodigoCancelamento>
+        </ns3:InfPedidoCancelamento>
+    </ns3:Pedido>
 </CancelarNfseEnvio>
