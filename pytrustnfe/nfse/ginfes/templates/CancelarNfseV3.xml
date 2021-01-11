@@ -4,7 +4,7 @@
             <IdentificacaoNfse>
                 <Numero>{{ cancelamento.numero_nfse }}</Numero>
                 <Cnpj>{{ cancelamento.cnpj_prestador }}</Cnpj>
-                <CodigoMunicipio>{{ cancelamento.inscricao_municipal }}</CodigoMunicipio>
+                <CodigoMunicipio>{{ cancelamento.cidade }}</CodigoMunicipio>
             </IdentificacaoNfse>
             <CodigoCancelamento>{{ cancelamento.codigo_cancelamento }}</CodigoCancelamento>
         </InfPedidoCancelamento>
