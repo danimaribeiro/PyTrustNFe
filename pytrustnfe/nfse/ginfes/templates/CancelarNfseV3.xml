@@ -4,7 +4,9 @@
         <tipos:InfPedidoCancelamento Id="C{{ cancelamento.numero_nfse }}">
             <tipos:IdentificacaoNfse>
                 <tipos:Numero>{{ cancelamento.numero_nfse }}</tipos:Numero>
-                <tipos:Cnpj>{{ cancelamento.cnpj_prestador }}</tipos:Cnpj>
+                <tipos:CpfCnpj>
+                    <tipos:Cnpj>{{ cancelamento.cnpj_prestador }}</tipos:Cnpj>
+                </tipos:CpfCnpj>
                 <tipos:InscricaoMunicipal>{{ cancelamento.inscricao_municipal }}</tipos:InscricaoMunicipal>
                 <tipos:CodigoMunicipio>{{ cancelamento.cidade }}</tipos:CodigoMunicipio>
             </tipos:IdentificacaoNfse>
