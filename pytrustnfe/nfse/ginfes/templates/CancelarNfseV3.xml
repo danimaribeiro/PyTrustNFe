@@ -1,15 +1,14 @@
-<p:CancelarNfseEnvio xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
-    xmlns:p="http://www.ginfes.com.br/servico_cancelar_nfse_envio_v03.xsd"
-    xmlns:p1="http://www.ginfes.com.br/tipos_v03.xsd"
+<CancelarNfseEnvio xmlns="http://www.ginfes.com.br/servico_cancelar_nfse_envio_v03.xsd"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <Pedido>
-        <p1:InfPedidoCancelamento Id="1">
-            <p1:IdentificacaoNfse>
-                <p1:Numero>{{ cancelamento.numero_nfse }}</p1:Numero>
-                <p1:Cnpj>{{ cancelamento.cnpj_prestador }}</p1:Cnpj>
-                <p1:CodigoMunicipio>{{ cancelamento.cidade }}</p1:CodigoMunicipio>
-            </p1:IdentificacaoNfse>
-            <p1:CodigoCancelamento>{{ cancelamento.codigo_cancelamento }}</p1:CodigoCancelamento>
-        </p1:InfPedidoCancelamento>
+    <Pedido xmlns="">
+        <tipos:InfPedidoCancelamento Id="1"
+            xmlns:tipos="http://www.ginfes.com.br/tipos_v03.xsd">
+            <tipos:IdentificacaoNfse>
+                <tipos:Numero>{{ cancelamento.numero_nfse }}</tipos:Numero>
+                <tipos:Cnpj>{{ cancelamento.cnpj_prestador }}</tipos:Cnpj>
+                <tipos:CodigoMunicipio>{{ cancelamento.cidade }}</tipos:CodigoMunicipio>
+            </tipos:IdentificacaoNfse>
+            <tipos:CodigoCancelamento>{{ cancelamento.codigo_cancelamento }}</tipos:CodigoCancelamento>
+        </tipos:InfPedidoCancelamento>
     </Pedido>
-</p:CancelarNfseEnvio>
+</CancelarNfseEnvio>
