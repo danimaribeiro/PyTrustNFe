@@ -18,7 +18,7 @@ def _render(certificado, method, **kwargs):
     xml_send = render_xml(path, "%s.xml" % method, True, **kwargs)
 
     reference = ""
-    if method == "RecepcionarLoteRpsV3":
+    if method == "RecepcionarLoteRpsV3" or "RecepcionarLoteRpsV3":
         reference = "rps%s" % kwargs["nfse"]["lista_rps"][0]["numero"]
     elif method == "CancelarNfseV3":
         reference = "C%s" % kwargs["cancelamento"]["numero_nfse"]
@@ -63,6 +63,16 @@ def recepcionar_lote_rps(certificado, **kwargs):
     if "xml" not in kwargs:
         kwargs["xml"] = xml_recepcionar_lote_rps(certificado, **kwargs)
     return _send(certificado, "RecepcionarLoteRpsV3", **kwargs)
+
+
+def xml_recepcionar_lote_rps_sync(certificado, **kwargs):
+    return _render(certificado, "RecepcionarLoteRpsSincronoV3", **kwargs)
+
+
+def recepcionar_lote_rps_sync(certificado, **kwargs):
+    if "xml" not in kwargs:
+        kwargs["xml"] = xml_recepcionar_lote_rps(certificado, **kwargs)
+    return _send(certificado, "RecepcionarLoteRpsSincronoV3", **kwargs)
 
 
 def xml_consultar_situacao_lote(certificado, **kwargs):
