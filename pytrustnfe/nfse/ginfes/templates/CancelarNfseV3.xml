@@ -1,7 +1,7 @@
 <CancelarNfseEnvio xmlns="http://www.ginfes.com.br/servico_cancelar_nfse_envio_v03.xsd"
     xmlns:tipos="http://www.ginfes.com.br/tipos_v03.xsd">
     <Pedido xmlns="">
-        <tipos:InfPedidoCancelamento Id="1">
+        <tipos:InfPedidoCancelamento Id="{{ cancelamento.numero_nfse }}">
             <tipos:IdentificacaoNfse>
                 <tipos:Numero>{{ cancelamento.numero_nfse }}</tipos:Numero>
                 <tipos:Cnpj>{{ cancelamento.cnpj_prestador }}</tipos:Cnpj>
