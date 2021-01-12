@@ -5,6 +5,7 @@
             <tipos:IdentificacaoNfse>
                 <tipos:Numero>{{ cancelamento.numero_nfse }}</tipos:Numero>
                 <tipos:Cnpj>{{ cancelamento.cnpj_prestador }}</tipos:Cnpj>
+                <InscricaoMunicipal>{{ cancelamento.inscricao_municipal }}</InscricaoMunicipal>
                 <tipos:CodigoMunicipio>{{ cancelamento.cidade }}</tipos:CodigoMunicipio>
             </tipos:IdentificacaoNfse>
             <tipos:CodigoCancelamento>{{ cancelamento.codigo_cancelamento }}</tipos:CodigoCancelamento>
