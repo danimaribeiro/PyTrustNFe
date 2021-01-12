@@ -18,7 +18,7 @@ def _render(certificado, method, **kwargs):
     xml_send = render_xml(path, "%s.xml" % method, True, **kwargs)
 
     reference = ""
-    if method == "RecepcionarLoteRpsV3" or "RecepcionarLoteRpsV3":
+    if method in ("RecepcionarLoteRpsV3", "RecepcionarLoteRpsV3"):
         reference = "rps%s" % kwargs["nfse"]["lista_rps"][0]["numero"]
     elif method == "CancelarNfseV3":
         reference = "C%s" % kwargs["cancelamento"]["numero_nfse"]
