@@ -20,6 +20,8 @@ def _render(certificado, method, **kwargs):
     reference = ""
     if method == "RecepcionarLoteRpsV3":
         reference = "rps%s" % kwargs["nfse"]["lista_rps"][0]["numero"]
+    elif method == "CancelarNfseV3":
+        reference = "C%s" % kwargs["cancelamento"]["numero_nfse"]
 
     signer = Assinatura(certificado.pfx, certificado.password)
     xml_send = signer.assina_xml(xml_send, reference)
