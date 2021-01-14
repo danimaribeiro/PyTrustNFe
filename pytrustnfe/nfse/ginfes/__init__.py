@@ -85,9 +85,14 @@ def consultar_situacao_lote(certificado, **kwargs):
     return _send(certificado, "ConsultarSituacaoLoteRpsV3", **kwargs)
 
 
-def consultar_nfse_por_rps(certificado, **kwargs):
-    return _send(certificado, "ConsultarNfsePorRpsV3", **kwargs)
+def xml_consultar_nfse_por_rps(certificado, **kwargs):
+    return _render(certificado, "ConsultarNfsePorRpsV3", **kwargs)
 
+def consultar_nfse_por_rps(certificado, **kwargs):
+    if "xml" not in kwargs:
+        kwargs["xml"] = xml_consultar_nfse_por_rps(certificado, **kwargs)
+        
+    return _send(certificado, "ConsultarNfsePorRpsV3", **kwargs)
 
 def xml_consultar_lote_rps(certificado, **kwargs):
     return _render(certificado, "ConsultarLoteRpsV3", **kwargs)
