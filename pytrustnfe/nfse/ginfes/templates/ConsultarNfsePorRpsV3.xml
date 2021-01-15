@@ -1,11 +1,12 @@
-<ConsultarNfseRpsEnvio xmlns="http://www.betha.com.br/e-nota-contribuinte-ws">
-    <IdentificacaoRps>
-        <Numero>{{ consulta.numero }}</Numero>
-        <Serie>{{ consulta.serie }}</Serie>
-        <Tipo>{{ consulta.tipo }}</Tipo>
-    </IdentificacaoRps>
+<ConsultarNfseRpsEnvio xmlns="http://www.ginfes.com.br/servico_consultar_lote_rps_envio_v03.xsd"
+    xmlns:tipos="http://www.ginfes.com.br/tipos_v03.xsd">
+    <tipos:IdentificacaoRps>
+        <tipos:Numero>{{ consulta.numero }}</tipos:Numero>
+        <tipos:Serie>{{ consulta.serie }}</tipos:Serie>
+        <tipos:Tipo>{{ consulta.tipo }}</tipos:Tipo>
+    </tipos:IdentificacaoRps>
     <Prestador>
-        <Cnpj>{{ consulta.cnpj_prestador }}</Cnpj>
-        <InscricaoMunicipal>{{ consulta.inscricao_municipal }}</InscricaoMunicipal>
+        <tipos:Cnpj>{{ consulta.cnpj_prestador }}</tipos:Cnpj>
+        <tipos:InscricaoMunicipal>{{ consulta.inscricao_municipal }}</tipos:InscricaoMunicipal>
     </Prestador>
 </ConsultarNfseRpsEnvio>
