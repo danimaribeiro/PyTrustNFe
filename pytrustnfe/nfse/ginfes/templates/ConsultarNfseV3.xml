@@ -4,7 +4,7 @@
         <tipos:Cnpj>{{ consulta.cnpj_prestador }}</tipos:Cnpj>
         <tipos:InscricaoMunicipal>{{ consulta.inscricao_municipal }}</tipos:InscricaoMunicipal>
     </Prestador>
-    <NumeroNfse>{{ consulta.numero }}</NumeroNfse>
+    <NumeroNfse>{{ consulta.numero_nfse }}</NumeroNfse>
     <PeriodoEmissao>
         <DataInicial>{{ consulta.dataInicial }}</DataInicial>
         <DataFinal>{{ consulta.dataFinal }}</DataFinal>
