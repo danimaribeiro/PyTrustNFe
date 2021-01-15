@@ -1,8 +1,9 @@
-<ConsultarLoteRpsEnvio xmlns="http://www.betha.com.br/e-nota-contribuinte-ws">
+<ConsultarLoteRpsEnvio xmlns="http://www.betha.com.br/e-nota-contribuinte-ws"
+    xmlns="http://www.ginfes.com.br/servico_consultar_nfse_envio_v03.xsd"
+    xmlns:tipos="http://www.ginfes.com.br/tipos_v03.xsd">
     <Prestador>
-        <CpfCnpj>
-            <Cnpj>45111111111100</Cnpj>
-        </CpfCnpj>
+        <tipos:NumeroNfse>{{ consulta.cnpj_prestador }}</tipos:NumeroNfse>
+        <tipos:InscricaoMunicipal>{{ consulta.inscricao_municipal }}</tipos:InscricaoMunicipal>
     </Prestador>
-    <Protocolo>141542179222170</Protocolo>
+    <NumeroNfse>{{ consulta.numero }}</NumeroNfse>
 </ConsultarLoteRpsEnvio>
