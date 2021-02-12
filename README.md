@@ -23,7 +23,7 @@ NFSe - Cidades atendidas
 * **Imperial** - Petrópolis/RH
 * [Susesu](cidades/susesu.md) - 3 cidades atendidas
 * [Simpliss](cidades/simpliss.md) - 18 cidade atendidas
-* [GINFES](cidaes/ginfes.md) - 79 cidades atendidas
+* [GINFES](cidades/ginfes.md) - 79 cidades atendidas
 * [DSF](cidades/dsf.md) - 7 cidades atendidas
 
 Roadmap

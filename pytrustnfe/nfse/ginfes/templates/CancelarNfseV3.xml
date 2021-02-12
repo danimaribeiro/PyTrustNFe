@@ -1,15 +1,14 @@
-<CancelarNfseEnvio xmlns="http://www.betha.com.br/e-nota-contribuinte-ws">
-    <Pedido>
-        <InfPedidoCancelamento Id="1">
-            <IdentificacaoNfse>
-                <Numero>{{ cancelamento.numero_nfse }}</Numero>
-                <CpfCnpj>
-                    <Cnpj>{{ cancelamento.cnpj_prestador }}</Cnpj>
-                </CpfCnpj>
-                <InscricaoMunicipal>{{ cancelamento.inscricao_municipal }}</InscricaoMunicipal>
-                <CodigoMunicipio>{{ cancelamento.cidade }}</CodigoMunicipio>
-            </IdentificacaoNfse>
-            <CodigoCancelamento>{{ cancelamento.codigo_cancelamento }}</CodigoCancelamento>
-        </InfPedidoCancelamento>
+<CancelarNfseEnvio xmlns="http://www.ginfes.com.br/servico_cancelar_nfse_envio_v03.xsd"
+    xmlns:tipos="http://www.ginfes.com.br/tipos_v03.xsd">
+    <Pedido xmlns="">
+        <tipos:InfPedidoCancelamento Id="C{{ cancelamento.numero_nfse }}">
+            <tipos:IdentificacaoNfse>
+                <tipos:Numero>{{ cancelamento.numero_nfse }}</tipos:Numero>
+                <tipos:Cnpj>{{ cancelamento.cnpj_prestador }}</tipos:Cnpj>
+                <tipos:InscricaoMunicipal>{{ cancelamento.inscricao_municipal }}</tipos:InscricaoMunicipal>
+                <tipos:CodigoMunicipio>{{ cancelamento.cidade }}</tipos:CodigoMunicipio>
+            </tipos:IdentificacaoNfse>
+            <tipos:CodigoCancelamento>{{ cancelamento.codigo_cancelamento }}</tipos:CodigoCancelamento>
+        </tipos:InfPedidoCancelamento>
     </Pedido>
 </CancelarNfseEnvio>
