@@ -1,0 +1,63 @@
+<Rps>
+    <InfDeclaracaoPrestacaoServico>
+        <Rps>
+            <IdentificacaoRps>
+                <Numero>{{ numero }}</Numero>
+                <Serie>{{ serie }}</Serie>
+                <Tipo>{{ tipo }}</Tipo>
+            </IdentificacaoRps>
+            <DataEmissao>{{ data_emissao }}</DataEmissao>
+            <Status>{{ status }}</Status>
+        </Rps>
+        <Servico>
+            <Valores>
+                <ValorServicos>{{ servico.valor_servicos }}</ValorServicos>
+                {% if servico.valor_pis %}<ValorPis>{{ servico.valor_pis }}</ValorPis>{% endif %}
+                {% if servico.valor_confins %}<ValorCofins>{{ servico.valor_confins }}</ValorCofins>{% endif %}
+                {% if servico.valor_inss %}<ValorInss>{{ servico.valor_inss }}</ValorInss>{% endif %}
+                {% if servico.valor_csll %}<ValorCsll>{{ servico.valor_csll }}</ValorCsll>{% endif %}
+                {% if servico.aliquota %}<Aliquota>{{ servico.aliquota }}</Aliquota>{% endif %}
+            </Valores>
+            <CodigoTributacaoMunicipio>{{ servico.codigo_tributacao_municipio }}</CodigoTributacaoMunicipio>
+            <Discriminacao>{{ servico.discriminacao }}</Discriminacao>
+            <CodigoMunicipio>{{ servico.codigo_municipio }}</CodigoMunicipio>
+        </Servico>
+        <Prestador>
+            <CpfCnpj>
+                {% if prestador.cnpj_cpf|length == 14  %}
+                    <Cnpj>{{ prestador.cnpj_cpf }}</Cnpj>
+                {% endif %}
+                {% if prestador.cnpj_cpf|length == 11  %}
+                    <Cpf>{{ prestador.cnpj_cpf }}</Cpf>
+                {% endif %}
+            </CpfCnpj>
+            <InscricaoMunicipal>{{ prestador.inscricao_municipal }}</InscricaoMunicipal>
+        </Prestador>
+        <Tomador>
+            <IdentificacaoTomador>
+                <CpfCnpj>
+                    {% if tomador.cnpj_cpf|length == 14  %}
+                        <Cnpj>{{ tomador.cnpj_cpf }}</Cnpj>
+                    {% endif %}
+                    {% if prestador.cnpj_cpf|length == 11  %}
+                        <Cpf>{{ prestador.cnpj_cpf }}</Cpf>
+                    {% endif %}
+                </CpfCnpj>
+                {% if tomador.inscricao_municipal %}
+                    <InscricaoMunicipal>{{ tomador.inscricao_municipal }}</InscricaoMunicipal>
+                {% endif %}
+            </IdentificacaoTomador>
+            <RazaoSocial>{{ tomador.razao_social }}</RazaoSocial>
+            {% if tomador.endereco %}
+            <Endereco>
+                {% if tomador.endereco.rua %}<Endereco>{{ tomador.endereco.rua }}</Endereco>{%endif %}
+                {% if tomador.endereco.numero %}<Numero>{{ tomador.endereco.numero }}</Numero>{%endif %}
+                {% if tomador.endereco.complemento %}<Complemento>{{ tomador.endereco.complemento }}</Complemento>{%endif %}
+                {% if tomador.endereco.bairro %}<Bairro>{{ tomador.endereco.bairro }}</Bairro>{%endif %}
+                {% if tomador.endereco.codigo_municipio %}<CodigoMunicipio>{{ tomador.endereco.codigo_municipio }}</CodigoMunicipio>{%endif %}
+                {% if tomador.endereco.uf %}<Uf>{{ tomador.endereco.uf }}</Uf>{%endif %}
+            </Endereco>
+            {% endif %}
+        </Tomador>
+    </InfDeclaracaoPrestacaoServico>
+</Rps>
