@@ -26,6 +26,7 @@
                 <finNFe>{{ ide.finNFe }}</finNFe>
                 <indFinal>{{ ide.indFinal }}</indFinal>
                 <indPres>{{ ide.indPres }}</indPres>
+                <indIntermed>{{ ide.indIntermed }}</indIntermed>
                 <procEmi>{{ ide.procEmi }}</procEmi>
                 <verProc>{{ ide.verProc }}</verProc>
                 {% if ide.tpEmis != 1 %}
