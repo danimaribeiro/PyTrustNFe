@@ -18,3 +18,5 @@ docs/_build
 sent_xml.xml
 received_xml.xml
 nfse-exemplo.py
+.vim/*
+.venv/*

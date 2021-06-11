@@ -878,6 +878,12 @@
                 {% endfor %}
             </pag>
             {% endif %}
+            {% if NFe.infNFe.infIntermed is defined %}
+            <infIntermed>
+                <CNPJ>{{ NFe.infNFe.infIntermed.CNPJ }}</CNPJ>
+                <idCadIntTran>{{ NFe.infNFe.infIntermed.idCadIntTran }}</idCadIntTran>
+            </infIntermed>
+            {% endif %}
             <infAdic>
                 <infAdFisco>{{ NFe.infNFe.infAdic.infAdFisco|normalize|escape }}</infAdFisco>
                 <infCpl>{{ NFe.infNFe.infAdic.infCpl|normalize|escape }}</infCpl>
