@@ -4,8 +4,8 @@ Jinja2
 signxml
 urllib3 >= 1.22
 suds-jurko >= 0.6
-suds-jurko-requests >= 1.1
-defusedxml >= 0.4.1, < 1
+suds-jurko-requests >= 1.2
+defusedxml >= 0.7.1, < 1
 eight >= 0.3.0, < 1
 cryptography >= 1.8, < 3
 pyOpenSSL >= 16.0.0, < 18
