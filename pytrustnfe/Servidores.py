@@ -698,7 +698,7 @@ ESTADO_WS = {
     "AM": UFAM,
     "AP": SVRS,
     "BA": UFBA,
-    "CE": UFCE,
+    "CE": SVRS,
     "DF": SVRS,
     "ES": SVRS,
     "GO": UFGO,
