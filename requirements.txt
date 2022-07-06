@@ -3,7 +3,7 @@ coveralls
 Jinja2
 signxml
 urllib3 >= 1.22
-suds
+suds-community
 suds-requests4
 defusedxml >= 0.7.1, < 1
 eight >= 0.3.0, < 1
