@@ -1,7 +1,8 @@
 lxml >= 3.5.0, < 5
 coveralls
 Jinja2
-signxml
+signxml==2.8.2 ; python_version < '3.7'
+signxml ; python_version >= '3.7'
 urllib3 >= 1.22
 suds-jurko >= 0.6
 suds-jurko-requests >= 1.2
