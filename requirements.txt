@@ -8,7 +8,7 @@ suds-requests4
 defusedxml >= 0.7.1, < 1
 eight >= 0.3.0, < 1
 cryptography >= 2.1.4
-pyOpenSSL >= 17.5.0, < 22.1.0
+pyOpenSSL >= 17.5.0, <= 22.1.0
 certifi >= 2015.11.20.1
 xmlsec >= 1.3.3
 reportlab
