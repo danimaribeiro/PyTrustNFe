@@ -85,8 +85,12 @@ class test_nfse_paulistana(unittest.TestCase):
             retorno = mock.MagicMock()
             client.return_value = retorno
             retorno.service.EnvioLoteRPS.return_value = "<xml></xml>"
+            print('retorno')
+            print(retorno)
 
             retorno = envio_lote_rps(pfx, nfse=nfse)
+            print('retorno')
+            print(retorno)
             # f = open(os.path.join(path, "paulistana_signature.xml"), "w")
             # f.write(retorno["sent_xml"])
             # f.close()
