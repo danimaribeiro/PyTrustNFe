@@ -84,9 +84,7 @@ def getdateByTimezone(cDateUTC, timezone=None):
 
 def format_number(cNumber):
     if cNumber:
-        # Vírgula para a separação de milhar e 2f para 2 casas decimais
-        cNumber = "{:,.2f}".format(float(cNumber))
-        return cNumber.replace(",", "X").replace(".", ",").replace("X", ".")
+        return cNumber.replace(",", "X").replace("X", ".").replace(".", ",")
     return ""
 
 
