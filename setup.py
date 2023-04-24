@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 
-VERSION = "1.0.61"
+VERSION = "1.0.62"
 
 
 setup(
@@ -55,7 +55,7 @@ later (LGPLv2+)",
         'Jinja2 >= 2.8',
         'pyOpenSSL >= 16.0.0, < 18',
         'signxml >= 2.4.0',
-        'lxml >= 3.5.0, < 5',
+        'lxml >= 4, < 5',
         'suds-jurko >= 0.6',
         'suds-jurko-requests >= 1.2',
         'reportlab',
