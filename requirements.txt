@@ -1,7 +1,8 @@
 lxml >= 4.2.1, < 5
 coveralls
-Jinja2 <= 3.0.3
-signxml
+Jinja2
+signxml==2.9.0 ; python_version < '3.7'
+signxml ; python_version >= '3.7'
 urllib3 >= 1.22
 suds-community
 suds-requests4
