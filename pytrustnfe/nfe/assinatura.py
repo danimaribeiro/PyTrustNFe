@@ -8,6 +8,11 @@ from pytrustnfe.certificado import extract_cert_and_key_from_pfx
 from signxml import XMLSigner
 
 
+class XMLSignerWithSHA1(XMLSigner):
+    def check_deprecated_methods(self):
+        pass
+
+
 class Assinatura(object):
     def __init__(self, arquivo, senha):
         self.arquivo = arquivo
@@ -20,7 +25,7 @@ class Assinatura(object):
             if element.text is not None and not element.text.strip():
                 element.text = None
 
-        signer = XMLSigner(
+        signer = XMLSignerWithSHA1(
             method=signxml.methods.enveloped,
             signature_algorithm="rsa-sha1",
             digest_algorithm="sha1",
@@ -30,6 +35,7 @@ class Assinatura(object):
         ns = {}
         ns[None] = signer.namespaces["ds"]
         signer.namespaces = ns
+        signer.excise_empty_xmlns_declarations = True
 
         ref_uri = ("#%s" % reference) if reference else None
         signed_root = signer.sign(
