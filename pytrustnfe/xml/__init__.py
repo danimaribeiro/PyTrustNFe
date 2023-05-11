@@ -17,8 +17,7 @@ def recursively_empty(e):
 
 def render_xml(path, template_name, remove_empty, **nfe):
     nfe = recursively_normalize(nfe)
-    env = Environment(loader=FileSystemLoader(
-        path), extensions=["jinja2.ext.with_"])
+    env = Environment(loader=FileSystemLoader(path))
     env.filters["normalize"] = filters.strip_line_feed
     env.filters["normalize_str"] = filters.normalize_str
     env.filters["format_percent"] = filters.format_percent
