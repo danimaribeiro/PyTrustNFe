@@ -20,7 +20,7 @@ class Certificado(object):
 
 
 def extract_cert_and_key_from_pfx(pfx, password):
-    pfx = crypto.load_pkcs12(pfx, password)
+    pfx = crypto.load_pkcs12(pfx, password.encode())
     # PEM formatted private key
     key = crypto.dump_privatekey(crypto.FILETYPE_PEM, pfx.get_privatekey())
     # PEM formatted certificate
