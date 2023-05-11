@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 
-VERSION = "1.0.62"
+VERSION = "2.0.0"
 
 
 setup(
@@ -50,13 +50,14 @@ later (LGPLv2+)",
     long_description=open("README.md", "r").read(),
     long_description_content_type="text/markdown",
     install_requires=[
-        'urllib3 >= 1.22',
-        'xmlsec >= 1.3.3',  # apt update;apt install libxmlsec1-dev pkg-config -y
-        'Jinja2 >= 2.8, <= 3.0.3',
-        'lxml >= 4.2.1, < 5',
-        'cryptography >= 2.1.4',
-        'pyOpenSSL == 22.1.0',
-        'suds',
+        'xmlsec >= 1.3.13',  # apt update;apt install libxmlsec1-dev pkg-config -y
+        'lxml >= 4.2.1',
+        'cryptography >= 3.4.8',
+        'pyOpenSSL >= 17.5.0',
+        'certifi >=  2018.1.18',
+        'urllib3',
+        'Jinja2',
+        'suds-community',
         'suds-requests4',
         'reportlab',
         'pytz',

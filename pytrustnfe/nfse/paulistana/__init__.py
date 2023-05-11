@@ -13,14 +13,14 @@ from pytrustnfe.nfse.assinatura import Assinatura
 
 
 def sign_tag(certificado, **kwargs):
-    pkcs12 = crypto.load_pkcs12(certificado.pfx, certificado.password)
+    pkcs12 = crypto.load_pkcs12(certificado.pfx, certificado.password.encode())
     key = pkcs12.get_privatekey()
     if "nfse" in kwargs:
         for item in kwargs["nfse"]["lista_rps"]:
-            signed = crypto.sign(key, item["assinatura"], "SHA1")
+            signed = crypto.sign(key, item["assinatura"].encode(), "SHA1")
             item["assinatura"] = b64encode(signed).decode()
     if "cancelamento" in kwargs:
-        signed = crypto.sign(key, kwargs["cancelamento"]["assinatura"], "SHA1")
+        signed = crypto.sign(key, kwargs["cancelamento"]["assinatura"].encode(), "SHA1")
         kwargs["cancelamento"]["assinatura"] = b64encode(signed).decode()
 
 

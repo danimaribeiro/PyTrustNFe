@@ -1,19 +1,25 @@
-lxml >= 4.2.1, < 5
-coveralls
-Jinja2
+# Sign xml dependencies
 signxml==2.9.0 ; python_version < '3.7'
 signxml ; python_version >= '3.7'
-urllib3 >= 1.22
-suds-community
-suds-requests4
-defusedxml >= 0.7.1, < 1
-eight >= 0.3.0, < 1
-cryptography >= 2.1.4
-pyOpenSSL == 22.1.0
-certifi >= 2015.11.20.1
-xmlsec >= 1.3.3
-reportlab
-pytest>=4.1.1
-pytest-cov
+lxml >= 4.2.1
+cryptography >= 3.4.8
+pyOpenSSL >= 22.1.0
+certifi >=  2018.1.18
+
+# XmlSec
+xmlsec >= 1.3.13
+
+# pytrustnfe dependencies
+Jinja2
 pytz
 zeep
+reportlab
+urllib3
+suds-community
+suds-requests4
+
+# Test dependencies
+coveralls
+pytest>=4.1.1
+pytest-cov
+
