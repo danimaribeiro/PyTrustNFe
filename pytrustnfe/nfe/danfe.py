@@ -7,6 +7,7 @@ import os
 from io import BytesIO
 from textwrap import wrap
 import math
+from decimal import Decimal
 
 from reportlab.lib import utils
 from reportlab.pdfgen import canvas
@@ -84,7 +85,8 @@ def getdateByTimezone(cDateUTC, timezone=None):
 
 def format_number(cNumber):
     if cNumber:
-        return cNumber.replace(",", "X").replace("X", ".").replace(".", ",")
+        cNumber = "{0:,}".format(Decimal(cNumber))
+        return cNumber.replace(",", "X").replace(".", ",").replace("X", ".")
     return ""
 
 
