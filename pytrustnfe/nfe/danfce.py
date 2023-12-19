@@ -221,7 +221,7 @@ class danfce(object):
         )
 
         w, h = table.wrapOn(self.canvas, 200, 450)
-        table.drawOn(self.canvas, 0, self.current_height - (h * 1.2))
+        table.drawOn(self.canvas, 0, self.current_height - h)
         self.current_height -= h * 1.1
 
     def totais(self, oXML=None):
