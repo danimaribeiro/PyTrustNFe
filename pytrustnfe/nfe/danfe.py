@@ -7,6 +7,7 @@ import os
 from io import BytesIO
 from textwrap import wrap
 import math
+from html import escape
 from decimal import Decimal
 
 from reportlab.lib import utils
@@ -1051,7 +1052,7 @@ obsCont[@xCampo='NomeVendedor']"
         observacoes = tagtext(oNode=el_infAdic, cTag="infCpl")
         if fisco:
             observacoes = fisco + " " + observacoes
-        P = Paragraph(observacoes, styles["Normal"])
+        P = Paragraph(escape(observacoes), styles["Normal"])
         w, h = P.wrap(128 * mm, 32 * mm)
         altura = (self.height - self.nlin - 5) * mm
         P.drawOn(self.canvas, (self.nLeft + 1) * mm, altura - h)
