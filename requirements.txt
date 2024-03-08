@@ -2,7 +2,7 @@
 signxml==2.9.0 ; python_version < '3.7'
 signxml ; python_version >= '3.7'
 lxml >= 4.2.1
-cryptography >= 3.4.8
+cryptography >= 3.4.8, <= 23.2.0
 pyOpenSSL >= 22.1.0
 certifi >=  2018.1.18
 
